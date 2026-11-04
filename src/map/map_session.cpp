@@ -43,6 +43,11 @@ auto MapSession::hasLoadedZone() const -> bool
     return hasSentGameOk || timer::now() > loginTime + kZoneLoadTimeout;
 }
 
+auto MapSession::canZoneOut() const -> bool
+{
+    return hasLoadedZone() && timer::now() >= gameOkTime + kGameOkSettleTime;
+}
+
 auto MapSession::isStaleLogin(const uint16 seq, const IPP& from) const -> bool
 {
     // The client counts from 1, and loginSeq 0 means no 0x00A taken for this key

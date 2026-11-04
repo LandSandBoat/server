@@ -169,10 +169,12 @@ describe('Stale C2S 0x00A', function()
 
     it('is ignored while S2C 0x00B is still queued', function()
         player.network:zoneIn()
+        xi.test.world:skipTime(3)
 
         -- The server queues 0x00B, then a delayed retry from this zone-in arrives
         player:setPos(0, 0, 0, 0, xi.zone.WEST_RONFAURE)
         xi.test.world:tick()
+        assert(not player:getZone(), 'S2C 0x00B was not queued')
         player.network:sendStaleLogin(2)
 
         assert(zoning.awaitZoneOut(player) == 'login', 'Client never got S2C 0x00B')

@@ -100,8 +100,33 @@ describe('GAMEOK', function()
 
         player.network:finishLoading()
         assert(not player.network:isHung(), player.network:hangReason())
+        assert(player.network:mode() == 'ingame', 'The logout 0x00B went out right after GAMEOK')
+
+        xi.test.world:skipTime(2)
+        player.network:exchange()
+        assert(player.network:mode() == 'ingame', 'The logout 0x00B went out under 3 s after GAMEOK')
 
         assert(zoning.awaitZoneOut(player) == 'loggedout')
+    end)
+
+    it('waits a moment after GAMEOK before the warp goes out', function()
+        assert(player.network:login())
+
+        player:setPos(0, 0, 0, 0, xi.zone.WEST_RONFAURE)
+        xi.test.world:tick()
+        player.network:finishLoading()
+
+        -- On PC the client can still be finishing its load right after GAMEOK
+        xi.test.world:tick()
+        player.network:exchange()
+        assert(player.network:mode() == 'ingame', 'S2C 0x00B went out right after GAMEOK')
+
+        -- Inside the settle time, with room for slow builds
+        xi.test.world:skipTime(1)
+        player.network:exchange()
+        assert(player.network:mode() == 'ingame', 'S2C 0x00B went out under 3 s after GAMEOK')
+
+        assert(zoning.awaitZoneOut(player) == 'login')
     end)
 
     it('opens the gate on a GAMEOK the handler refuses', function()

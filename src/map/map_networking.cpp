@@ -555,9 +555,10 @@ auto MapNetworking::parse(uint8* buff, size_t* buffsize, MapSession* PSession) -
         }
 
         // The client sends this once it has loaded the zone, whether or not the handler takes it
-        if (SmallPD_Type == static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_GAMEOK))
+        if (SmallPD_Type == static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_GAMEOK) && !PSession->hasSentGameOk)
         {
             PSession->hasSentGameOk = true;
+            PSession->gameOkTime    = timer::now();
         }
 
         if (SmallPD_Type != static_cast<uint16>(PacketC2S::GP_CLI_COMMAND_POS))
@@ -695,8 +696,8 @@ auto MapNetworking::send_parse(uint8* buff, size_t* buffsize, MapSession* PSessi
             break;
         }
 
-        // hold 0x00B until the client decrypts a packet with the current key
-        if (PSmallPacket->getType() == 0x00B && !PSession->hasDecryptedPacket)
+        // Hold 0x00B until the client decrypts with the current key and has settled after loading
+        if (PSmallPacket->getType() == static_cast<uint16>(PacketS2C::GP_SERV_COMMAND_LOGOUT) && (!PSession->hasDecryptedPacket || !PSession->canZoneOut()))
         {
             break;
         }

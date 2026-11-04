@@ -68,6 +68,7 @@ struct MapSession
     IPP                          previousLoginIpp   = {};    // the address before it, for a late retry after a NAT rebind
     uint16                       previousLoginSeq   = 0;     // header seq of the last 0x00A taken from there
     timer::time_point            loginTime          = {};    // when the first C2S 0x00A for this key was taken
+    timer::time_point            gameOkTime         = {};    // when C2S 0x00C arrived for this zone
     timer::time_point            addressChanged     = {};    // last time a 0x00A moved this session
 
     // Store old blowfish data, when a player recieves 0x00B their key should increment
@@ -80,6 +81,9 @@ struct MapSession
 
     // Sent C2S 0x00C, or took so long it never will. Until then most packets and every zone change wait.
     auto hasLoadedZone() const -> bool;
+
+    // Loaded, and long enough ago that S2C 0x00B can't catch the client mid-load
+    auto canZoneOut() const -> bool;
 
     // A plaintext C2S 0x00A this session must not take
     auto isStaleLogin(uint16 seq, const IPP& from) const -> bool;

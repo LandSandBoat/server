@@ -2123,10 +2123,8 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
         auto* PChar       = *it;
         bool  shouldErase = false;
 
-        // S2C 0x00B before the client has loaded the zone hangs it for good.
-        // charTick adds the char back each tick, so it moves once C2S 0x00C arrives.
-        // A logout goes now, and send_parse holds its 0x00B until the load is done.
-        if (PChar->status != xi::Status::Shutdown && !PChar->PSession->hasLoadedZone())
+        // charTick adds the char back each tick, so it moves once canZoneOut(). A logout goes now.
+        if (PChar->status != xi::Status::Shutdown && !PChar->PSession->canZoneOut())
         {
             it = m_charsToChangeZone.erase(it);
             continue;
