@@ -87,3 +87,9 @@ end
 ---@return nil
 function CClientEntityPairNetwork:setStoredZone(zoneId)
 end
+
+---Run the session cleanup as if nothing had arrived for that long, and say whether the char is link-dead
+---@param seconds integer
+---@return boolean
+function CClientEntityPairNetwork:isLinkDeadAfter(seconds)
+end

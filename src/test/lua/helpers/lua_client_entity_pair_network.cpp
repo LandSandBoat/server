@@ -29,6 +29,9 @@
 
 #include "common/database.h"
 #include "map/entities/char_entity.h"
+#include "map/map_engine.h"
+#include "map/map_networking.h"
+#include "map/map_session.h"
 
 namespace
 {
@@ -301,6 +304,26 @@ void CLuaClientEntityPairNetwork::setStoredZone(const uint16 zoneId) const
     }
 }
 
+/************************************************************************
+ *  Function: isLinkDeadAfter()
+ *  Purpose : Runs the session cleanup as if nothing arrived for that long
+ *  Example : assert(not player.network:isLinkDeadAfter(10))
+ *  Notes   : Moves the session's last update back rather than the
+ *            earth clock, which every later test would inherit.
+ ************************************************************************/
+
+auto CLuaClientEntityPairNetwork::isLinkDeadAfter(const uint32 seconds) const -> bool
+{
+    auto* session = parent_->testChar()->session();
+    session->last_update -= std::chrono::seconds(seconds);
+
+    auto& networking = parent_->engine()->networking();
+    networking.sessions().cleanupSessions(networking.ipp());
+
+    const auto* PChar = parent_->testChar()->entity();
+    return PChar != nullptr && PChar->isLinkDead;
+}
+
 void CLuaClientEntityPairNetwork::Register()
 {
     SOL_USERTYPE("CClientEntityPairNetwork", CLuaClientEntityPairNetwork);
@@ -317,4 +340,5 @@ void CLuaClientEntityPairNetwork::Register()
     SOL_REGISTER("received", CLuaClientEntityPairNetwork::received);
     SOL_REGISTER("clearReceived", CLuaClientEntityPairNetwork::clearReceived);
     SOL_REGISTER("setStoredZone", CLuaClientEntityPairNetwork::setStoredZone);
+    SOL_REGISTER("isLinkDeadAfter", CLuaClientEntityPairNetwork::isLinkDeadAfter);
 }

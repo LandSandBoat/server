@@ -45,6 +45,7 @@ public:
     auto received() const -> sol::table;
     void clearReceived() const;
     void setStoredZone(uint16 zoneId) const;
+    auto isLinkDeadAfter(uint32 seconds) const -> bool;
 
     static void Register();
 

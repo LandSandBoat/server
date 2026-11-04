@@ -450,6 +450,9 @@ auto MapNetworking::recv_parse(uint8* buff, size_t* buffsize, MapSession*& PSess
         PSession->zone_ipp         = {};
         PSession->zone_type        = GP_GAME_LOGOUT_STATE::NONE;
 
+        // Tap now, or a slow zone change flags the new char link-dead before its first encrypted packet
+        PSession->tapLastUpdate();
+
         return 0;
     }
     else if (PSession != nullptr)
