@@ -1107,9 +1107,9 @@ void LoadInventory(CCharEntity* PChar)
                     for (uint8 j = 0; j < 4; ++j)
                     {
                         // found a match, apply the augment
-                        if (((CItemEquipment*)PItem)->getAugment(j) != 0)
+                        if (static_cast<CItemEquipment*>(PItem)->getAugment(j) != 0)
                         {
-                            ((CItemEquipment*)PItem)->ApplyAugment(j);
+                            static_cast<CItemEquipment*>(PItem)->ApplyAugment(j);
                         }
                     }
                 }
@@ -1172,11 +1172,11 @@ void LoadEquip(CCharEntity* PChar)
 
                     if (equipSlotId == SLOT_LINK1)
                     {
-                        PLinkshell1 = (CItemLinkshell*)PItem;
+                        PLinkshell1 = static_cast<CItemLinkshell*>(PItem);
                     }
                     else if (equipSlotId == SLOT_LINK2)
                     {
-                        PLinkshell2 = (CItemLinkshell*)PItem;
+                        PLinkshell2 = static_cast<CItemLinkshell*>(PItem);
                     }
                 }
             }
@@ -1875,8 +1875,8 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
     if ((PItem != nullptr) && PItem->isType(ITEM_EQUIPMENT))
     {
         // if removeSlotLookID is available it should be prioritized as it will encompass a larger set of slots
-        auto removeSlotLookID = ((CItemEquipment*)PItem)->getRemoveSlotLookId();
-        auto removeSlotID     = removeSlotLookID > 0 ? removeSlotLookID : ((CItemEquipment*)PItem)->getRemoveSlotId();
+        auto removeSlotLookID = static_cast<CItemEquipment*>(PItem)->getRemoveSlotLookId();
+        auto removeSlotID     = removeSlotLookID > 0 ? removeSlotLookID : static_cast<CItemEquipment*>(PItem)->getRemoveSlotId();
 
         // When unequipping an item, revert all associated look slots to either default or the item which is equipped
         for (auto i = 0u; i < sizeof(removeSlotID) * 8; ++i)
@@ -1918,7 +1918,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
         //      thought to be source of nin bug
         PChar->clearEquip(equipSlotID);
 
-        if (((CItemEquipment*)PItem)->getScriptType() & SCRIPT_EQUIP)
+        if (static_cast<CItemEquipment*>(PItem)->getScriptType() & SCRIPT_EQUIP)
         {
             PChar->m_EquipFlag = 0;
             for (uint8 i = 0; i < 16; ++i)
@@ -1946,9 +1946,9 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
             }
             PChar->m_dualWield = false;
         }
-        PChar->delEquipModifiers((CItemEquipment*)PItem, isDelevel);
-        PChar->PLatentEffectContainer->DelLatentEffects(((CItemEquipment*)PItem)->getReqLvl(), equipSlotID);
-        PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
+        PChar->delEquipModifiers(static_cast<CItemEquipment*>(PItem), isDelevel);
+        PChar->PLatentEffectContainer->DelLatentEffects(static_cast<CItemEquipment*>(PItem)->getReqLvl(), equipSlotID);
+        PChar->delPetModifiers(&static_cast<CItemEquipment*>(PItem)->petModList);
 
         switch (equipSlotID)
         {
@@ -2197,7 +2197,7 @@ auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
                     PChar->m_Weapons[SLOT_MAIN] = PItem;
                 }
                 PChar->look.main = PItem->getModelId();
-                UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
+                UpdateWeaponStyle(PChar, equipSlotID, static_cast<CItemWeapon*>(PItem));
             }
             break;
             case SLOT_SUB:
@@ -3218,7 +3218,7 @@ void CheckValidEquipment(CCharEntity* PChar, bool isDelevel /* = false */)
         if (slotID == SLOT_SUB && !PItem->IsShield())
         {
             // Unequip if no main weapon or a non-grip subslot without DW
-            if (!PChar->getEquip(SLOT_MAIN) || (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) && !(((CItemWeapon*)PItem)->getSkillType() == xi::SkillType::None)))
+            if (!PChar->getEquip(SLOT_MAIN) || (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) && !(static_cast<CItemWeapon*>(PItem)->getSkillType() == xi::SkillType::None)))
             {
                 UnequipItem(PChar, SLOT_SUB, Recalculate::Yes, isDelevel);
                 continue;
@@ -4543,7 +4543,7 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
             {
                 if (PPartyMember->getZone() == PMob->getZone() && isWithinDistance(PPartyMember->loc.p, PMob->loc.p, 100.0f)) // TODO: verify range
                 {
-                    members.emplace_back((CCharEntity*)PPartyMember);
+                    members.emplace_back(static_cast<CCharEntity*>(PPartyMember));
                 }
             });
         // clang-format on

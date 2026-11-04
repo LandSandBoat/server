@@ -794,7 +794,7 @@ auto CanUseSpell(CBattleEntity* PCaster, CSpell* spell) -> bool
                             usable = false;
                         }
                     }
-                    else if (!blueutils::IsSpellSet(PChar, (CBlueSpell*)spell))
+                    else if (!blueutils::IsSpellSet(PChar, static_cast<CBlueSpell*>(spell)))
                     {
                         usable = false;
                     }
@@ -842,7 +842,7 @@ auto CanUseSpell(CBattleEntity* PCaster, CSpell* spell) -> bool
                             usable = false;
                         }
                     }
-                    else if (!blueutils::IsSpellSet(PChar, (CBlueSpell*)spell))
+                    else if (!blueutils::IsSpellSet(PChar, static_cast<CBlueSpell*>(spell)))
                     {
                         usable = false;
                     }

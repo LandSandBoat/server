@@ -212,7 +212,7 @@ auto DetourNavMesh::load(const std::string& filename) -> bool
             break;
         }
 
-        unsigned char* data = (unsigned char*)dtAlloc(tileHeader.dataSize, DT_ALLOC_PERM);
+        unsigned char* data = static_cast<unsigned char*>(dtAlloc(tileHeader.dataSize, DT_ALLOC_PERM));
         if (!data)
         {
             break;

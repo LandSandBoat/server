@@ -113,7 +113,7 @@ void CParty::DisbandParty(bool playerInitiated)
 
         for (auto& member : members)
         {
-            CCharEntity* PChar = (CCharEntity*)member;
+            CCharEntity* PChar = static_cast<CCharEntity*>(member);
             PChar->ClearTrusts();
 
             PChar->PParty = nullptr;
@@ -762,7 +762,7 @@ void CParty::PushMember(CBattleEntity* PEntity)
         }
     }
 
-    ReloadTreasurePool((CCharEntity*)PEntity);
+    ReloadTreasurePool(static_cast<CCharEntity*>(PEntity));
 }
 
 void CParty::SetPartyID(uint32 id)
@@ -851,7 +851,7 @@ void CParty::ReloadParty()
             party->RefreshFlags(info);
             for (auto&& member : party->members)
             {
-                CCharEntity* PChar = (CCharEntity*)member;
+                CCharEntity* PChar = static_cast<CCharEntity*>(member);
                 PChar->ReloadPartyDec();
                 uint16 alliance = 0;
                 PChar->pushPacket<GP_SERV_COMMAND_GROUP_TBL>(party);
@@ -896,7 +896,7 @@ void CParty::ReloadParty()
         // regular party
         for (auto& member : members)
         {
-            CCharEntity* PChar = (CCharEntity*)member;
+            CCharEntity* PChar = static_cast<CCharEntity*>(member);
 
             PChar->PLatentEffectContainer->CheckLatentsPartyJobs();
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size(), trustCount);
@@ -916,7 +916,7 @@ void CParty::ReloadParty()
                     CBattleEntity* PLeader = GetLeader();
                     if (PLeader != nullptr)
                     {
-                        for (auto* PTrust : ((CCharEntity*)PLeader)->PTrusts)
+                        for (auto* PTrust : static_cast<CCharEntity*>(PLeader)->PTrusts)
                         {
                             j++;
                             // trusts don't persist over zonelines, so we know their zone has be the same as the leader.
@@ -996,7 +996,7 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
             {
                 for (std::size_t i = 0; i < PChar->PParty->m_PAlliance->partyList.at(a)->members.size(); ++i)
                 {
-                    CCharEntity* PPartyMember = (CCharEntity*)PChar->PParty->m_PAlliance->partyList.at(a)->members.at(i);
+                    CCharEntity* PPartyMember = static_cast<CCharEntity*>(PChar->PParty->m_PAlliance->partyList.at(a)->members.at(i));
 
                     if (PPartyMember != PChar && PPartyMember->PTreasurePool != nullptr && PPartyMember->getZone() == PChar->getZone())
                     {
@@ -1016,7 +1016,7 @@ void CParty::ReloadTreasurePool(CCharEntity* PChar)
         {
             for (auto& member : members)
             {
-                CCharEntity* PPartyMember = (CCharEntity*)member;
+                CCharEntity* PPartyMember = static_cast<CCharEntity*>(member);
 
                 if (PPartyMember != PChar && PPartyMember->PTreasurePool != nullptr && PPartyMember->getZone() == PChar->getZone())
                 {
@@ -1094,12 +1094,12 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
             // enable level sync
             if (PChar->GetMLevel() < 10)
             {
-                ((CCharEntity*)GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 10, MsgStd::LevelSyncDesigneeBelowMin);
+                static_cast<CCharEntity*>(GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(static_cast<CCharEntity*>(GetLeader()), static_cast<CCharEntity*>(GetLeader()), 0, 10, MsgStd::LevelSyncDesigneeBelowMin);
                 return;
             }
             else if (PChar->getZone() != GetLeader()->getZone())
             {
-                ((CCharEntity*)GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, MsgStd::LevelSyncDesigneeInOtherArea);
+                static_cast<CCharEntity*>(GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(static_cast<CCharEntity*>(GetLeader()), static_cast<CCharEntity*>(GetLeader()), 0, 0, MsgStd::LevelSyncDesigneeInOtherArea);
                 return;
             }
             else
@@ -1108,7 +1108,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, MsgStd message)
                 {
                     if (member->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::LevelRestriction, xi::StatusEffect::LevelSync, xi::StatusEffect::SjRestriction, xi::StatusEffect::Confrontation, xi::StatusEffect::Battlefield }))
                     {
-                        ((CCharEntity*)GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, MsgStd::LevelSyncPreventedByStatus);
+                        static_cast<CCharEntity*>(GetLeader())->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(static_cast<CCharEntity*>(GetLeader()), static_cast<CCharEntity*>(GetLeader()), 0, 0, MsgStd::LevelSyncPreventedByStatus);
                         return;
                     }
                 }
@@ -1259,7 +1259,7 @@ void CParty::DisableSync()
 
 void CParty::RefreshSync()
 {
-    CCharEntity* sync      = (CCharEntity*)m_PSyncTarget;
+    CCharEntity* sync      = static_cast<CCharEntity*>(m_PSyncTarget);
     uint8        syncLevel = sync->jobs.job[static_cast<uint8>(sync->GetMJob())];
     if (syncLevel < 10)
     {

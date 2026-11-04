@@ -33,6 +33,7 @@
 #include <span>
 
 #include <DetourCommon.h>
+#define ZLIB_CONST
 #include <zlib.h>
 
 namespace
@@ -92,7 +93,7 @@ auto zlibDecompress(const std::vector<uint8>& rawData) -> std::vector<uint8>
         return {};
     }
 
-    stream.next_in  = (Bytef*)rawData.data();
+    stream.next_in  = rawData.data();
     stream.avail_in = static_cast<uInt>(rawData.size());
 
     std::vector<uint8> result;

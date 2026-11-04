@@ -51,7 +51,7 @@ CInstanceLoader::CInstanceLoader(uint32 instanceid, CCharEntity* PRequester)
 
     m_PRequester = PRequester;
     m_PZone      = PZone;
-    m_PInstance  = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    m_PInstance  = static_cast<CZoneInstance*>(PZone)->CreateInstance(instanceid);
 }
 
 CInstanceLoader::~CInstanceLoader()

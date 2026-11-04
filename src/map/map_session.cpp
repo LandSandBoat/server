@@ -39,7 +39,7 @@ void MapSession::incrementBlowfish()
 
 void MapSession::initBlowfish()
 {
-    md5((uint8*)(blowfish.key), blowfish.hash, 20);
+    md5(reinterpret_cast<uint8*>(blowfish.key), blowfish.hash, 20);
 
     for (uint32 i = 0; i < 16; ++i)
     {
@@ -49,7 +49,7 @@ void MapSession::initBlowfish()
             break;
         }
     }
-    blowfish_init((int8*)blowfish.hash, 16, blowfish.P, blowfish.S[0]);
+    blowfish_init(reinterpret_cast<int8*>(blowfish.hash), 16, blowfish.P, blowfish.S[0]);
 }
 
 auto MapSession::toString() const -> std::string

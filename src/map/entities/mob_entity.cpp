@@ -787,7 +787,7 @@ void CMobEntity::Spawn()
     {
         for (int32 i = 1; i < getMobMod(xi::MobMod::Assist) + 1; i++)
         {
-            CMobEntity* PMob = (CMobEntity*)GetEntity(targid + i, TYPE_MOB);
+            CMobEntity* PMob = static_cast<CMobEntity*>(GetEntity(targid + i, TYPE_MOB));
 
             if (PMob != nullptr)
             {
@@ -887,7 +887,7 @@ void CMobEntity::DistributeRewards()
                     RoeDatagramList datagrams;
                     datagrams.emplace_back("mob", this);
                     datagrams.emplace_back("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType));
-                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
+                    roeutils::event(ROE_MOBKILL, static_cast<CCharEntity*>(PMember), datagrams);
                 }
             });
             // clang-format on
@@ -1380,7 +1380,7 @@ void CMobEntity::OnEngage(CAttackState& state)
         if (PTarget->objtype == TYPE_PET)
         {
             PPet    = state.target().resolve();
-            PTarget = ((CPetEntity*)PTarget)->PMaster;
+            PTarget = static_cast<CPetEntity*>(PTarget)->PMaster;
         }
 
         // TODO: Supertanking might be effected by this block when we don't want it to be.
@@ -1399,7 +1399,7 @@ void CMobEntity::OnEngage(CAttackState& state)
             });
             // clang-format on
 
-            this->PEnmityContainer->UpdateEnmity((PPet ? (CBattleEntity*)PPet : (CBattleEntity*)PTarget), 0, 1); // Set VE so target doesn't change
+            this->PEnmityContainer->UpdateEnmity((PPet ? static_cast<CBattleEntity*>(PPet) : static_cast<CBattleEntity*>(PTarget)), 0, 1); // Set VE so target doesn't change
         }
     }
     TapDeaggroTime();

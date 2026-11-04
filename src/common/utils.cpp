@@ -391,7 +391,7 @@ auto packBitsLE(uint8* target, uint64 value, int32 byteOffset, int32 bitOffset, 
     return ((byteOffset << 3) + bitOffset + lengthInBit);
 }
 
-auto unpackBitsLE(uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64
+auto unpackBitsLE(const uint8* target, int32 bitOffset, uint8 lengthInBit) -> uint64
 {
     return unpackBitsLE(target, 0, bitOffset, lengthInBit);
 }
@@ -495,7 +495,7 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
         uint8 tempChar = '\0';
-        tempChar       = (uint8)unpackBitsLE((uint8*)signature.c_str(), static_cast<uint32>(currChar * 6), 6);
+        tempChar       = (uint8)unpackBitsLE(reinterpret_cast<const uint8*>(signature.c_str()), static_cast<uint32>(currChar * 6), 6);
         if (tempChar >= 1 && tempChar <= 26)
         {
             tempChar = 'a' - 1 + tempChar;
@@ -561,7 +561,7 @@ void DecodeStringSignature(const std::string& signature, char* target)
 
     for (uint8 currChar = 0; currChar < PacketNameLength; ++currChar)
     {
-        char tempChar = unpackBitsLE((uint8*)signature.c_str(), currChar * 6, 6);
+        char tempChar = unpackBitsLE(reinterpret_cast<const uint8*>(signature.c_str()), currChar * 6, 6);
         if (tempChar >= 1 && tempChar <= 10)
         {
             tempChar = '0' - 1 + tempChar;

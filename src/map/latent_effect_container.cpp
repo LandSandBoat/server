@@ -804,7 +804,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             break;
         case xi::Latent::PetId:
             expression =
-                m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET && ((CPetEntity*)m_POwner->PPet)->petID() == latentEffect.GetConditionsValue();
+                m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET && static_cast<CPetEntity*>(m_POwner->PPet)->petID() == latentEffect.GetConditionsValue();
             break;
         case xi::Latent::WeaponDrawn:
             expression = m_POwner->animation == xi::Animation::Attack;
@@ -889,7 +889,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
                     }
                 }
 
-                auto PLeader = (CCharEntity*)m_POwner->PParty->GetLeader();
+                auto PLeader = static_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
                 if (m_POwner->getZone() == PLeader->getZone())
                 {
                     inZone = inZone + static_cast<int>(PLeader->PTrusts.size());
@@ -919,7 +919,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
             }
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
-                auto* PPet = (CPetEntity*)m_POwner->PPet;
+                auto* PPet = static_cast<CPetEntity*>(m_POwner->PPet);
                 if (
                     !PPet->isDead() && PPet->petID() < 21 && // is a live avatar
                     (PPet->petID() == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21))
@@ -943,7 +943,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
                     }
                 }
 
-                auto leader = (CCharEntity*)m_POwner->PParty->GetLeader();
+                auto leader = static_cast<CCharEntity*>(m_POwner->PParty->GetLeader());
 
                 if (leader == nullptr)
                 {
@@ -1178,7 +1178,7 @@ auto CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect, bo
         case xi::Latent::WeaponBroken:
         {
             auto  slot = latentEffect.GetSlot();
-            auto* item = (CItemWeapon*)m_POwner->getEquip((SLOTTYPE)slot);
+            auto* item = static_cast<CItemWeapon*>(m_POwner->getEquip((SLOTTYPE)slot));
             switch (slot)
             {
                 case SLOT_MAIN:

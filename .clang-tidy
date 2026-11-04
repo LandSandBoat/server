@@ -15,6 +15,7 @@ Checks: >
   cppcoreguidelines-no-malloc,
   cppcoreguidelines-prefer-member-initializer,
   cppcoreguidelines-pro-type-const-cast,
+  cppcoreguidelines-pro-type-cstyle-cast,
   cppcoreguidelines-pro-type-member-init,
 
   cppcoreguidelines-slicing,
@@ -57,6 +58,5 @@ CheckOptions:
 
 # TODO: These are important, but they're destructive. Turn on one day.
 #  cppcoreguidelines-pro-type-static-cast-downcast,
-#  cppcoreguidelines-pro-type-cstyle-cast,
 #  performance-enum-size, (narrows enums that sit in packet and DB struct layouts)
 ...
