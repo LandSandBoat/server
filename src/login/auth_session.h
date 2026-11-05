@@ -118,8 +118,6 @@ public:
     }
 
 public:
-    void start() override;
-
     void read_func() override;
 
     void write_func() override
@@ -132,10 +130,6 @@ public:
         // Intentionally do not log any errors
         // Most errors are extremely noisy, any connection that's been dropped (Such as port scanners) will log an error
     }
-
-    void do_write(std::size_t length) override;
-
-    void do_read() override;
 
 private:
     ipc::Channel<zmq::message_t> dealerChannel_;

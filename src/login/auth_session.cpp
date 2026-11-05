@@ -48,54 +48,6 @@ constexpr auto isBcryptHash(const std::string& passHash) -> bool
 
 } // namespace
 
-void auth_session::start()
-{
-    if (socket_.lowest_layer().is_open())
-    {
-        socket_.async_handshake(
-            asio::ssl::stream_base::server,
-            [this, self = shared_from_this()](std::error_code ec)
-            {
-                if (!ec)
-                {
-                    do_read();
-                }
-                else
-                {
-                    const auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
-                    ShowWarning(errStr);
-                    ShowWarning("Failed to handshake!");
-                    if (errStr.contains("wrong version number (SSL routines)"))
-                    {
-                        ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
-                        ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
-                    }
-                    socket_.next_layer().close();
-                }
-            });
-    }
-}
-
-void auth_session::do_read()
-{
-    std::memset(buffer_.data(), 0, buffer_.size());
-
-    socket_.async_read_some(
-        asio::buffer(buffer_.data(), buffer_.size()),
-        [this, self = shared_from_this()](std::error_code ec, std::size_t length)
-        {
-            if (!ec)
-            {
-                read_func();
-            }
-            else
-            {
-                DebugSockets(fmt::format("async_read_some error in auth_session from IP {} ({}: {})", ipAddress, ec.value(), ec.message()));
-                handle_error(ec, self);
-            }
-        });
-}
-
 void auth_session::read_func()
 {
     const auto jsonBuffer = nlohmann::json::parse(buffer_, nullptr, false);
@@ -632,24 +584,6 @@ void auth_session::read_func()
         }
         break;
     }
-}
-
-void auth_session::do_write(std::size_t length)
-{
-    asio::async_write(
-        socket_,
-        asio::buffer(buffer_.data(), length),
-        [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
-        {
-            if (!ec)
-            {
-                write_func();
-            }
-            else
-            {
-                ShowError(ec.message());
-            }
-        });
 }
 
 auto auth_session::validatePassword(std::string username, std::string password) -> Maybe<std::pair<uint32, uint32>>
