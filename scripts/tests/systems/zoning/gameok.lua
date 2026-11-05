@@ -77,6 +77,20 @@ describe('GAMEOK', function()
         assert(player:getZoneID() == xi.zone.WEST_RONFAURE)
     end)
 
+    it('keeps a warp requested during the load across a C2S 0x00A retry', function()
+        assert(not player.network:login({ dropReply = true }))
+
+        player:setPos(0, 0, 0, 0, xi.zone.WEST_RONFAURE)
+        xi.test.world:tick()
+        assert(player.network:login())
+        assert(player:getStatus() == xi.status.DISAPPEAR, 'The retry cleared the queued warp')
+
+        player.network:finishLoading()
+        assert(zoning.awaitZoneOut(player) == 'login')
+        player.network:zoneIn()
+        assert(player:getZoneID() == xi.zone.WEST_RONFAURE)
+    end)
+
     it('takes a logout requested during the load at once, and holds its 0x00B until the client sends it', function()
         assert(player.network:login())
 

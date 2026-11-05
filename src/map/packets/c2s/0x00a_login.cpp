@@ -67,7 +67,8 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     // No real distinction between these two states in the 0x00A handler --
     // Key is already assumed to be incremented correctly,
     // Pending zone is same process transfer, and waiting is new login or different process.
-    if (PSession->blowfish.status == BLOWFISH_PENDING_ZONE || PSession->blowfish.status == BLOWFISH_WAITING) // Call zone in, etc, only once.
+    const auto isFirstZoneIn = PSession->blowfish.status == BLOWFISH_PENDING_ZONE || PSession->blowfish.status == BLOWFISH_WAITING;
+    if (isFirstZoneIn) // Call zone in, etc, only once.
     {
         PSession->blowfish.status = BLOWFISH_ACCEPTED;
         PChar->clearPacketList();
@@ -173,7 +174,12 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
 
         PChar->movePacketsToFront(PChar->getPacketCount() - queued);
 
-        PChar->status = xi::Status::Normal;
+        // A retry would undo a zone change or logout queued while the client loads
+        if (isFirstZoneIn)
+        {
+            PChar->status = xi::Status::Normal;
+        }
+
         PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
 }
