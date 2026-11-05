@@ -51,7 +51,27 @@ void handler_session::start()
         socket_.lowest_layer().set_option(asio::detail::socket_option::integer<IPPROTO_TCP, TCP_KEEPIDLE>(5 * 60)); // secs before keepalive probes
 #endif
 
-        do_read();
+        socket_.async_handshake(
+            asio::ssl::stream_base::server,
+            [this, self = shared_from_this()](std::error_code ec)
+            {
+                if (!ec)
+                {
+                    do_read();
+                    return;
+                }
+
+                const auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
+                ShowWarning(errStr);
+                ShowWarning("Failed to handshake!");
+                if (errStr.contains("wrong version number (SSL routines)"))
+                {
+                    ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
+                    ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                }
+
+                socket_.lowest_layer().close();
+            });
     }
 }
 
@@ -59,7 +79,7 @@ void handler_session::do_read()
 {
     std::memset(buffer_.data(), 0, buffer_.size());
 
-    socket_.next_layer().async_read_some(
+    socket_.async_read_some(
         asio::buffer(buffer_.data(), buffer_.size()),
         [this, self = shared_from_this()](std::error_code ec, std::size_t length)
         {
@@ -78,7 +98,7 @@ void handler_session::do_read()
 void handler_session::do_write(std::size_t length)
 {
     asio::async_write(
-        socket_.next_layer(),
+        socket_,
         asio::buffer(buffer_.data(), length),
         [this, self = shared_from_this()](std::error_code ec, std::size_t /*length*/)
         {
