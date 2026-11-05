@@ -216,12 +216,15 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0)
     then
+        -- Tested vs lvl 100 Chapuli vs a level 15 PLD with 0 shield skill. Chapuli have 373 meva, with floored dINT and an additional 20 to hit 95%
+        -- The most conservative estimate is +428~ macc but there's no "magic numbers" that fit other than +512
         local maccParams =
         {
             effectId       = xi.effect.STUN,
             magicalElement = xi.element.THUNDER,
-            skillRank      = xi.skillRank.A_PLUS,
+            skillType      = xi.skill.SHIELD, -- Guessed
             actorStat      = xi.mod.INT,
+            bonusMacc      = 512,
         }
 
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
