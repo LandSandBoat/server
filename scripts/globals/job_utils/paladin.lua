@@ -229,7 +229,7 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
 
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
-            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = math.randomInt(2, 8) * resistanceRate, origin = player })
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = math.randomInt(4.2, 6.2) * resistanceRate, origin = player })
         end
     end
 
