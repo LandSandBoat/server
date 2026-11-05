@@ -9,7 +9,7 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.14.1)
+    set(TRACY_VERSION 0.15.0)
 
     # Download client library
     CPMAddPackage(
@@ -37,7 +37,7 @@ if(TRACY_ENABLE)
     if(MSVC)
         ExternalProject_Add(tracy-windows-tools
             URL https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/windows-${TRACY_VERSION}.zip
-            URL_HASH SHA256=f7499d74914aa3ba94a2c1ce72f36477d7b61d9d0f7c9790e05274c258c97fb5 # update with TRACY_VERSION
+            URL_HASH SHA256=3549555e0ce253932b9e37dc2c2b72af9fe46f65c64391cbf1762a4a510f67c7 # update with TRACY_VERSION
             DOWNLOAD_EXTRACT_TIMESTAMP ON
             CONFIGURE_COMMAND ""
             BUILD_COMMAND ""

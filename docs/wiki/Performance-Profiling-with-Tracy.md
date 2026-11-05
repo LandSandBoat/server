@@ -45,14 +45,7 @@ If you need Tracy on a configuration the preset does not cover, add `-DTRACY_ENA
 1> [CMake] -- CMAKE_SIZEOF_VOID_P == 8: 64-bit build
 1> [CMake] -- ENABLE_FAST_MATH: ON
 1> [CMake] -- TRACY_ENABLE: ON
-1> [CMake] -- Downloading Tracy development library
-1> [CMake] x tracy-0.8.2/
-1> [CMake] x tracy-0.8.2/.github/
-1> [CMake] x tracy-0.8.2/.github/FUNDING.yml
-1> [CMake] x tracy-0.8.2/.github/sponsor.png
-1> [CMake] x tracy-0.8.2/.github/workflows/
-... 
-1> [CMake] -- Modifying C:/ffxi/server/ext/tracy/tracy-0.8.2/client/TracyProfiler.hpp
+1> [CMake] -- CPM: Adding package TracyClient@0.15.0 (v0.15.0 to C:/ffxi/server/.cpm-cache/tracyclient/...)
 ...
 1> [CMake] -- Configuring done
 1> [CMake] -- Generating done
