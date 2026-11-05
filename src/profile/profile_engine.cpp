@@ -26,6 +26,7 @@
 #include "irc/irc_session.h"
 #include "profile/profile_session.h"
 
+#include "common/cert_helpers.h"
 #include "common/logging.h"
 #include "common/settings.h"
 
@@ -34,7 +35,6 @@
 #include <array>
 #include <chrono>
 #include <cstring>
-#include <stdexcept>
 
 namespace
 {
@@ -52,21 +52,8 @@ constexpr uint16 kIrcPort = 51240;
 
 ProfileEngine::ProfileEngine(Scheduler& scheduler)
 : scheduler_(scheduler)
-, tls_(asio::ssl::context::tlsv13_server)
+, tls_(certificateHelpers::serverContext())
 {
-    auto ec = asio::error_code{};
-    tls_.set_options(asio::ssl::context::default_workarounds);
-    tls_.use_certificate_chain_file("profile.cert", ec);
-    if (!ec)
-    {
-        tls_.use_private_key_file("profile.key", asio::ssl::context::file_format::pem, ec);
-    }
-
-    if (ec)
-    {
-        throw std::runtime_error(fmt::format("Cannot load profile.cert and profile.key ({})", ec.message()));
-    }
-
     const auto profilePort = settings::get<uint16>("network.PROFILE_PORT");
     listen(profilePort,
            [this](profile::Stream stream, std::string peer, const profile::accounts::Credential credential)

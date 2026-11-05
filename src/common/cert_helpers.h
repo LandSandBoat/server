@@ -24,77 +24,34 @@
 #include "common/logging.h"
 
 #include <asio/ssl.hpp>
+#include <chrono>
 #include <filesystem>
+#include <stdexcept>
 #include <string>
+#include <thread>
 
 namespace certificateHelpers
 {
 
-// creates <name>.key and <name>.cert on first start
-inline void generateSelfSignedCert(const std::string& name = "login", const bool ellipticCurve = false)
+// one pair for every TLS listener (xi_connect auth/data/view, xi_profile)
+constexpr auto keyFile  = "login.key";
+constexpr auto certFile = "login.cert";
+
+// creates the key and cert on first start
+inline void generateSelfSignedCert()
 {
-    const auto keyFile  = name + ".key";
-    const auto certFile = name + ".cert";
-
-    if (std::filesystem::exists(keyFile))
-    {
-        FILE* fileHandle = fopen(keyFile.c_str(), "r");
-        if (fileHandle)
-        {
-            EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, nullptr, nullptr, nullptr);
-            if (pkey)
-            {
-                ShowInfo(fmt::format("Found existing {}", keyFile));
-            }
-
-            EVP_PKEY_free(pkey);
-            fclose(fileHandle);
-        }
-    }
-
-    if (std::filesystem::exists(certFile))
-    {
-        FILE* fileHandle = fopen(certFile.c_str(), "r");
-        if (fileHandle)
-        {
-            X509* cert = PEM_read_X509(fileHandle, nullptr, nullptr, nullptr);
-            if (cert)
-            {
-                char cn[2048] = {};
-                int  size     = sizeof(cn);
-
-                X509_NAME_oneline(X509_get_subject_name(cert), cn, size);
-                X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
-
-                // This is internal, so we can trust it.
-                ShowInfo(fmt::format("Found existing {}: {}", certFile, asStringFromUntrustedSource(cn, sizeof(cn))));
-
-                // if current time not within the bounds of valid date, note it's expired
-                if (X509_cmp_time(X509_get_notAfter(cert), nullptr) != 1 || X509_cmp_time(X509_get_notBefore(cert), nullptr) != -1)
-                {
-                    ShowWarning(fmt::format("Existing {} is not valid for the current time. Please regenerate or obtain a new certificate.", certFile));
-                }
-            }
-
-            X509_free(cert);
-            fclose(fileHandle);
-        }
-    }
-
+    // the key is created exclusively so concurrently starting servers generate a single pair
+    FILE* keyHandle = nullptr;
     if (!std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile))
+    {
+        keyHandle = fopen(keyFile, "wx");
+    }
+
+    if (keyHandle)
     {
         ShowInfo("Generating self-signed certificate");
 
-        EVP_PKEY* pkey = [&]()
-        {
-            if (ellipticCurve)
-            {
-                return EVP_EC_gen("P-256");
-            }
-
-            return EVP_RSA_gen(4096);
-        }();
-
+        EVP_PKEY* pkey = EVP_RSA_gen(4096);
         if (pkey == nullptr)
         {
             ShowError("Failed to generate private key!");
@@ -123,8 +80,7 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
 
         authIpAddr.copy(reinterpret_cast<char*>(commonNameIpAddr), sizeof(commonNameIpAddr) - 1);
 
-        const auto organization = fmt::format("LSB self-signed certificate for {} server", name);
-        X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>(organization.c_str()), -1, -1, 0);
+        X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>("LSB self-signed certificate"), -1, -1, 0);
         X509_NAME_add_entry_by_txt(subject, "CN", MBSTRING_ASC, commonNameIpAddr, -1, -1, 0);
 
         X509_set_issuer_name(x509, subject);
@@ -134,17 +90,15 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
             ShowError("Failed to sign X509 cert!");
         }
 
-        FILE* fileHandle = fopen(keyFile.c_str(), "wb");
-        if (fileHandle)
+        if (!PEM_write_PrivateKey(keyHandle, pkey, nullptr, nullptr, 0, nullptr, nullptr))
         {
-            if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, nullptr, nullptr))
-            {
-                ShowError(fmt::format("Failed to write {}!", keyFile));
-            }
-            fclose(fileHandle);
+            ShowError(fmt::format("Failed to write {}!", keyFile));
         }
+        fclose(keyHandle);
 
-        fileHandle = fopen(certFile.c_str(), "wb");
+        // the cert appears in one step, so its presence means the pair is complete
+        const auto certTemp   = std::string(certFile) + ".tmp";
+        FILE*      fileHandle = fopen(certTemp.c_str(), "wb");
         if (fileHandle)
         {
             if (!PEM_write_X509(fileHandle, x509))
@@ -152,10 +106,89 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
                 ShowError(fmt::format("Failed to write {}!", certFile));
             }
             fclose(fileHandle);
+
+            std::error_code ec;
+            std::filesystem::rename(certTemp, certFile, ec);
+            if (ec)
+            {
+                ShowError(fmt::format("Failed to write {}! ({})", certFile, ec.message()));
+            }
         }
         EVP_PKEY_free(pkey);
         X509_free(x509);
     }
+
+    // another server may still be generating the pair
+    for (int attempt = 0; attempt < 300 && std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile); ++attempt)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    if (std::filesystem::exists(keyFile))
+    {
+        FILE* fileHandle = fopen(keyFile, "r");
+        if (fileHandle)
+        {
+            EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, nullptr, nullptr, nullptr);
+            if (pkey)
+            {
+                ShowInfo(fmt::format("Found existing {}", keyFile));
+            }
+
+            EVP_PKEY_free(pkey);
+            fclose(fileHandle);
+        }
+    }
+
+    if (std::filesystem::exists(certFile))
+    {
+        FILE* fileHandle = fopen(certFile, "r");
+        if (fileHandle)
+        {
+            X509* cert = PEM_read_X509(fileHandle, nullptr, nullptr, nullptr);
+            if (cert)
+            {
+                char cn[2048] = {};
+                int  size     = sizeof(cn);
+
+                X509_NAME_oneline(X509_get_subject_name(cert), cn, size);
+                X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
+
+                // This is internal, so we can trust it.
+                ShowInfo(fmt::format("Found existing {}: {}", certFile, asStringFromUntrustedSource(cn, sizeof(cn))));
+
+                // if current time not within the bounds of valid date, note it's expired
+                if (X509_cmp_time(X509_get_notAfter(cert), nullptr) != 1 || X509_cmp_time(X509_get_notBefore(cert), nullptr) != -1)
+                {
+                    ShowWarning(fmt::format("Existing {} is not valid for the current time. Please regenerate or obtain a new certificate.", certFile));
+                }
+            }
+
+            X509_free(cert);
+            fclose(fileHandle);
+        }
+    }
+}
+
+// TLS 1.3 server context loaded with the shared key and cert
+inline auto serverContext() -> asio::ssl::context
+{
+    asio::ssl::context context(asio::ssl::context::tlsv13_server);
+    context.set_options(asio::ssl::context::default_workarounds);
+
+    asio::error_code ec;
+    context.use_certificate_chain_file(certFile, ec);
+    if (!ec)
+    {
+        context.use_private_key_file(keyFile, asio::ssl::context::file_format::pem, ec);
+    }
+
+    if (ec)
+    {
+        throw std::runtime_error(fmt::format("Cannot load {} and {} ({})", certFile, keyFile, ec.message()));
+    }
+
+    return context;
 }
 
 } // namespace certificateHelpers

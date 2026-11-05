@@ -29,6 +29,7 @@
 #include "data_session.h"
 #include "view_session.h"
 
+#include "common/cert_helpers.h"
 #include "common/scheduler/scheduler.h"
 #include "common/zmq/channel.h"
 
@@ -41,15 +42,10 @@ public:
     handler(Scheduler& scheduler, unsigned int port, ipc::Channel<zmq::message_t> dealerChannel)
     : scheduler_(scheduler)
     , acceptor_(scheduler_.mainContext(), asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
-    , sslContext_(asio::ssl::context::tlsv13_server)
+    , sslContext_(certificateHelpers::serverContext())
     , dealerChannel_(dealerChannel)
     {
         acceptor_.set_option(asio::socket_base::reuse_address(true));
-
-        sslContext_.set_options(asio::ssl::context::default_workarounds | asio::ssl::context::verify_fail_if_no_peer_cert);
-        sslContext_.set_default_verify_paths();
-        sslContext_.use_rsa_private_key_file("login.key", asio::ssl::context::file_format::pem);
-        sslContext_.use_certificate_chain_file("login.cert");
 
         scheduler_.postToMainThread(accept_loop());
     }
