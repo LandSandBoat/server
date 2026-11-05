@@ -67,54 +67,67 @@ inline auto hex32ToString(std::uint32_t hex) -> std::string
 #define TracyMessageStr(str)      TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str)   tracy::SetThreadName(str)
 
+// Multi-statement macros are wrapped in do/while so the caller's semicolon ends them.
 #define TracyZoneHex8(num) \
-    auto str = hex8ToString(num); \
-    TracyZoneText(str.c_str(), str.size());
+    do { \
+        const auto str = hex8ToString(num); \
+        TracyZoneText(str.c_str(), str.size()); \
+    } while (0)
 
 #define TracyZoneHex16(num) \
-    auto str = hex16ToString(num); \
-    TracyZoneText(str.c_str(), str.size());
+    do { \
+        const auto str = hex16ToString(num); \
+        TracyZoneText(str.c_str(), str.size()); \
+    } while (0)
 
 #define TracyZoneHex32(num) \
-    auto str = hex32ToString(num); \
-    TracyZoneText(str.c_str(), str.size());
+    do { \
+        const auto str = hex32ToString(num); \
+        TracyZoneText(str.c_str(), str.size()); \
+    } while (0)
 
 #define TracyReportGraphNumber(name, num) \
-    TracyPlotConfig(name, tracy::PlotFormatType::Number, false, true, 0); \
-    TracyPlot(name, num);
+    do { \
+        TracyPlotConfig(name, tracy::PlotFormatType::Number, false, true, 0); \
+        TracyPlot(name, num); \
+    } while (0)
 
 #define TracyReportGraphBytes(name, num) \
-    TracyPlotConfig(name, tracy::PlotFormatType::Memory, false, true, 0); \
-    TracyPlot(name, num);
+    do { \
+        TracyPlotConfig(name, tracy::PlotFormatType::Memory, false, true, 0); \
+        TracyPlot(name, num); \
+    } while (0)
 
 #define TracyReportGraphPercent(name, num) \
-    TracyPlotConfig(name, tracy::PlotFormatType::Percentage, false, true, 0); \
-    TracyPlot(name, num);
+    do { \
+        TracyPlotConfig(name, tracy::PlotFormatType::Percentage, false, true, 0); \
+        TracyPlot(name, num); \
+    } while (0)
 
 #define TracyReportLuaMemory(L) \
-    TracyReportGraphBytes("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0);
+    TracyReportGraphBytes("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0)
 
 #else // Empty stubs for regular builds
-#define TracyFrameMark                     std::ignore = 0
-#define TracyZoneScoped                    std::ignore = 0
-#define TracyZoneScopedN(n)                std::ignore = n
-#define TracyZoneNamed(var, name)          std::ignore = #var; std::ignore = name
-#define TracyZoneText(n, l)                std::ignore = n; std::ignore = l
-#define TracyZoneScopedC(c)                std::ignore = c
-#define TracyZoneScopedNC(n, c)            std::ignore = n; std::ignore = c
-#define TracyZoneScopedS(depth)            std::ignore = depth
-#define TracyZoneString(str)               std::ignore = str
-#define TracyZoneCString(cstr)             std::ignore = cstr
-#define TracyZoneIString(istr)             std::ignore = istr
-#define TracyZoneHex8(num)                 std::ignore = num
-#define TracyZoneHex16(num)                std::ignore = num
-#define TracyZoneHex32(num)                std::ignore = num
-#define TracyReportGraphNumber(name, num)  std::ignore = name; std::ignore = num
-#define TracyReportGraphBytes(name, num)   std::ignore = name; std::ignore = num
-#define TracyReportGraphPercent(name, num) std::ignore = name; std::ignore = num
-#define TracyReportLuaMemory(L)            std::ignore = L
-#define TracyMessageStr(str)               std::ignore = str
-#define TracySetThreadName(str)            std::ignore = str
+// decltype never evaluates its operand, but still counts as a use of it.
+#define TracyFrameMark                     static_cast<void>(0)
+#define TracyZoneScoped                    static_cast<void>(0)
+#define TracyZoneScopedN(n)                static_cast<void>(sizeof(decltype(n)))
+#define TracyZoneNamed(var, name)          static_cast<void>(sizeof(decltype(name)))
+#define TracyZoneText(n, l)                static_cast<void>(sizeof(decltype(n)) + sizeof(decltype(l)))
+#define TracyZoneScopedC(c)                static_cast<void>(sizeof(decltype(c)))
+#define TracyZoneScopedNC(n, c)            static_cast<void>(sizeof(decltype(n)) + sizeof(decltype(c)))
+#define TracyZoneScopedS(depth)            static_cast<void>(sizeof(decltype(depth)))
+#define TracyZoneString(str)               static_cast<void>(sizeof(decltype(str)))
+#define TracyZoneCString(cstr)             static_cast<void>(sizeof(decltype(cstr)))
+#define TracyZoneHex8(num)                 static_cast<void>(sizeof(decltype(num)))
+#define TracyZoneHex16(num)                static_cast<void>(sizeof(decltype(num)))
+#define TracyZoneHex32(num)                static_cast<void>(sizeof(decltype(num)))
+#define TracyReportGraphNumber(name, num)  static_cast<void>(sizeof(decltype(name)) + sizeof(decltype(num)))
+#define TracyReportGraphBytes(name, num)   static_cast<void>(sizeof(decltype(name)) + sizeof(decltype(num)))
+#define TracyReportGraphPercent(name, num) static_cast<void>(sizeof(decltype(name)) + sizeof(decltype(num)))
+#define TracyReportLuaMemory(L)            static_cast<void>(sizeof(decltype(L)))
+#define TracyMessageStr(str)               static_cast<void>(sizeof(decltype(str)))
+#define TracySetThreadName(str)            static_cast<void>(sizeof(decltype(str)))
 #define TracyLockable(m, n)                m n
 #define TracySharedLockable(m, n)          m n
 #define LockableBase(type)                 type
