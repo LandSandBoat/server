@@ -15570,13 +15570,13 @@ auto CLuaBaseEntity::getACC(const sol::object& maybeAttackNumber) -> uint16
 
 auto CLuaBaseEntity::getEVA() -> uint16
 {
-    if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
+    if (m_PBaseEntity->objtype == TYPE_NPC)
     {
-        return PEntity->EVA();
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return 0;
     }
 
-    ShowError("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-    return 0;
+    return static_cast<CBattleEntity*>(m_PBaseEntity)->EVA();
 }
 
 /************************************************************************
