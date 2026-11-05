@@ -41,6 +41,7 @@ adduser  --uid $UID $UNAME --ingroup $UGROUP --home /xiadmin --disabled-password
 echo "$UNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$UNAME
 chmod 0440 /etc/sudoers.d/$UNAME
 chown $UNAME:$UGROUP /server
+install -d -o $UNAME -g $UGROUP /server/certs
 git config --system --add safe.directory /server
 EOF
 

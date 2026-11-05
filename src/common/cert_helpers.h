@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/logging.h"
+#include "common/settings.h"
 
 #include <asio/ssl.hpp>
 #include <chrono>
@@ -33,18 +34,17 @@
 namespace certificateHelpers
 {
 
-// one pair for every TLS listener (xi_connect auth/data/view, xi_profile)
-constexpr auto keyFile  = "login.key";
-constexpr auto certFile = "login.cert";
-
-// creates the key and cert on first start
+// creates the key and cert on first start; one pair serves every TLS listener (xi_connect auth/data/view, xi_profile)
 inline void generateSelfSignedCert()
 {
+    const auto keyFile  = settings::get<std::string>("network.TLS_KEY");
+    const auto certFile = settings::get<std::string>("network.TLS_CERT");
+
     // the key is created exclusively so concurrently starting servers generate a single pair
     FILE* keyHandle = nullptr;
     if (!std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile))
     {
-        keyHandle = fopen(keyFile, "wx");
+        keyHandle = fopen(keyFile.c_str(), "wx");
     }
 
     if (keyHandle)
@@ -97,7 +97,7 @@ inline void generateSelfSignedCert()
         fclose(keyHandle);
 
         // the cert appears in one step, so its presence means the pair is complete
-        const auto certTemp   = std::string(certFile) + ".tmp";
+        const auto certTemp   = certFile + ".tmp";
         FILE*      fileHandle = fopen(certTemp.c_str(), "wb");
         if (fileHandle)
         {
@@ -126,7 +126,7 @@ inline void generateSelfSignedCert()
 
     if (std::filesystem::exists(keyFile))
     {
-        FILE* fileHandle = fopen(keyFile, "r");
+        FILE* fileHandle = fopen(keyFile.c_str(), "r");
         if (fileHandle)
         {
             EVP_PKEY* pkey = PEM_read_PrivateKey(fileHandle, nullptr, nullptr, nullptr);
@@ -142,7 +142,7 @@ inline void generateSelfSignedCert()
 
     if (std::filesystem::exists(certFile))
     {
-        FILE* fileHandle = fopen(certFile, "r");
+        FILE* fileHandle = fopen(certFile.c_str(), "r");
         if (fileHandle)
         {
             X509* cert = PEM_read_X509(fileHandle, nullptr, nullptr, nullptr);
@@ -173,6 +173,9 @@ inline void generateSelfSignedCert()
 // TLS 1.3 server context loaded with the shared key and cert
 inline auto serverContext() -> asio::ssl::context
 {
+    const auto keyFile  = settings::get<std::string>("network.TLS_KEY");
+    const auto certFile = settings::get<std::string>("network.TLS_CERT");
+
     asio::ssl::context context(asio::ssl::context::tlsv13_server);
     context.set_options(asio::ssl::context::default_workarounds);
 

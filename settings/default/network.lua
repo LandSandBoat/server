@@ -30,6 +30,10 @@ xi.settings.network =
 
     PROFILE_PORT = 51220,
 
+    -- Key and certificate shared by every TLS listener (xi_connect and xi_profile), generated on first start if neither exists
+    TLS_KEY  = 'login.key',
+    TLS_CERT = 'login.cert',
+
     -- DB queries will attempt each query once, and reconnect and retry up to `SQL_QUERY_RETRY_COUNT` times.
     SQL_QUERY_RETRY_COUNT = 1,
 

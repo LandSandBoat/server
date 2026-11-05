@@ -111,8 +111,11 @@ x-common: &common
     XI_NETWORK_HTTP_HOST: 0.0.0.0
     XI_NETWORK_ZMQ_IP: world
     XI_NETWORK_SQL_HOST: database
+    XI_NETWORK_TLS_KEY: /server/certs/login.key
+    XI_NETWORK_TLS_CERT: /server/certs/login.cert
     # XI_{file}_{setting}: value
   volumes:
+    - certs:/server/certs
     - navmeshes:/server/navmeshes
     - ximeshes:/server/ximeshes
     # - ./config.yaml:/server/tools/config.yaml
@@ -213,6 +216,7 @@ services:
         condition: service_started
 
 volumes:
+  certs:
   database:
   navmeshes:
     external: true

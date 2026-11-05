@@ -16,7 +16,7 @@ Make sure you replace any references to `/path/to/server/` with your own server'
   <summary>Linux (Ubuntu 24.04)</summary>
 
 ### Backup Existing Cert
-Chances are you already have a cert in your xi server directory. `xi_connect` and `xi_profile` share `login.key` and `login.cert`, and generate a self-signed pair on first start if neither file exists. Its a good idea to back anything we are changing just in case.
+Chances are you already have a cert in your xi server directory. `xi_connect` and `xi_profile` share `login.key` and `login.cert` (paths set by `TLS_KEY` and `TLS_CERT` in `settings/network.lua`), and generate a self-signed pair on first start if neither file exists. Its a good idea to back anything we are changing just in case.
 ```sh
 cp /path/to/server/login.key /path/to/server/login.key.bak
 cp /path/to/server/login.cert /path/to/server/login.cert.bak
