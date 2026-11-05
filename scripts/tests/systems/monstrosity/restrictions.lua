@@ -195,6 +195,8 @@ describe('Monstrosity restrictions', function()
 
     -- Retail counts 4, 3, 2, 1 three seconds apart, then leaves.
     it('leaves Monstrosity when the Relinquish countdown ends', function()
+        -- Keep ambient aggro from interrupting the countdown.
+        player:setVisibleGMLevel(3)
         startRelinquish()
         waitSeconds(15)
 
