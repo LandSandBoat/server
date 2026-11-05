@@ -164,8 +164,8 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
             // get player skill level with bonus from gear
             auto playerSkillLvl = PBlueMage->GetSkill(xi::SkillType::BlueMagic);
 
-            // make sure the difference between spell skill and player is at most 31 points
-            if (playerSkillLvl >= skillLvlForSpell - 31)
+            // make sure the difference between spell skill and player is at most 29 points
+            if (playerSkillLvl >= skillLvlForSpell - 29)
             {
                 auto chanceToLearn = 33 + PBlueMage->getMod(xi::Mod::BLUE_LEARN_CHANCE);
                 if (xirand::GetRandomNumber(100) < chanceToLearn)
