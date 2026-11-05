@@ -36,9 +36,13 @@ for file in "${targets[@]}"; do
         # cppcheck cannot parse Catch2's TEST_CASE macro expansion; real syntax
         # errors in these files are still caught by compilation.
 
+        # --suppress=syntaxError:src/map/items/exdata/*.h
+        # cppcheck cannot parse default member initialisers on bitfields.
+
         cppcheck_output=$(cppcheck -v -j 4 --force --quiet --inconclusive --std=c++23 \
         --suppress=passedByValue:src/map/packet_system.cpp \
         --suppress=syntaxError:src/test/tests/* \
+        --suppress=syntaxError:src/map/items/exdata/*.h \
         --suppress=templateRecursion:src/map/packet_system.cpp \
         --suppress=unmatchedSuppression \
         --suppress=missingIncludeSystem \
