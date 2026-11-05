@@ -2531,7 +2531,7 @@ spawns:
     level:    [52, 55]
   17440986:
     template: Baronet_Romwe
-    region:   region_87
+    region:   c_210
     level:    [68, 68]
   17440987:
     template: Deadly_Iris
