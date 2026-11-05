@@ -7,6 +7,7 @@ CPMAddPackage(
     NAME ZLIB
     GITHUB_REPOSITORY madler/zlib
     GIT_TAG v1.3.1
+    SYSTEM ON
     OPTIONS "ZLIB_BUILD_EXAMPLES OFF"
 ) # defines: zlibstatic, for the compressed ximesh files
 
@@ -14,6 +15,7 @@ CPMAddPackage(
     NAME utfcpp
     GITHUB_REPOSITORY nemtrif/utfcpp
     GIT_TAG v4.0.8
+    SYSTEM ON
 ) # defines: utf8cpp
 
 CPMAddPackage(
