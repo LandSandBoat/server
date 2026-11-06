@@ -23,6 +23,7 @@
 
 #include "common/application.h"
 #include "common/scheduler/scheduler.h"
+#include "common/types/maybe.h"
 #include "in_memory_sink.h"
 #include "map/map_engine.h"
 #include "mock_manager.h"
@@ -48,6 +49,7 @@ struct TestConfig
     bool                          keepGoing{ false };
     bool                          watch{ false };
     size_t                        retryCount{ 0 };
+    Maybe<uint64>                 seed; // fixed PRNG seed for every test (--seed); a fresh one per test when unset
     FilterConfig                  filters;
 };
 
