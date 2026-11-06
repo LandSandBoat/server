@@ -40,6 +40,17 @@ describe('Notoriety', function()
         assert(player:hasEnmity(), 'the player has no enmity from the rabbit')
     end)
 
+    it('lists a mob that turns on its charmer when charm wears off', function()
+        mob:respawn()
+        player:charm(mob, 5)
+        assert(mob:isCharmed(), 'precondition: the rabbit is charmed')
+
+        xi.test.world:skipTime(10)
+        xi.test.world:tickEntity(mob)
+        assert(not mob:isCharmed(), 'precondition: the charm wore off')
+        assert(inNotoriety(player, mob), 'the rabbit is missing from the player\'s notoriety')
+    end)
+
     -- The rabbit keeps an ownerless entry for the player, who comes back as a new object with the same id.
     describe('after the player zones out and back', function()
         before_each(function()
