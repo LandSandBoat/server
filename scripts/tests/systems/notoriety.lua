@@ -40,6 +40,30 @@ describe('Notoriety', function()
         assert(player:hasEnmity(), 'the player has no enmity from the rabbit')
     end)
 
+    -- The rabbit keeps an ownerless entry for the player, who comes back as a new object with the same id.
+    describe('after the player zones out and back', function()
+        before_each(function()
+            mob:respawn()
+            mob:addStatusEffect(xi.effect.PETRIFICATION, { power = 1, duration = 600, origin = mob })
+            mob:addEnmity(player, 1, 1)
+            player:gotoZone(xi.zone.LA_THEINE_PLATEAU)
+            player:gotoZone(xi.zone.WEST_RONFAURE)
+        end)
+
+        it('leaves notoriety when the mob dies after base enmity', function()
+            mob:addBaseEnmity(player)
+            assert(inNotoriety(player, mob), 'precondition: the rabbit is in the player\'s notoriety')
+
+            mob:despawn()
+            assert(not inNotoriety(player, mob), 'the dead rabbit is still in the player\'s notoriety')
+        end)
+
+        it('rejoins notoriety when the mob gains enmity', function()
+            mob:addEnmity(player, 1, 1)
+            assert(inNotoriety(player, mob), 'the rabbit is missing from the player\'s notoriety')
+        end)
+    end)
+
     describe('with a player-allegiance mob', function()
         ---@type CBaseEntity
         local ally
