@@ -26,10 +26,11 @@ templates:
         hp: 7000
 
   Ramuh_Prime_ASA:
-    id:           7041
-    display_name: Ramuh_Prime
-    species:      ramuh
-    type:         [notorious, battlefield]
+    id:            7041
+    display_name:  Ramuh_Prime
+    species:       ramuh
+    type:          [notorious, battlefield]
+    skill_list_id: 320
     attributes:
       combat:
         skill: staff
@@ -50,7 +51,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Ramuh_Prime_TBL:
     id:            4643

@@ -4440,7 +4440,38 @@ INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,588); -- death_trap (
 INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,654); -- double_whammy
 INSERT INTO `mob_skill_lists` VALUES ('Chest_OPlenty',2114,656); -- gilded_torpor
 
--- Next ID : 2115
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,869); -- whispering_wind
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,870); -- hastega, observed on retail
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,871); -- aerial_armor
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,872); -- aero_iv
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,873); -- predator_claws
+INSERT INTO `mob_skill_lists` VALUES ('Avatar_Garuda_ASA',2115,874); -- wind_blade
+
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2116,144); -- tachi_enpi
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2116,145); -- tachi_hobaku
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2116,146); -- tachi_goten
+INSERT INTO `mob_skill_lists` VALUES ('Renfred_ASA',2116,147); -- tachi_kagero
+
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2117,128); -- blade_rin
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2117,129); -- blade_retsu
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2117,131); -- blade_to
+INSERT INTO `mob_skill_lists` VALUES ('Gorattz_ASA',2117,132); -- blade_chi
+
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,96); -- slice
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,98); -- shadow_of_death
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,101); -- vorpal_scythe
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,102); -- guillotine
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,103); -- cross_reaper
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,2486); -- salvation_scythe
+INSERT INTO `mob_skill_lists` VALUES ('D_Shantotto_ASA',2118,2487); -- salvation_scythe
+
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2119,181); -- shell_crusher
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2119,182); -- full_swing
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2119,184); -- retribution
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2119,2488); -- divine_malison
+INSERT INTO `mob_skill_lists` VALUES ('Shantotto_ASA',2119,2489); -- divine_malison
+
+-- Next ID : 2120
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
