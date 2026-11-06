@@ -24,6 +24,7 @@
 #include "common/lua.h"
 #include "common/settings.h"
 #include "common/tracy.h"
+#include "common/xirand.h"
 #include "enums/test_status.h"
 #include "in_memory_sink.h"
 #include "lua/lua_simulation.h"
@@ -43,6 +44,18 @@
 #define XI_TEST_ASAN 1
 #endif
 #endif
+
+namespace
+{
+
+// A seed drawn from the system entropy source, for runs without --seed.
+auto freshSeed() -> uint64
+{
+    xirand::seed();
+    return static_cast<uint64>(xirand::rng()());
+}
+
+} // namespace
 
 TestEngine::TestEngine(Application& application, TestConfig testConfig, std::unique_ptr<MapEngine> mapEngine, std::unique_ptr<WorldEngine> worldEngine)
 : application_(application)
@@ -298,7 +311,17 @@ auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& co
 
     // Clean simulation state, reset PRNG seed and weather, and clear logs before each test
     DebugTestFmt("  Cleaning simulation state for test: {}", testCase.name());
-    simulation_->seed();
+    // One 64-bit seed per test, fixed by --seed or drawn fresh, so any failure can be rerun exactly.
+    const auto testSeed = [&]() -> uint64
+    {
+        if (testConfig_.seed)
+        {
+            return *testConfig_.seed;
+        }
+
+        return freshSeed();
+    }();
+    simulation_->setSeed(testSeed);
     simulation_->resetWeather();
     testConfig_.loggerSink->clear();
 
@@ -355,6 +378,11 @@ auto TestEngine::runTestCaseOnce(const TestCase& testCase, const HookContext& co
     lua.collect_garbage();
     lua.collect_garbage();
 #endif
+
+    if (status == TestStatus::Failed)
+    {
+        errorMessage += fmt::format("\n  PRNG seed: {} (rerun with --seed {})", testSeed, testSeed);
+    }
 
     // Always collect logs AFTER all execution (for verbose mode or failure)
     logs = testConfig_.loggerSink->logs();
