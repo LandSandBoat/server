@@ -67,4 +67,6 @@ xi.settings.logging =
     SQL_SLOW_QUERY_LOG_ENABLE   = true, -- true/false. If true, slow SQL queries will generate warning or error logs if they exceed the durations listed below.
     SQL_SLOW_QUERY_WARNING_TIME = 100,  -- uint (milliseconds).
     SQL_SLOW_QUERY_ERROR_TIME   = 250,  -- uint (milliseconds).
+
+    PACKET_CAPTURE_DIR = './log/packets', -- Output folder for the packetcap module (modules/tools/packetcap)
 }
