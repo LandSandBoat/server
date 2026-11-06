@@ -12,6 +12,7 @@
  * PP = packet payload
  ************************************************************************/
 
+#include "common/earth_time.h"
 #include "common/settings.h"
 #include "map/entities/char_entity.h"
 #include "map/packets/basic.h"
@@ -63,7 +64,7 @@ public:
 
         if (PChar->getCharVar("PacketCap") == 1)
         {
-            auto now      = std::chrono::floor<std::chrono::seconds>(std::chrono::system_clock::now());
+            auto now      = earth_time::to_utc_tm(std::chrono::system_clock::now());
             auto filename = fmt::format("{}/{}_{:%Y%m%d_%H%M%S}.cap", captureDir_, PChar->id, now);
             auto file     = std::make_unique<std::ofstream>(filename, std::ios::binary);
 
