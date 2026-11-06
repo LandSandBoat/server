@@ -560,6 +560,13 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         {
             PChar->PPet->PAI->Disengage();
 
+            // The master is freed before the pet's next tick, which is where the pet would let go of it.
+            PChar->PPet->PMaster = nullptr;
+            FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
+            {
+                PCurrentMob->PEnmityContainer->Clear(PChar->PPet->id);
+            }
+
             FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
             {
                 // inform other players of the pets removal
