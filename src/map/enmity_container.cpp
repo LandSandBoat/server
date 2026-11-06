@@ -509,6 +509,11 @@ auto CEnmityContainer::GetHighestEnmity() -> CBattleEntity*
         // Is this still true?
         if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() || PEntity->PInstance != m_EnmityHolder->PInstance || PEntity->isDead())
         {
+            if (PEntity)
+            {
+                PEntity->PNotorietyContainer->remove(m_EnmityHolder);
+            }
+
             m_EnmityList.erase(highest);
             PEntity = GetHighestEnmity();
         }
