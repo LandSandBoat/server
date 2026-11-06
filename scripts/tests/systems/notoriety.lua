@@ -9,6 +9,18 @@ describe('Notoriety', function()
     ---@type CTestEntity
     local mob
 
+    ---@param holder CBaseEntity
+    ---@param entity CBaseEntity
+    local function inNotoriety(holder, entity)
+        for _, entry in pairs(holder:getNotorietyList()) do
+            if entry:getID() == entity:getID() then
+                return true
+            end
+        end
+
+        return false
+    end
+
     before_each(function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
         mob    = player.entities:moveTo('Wild_Rabbit')
@@ -26,5 +38,62 @@ describe('Notoriety', function()
         mob:addEnmity(player, 1, 1)
 
         assert(player:hasEnmity(), 'the player has no enmity from the rabbit')
+    end)
+
+    describe('with a player-allegiance mob', function()
+        ---@type CBaseEntity
+        local ally
+
+        -- Garrison allies are dynamic mobs on the player's side, so their enmity lands in the beastmen's notoriety.
+        before_each(function()
+            mob:respawn()
+            mob:setUnkillable(false)
+
+            local zone = GetZone(xi.zone.WEST_RONFAURE)
+            assert(zone, 'West Ronfaure not loaded')
+
+            local inserted = zone:insertDynamicEntity({
+                objtype              = xi.objType.MOB,
+                allegiance           = xi.allegiance.PLAYER,
+                name                 = 'Notoriety_Ally',
+                x                    = mob:getXPos(),
+                y                    = mob:getYPos(),
+                z                    = mob:getZPos(),
+                rotation             = mob:getRotPos(),
+                groupId              = 5,
+                groupZoneId          = xi.zone.GHELSBA_OUTPOST,
+                minLevel             = 1,
+                maxLevel             = 1,
+                releaseIdOnDisappear = true,
+            })
+            assert(inserted, 'precondition: the ally was inserted')
+            ally = inserted
+            ally:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+            ally:spawn()
+
+            ally:addEnmity(mob, 1, 1)
+            assert(inNotoriety(mob, ally), 'precondition: the ally is in the rabbit\'s notoriety')
+
+            -- The ally drops a dead target from its enmity list the next time it picks a target.
+            mob:setHP(0)
+            ally:updateTarget()
+            mob:setHP(mob:getMaxHP())
+        end)
+
+        it('leaves notoriety when the ally drops its dead target', function()
+            assert(not inNotoriety(mob, ally), 'the ally is still in the rabbit\'s notoriety')
+            DespawnMob(ally:getID())
+        end)
+
+        -- Curing walks the target's notoriety, which held the freed ally.
+        it('survives a cure on the target after the ally is deleted', function()
+            local allyID = ally:getID()
+            DespawnMob(allyID)
+            xi.test.world:skipTime(5)
+            xi.test.world:tick()
+            assert(GetMobByID(allyID) == nil, 'precondition: the ally was deleted')
+
+            player:updateEnmityFromCure(mob, 100)
+        end)
     end)
 end)
