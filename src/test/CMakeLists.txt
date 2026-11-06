@@ -72,6 +72,7 @@ xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/scheduler_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/transport_voyage_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/ximesh_query_tests.cpp
 )
 add_dependencies(xi_test data_schema_generate)
 
