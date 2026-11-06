@@ -1410,6 +1410,9 @@ void DetachPet(CBattleEntity* PMaster)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(PPet);
 
+        // Before the enmity update, so the mob can join its old master's notoriety.
+        PMob->allegiance = xi::Allegiance::Mob;
+
         if (!PMob->isDead())
         {
             PMob->PAI->Disengage();
@@ -1446,10 +1449,9 @@ void DetachPet(CBattleEntity* PMaster)
             PMob->updatemask |= UPDATE_STATUS;
         }
 
-        PMob->isCharmed  = false;
-        PMob->allegiance = xi::Allegiance::Mob;
-        PMob->charmTime  = timer::time_point::min();
-        PMob->PMaster    = nullptr;
+        PMob->isCharmed = false;
+        PMob->charmTime = timer::time_point::min();
+        PMob->PMaster   = nullptr;
 
         PMob->setMobMod(xi::MobMod::Bodyguard, 0);
 
