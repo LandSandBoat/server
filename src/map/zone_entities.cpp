@@ -2049,6 +2049,14 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
             {
                 PChar->eventPreparation->targetEntity = nullptr;
             }
+
+            for (auto* PEvent : PChar->eventQueue)
+            {
+                if (PEvent->targetEntity == PEntity)
+                {
+                    PEvent->targetEntity = nullptr;
+                }
+            }
         }
     };
 
