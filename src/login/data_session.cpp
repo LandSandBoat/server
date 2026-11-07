@@ -564,7 +564,7 @@ void data_session::read_func()
 
                 // Write synchronously here to ensure the write() completes before the subsequent shutdown
                 std::error_code writeEc;
-                asio::write(viewSession->socket_.next_layer(),
+                asio::write(viewSession->socket_,
                             asio::buffer(viewSession->buffer_.data(), sizeof(characterSelectionResponse)),
                             writeEc);
                 if (writeEc)

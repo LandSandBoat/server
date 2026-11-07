@@ -22,19 +22,107 @@
 #pragma once
 
 #include "common/logging.h"
+#include "common/settings.h"
 
 #include <asio/ssl.hpp>
+#include <chrono>
 #include <filesystem>
+#include <stdexcept>
 #include <string>
+#include <thread>
 
 namespace certificateHelpers
 {
 
-// creates <name>.key and <name>.cert on first start
-inline void generateSelfSignedCert(const std::string& name = "login", const bool ellipticCurve = false)
+// creates the key and cert on first start; one pair serves every TLS listener (xi_connect auth/data/view, xi_profile)
+inline void generateSelfSignedCert()
 {
-    const auto keyFile  = name + ".key";
-    const auto certFile = name + ".cert";
+    const auto keyFile  = settings::get<std::string>("network.TLS_KEY");
+    const auto certFile = settings::get<std::string>("network.TLS_CERT");
+
+    // the key is created exclusively so concurrently starting servers generate a single pair
+    FILE* keyHandle = nullptr;
+    if (!std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile))
+    {
+        keyHandle = fopen(keyFile.c_str(), "wx");
+    }
+
+    if (keyHandle)
+    {
+        ShowInfo("Generating self-signed certificate");
+
+        EVP_PKEY* pkey = EVP_RSA_gen(4096);
+        if (pkey == nullptr)
+        {
+            ShowError("Failed to generate private key!");
+        }
+
+        X509* x509 = X509_new();
+
+        if (x509 == nullptr)
+        {
+            ShowError("Failed to generate allocate X509 cert!");
+        }
+
+        ASN1_INTEGER_set(X509_get_serialNumber(x509), 1);         // cert #1 for self-signed
+        X509_gmtime_adj(X509_get_notBefore(x509), 0);             // valid from now
+        X509_gmtime_adj(X509_get_notAfter(x509), 31536000L * 20); // expires 20 years from now
+
+        if (!X509_set_pubkey(x509, pkey))
+        {
+            ShowError("Failed to assign private key to X509 cert!");
+        }
+
+        X509_NAME* subject = X509_get_subject_name(x509);
+
+        std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
+        unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
+
+        authIpAddr.copy(reinterpret_cast<char*>(commonNameIpAddr), sizeof(commonNameIpAddr) - 1);
+
+        X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>("LSB self-signed certificate"), -1, -1, 0);
+        X509_NAME_add_entry_by_txt(subject, "CN", MBSTRING_ASC, commonNameIpAddr, -1, -1, 0);
+
+        X509_set_issuer_name(x509, subject);
+
+        if (!X509_sign(x509, pkey, EVP_sha384()))
+        {
+            ShowError("Failed to sign X509 cert!");
+        }
+
+        if (!PEM_write_PrivateKey(keyHandle, pkey, nullptr, nullptr, 0, nullptr, nullptr))
+        {
+            ShowError(fmt::format("Failed to write {}!", keyFile));
+        }
+        fclose(keyHandle);
+
+        // the cert appears in one step, so its presence means the pair is complete
+        const auto certTemp   = certFile + ".tmp";
+        FILE*      fileHandle = fopen(certTemp.c_str(), "wb");
+        if (fileHandle)
+        {
+            if (!PEM_write_X509(fileHandle, x509))
+            {
+                ShowError(fmt::format("Failed to write {}!", certFile));
+            }
+            fclose(fileHandle);
+
+            std::error_code ec;
+            std::filesystem::rename(certTemp, certFile, ec);
+            if (ec)
+            {
+                ShowError(fmt::format("Failed to write {}! ({})", certFile, ec.message()));
+            }
+        }
+        EVP_PKEY_free(pkey);
+        X509_free(x509);
+    }
+
+    // another server may still be generating the pair
+    for (int attempt = 0; attempt < 300 && std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile); ++attempt)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
 
     if (std::filesystem::exists(keyFile))
     {
@@ -80,82 +168,30 @@ inline void generateSelfSignedCert(const std::string& name = "login", const bool
             fclose(fileHandle);
         }
     }
+}
 
-    if (!std::filesystem::exists(keyFile) && !std::filesystem::exists(certFile))
+// TLS 1.3 server context loaded with the shared key and cert
+inline auto serverContext() -> asio::ssl::context
+{
+    const auto keyFile  = settings::get<std::string>("network.TLS_KEY");
+    const auto certFile = settings::get<std::string>("network.TLS_CERT");
+
+    asio::ssl::context context(asio::ssl::context::tlsv13_server);
+    context.set_options(asio::ssl::context::default_workarounds);
+
+    asio::error_code ec;
+    context.use_certificate_chain_file(certFile, ec);
+    if (!ec)
     {
-        ShowInfo("Generating self-signed certificate");
-
-        EVP_PKEY* pkey = [&]()
-        {
-            if (ellipticCurve)
-            {
-                return EVP_EC_gen("P-256");
-            }
-
-            return EVP_RSA_gen(4096);
-        }();
-
-        if (pkey == nullptr)
-        {
-            ShowError("Failed to generate private key!");
-        }
-
-        X509* x509 = X509_new();
-
-        if (x509 == nullptr)
-        {
-            ShowError("Failed to generate allocate X509 cert!");
-        }
-
-        ASN1_INTEGER_set(X509_get_serialNumber(x509), 1);         // cert #1 for self-signed
-        X509_gmtime_adj(X509_get_notBefore(x509), 0);             // valid from now
-        X509_gmtime_adj(X509_get_notAfter(x509), 31536000L * 20); // expires 20 years from now
-
-        if (!X509_set_pubkey(x509, pkey))
-        {
-            ShowError("Failed to assign private key to X509 cert!");
-        }
-
-        X509_NAME* subject = X509_get_subject_name(x509);
-
-        std::string   authIpAddr           = settings::get<std::string>("network.LOGIN_AUTH_IP");
-        unsigned char commonNameIpAddr[17] = {}; // size of "255.255.255.255\0"
-
-        authIpAddr.copy(reinterpret_cast<char*>(commonNameIpAddr), sizeof(commonNameIpAddr) - 1);
-
-        const auto organization = fmt::format("LSB self-signed certificate for {} server", name);
-        X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, reinterpret_cast<const unsigned char*>(organization.c_str()), -1, -1, 0);
-        X509_NAME_add_entry_by_txt(subject, "CN", MBSTRING_ASC, commonNameIpAddr, -1, -1, 0);
-
-        X509_set_issuer_name(x509, subject);
-
-        if (!X509_sign(x509, pkey, EVP_sha384()))
-        {
-            ShowError("Failed to sign X509 cert!");
-        }
-
-        FILE* fileHandle = fopen(keyFile.c_str(), "wb");
-        if (fileHandle)
-        {
-            if (!PEM_write_PrivateKey(fileHandle, pkey, nullptr, nullptr, 0, nullptr, nullptr))
-            {
-                ShowError(fmt::format("Failed to write {}!", keyFile));
-            }
-            fclose(fileHandle);
-        }
-
-        fileHandle = fopen(certFile.c_str(), "wb");
-        if (fileHandle)
-        {
-            if (!PEM_write_X509(fileHandle, x509))
-            {
-                ShowError(fmt::format("Failed to write {}!", certFile));
-            }
-            fclose(fileHandle);
-        }
-        EVP_PKEY_free(pkey);
-        X509_free(x509);
+        context.use_private_key_file(keyFile, asio::ssl::context::file_format::pem, ec);
     }
+
+    if (ec)
+    {
+        throw std::runtime_error(fmt::format("Cannot load {} and {} ({})", certFile, keyFile, ec.message()));
+    }
+
+    return context;
 }
 
 } // namespace certificateHelpers

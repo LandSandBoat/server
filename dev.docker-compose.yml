@@ -131,11 +131,14 @@ services:
       XI_NETWORK_SQL_HOST: database
       XI_NETWORK_SQL_PORT: 3306
       XI_NETWORK_ZMQ_IP: world
+      XI_NETWORK_TLS_KEY: /server/certs/login.key
+      XI_NETWORK_TLS_CERT: /server/certs/login.cert
     ports:
       - "54001:54001"
       - "54230:54230"
       - "54231:54231"
     volumes:
+      - certs:/server/certs
       - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
     depends_on:
       database:
@@ -167,10 +170,13 @@ services:
       <<: *dbcreds
       XI_NETWORK_SQL_HOST: database
       XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_TLS_KEY: /server/certs/login.key
+      XI_NETWORK_TLS_CERT: /server/certs/login.cert
     ports:
       - "51220:51220"
       - "51240:51240"
     volumes:
+      - certs:/server/certs
       - ${LOCAL_WORKSPACE_FOLDER:-./}/log:/server/log
     depends_on:
       database:
@@ -222,5 +228,6 @@ services:
         condition: service_started
 
 volumes:
+  certs:
   navmeshes:
     external: true
