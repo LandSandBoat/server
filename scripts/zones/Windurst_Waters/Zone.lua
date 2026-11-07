@@ -8,7 +8,7 @@ zoneObject.onInitialize = function(zone)
     -- Used for Windurst Mission 1-3
     zone:registerCuboidTriggerArea(1, 23, -12, -208, 31, -8, -197)
 
-    xi.events.harvestFestival.applyHalloweenNpcCostumes(zone:getID())
+    xi.events.harvestFestival.initializeZone(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -20,6 +20,11 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaEnter(player, triggerArea)
+end
+
+zoneObject.onTriggerAreaLeave = function(player, triggerArea)
+    xi.events.harvestFestival.games.onTriggerAreaLeave(player, triggerArea)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
