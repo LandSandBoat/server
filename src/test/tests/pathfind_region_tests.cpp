@@ -21,6 +21,7 @@
 
 #include "map/ai/helpers/pathfind/path_owner.h"
 #include "map/ai/helpers/pathfind/pathfind.h"
+#include "map/ai/helpers/pathfind/pathfind_step.h"
 #include "map/navmesh/navmesh.h"
 #include "map/roam_region.h"
 
@@ -228,4 +229,26 @@ TEST_CASE("pathfind: a region mob that cannot sample a leg walks back onto its r
     const auto destination = pathFind.GetDestination();
     CHECK(region.contains(destination.x, destination.z));
     CHECK_FALSE(region.contains(ownerPtr->position().x, ownerPtr->position().z));
+}
+
+TEST_CASE("pathfind: movement does not overshoot a sloped waypoint", "[pathfind][region]")
+{
+    position_t       position{ 0.0f, 0.0f, 0.0f, 0, 0 };
+    const position_t target{ 1.0f, 1.0f, 0.0f, 0, 0 };
+
+    SECTION("waypoint within the horizontal step")
+    {
+        const float moved = pathfind::stepTowards(position, target, 1.25f, 0.0f);
+        CHECK(position.x == target.x);
+        CHECK(position.y == target.y);
+        CHECK(position.z == target.z);
+        CHECK(moved == 1.0f);
+    }
+
+    SECTION("stopping range still includes height")
+    {
+        const float moved = pathfind::stepTowards(position, target, 0.1f, 1.25f);
+        CHECK(moved == 0.1f);
+        CHECK(position.x > 0.0f);
+    }
 }
