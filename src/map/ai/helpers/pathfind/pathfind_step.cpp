@@ -32,7 +32,8 @@ namespace pathfind
 
 auto stepTowards(position_t& pos, const position_t& target, float stepDistance, float stopShort) -> float
 {
-    const float distanceTo = distance(pos, target);
+    // Waypoints use horizontal distance. Stop-short ranges include height.
+    const float distanceTo = distance(pos, target, stopShort == 0.0f);
     const float diffY      = target.y - pos.y;
 
     // Face the target, unless we are basically on top of it and the angle would be unpredictable.
