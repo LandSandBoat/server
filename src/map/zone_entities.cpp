@@ -242,6 +242,12 @@ void CZoneEntities::InsertPC(CCharEntity* PChar)
     m_charTargIds.insert(PChar->targid);
     m_charList[PChar->targid] = PChar;
 
+    // Mobs keep a returning char's enmity, but it still points at the char object that zoned out.
+    FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PMob, m_mobList)
+    {
+        PMob->PEnmityContainer->ZoneInRebind(PChar);
+    }
+
     TryAddToNearbySpawnLists(PChar);
 
     ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
