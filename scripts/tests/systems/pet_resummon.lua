@@ -175,6 +175,7 @@ describe('Normal pet summon placement', function()
 
     before_each(function()
         player = xi.test.world:spawnPlayer({ zone = xi.zone.ROLANBERRY_FIELDS })
+        player:setVisibleGMLevel(3)
         owner  = player.entities:get(17228224)
 
         local linkedPet = owner:getPet()
