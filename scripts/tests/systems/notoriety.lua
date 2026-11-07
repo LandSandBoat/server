@@ -61,6 +61,10 @@ describe('Notoriety', function()
             player:gotoZone(xi.zone.WEST_RONFAURE)
         end)
 
+        it('rejoins notoriety as the player zones in', function()
+            assert(inNotoriety(player, mob), 'the rabbit is missing from the player\'s notoriety')
+        end)
+
         it('leaves notoriety when the mob dies after base enmity', function()
             mob:addBaseEnmity(player)
             assert(inNotoriety(player, mob), 'precondition: the rabbit is in the player\'s notoriety')

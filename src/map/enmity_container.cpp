@@ -99,6 +99,15 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
     }
 }
 
+void CEnmityContainer::ZoneInRebind(CBattleEntity* PEntity)
+{
+    if (const auto& enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
+    {
+        enmity_obj->second.PEnmityOwner = PEntity;
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
+    }
+}
+
 void CEnmityContainer::SetActive(uint32 EntityID, bool active)
 {
     if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())

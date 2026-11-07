@@ -52,8 +52,9 @@ public:
     auto GetHighestEnmity() -> CBattleEntity*; // Decays VE and gets target with highest enmity
 
     auto CalculateEnmityBonus(CBattleEntity* PEntity) -> float;
-    void Clear(uint32 EntityID = 0);   // Removes Entries from list
-    void LogoutReset(uint32 EntityID); // Sets entry to inactive
+    void Clear(uint32 EntityID = 0);           // Removes Entries from list
+    void LogoutReset(uint32 EntityID);         // Sets entry to inactive
+    void ZoneInRebind(CBattleEntity* PEntity); // Points a LogoutReset entry at the char that zoned back in
     void SetActive(uint32 EntityID, bool active);
     void AddBaseEnmity(CBattleEntity* PEntity);
     void UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster = false, bool tameable = false, bool directAction = true);
