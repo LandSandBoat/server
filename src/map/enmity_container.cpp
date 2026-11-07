@@ -99,6 +99,15 @@ void CEnmityContainer::LogoutReset(uint32 EntityID)
     }
 }
 
+void CEnmityContainer::ZoneInRebind(CBattleEntity* PEntity)
+{
+    if (const auto& enmity_obj = m_EnmityList.find(PEntity->id); enmity_obj != m_EnmityList.end())
+    {
+        enmity_obj->second.PEnmityOwner = PEntity;
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
+    }
+}
+
 void CEnmityContainer::SetActive(uint32 EntityID, bool active)
 {
     if (const auto& enmity_obj = m_EnmityList.find(EntityID); enmity_obj != m_EnmityList.end())
@@ -121,7 +130,9 @@ void CEnmityContainer::AddBaseEnmity(CBattleEntity* PChar)
     {
         return;
     }
-    m_EnmityList.emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, true });
+    // A char that zoned back in is a new object with the same id.
+    const auto enmityObj           = m_EnmityList.try_emplace(PChar->id, EnmityObject_t{ PChar, 0, 0, true }).first;
+    enmityObj->second.PEnmityOwner = PChar;
     PChar->PNotorietyContainer->add(m_EnmityHolder);
 }
 
@@ -205,10 +216,9 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
 
     if (enmity_obj != m_EnmityList.end())
     {
-        if (enmity_obj->second.PEnmityOwner == nullptr)
-        {
-            enmity_obj->second.PEnmityOwner = PEntity;
-        }
+        enmity_obj->second.PEnmityOwner = PEntity;
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
+
         float bonus = CalculateEnmityBonus(PEntity);
 
         int32 newCE = (int32)(enmity_obj->second.CE + (CE > 0 ? CE * bonus : CE));
@@ -314,6 +324,9 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
 
     if (enmity_obj != m_EnmityList.end())
     {
+        enmity_obj->second.PEnmityOwner = PEntity;
+        PEntity->PNotorietyContainer->add(m_EnmityHolder);
+
         enmity_obj->second.CE     = std::clamp(enmity_obj->second.CE + CE, 0, EnmityCap);
         enmity_obj->second.VE     = std::clamp(enmity_obj->second.VE + VE, 0, EnmityCap);
         enmity_obj->second.active = true;
@@ -509,6 +522,11 @@ auto CEnmityContainer::GetHighestEnmity() -> CBattleEntity*
         // Is this still true?
         if (!PEntity || PEntity->getZone() != m_EnmityHolder->getZone() || PEntity->PInstance != m_EnmityHolder->PInstance || PEntity->isDead())
         {
+            if (PEntity)
+            {
+                PEntity->PNotorietyContainer->remove(m_EnmityHolder);
+            }
+
             m_EnmityList.erase(highest);
             PEntity = GetHighestEnmity();
         }

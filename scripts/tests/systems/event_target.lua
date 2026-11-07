@@ -44,4 +44,41 @@ describe('Event target', function()
         assert(packetReader.lastEventStart(player).actor == player:getID(), 'The killed mob became the actor')
         player.events:expect({ eventId = 8 })
     end)
+
+    it('forgets a deleted dynamic mob that queued an event', function()
+        local player = xi.test.world:spawnPlayer({ zone = xi.zone.WEST_RONFAURE })
+        local zone   = GetZone(xi.zone.WEST_RONFAURE)
+        assert(zone, 'West Ronfaure not loaded')
+
+        local mob = zone:insertDynamicEntity({
+            objtype              = xi.objType.MOB,
+            name                 = 'Queued_Event_Mob',
+            x                    = player:getXPos(),
+            y                    = player:getYPos(),
+            z                    = player:getZPos(),
+            rotation             = player:getRotPos(),
+            groupId              = 5,
+            groupZoneId          = xi.zone.GHELSBA_OUTPOST,
+            minLevel             = 1,
+            maxLevel             = 1,
+            releaseIdOnDisappear = true,
+            onMobDeath           = function(_, killer)
+                killer:startEvent(9)
+            end,
+        })
+        assert(mob, 'precondition: the mob was inserted')
+        mob:setSpawn(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
+        mob:spawn()
+
+        local mobID = mob:getID()
+        player:startEvent(8)
+        player:claimAndKillMob(mobID)
+        DespawnMob(mobID)
+        xi.test.world:skipTime(5)
+        xi.test.world:tick()
+        assert(GetMobByID(mobID) == nil, 'precondition: the mob was deleted')
+
+        player.events:finish(8)
+        assert(player:getEventTarget() == nil, 'the queued event kept the deleted mob')
+    end)
 end)

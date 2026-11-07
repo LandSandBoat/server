@@ -242,6 +242,12 @@ void CZoneEntities::InsertPC(CCharEntity* PChar)
     m_charTargIds.insert(PChar->targid);
     m_charList[PChar->targid] = PChar;
 
+    // Mobs keep a returning char's enmity, but it still points at the char object that zoned out.
+    FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PMob, m_mobList)
+    {
+        PMob->PEnmityContainer->ZoneInRebind(PChar);
+    }
+
     TryAddToNearbySpawnLists(PChar);
 
     ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
@@ -559,6 +565,13 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         if (PChar->PPet != nullptr)
         {
             PChar->PPet->PAI->Disengage();
+
+            // The master is freed before the pet's next tick, which is where the pet would let go of it.
+            PChar->PPet->PMaster = nullptr;
+            FOR_EACH_PAIR_CAST_SECOND(CMobEntity*, PCurrentMob, m_mobList)
+            {
+                PCurrentMob->PEnmityContainer->Clear(PChar->PPet->id);
+            }
 
             FOR_EACH_PAIR_CAST_SECOND(CCharEntity*, PCurrentChar, m_charList)
             {
@@ -2055,6 +2068,14 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
             if (PChar->eventPreparation->targetEntity == PEntity)
             {
                 PChar->eventPreparation->targetEntity = nullptr;
+            }
+
+            for (auto* PEvent : PChar->eventQueue)
+            {
+                if (PEvent->targetEntity == PEntity)
+                {
+                    PEvent->targetEntity = nullptr;
+                }
             }
         }
     };
