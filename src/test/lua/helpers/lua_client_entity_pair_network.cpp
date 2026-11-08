@@ -177,12 +177,18 @@ void CLuaClientEntityPairNetwork::zoneIn() const
  *  Function: exchange()
  *  Purpose : One client send tick, then reads every reply
  *  Example : player.network:exchange()
+ *            player.network:exchange({ dropReply = true })
  *  Notes   : Zones out on its own when it accepts S2C 0x00B in game.
+ *            dropReply loses the server's reply on the wire.
  ************************************************************************/
 
-void CLuaClientEntityPairNetwork::exchange() const
+void CLuaClientEntityPairNetwork::exchange(sol::optional<sol::table> params) const
 {
-    parent_->networkClient().exchange();
+    const auto faults = TestNetworkClient::LoginFaults{
+        .dropReply = params.has_value() && params.value().get_or("dropReply", false),
+    };
+
+    parent_->networkClient().exchange(faults);
     parent_->refreshEntity();
 }
 
@@ -204,7 +210,7 @@ void CLuaClientEntityPairNetwork::drain() const
             return;
         }
 
-        client.exchange();
+        client.exchange({});
         parent_->refreshEntity();
     }
 
@@ -324,6 +330,19 @@ auto CLuaClientEntityPairNetwork::isLinkDeadAfter(const uint32 seconds) const ->
     return PChar != nullptr && PChar->isLinkDead;
 }
 
+/************************************************************************
+ *  Function: hasSentZoneOut()
+ *  Purpose : True once the server has sent S2C 0x00B and released the char
+ *  Example : assert(player.network:hasSentZoneOut())
+ *  Notes   : The player's entity is gone from then until the zone-in.
+ ************************************************************************/
+
+auto CLuaClientEntityPairNetwork::hasSentZoneOut() const -> bool
+{
+    const auto* session = parent_->testChar()->session();
+    return session != nullptr && session->PChar == nullptr && session->blowfish.status == BLOWFISH_PENDING_ZONE;
+}
+
 void CLuaClientEntityPairNetwork::Register()
 {
     SOL_USERTYPE("CClientEntityPairNetwork", CLuaClientEntityPairNetwork);
@@ -341,4 +360,5 @@ void CLuaClientEntityPairNetwork::Register()
     SOL_REGISTER("clearReceived", CLuaClientEntityPairNetwork::clearReceived);
     SOL_REGISTER("setStoredZone", CLuaClientEntityPairNetwork::setStoredZone);
     SOL_REGISTER("isLinkDeadAfter", CLuaClientEntityPairNetwork::isLinkDeadAfter);
+    SOL_REGISTER("hasSentZoneOut", CLuaClientEntityPairNetwork::hasSentZoneOut);
 }

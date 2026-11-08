@@ -37,7 +37,7 @@ public:
     void finishLoading(sol::optional<sol::table> params) const;
     void rebind(uint16 port) const;
     void zoneIn() const;
-    void exchange() const;
+    void exchange(sol::optional<sol::table> params) const;
     void drain() const;
     auto mode() const -> std::string;
     auto isHung() const -> bool;
@@ -46,6 +46,7 @@ public:
     void clearReceived() const;
     void setStoredZone(uint16 zoneId) const;
     auto isLinkDeadAfter(uint32 seconds) const -> bool;
+    auto hasSentZoneOut() const -> bool;
 
     static void Register();
 
