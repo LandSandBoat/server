@@ -432,8 +432,8 @@ struct GP_CLI_LOGIN
     uint16_t sync;
     uint8_t  LoginPacketCheck; // PS2: LoginPacketCheck
     uint8_t  padding00;        // PS2: dam__
-    uint16_t unknown00;        // PS2: MyPort
-    uint32_t unknown01;        // PS2: MyIP
+    uint16_t unknown00;        // PS2: MyPort. PC: connection state
+    uint32_t unknown01;        // PS2: MyIP. PC: last four receive status codes
     uint32_t UniqueNo;         // PS2: UniqueNo
     uint16_t GrapIDTbl[9];     // PS2: GrapIDTbl
     char     sName[15];        // PS2: sName

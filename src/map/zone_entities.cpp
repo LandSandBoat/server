@@ -27,6 +27,7 @@
 #include "enmity_container.h"
 #include "instance.h"
 #include "latent_effect_container.h"
+#include "map_session.h"
 #include "party.h"
 #include "recast_container.h"
 #include "spawn_handler.h"
@@ -2142,6 +2143,13 @@ auto CZoneEntities::ZoneServer(timer::time_point tick) -> Task<void>
     {
         auto* PChar       = *it;
         bool  shouldErase = false;
+
+        // charTick adds the char back each tick, so it moves once canZoneOut(). A logout goes now.
+        if (PChar->status != xi::Status::Shutdown && !PChar->PSession->canZoneOut())
+        {
+            it = m_charsToChangeZone.erase(it);
+            continue;
+        }
 
         auto ipp = zoneutils::GetZoneIPP(PChar->loc.destination);
         if (ipp == 0 && PChar->status != xi::Status::Shutdown)

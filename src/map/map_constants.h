@@ -78,3 +78,9 @@ static constexpr auto kIPCPumpInterval = 100ms;
 static constexpr auto kMaxBufferSize           = 2500U;
 static constexpr auto kMaxPacketPerCompression = 32U;
 static constexpr auto kMaxPacketBacklogSize    = kMaxPacketPerCompression * 6U; // If we hit this number, things are going very very badly.
+
+// A client that hasn't sent C2S 0x00C by now is not loading
+static constexpr auto kZoneLoadTimeout = 30s;
+
+// The PC client can still be loading just after C2S 0x00C
+static constexpr auto kGameOkSettleTime = 3s;

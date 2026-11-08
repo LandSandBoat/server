@@ -56,18 +56,19 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     //
     if (header.sync > 1)
     {
+        // The client has seen this sync already, so everything from here goes out above it
         PSession->server_packet_id = header.sync;
 
-        // Clear all pending packets for this character.
-        // This incoming 0x00A from the client wants us to set the starting sync count for all new packets to the sync count from 0x02.
-        // If we do not do this, all further packets may be ignored by the client and will result in disconnection from the server.
-        PChar->clearPacketList();
+        // Only the missed reply is replaced. Held packets get their sync when they go out
+        constexpr auto staleReply = std::to_array<uint16>({ 0x00A, 0x01C, 0x04F, 0x050, 0x051 });
+        PChar->erasePacketsOfType(staleReply);
     }
 
     // No real distinction between these two states in the 0x00A handler --
     // Key is already assumed to be incremented correctly,
     // Pending zone is same process transfer, and waiting is new login or different process.
-    if (PSession->blowfish.status == BLOWFISH_PENDING_ZONE || PSession->blowfish.status == BLOWFISH_WAITING) // Call zone in, etc, only once.
+    const auto isFirstZoneIn = PSession->blowfish.status == BLOWFISH_PENDING_ZONE || PSession->blowfish.status == BLOWFISH_WAITING;
+    if (isFirstZoneIn) // Call zone in, etc, only once.
     {
         PSession->blowfish.status = BLOWFISH_ACCEPTED;
         PChar->clearPacketList();
@@ -83,12 +84,10 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         const auto destination = PChar->loc.destination;
         CZone*     destZone    = zoneutils::GetZone(destination);
 
+        // The client gets no reply and times out at the title screen
         if (static_cast<uint16>(destination) >= MAX_ZONEID || destZone == nullptr)
         {
-            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("GP_CLI_COMMAND_LOGIN: player tried to enter zone that was invalid or out of range");
-            ShowWarning("GP_CLI_COMMAND_LOGIN: dumping player `%s` to homepoint!", PChar->getName());
-            PChar->requestedWarp = WarpRequest::HomePoint; // Not a "request" but a demand
+            ShowErrorFmt("GP_CLI_COMMAND_LOGIN: {} can't enter zone {} on this process", PChar->getName(), destination);
 
             // Save pet if any
             if (PChar->shouldPetPersistThroughZoning())
@@ -152,11 +151,12 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         }
     }
 
-    // Only release client from "Downloading Data" if the packet sequence came in without a drop on 0x00D
-    // It is also possible that the client also never received our packets to release themselves from the loading screen.
-    // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
+    // The client leaves "Downloading data" on the first S2C 0x00A it accepts, so every retry gets one
     if (PChar->loc.zone != nullptr)
     {
+        // Ahead of anything the zone-in queued, which waits for C2S 0x00C
+        const auto queued = PChar->getPacketCount();
+
         PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
         PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
@@ -169,7 +169,15 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
                 PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(*eloc, static_cast<SLOTTYPE>(i));
             }
         }
-        PChar->status = xi::Status::Normal;
+
+        PChar->movePacketsToFront(PChar->getPacketCount() - queued);
+
+        // A retry would undo a zone change or logout queued while the client loads
+        if (isFirstZoneIn)
+        {
+            PChar->status = xi::Status::Normal;
+        }
+
         PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
     }
 }

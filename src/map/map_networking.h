@@ -96,6 +96,9 @@ public:
     auto socket() -> Socket&;
     auto packetSystem() -> PacketSystem&;
 
+    // The test server has no socket until a test installs one
+    void setSocket(std::unique_ptr<Socket> socket);
+
 private:
     Scheduler&              scheduler_;
     MapStatistics&          mapStatistics_;

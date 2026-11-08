@@ -497,6 +497,23 @@ void CCharEntity::erasePackets(uint8 num)
     }
 }
 
+// Only for types popPacket keeps no bookkeeping for
+void CCharEntity::erasePacketsOfType(const std::span<const uint16> types)
+{
+    std::erase_if(
+        PacketList,
+        [&](const auto& PPacket)
+        {
+            return std::ranges::contains(types, PPacket->getType());
+        });
+}
+
+void CCharEntity::movePacketsToFront(const std::size_t count)
+{
+    const auto moved = std::min(count, PacketList.size());
+    std::rotate(PacketList.begin(), PacketList.end() - static_cast<std::ptrdiff_t>(moved), PacketList.end());
+}
+
 auto CCharEntity::isPacketFiltered(std::unique_ptr<CBasicPacket>& packet) const -> bool
 {
     // Filter others synthesis results

@@ -634,23 +634,28 @@ void IPCServer::handleMessage_KillSession(const IPP& ipp, const ipc::KillSession
         const auto prevZoneID = rset->get<xi::ZoneId>("pos_prevzone");
         const auto nextZoneID = rset->get<xi::ZoneId>("pos_zone");
 
-        if (prevZoneID != nextZoneID)
+        if (prevZoneID == nextZoneID)
         {
-            const auto zoneSettings = zoneSettings_.zoneSettingsMap_.at(prevZoneID);
-
-            DebugIPCFmt("Message: -> rerouting to {}", zoneSettings.ipp.toString());
-
-            sendMessage(zoneSettings.ipp, message);
+            return;
         }
+
+        if (const auto it = zoneSettings_.zoneSettingsMap_.find(prevZoneID); it != zoneSettings_.zoneSettingsMap_.end())
+        {
+            DebugIPCFmt("Message: -> rerouting to {}", it->second.ipp.toString());
+
+            sendMessage(it->second.ipp, message);
+            return;
+        }
+
+        ShowWarningFmt("IPCServer::handleMessage_KillSession: no zone settings for zone {}, sending to every map", prevZoneID);
     }
-    else // Otherwise, send to all zones
-    {
-        for (const auto& ipp : zoneSettings_.mapEndpoints_)
-        {
-            DebugIPCFmt("Message: -> rerouting to {}", ipp.toString());
 
-            sendMessage(ipp, message);
-        }
+    // Otherwise, send to all zones
+    for (const auto& ipp : zoneSettings_.mapEndpoints_)
+    {
+        DebugIPCFmt("Message: -> rerouting to {}", ipp.toString());
+
+        sendMessage(ipp, message);
     }
 }
 

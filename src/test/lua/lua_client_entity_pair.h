@@ -25,6 +25,7 @@
 #include "helpers/lua_client_entity_pair_bcnm.h"
 #include "helpers/lua_client_entity_pair_entities.h"
 #include "helpers/lua_client_entity_pair_events.h"
+#include "helpers/lua_client_entity_pair_network.h"
 #include "helpers/lua_client_entity_pair_packets.h"
 #include "lua_test_entity.h"
 
@@ -36,6 +37,7 @@
 
 class CLuaSimulation;
 class TestChar;
+class TestNetworkClient;
 class MapEngine;
 
 class CLuaClientEntityPair : public CLuaTestEntity
@@ -64,11 +66,16 @@ public:
     auto events() -> CLuaClientEntityPairEvents;
     auto entities() -> CLuaClientEntityPairEntities;
     auto packets() -> CLuaClientEntityPairPackets;
+    auto network() -> CLuaClientEntityPairNetwork;
 
     auto testChar() const -> TestChar*;
     auto simulation() const -> CLuaSimulation*;
 
     auto engine() -> MapEngine*;
+
+    // Created on first use. From then on the client talks to the server in datagrams.
+    auto networkClient() -> TestNetworkClient&;
+    void refreshEntity();
 
     static void Register();
 
@@ -78,4 +85,6 @@ private:
     std::unique_ptr<TestChar> testChar_;
     CLuaSimulation*           simulation_;
     MapEngine*                engine_;
+
+    std::unique_ptr<TestNetworkClient> networkClient_;
 };

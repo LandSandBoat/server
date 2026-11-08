@@ -20,9 +20,11 @@
 */
 
 #include "test_application.h"
+#include "mock_socket.h"
 #include "test_engine.h"
 
 #include "common/settings.h"
+#include "map/map_networking.h"
 
 #include <spdlog/async.h>
 
@@ -145,6 +147,7 @@ auto TestApplication::run() -> bool
                 .controlledWeather = true,
             };
             auto mapEngine = std::make_unique<MapEngine>(*this, mapConfig);
+            mapEngine->networking().setSocket(std::make_unique<MockSocket>());
 
             // We must ensure that mapEngine->init() is complete before we
             // try and construct TestEngine or run the tests

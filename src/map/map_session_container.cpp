@@ -395,6 +395,19 @@ void MapSessionContainer::destroyPendingSession(MapSession* map_session_data)
     pending_sessions_.erase(map_session_data->charID);
 }
 
+void MapSessionContainer::releaseCharacter(const uint32 charId)
+{
+    TracyZoneScoped;
+
+    if (auto* session = getSessionByCharId(charId); session != nullptr && session->blowfish.status == BLOWFISH_PENDING_ZONE)
+    {
+        ShowDebugFmt("Closing session of charid {} on request of other process", charId);
+        destroySession(session);
+    }
+
+    destroyPendingSession(charId);
+}
+
 void MapSessionContainer::destroyPendingSession(uint32 charId)
 {
     TracyZoneScoped;

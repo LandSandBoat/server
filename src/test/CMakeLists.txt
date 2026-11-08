@@ -35,6 +35,8 @@ set(SOURCES
     test_lua_environment.cpp
     test_matcher.h
     test_matcher.cpp
+    test_network_client.h
+    test_network_client.cpp
     test_suite.h
     test_suite.cpp
 )
@@ -67,6 +69,7 @@ xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/fishing_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/huffman_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/item_container_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/map_session_container_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/rng_runtime_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/pathfind_region_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/roam_region_tests.cpp

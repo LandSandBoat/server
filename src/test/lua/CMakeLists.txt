@@ -15,6 +15,8 @@ target_sources(xi_test_lib PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_entities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_events.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_events.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_network.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_network.h
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_packets.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/lua_client_entity_pair_packets.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_spy.cpp

@@ -131,6 +131,9 @@ void CLuaClientEntityPairPackets::sendZonePackets()
     transition->unknown01       = 0;
     sendBasicPacket(*transitionPacket);
 
+    // The harness skips C2S 0x00C and its burst, so mark the zone as loaded
+    testChar->session()->hasSentGameOk = true;
+
     // Execute AfterZoneIn logic
     parent_->simulation()->skipTime(4);
     testChar->entity()->PAI->checkQueueImmediately();
