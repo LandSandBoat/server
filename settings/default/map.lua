@@ -283,6 +283,7 @@ xi.settings.map =
     AUDIT_PLAYER_BAZAAR = false,
     AUDIT_PLAYER_DBOX   = false,
     AUDIT_PLAYER_VENDOR = false,
+    AUDIT_PLAYER_CRAFT  = false,
 
     -- Maximum number of in-flight items (slots) allowed in a player's delivery box for PC-to-PC transfers.
     DELIVERY_BOX_MAX_INFLIGHT = 128,

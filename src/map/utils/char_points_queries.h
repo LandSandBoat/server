@@ -307,7 +307,7 @@ struct CharPointsQueries
     db::Query        update;
 };
 
-inline constexpr auto charPointsQueries = []<std::size_t... I>(std::index_sequence<I...>)
+inline constexpr auto charPointsQueries = []<std::size_t... I>(std::index_sequence<I...>) consteval
 {
     return std::array{
         CharPointsQueries{

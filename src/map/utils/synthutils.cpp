@@ -34,6 +34,7 @@
 #include "items/transactions/synth.h"
 #include "itemutils.h"
 #include "lua/luautils.h"
+#include "map_session.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x030_effect.h"
@@ -1130,6 +1131,44 @@ void doSynthSkillUp(CCharEntity* PChar)
     }
 }
 
+// Indexed by SYNTHESIS_RESULT
+constexpr std::array<const char*, 5> synthResultNames = { "fail", "nq", "hq1", "hq2", "hq3" };
+
+void auditSynth(CCharEntity* PChar, const char* result)
+{
+    if (!settings::get<bool>("map.AUDIT_PLAYER_CRAFT") || !PChar->PSession || !PChar->PSession->scheduler)
+    {
+        return;
+    }
+
+    const auto unixSeconds = [](const timer::time_point timePoint) -> double
+    {
+        return std::chrono::duration<double>(timer::to_utc(timePoint).time_since_epoch()).count();
+    };
+
+    PChar->PSession->scheduler->postToWorkerThread(
+        [result,
+         charId       = PChar->id,
+         charName     = PChar->getName(),
+         recipeId     = PChar->craftState().recipeId(),
+         startSeconds = unixSeconds(PChar->m_LastSynthTime),
+         endSeconds   = unixSeconds(timer::now())]()
+        {
+            if (!db::preparedStmt("INSERT INTO audit_craft(charid, char_name, recipeid, recipe_name, result, start_time, end_time) "
+                                  "VALUES (?, ?, ?, (SELECT ResultName FROM synth_recipes WHERE ID = ?), ?, ?, ?)",
+                                  charId,
+                                  charName,
+                                  recipeId,
+                                  recipeId,
+                                  result,
+                                  startSeconds,
+                                  endSeconds))
+            {
+                ShowErrorFmt("Failed to log craft (char: {}, recipe: {}, result: {})", charId, recipeId, result);
+            }
+        });
+}
+
 } // namespace
 
 /************************
@@ -1212,6 +1251,8 @@ void sendSynthDone(CCharEntity* PChar)
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
 
+    auditSynth(PChar, synthResultNames[PChar->craftState().result()]);
+
     PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
     PChar->pushPacket<CCharStatusPacket>(PChar);
@@ -1248,6 +1289,8 @@ void doSynthCriticalFail(CCharEntity* PChar)
 
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
+
+    auditSynth(PChar, "interrupted");
 
     PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
