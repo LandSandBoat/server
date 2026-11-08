@@ -193,28 +193,12 @@ xi.mix.fomorParty.onPartySpawn = function(mob)
         mob:setMobMod(xi.mobMod.SUPERLINK, leaderID)
     end
 
-    -- Allow followers to respawn (respawn blocked on death until leader respawns)
     if
         behavior == 'patrol' and
         mobID == leaderID and
         party.followers
     then
         mob:setMobMod(xi.mobMod.LEADER, party.followers)
-
-        -- Spawn followers properly on server start
-        -- Otherwise allow them to respawn normally
-        for i = 1, party.followers do
-            local followerID = leaderID + i
-            local follower = GetMobByID(followerID)
-
-            if follower then
-                local respawnTime = GetMobRespawnTime(followerID)
-
-                if respawnTime ~= 0 then
-                    DisallowRespawn(followerID, false)
-                end
-            end
-        end
     end
 
     -- Follower spawning logic for patrol parties
@@ -337,7 +321,34 @@ xi.mix.fomorParty.onPartyDeath = function(mob)
     end
 end
 
-g_mixins.fomor_party = function(mob)
+g_mixins.fomor_party = function(fomorMob)
+    fomorMob:addListener('SPAWN', 'FOMOR_PARTY_SPAWN', function(mob)
+        local mobID = mob:getID()
+        local party, behavior = getFomorParty(mobID, zoneParties[mob:getZoneID()])
+
+        if not party or behavior ~= 'patrol' or mobID ~= party.leader then
+            return
+        end
+
+        for i = 1, party.followers do
+            local follower = GetMobByID(mobID + i)
+            if follower and not follower:getMaster() and not follower:isAlive() then
+                follower:queue(0, function(followerArg)
+                    local leader = GetMobByID(mobID)
+                    if not leader or not leader:isAlive() or followerArg:isSpawned() then
+                        return
+                    end
+
+                    local followerID = followerArg:getID()
+                    -- setRespawnTime(0) clears the configured timer.
+                    local respawnTime = GetMobRespawnTime(followerID)
+                    followerArg:setRespawnTime(0)
+                    SpawnMob(followerID)
+                    followerArg:setRespawnTime(respawnTime)
+                end)
+            end
+        end
+    end)
 end
 
 return g_mixins.fomor_party
