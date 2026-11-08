@@ -33,6 +33,16 @@ enum CRAFT_TYPE
     CRAFT_DESYNTHESIS = 1,
 };
 
+// Values index CCraftState's result tiers
+enum class SynthesisOutcome : uint8
+{
+    Fail = 0,
+    NQ   = 1,
+    HQ1  = 2,
+    HQ2  = 3,
+    HQ3  = 4,
+};
+
 // Runtime state for synthutils to track synthesis over multiple steps
 // Item ownership and mutations exclusively in SynthTransaction!
 class CCraftState
@@ -59,17 +69,17 @@ public:
     void populate(const Init& data);
 
     void setFailingSkill(uint8 s);
-    void setResult(uint8 r);
+    void setResult(SynthesisOutcome outcome);
     void markBroken(uint8 idx);
 
     auto recipeId() const -> uint32;
     auto craftMode() const -> CRAFT_TYPE;
     auto crystalItemId() const -> uint16;
-    auto resultTier(uint8 tier) const -> const Result&;
+    auto resultTier(SynthesisOutcome outcome) const -> const Result&;
     auto skillRequired(uint8 idx) const -> uint8;
     auto element() const -> uint8;
     auto failingSkill() const -> uint8;
-    auto result() const -> uint8;
+    auto result() const -> SynthesisOutcome;
     auto isBroken(uint8 idx) const -> bool;
     auto ingredientItemId(uint8 idx) const -> uint16;
 
@@ -82,6 +92,6 @@ private:
     std::array<uint16, SynthMaxIngredients> ingredientItemIds_{};
     uint8                                   element_{};
     uint8                                   failingSkill_{};
-    uint8                                   result_{};
+    SynthesisOutcome                        result_{};
     std::array<bool, SynthMaxIngredients>   ingredientBroken_{};
 };

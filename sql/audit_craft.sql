@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `audit_craft` (
   `char_name` varchar(15) DEFAULT NULL,
   `recipeid` int(10) unsigned NOT NULL DEFAULT '0',
   `recipe_name` varchar(64) DEFAULT NULL,
-  `result` enum('fail','nq','hq1','hq2','hq3','interrupted') NOT NULL DEFAULT 'fail',
+  `result` enum('Fail','NQ','HQ1','HQ2','HQ3','Interrupted') NOT NULL DEFAULT 'Fail',
   `start_time` decimal(13,3) unsigned NOT NULL DEFAULT '0',
   `end_time` decimal(13,3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
