@@ -20,6 +20,16 @@ describe('Status Effect Flags', function()
             mob = player.entities:moveTo('Wild_Rabbit')
             mob:respawn()
             mob.assert:isAlive()
+            -- Respawning moves the rabbit to a random spawn point, and a roaming rabbit leaves the player's facing cone before the first swing.
+            local pos = player:getPos()
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+            mob:setPos(pos.x, pos.y, pos.z)
+            mob:clearPath()
+        end)
+
+        -- Other files share these rabbits.
+        after_each(function()
+            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end)
 
         it('drops on melee attack', function()
@@ -103,8 +113,16 @@ describe('Status Effect Flags', function()
             mob = player.entities:moveTo('Wild_Rabbit')
             mob:respawn()
             mob.assert:isAlive()
+            -- Respawning moves the rabbit to a random spawn point, and a roaming rabbit leaves the player's facing cone before the first swing.
             local pos = player:getPos()
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
             mob:setPos(pos.x, pos.y, pos.z)
+            mob:clearPath()
+        end)
+
+        -- Other files share these rabbits.
+        after_each(function()
+            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end)
 
         describe('emitting hostile actions', function()
