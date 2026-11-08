@@ -22,6 +22,7 @@
 #include "synthutils.h"
 
 #include "charutils.h"
+#include "common/earth_time.h"
 #include "common/logging.h"
 #include "common/timer.h"
 #include "common/types/flat_hash_map.h"
@@ -44,6 +45,7 @@
 #include "roe.h"
 #include "zone.h"
 
+#include <fmt/chrono.h>
 #include <magic_enum/magic_enum.hpp>
 
 #include <algorithm>
@@ -1130,6 +1132,15 @@ void doSynthSkillUp(CCharEntity* PChar)
     }
 }
 
+// DATETIME text in UTC, so the stored time never depends on the database's time zone
+auto toUtcDatetime(const earth_time::time_point timePoint) -> std::string
+{
+    const auto seconds = std::chrono::floor<std::chrono::seconds>(timePoint);
+    const auto millis  = std::chrono::duration_cast<std::chrono::milliseconds>(timePoint - seconds).count();
+
+    return fmt::format("{:%Y-%m-%d %H:%M:%S}.{:03}", earth_time::to_utc_tm(seconds), millis);
+}
+
 void auditSynth(CCharEntity* PChar, const std::string_view result)
 {
     if (!settings::get<bool>("map.AUDIT_PLAYER_CRAFT") || !PChar->PSession || !PChar->PSession->scheduler)
@@ -1137,18 +1148,13 @@ void auditSynth(CCharEntity* PChar, const std::string_view result)
         return;
     }
 
-    const auto unixSeconds = [](const timer::time_point timePoint) -> double
-    {
-        return std::chrono::duration<double>(timer::to_utc(timePoint).time_since_epoch()).count();
-    };
-
     PChar->PSession->scheduler->postToWorkerThread(
-        [result       = std::string(result),
-         charId       = PChar->id,
-         charName     = PChar->getName(),
-         recipeId     = PChar->craftState().recipeId(),
-         startSeconds = unixSeconds(PChar->m_LastSynthTime),
-         endSeconds   = unixSeconds(timer::now())]()
+        [result    = std::string(result),
+         charId    = PChar->id,
+         charName  = PChar->getName(),
+         recipeId  = PChar->craftState().recipeId(),
+         startTime = toUtcDatetime(timer::to_utc(PChar->m_LastSynthTime)),
+         endTime   = toUtcDatetime(earth_time::now())]()
         {
             if (!db::preparedStmt("INSERT INTO audit_craft(charid, char_name, recipeid, recipe_name, result, start_time, end_time) "
                                   "VALUES (?, ?, ?, (SELECT ResultName FROM synth_recipes WHERE ID = ?), ?, ?, ?)",
@@ -1157,8 +1163,8 @@ void auditSynth(CCharEntity* PChar, const std::string_view result)
                                   recipeId,
                                   recipeId,
                                   result,
-                                  startSeconds,
-                                  endSeconds))
+                                  startTime,
+                                  endTime))
             {
                 ShowErrorFmt("Failed to log craft (char: {}, recipe: {}, result: {})", charId, recipeId, result);
             }

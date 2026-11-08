@@ -8,7 +8,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Table structure of `audit_craft`
 --
--- start_time and end_time are unix seconds with millisecond precision.
+-- start_time and end_time are UTC.
 --
 
 CREATE TABLE IF NOT EXISTS `audit_craft` (
@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS `audit_craft` (
   `recipeid` int(10) unsigned NOT NULL DEFAULT '0',
   `recipe_name` varchar(64) DEFAULT NULL,
   `result` enum('Fail','NQ','HQ1','HQ2','HQ3','Interrupted') NOT NULL DEFAULT 'Fail',
-  `start_time` decimal(13,3) unsigned NOT NULL DEFAULT '0',
-  `end_time` decimal(13,3) unsigned NOT NULL DEFAULT '0',
+  `start_time` datetime(3) NOT NULL,
+  `end_time` datetime(3) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `charid` (`charid`),
   KEY `recipeid` (`recipeid`)
