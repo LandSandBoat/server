@@ -47,8 +47,9 @@ function CClientEntityPairNetwork:zoneIn()
 end
 
 ---One client send tick, then read every reply
+---@param params? { dropReply: boolean? } dropReply loses the server's reply on the wire
 ---@return nil
-function CClientEntityPairNetwork:exchange()
+function CClientEntityPairNetwork:exchange(params)
 end
 
 ---Exchange until the server has nothing queued for the client
@@ -92,4 +93,10 @@ end
 ---@param seconds integer
 ---@return boolean
 function CClientEntityPairNetwork:isLinkDeadAfter(seconds)
+end
+
+---True once the server has sent S2C 0x00B and released the char. The player's entity is gone until the zone-in.
+---@nodiscard
+---@return boolean
+function CClientEntityPairNetwork:hasSentZoneOut()
 end

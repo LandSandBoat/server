@@ -225,7 +225,7 @@ auto TestNetworkClient::ipp() const -> const IPP&
     return ipp_;
 }
 
-void TestNetworkClient::exchange()
+void TestNetworkClient::exchange(const LoginFaults& faults)
 {
     if (mode_ != Mode::InGame && mode_ != Mode::Loading)
     {
@@ -233,7 +233,7 @@ void TestNetworkClient::exchange()
     }
 
     sendDatagram();
-    readReplies({});
+    readReplies(faults);
 }
 
 auto TestNetworkClient::mode() const -> Mode

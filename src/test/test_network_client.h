@@ -85,7 +85,7 @@ public:
     auto ipp() const -> const IPP&;
 
     // One client send tick: a datagram with whatever is queued, then reads every reply.
-    void exchange();
+    void exchange(const LoginFaults& faults);
 
     auto mode() const -> Mode;
     auto hangReason() const -> const std::string&;
