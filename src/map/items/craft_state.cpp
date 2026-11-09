@@ -32,7 +32,7 @@ void CCraftState::populate(const Init& data)
     ingredientItemIds_ = data.ingredientItemIds;
 
     failingSkill_     = 0;
-    result_           = 0;
+    result_           = SynthesisOutcome::Fail;
     ingredientBroken_ = {};
 }
 
@@ -41,9 +41,9 @@ void CCraftState::setFailingSkill(uint8 s)
     failingSkill_ = s;
 }
 
-void CCraftState::setResult(uint8 r)
+void CCraftState::setResult(const SynthesisOutcome outcome)
 {
-    result_ = r;
+    result_ = outcome;
 }
 
 void CCraftState::markBroken(uint8 idx)
@@ -66,9 +66,9 @@ auto CCraftState::crystalItemId() const -> uint16
     return crystalItemId_;
 }
 
-auto CCraftState::resultTier(uint8 tier) const -> const Result&
+auto CCraftState::resultTier(const SynthesisOutcome outcome) const -> const Result&
 {
-    return results_[tier];
+    return results_[static_cast<std::size_t>(outcome)];
 }
 
 auto CCraftState::skillRequired(uint8 idx) const -> uint8
@@ -86,7 +86,7 @@ auto CCraftState::failingSkill() const -> uint8
     return failingSkill_;
 }
 
-auto CCraftState::result() const -> uint8
+auto CCraftState::result() const -> SynthesisOutcome
 {
     return result_;
 }

@@ -22,6 +22,7 @@
 #include "synthutils.h"
 
 #include "charutils.h"
+#include "common/earth_time.h"
 #include "common/logging.h"
 #include "common/timer.h"
 #include "common/types/flat_hash_map.h"
@@ -44,11 +45,14 @@
 #include "roe.h"
 #include "zone.h"
 
+#include <fmt/chrono.h>
+#include <magic_enum/magic_enum.hpp>
+
 #include <algorithm>
 #include <array>
 #include <cmath>
 
-// TODO: This largely overlaps with SYNTHESIS_RESULT and could be simplified.
+// TODO: This largely overlaps with SynthesisOutcome and could be simplified.
 #define RESULT_SUCCESS 0x00
 #define RESULT_FAIL    0x01
 #define RESULT_HQ      0x02
@@ -507,9 +511,9 @@ auto canSynthesizeHQ(CCharEntity* PChar, uint8 skillID) -> bool
     return (PChar->getMod(ModID) == 0);
 }
 
-auto calculateSynthResult(CCharEntity* PChar) -> uint8
+auto calculateSynthResult(CCharEntity* PChar) -> SynthesisOutcome
 {
-    uint8  synthResult     = SYNTHESIS_SUCCESS;
+    auto   synthResult     = SynthesisOutcome::NQ;
     uint8  skillID         = 0;
     uint8  finalHQTier     = 4;
     uint8  currentHQTier   = 0;
@@ -584,22 +588,22 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
         {
             // Keep the skill because of which the synthesis failed.
             PChar->craftState().setFailingSkill(skillID);
-            synthResult = SYNTHESIS_FAIL;
+            synthResult = SynthesisOutcome::Fail;
 
             break;
         }
     }
 
     // Early return: We broke the synth.
-    if (synthResult == SYNTHESIS_FAIL)
+    if (synthResult == SynthesisOutcome::Fail)
     {
-        return SYNTHESIS_FAIL;
+        return SynthesisOutcome::Fail;
     }
 
     // Early return: We cannot HQ.
     if (!canHQ)
     {
-        return SYNTHESIS_SUCCESS;
+        return SynthesisOutcome::NQ;
     }
 
     double chanceHQ = 0.0;
@@ -631,13 +635,13 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
     // Early return: We fail HQ check.
     if (xirand::GetRandomNumber(0.0, 100.0) > chanceHQ)
     {
-        return SYNTHESIS_SUCCESS;
+        return SynthesisOutcome::NQ;
     }
 
     // Early return: T0 cannot upgrade HQ.
     if (finalHQTier <= 1)
     {
-        return SYNTHESIS_HQ;
+        return SynthesisOutcome::HQ1;
     }
 
     // Calculate HQ2 and HQ3 upgrades.
@@ -655,12 +659,12 @@ auto calculateSynthResult(CCharEntity* PChar) -> uint8
         }
     }
 
-    return static_cast<uint8>(SYNTHESIS_HQ + upgradeHQ);
+    return static_cast<SynthesisOutcome>(static_cast<uint8>(SynthesisOutcome::HQ1) + upgradeHQ);
 }
 
-auto calculateDesynthResult(CCharEntity* PChar) -> uint8
+auto calculateDesynthResult(CCharEntity* PChar) -> SynthesisOutcome
 {
-    uint8  synthResult     = SYNTHESIS_SUCCESS;
+    auto   synthResult     = SynthesisOutcome::NQ;
     uint8  skillID         = 0;
     int16  synthDifficulty = 0;
     double successRate     = 0.0;
@@ -704,22 +708,22 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
         {
             // Keep the skill because of which the synthesis failed.
             PChar->craftState().setFailingSkill(skillID);
-            synthResult = SYNTHESIS_FAIL;
+            synthResult = SynthesisOutcome::Fail;
 
             break;
         }
     }
 
     // Early return: We broke the synth.
-    if (synthResult == SYNTHESIS_FAIL)
+    if (synthResult == SynthesisOutcome::Fail)
     {
-        return SYNTHESIS_FAIL;
+        return SynthesisOutcome::Fail;
     }
 
     // Early return: We cannot HQ.
     if (!canHQ)
     {
-        return SYNTHESIS_SUCCESS;
+        return SynthesisOutcome::NQ;
     }
 
     // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
@@ -731,7 +735,7 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
     // Early return: We fail HQ check.
     if (xirand::GetRandomNumber(0.0, 100.0) > chanceHQ)
     {
-        return SYNTHESIS_SUCCESS;
+        return SynthesisOutcome::NQ;
     }
 
     // Calculate HQ2 and HQ3 upgrades.
@@ -753,41 +757,38 @@ auto calculateDesynthResult(CCharEntity* PChar) -> uint8
         }
     }
 
-    return static_cast<uint8>(SYNTHESIS_HQ + upgradeHQ);
+    return static_cast<SynthesisOutcome>(static_cast<uint8>(SynthesisOutcome::HQ1) + upgradeHQ);
 }
 
 // Used in: startSynth
 auto handleSynthResult(CCharEntity* PChar) -> uint8
 {
     // Calculate synthesis result based on synthesis type.
-    uint8 synthResult = SYNTHESIS_FAIL;
-    if (PChar->craftState().craftMode() == CRAFT_DESYNTHESIS)
+    const auto outcome = [&]() -> SynthesisOutcome
     {
-        synthResult = calculateDesynthResult(PChar);
-    }
-    else
-    {
-        synthResult = calculateSynthResult(PChar);
-    }
+        if (PChar->craftState().craftMode() == CRAFT_DESYNTHESIS)
+        {
+            return calculateDesynthResult(PChar);
+        }
 
-    PChar->craftState().setResult(synthResult);
+        return calculateSynthResult(PChar);
+    }();
 
-    switch (synthResult)
+    PChar->craftState().setResult(outcome);
+
+    switch (outcome)
     {
-        case SYNTHESIS_FAIL:
-            synthResult = RESULT_FAIL;
-            break;
-        case SYNTHESIS_SUCCESS:
-            synthResult = RESULT_SUCCESS;
-            break;
-        case SYNTHESIS_HQ:
-        case SYNTHESIS_HQ2:
-        case SYNTHESIS_HQ3:
-            synthResult = RESULT_HQ;
-            break;
+        case SynthesisOutcome::Fail:
+            return RESULT_FAIL;
+        case SynthesisOutcome::NQ:
+            return RESULT_SUCCESS;
+        case SynthesisOutcome::HQ1:
+        case SynthesisOutcome::HQ2:
+        case SynthesisOutcome::HQ3:
+            return RESULT_HQ;
     }
 
-    return synthResult;
+    XI_UNREACHABLE();
 }
 
 // Base chance (percent) an ingredient is lost when a synth breaks, keyed by item id. Unlisted materials use 50% break rate
@@ -971,7 +972,7 @@ void doSynthSkillUp(CCharEntity* PChar)
         }
 
         // We don't Skill Up if the synth breaks outside the [-5, 0) interval
-        if (PChar->craftState().result() == SYNTHESIS_FAIL && (baseDiff > 5 || baseDiff <= 0))
+        if (PChar->craftState().result() == SynthesisOutcome::Fail && (baseDiff > 5 || baseDiff <= 0))
         {
             continue; // Break current loop iteration.
         }
@@ -1024,7 +1025,7 @@ void doSynthSkillUp(CCharEntity* PChar)
         // Chance penalties. The retail desynth rate was measured with breaks included, so it takes none.
         uint8 penalty = 1;
 
-        if (!isDesynth && PChar->craftState().result() == SYNTHESIS_FAIL) // If synth breaks, lower skill up rate
+        if (!isDesynth && PChar->craftState().result() == SynthesisOutcome::Fail) // If synth breaks, lower skill up rate
         {
             penalty += 1;
         }
@@ -1131,28 +1132,29 @@ void doSynthSkillUp(CCharEntity* PChar)
     }
 }
 
-// Indexed by SYNTHESIS_RESULT
-constexpr std::array<const char*, 5> synthResultNames = { "fail", "nq", "hq1", "hq2", "hq3" };
+// DATETIME text in UTC, so the stored time never depends on the database's time zone
+auto toUtcDatetime(const earth_time::time_point timePoint) -> std::string
+{
+    const auto seconds = std::chrono::floor<std::chrono::seconds>(timePoint);
+    const auto millis  = std::chrono::duration_cast<std::chrono::milliseconds>(timePoint - seconds).count();
 
-void auditSynth(CCharEntity* PChar, const char* result)
+    return fmt::format("{:%Y-%m-%d %H:%M:%S}.{:03}", earth_time::to_utc_tm(seconds), millis);
+}
+
+void auditSynth(CCharEntity* PChar, const std::string_view result)
 {
     if (!settings::get<bool>("map.AUDIT_PLAYER_CRAFT") || !PChar->PSession || !PChar->PSession->scheduler)
     {
         return;
     }
 
-    const auto unixSeconds = [](const timer::time_point timePoint) -> double
-    {
-        return std::chrono::duration<double>(timer::to_utc(timePoint).time_since_epoch()).count();
-    };
-
     PChar->PSession->scheduler->postToWorkerThread(
-        [result,
-         charId       = PChar->id,
-         charName     = PChar->getName(),
-         recipeId     = PChar->craftState().recipeId(),
-         startSeconds = unixSeconds(PChar->m_LastSynthTime),
-         endSeconds   = unixSeconds(timer::now())]()
+        [result    = std::string(result),
+         charId    = PChar->id,
+         charName  = PChar->getName(),
+         recipeId  = PChar->craftState().recipeId(),
+         startTime = toUtcDatetime(timer::to_utc(PChar->m_LastSynthTime)),
+         endTime   = toUtcDatetime(earth_time::now())]()
         {
             if (!db::preparedStmt("INSERT INTO audit_craft(charid, char_name, recipeid, recipe_name, result, start_time, end_time) "
                                   "VALUES (?, ?, ?, (SELECT ResultName FROM synth_recipes WHERE ID = ?), ?, ?, ?)",
@@ -1161,8 +1163,8 @@ void auditSynth(CCharEntity* PChar, const char* result)
                                   recipeId,
                                   recipeId,
                                   result,
-                                  startSeconds,
-                                  endSeconds))
+                                  startTime,
+                                  endTime))
             {
                 ShowErrorFmt("Failed to log craft (char: {}, recipe: {}, result: {})", charId, recipeId, result);
             }
@@ -1237,7 +1239,7 @@ void sendSynthDone(CCharEntity* PChar)
         return;
     }
 
-    if (PChar->craftState().result() == SYNTHESIS_FAIL)
+    if (PChar->craftState().result() == SynthesisOutcome::Fail)
     {
         handleSynthFail(PChar);
     }
@@ -1251,7 +1253,7 @@ void sendSynthDone(CCharEntity* PChar)
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
 
-    auditSynth(PChar, synthResultNames[PChar->craftState().result()]);
+    auditSynth(PChar, magic_enum::enum_name(PChar->craftState().result()));
 
     PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
@@ -1290,7 +1292,7 @@ void doSynthCriticalFail(CCharEntity* PChar)
     std::ignore = synthTransaction->commit();
     PChar->removeTransaction(synthTransaction);
 
-    auditSynth(PChar, "interrupted");
+    auditSynth(PChar, "Interrupted");
 
     PChar->animation = xi::Animation::None;
     PChar->updatemask |= UPDATE_HP;
