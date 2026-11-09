@@ -236,6 +236,12 @@ xi.assault.onRytaalTrigger = function(player, npc)
         return
     end
 
+    if not player:hasCompletedUniqueEvent(xi.uniqueEvent.ASSAULT_TUTORIAL) then
+        player:startEvent(269, { [0] = 66, [1] = 1, [2] = 255, [3] = 255, [4] = 255, [5] = 255, [6] = 255, [7] = 255, text_table = 0 })
+
+        return
+    end
+
     -- Player has not started an assault, give them a tag
     local tagStock, allTagsTimeCS = calculateTags(player)
     local dailyRestock            = player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) and 1 or 0
@@ -244,6 +250,12 @@ xi.assault.onRytaalTrigger = function(player, npc)
 end
 
 xi.assault.onRytaalEventFinish = function(player, csid, option, npc)
+    if csid == 269 then
+        player:setUniqueEvent(xi.uniqueEvent.ASSAULT_TUTORIAL)
+
+        return
+    end
+
     -- Early return if not assault tag related event
     if csid ~= 268 then
         return

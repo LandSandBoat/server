@@ -25,4 +25,5 @@ xi.uniqueEvent =
     HYRIA_INTRODUCTION     =  9,
     VANESSA_ENM_COMPLETE   = 10,
     ENM_TIMER_NPCS_INTRO   = 11,
+    ASSAULT_TUTORIAL       = 12,
 }
