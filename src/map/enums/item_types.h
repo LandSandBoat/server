@@ -25,14 +25,15 @@
 
 enum class ItemType : uint8_t
 {
-    None       = 0,
-    General    = 1, // CItemGeneral
-    Linkshell  = 2, // CItemLinkshell
-    Furnishing = 3, // CItemFurnishing
-    Puppet     = 4, // CItemPuppet
-    Usable     = 5, // CItemUsable
-    Equipment  = 6, // CItemEquipment
-    Weapon     = 7, // CItemWeapon
-    Currency   = 8, // CItemCurrency
-    FlowerPot  = 9, // CItemFlowerpot
+    None           = 0,
+    General        = 1,  // CItemGeneral
+    Linkshell      = 2,  // CItemLinkshell
+    Furnishing     = 3,  // CItemFurnishing
+    Puppet         = 4,  // CItemPuppet
+    Usable         = 5,  // CItemUsable
+    Equipment      = 6,  // CItemEquipment
+    Weapon         = 7,  // CItemWeapon
+    Currency       = 8,  // CItemCurrency
+    FlowerPot      = 9,  // CItemFlowerpot
+    TrustEquipment = 10, // CItemGeneral until Trust equipment is implemented
 };
