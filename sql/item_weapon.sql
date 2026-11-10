@@ -2505,6 +2505,7 @@ INSERT INTO `item_weapon` VALUES (18885,'vejovis_wand_+1',11,0,0,0,0,3,1,210,56,
 INSERT INTO `item_weapon` VALUES (18886,'dhyana_rod',11,0,0,0,0,3,1,288,65,0);
 INSERT INTO `item_weapon` VALUES (18887,'dukkha',11,0,0,0,0,3,1,280,66,0);
 INSERT INTO `item_weapon` VALUES (18888,'ankylosis_wand',11,0,0,0,0,3,1,288,46,0);
+INSERT INTO `item_weapon` VALUES (18889,'momiji_uchiwa',11,0,0,0,0,3,1,216,1,0);  -- TODO: ilvl_skill/parry/macc, dmgType
 INSERT INTO `item_weapon` VALUES (18891,'hannibals_sword',3,0,0,0,0,2,1,240,54,0);
 INSERT INTO `item_weapon` VALUES (18892,'corbenic_sword',3,0,0,0,0,2,1,233,53,0);
 INSERT INTO `item_weapon` VALUES (18893,'magnus_sword',3,0,0,0,0,2,1,240,41,0);

@@ -8595,6 +8595,7 @@ INSERT INTO `item_equipment` VALUES (18885,'vejovis_wand_+1',97,0,1622044,225,0,
 INSERT INTO `item_equipment` VALUES (18886,'dhyana_rod',99,0,1589260,595,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (18887,'dukkha',99,0,1589260,595,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (18888,'ankylosis_wand',99,0,1622044,599,0,0,3,0,0,0);
+INSERT INTO `item_equipment` VALUES (18889,'momiji_uchiwa',1,0,4194303,0,0,0,3,0,0,0);  -- TODO: MId
 INSERT INTO `item_equipment` VALUES (18891,'hannibals_sword',85,0,2130113,285,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (18892,'corbenic_sword',85,0,32848,269,0,0,3,0,0,0);
 INSERT INTO `item_equipment` VALUES (18893,'magnus_sword',82,0,32848,273,0,0,3,0,0,0);
