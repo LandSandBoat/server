@@ -105,6 +105,8 @@
 #include "packets/c2s/0x0c1_trust_ascension_points.h"
 #include "packets/c2s/0x0c3_group_comlink_make.h"
 #include "packets/c2s/0x0c4_group_comlink_active.h"
+#include "packets/c2s/0x0c5_trust_ascension_equip_set.h"
+#include "packets/c2s/0x0c6_trust_ascension_equip_req.h"
 #include "packets/c2s/0x0cb_myroom_is.h"
 #include "packets/c2s/0x0d2_map_group.h"
 #include "packets/c2s/0x0d3_faq_gmcall.h"
@@ -310,6 +312,8 @@ consteval auto buildPacketHandlers() -> std::array<PacketHandler, 512>
     registerPacket<GP_CLI_COMMAND_TRUST_ASCENSION_POINTS>(handlers);
     registerPacket<GP_CLI_COMMAND_GROUP_COMLINK_MAKE>(handlers);
     registerPacket<GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_SET>(handlers);
+    registerPacket<GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_REQ>(handlers);
     registerPacket<GP_CLI_COMMAND_MYROOM_IS>(handlers);
     registerPacket<GP_CLI_COMMAND_MAP_GROUP>(handlers);
     registerPacket<GP_CLI_COMMAND_FAQ_GMCALL>(handlers);
