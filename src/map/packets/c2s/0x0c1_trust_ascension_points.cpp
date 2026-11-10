@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
-#include "0x0c1_alter_ego_points.h"
+#include "0x0c1_trust_ascension_points.h"
 
 #include "data/enums/key_item.h"
 #include "entities/char_entity.h"
 #include "enums/alter_ego_points.h"
 #include "packets/c2s/validation.h"
-#include "packets/s2c/0x08e_alter_ego_points.h"
+#include "packets/s2c/0x08e_trust_ascension_points.h"
 
-auto GP_CLI_COMMAND_ALTER_EGO_POINTS::validate(MapSession* PSession, const CCharEntity* PChar) const
+auto GP_CLI_COMMAND_TRUST_ASCENSION_POINTS::validate(MapSession* PSession, const CCharEntity* PChar) const
     -> PacketValidationResult
 {
     return PacketValidator(PChar)
@@ -44,7 +44,7 @@ auto GP_CLI_COMMAND_ALTER_EGO_POINTS::validate(MapSession* PSession, const CChar
                 });
 }
 
-void GP_CLI_COMMAND_ALTER_EGO_POINTS::process(MapSession* PSession, CCharEntity* PChar) const
+void GP_CLI_COMMAND_TRUST_ASCENSION_POINTS::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Entrypoint for player requesting Alter Ego upgrade
     // 1) Verify PC has enough points to spend (0->10=1pt, 10->20=2 pts, 20->30=3pts, 30->40=4pts, 40->50=5pts
@@ -54,5 +54,5 @@ void GP_CLI_COMMAND_ALTER_EGO_POINTS::process(MapSession* PSession, CCharEntity*
     // 5) Emit BATTLE_MESSAGE message 828 with Data set to CategoryIndex and Data2 set to upgrade level
     // PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->CategoryIndex, 1, MsgBasic::AlterEgoUpgrade);
     // 6) Send updated array to PC
-    PChar->pushPacket<GP_SERV_PACKET_ALTER_EGO_POINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_TRUST_ASCENSION_POINTS>(PChar);
 }

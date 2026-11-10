@@ -19,24 +19,24 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x08e_trust_ascension_points.h"
 
-#include "base.h"
+#include "utils/charutils.h"
 
-class CCharEntity;
-
-// https://github.com/atom0s/XiPackets/tree/main/world/server/0x008E
-// This packet is sent by the server to populate the clients alter ego points information. This packet is also used to update alter ego points when the client spends alter ego points.
-class GP_SERV_PACKET_ALTER_EGO_POINTS final : public GP_SERV_PACKET<PacketS2C::GP_SERV_PACKET_ALTER_EGO_POINTS, GP_SERV_PACKET_ALTER_EGO_POINTS>
+GP_SERV_COMMAND_TRUST_ASCENSION_POINTS::GP_SERV_COMMAND_TRUST_ASCENSION_POINTS(CCharEntity* PChar)
 {
-public:
-    struct PacketData
-    {
-        uint16_t Points;
-        uint16_t padding00;
-        uint8_t  Upgrades[32];
-        uint16_t Costs[32];
-    };
+    auto& packet = this->data();
 
-    GP_SERV_PACKET_ALTER_EGO_POINTS(CCharEntity* PChar);
-};
+    packet.Points = charutils::GetPoints(PChar, "alter_ego_points");
+    // TODO: Populate actual upgrade levels per category - see AlterEgoCategory
+    for (auto& upgrade : packet.Upgrades)
+    {
+        upgrade = 0;
+    }
+
+    // TODO: Populate actual upgrade costs per category - see AlterEgoCategory
+    for (auto& cost : packet.Costs)
+    {
+        cost = 0;
+    }
+}

@@ -19,24 +19,12 @@
 ===========================================================================
 */
 
-#include "0x08e_alter_ego_points.h"
+#pragma once
 
-#include "utils/charutils.h"
+#include "base.h"
 
-GP_SERV_PACKET_ALTER_EGO_POINTS::GP_SERV_PACKET_ALTER_EGO_POINTS(CCharEntity* PChar)
-{
-    auto& packet = this->data();
-
-    packet.Points = charutils::GetPoints(PChar, "alter_ego_points");
-    // TODO: Populate actual upgrade levels per category - see AlterEgoCategory
-    for (auto& upgrade : packet.Upgrades)
-    {
-        upgrade = 0;
-    }
-
-    // TODO: Populate actual upgrade costs per category - see AlterEgoCategory
-    for (auto& cost : packet.Costs)
-    {
-        cost = 0;
-    }
-}
+// https://github.com/atom0s/XiPackets/tree/main/world/client/0x00C1
+// This packet is sent by the client when upgrading alter ego categories.
+GP_CLI_PACKET(GP_CLI_COMMAND_TRUST_ASCENSION_POINTS,
+              uint16_t CategoryIndex;
+              uint16_t padding00;);
