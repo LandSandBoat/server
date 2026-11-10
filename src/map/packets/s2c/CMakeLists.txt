@@ -200,8 +200,10 @@ target_sources(xi_map_packets_s2c PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08c_merit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x08d_job_points.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_alter_ego_points.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_alter_ego_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_trust_ascension_points.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08e_trust_ascension_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08f_trust_ascension_equip.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x08f_trust_ascension_equip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x096_myroom_enter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x097_myroom_exit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0a0_map_group.h

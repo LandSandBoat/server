@@ -19,24 +19,16 @@
 ===========================================================================
 */
 
-#include "0x08e_alter_ego_points.h"
+#include "0x0c5_trust_ascension_equip_set.h"
 
-#include "utils/charutils.h"
+#include "packets/c2s/validation.h"
 
-GP_SERV_PACKET_ALTER_EGO_POINTS::GP_SERV_PACKET_ALTER_EGO_POINTS(CCharEntity* PChar)
+auto GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_SET::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
 {
-    auto& packet = this->data();
+    // TODO: Trust equipment is not implemented.
+    return PacketValidator(PChar);
+}
 
-    packet.Points = charutils::GetPoints(PChar, "alter_ego_points");
-    // TODO: Populate actual upgrade levels per category - see AlterEgoCategory
-    for (auto& upgrade : packet.Upgrades)
-    {
-        upgrade = 0;
-    }
-
-    // TODO: Populate actual upgrade costs per category - see AlterEgoCategory
-    for (auto& cost : packet.Costs)
-    {
-        cost = 0;
-    }
+void GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar) const
+{
 }

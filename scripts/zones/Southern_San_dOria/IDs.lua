@@ -137,7 +137,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         MAP_MARKER_TUTORIAL            = 15787, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
         YOU_HAVE_JOINED_UNITY          = 16096, -- You have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
         HAVE_ALREADY_CHANGED_UNITY     = 16172, -- You have already changed Unities. Please wait until the next tabulation period.
-        TEAR_IN_FABRIC_OF_SPACE        = 16635, -- There appears to be a tear in the fabric of space...
+        TEAR_IN_FABRIC_OF_SPACE        = 16636, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

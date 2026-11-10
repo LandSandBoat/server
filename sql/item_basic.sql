@@ -111,6 +111,7 @@ SET @EQUIPMENT_TYPE  = 6;
 SET @WEAPON_TYPE     = 7;
 SET @CURRENCY_TYPE   = 8;
 SET @FLOWERPOT_TYPE  = 9;
+SET @TRUST_EQUIPMENT_TYPE = 10;
 
 -- Item Flags
 SET @FLAG_AUG_SENDABLE   =      1; -- 0x00001
@@ -16565,6 +16566,7 @@ INSERT INTO `item_basic` VALUES (18885,0,'vejovis_wand_+1','vejovis_wand_+1','�
 INSERT INTO `item_basic` VALUES (18886,0,'dhyana_rod','dhyana_rod','デャーナロッド',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18887,0,'dukkha','dukkha','ドゥッカ',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18888,0,'ankylosis_wand','ankylosis_wand','アンキロシスワンド',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANTRADENPC | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (18889,0,'momiji_uchiwa','momiji_uchiwa','紅葉団扇',@WEAPON_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18891,0,'hannibals_sword','hannibals_sword','ハンニバルソード',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18892,0,'corbenic_sword','corbenic_sword','コーベニクソード',@WEAPON_TYPE,1,@FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (18893,0,'magnus_sword','magnus_sword','マグヌスソード',@WEAPON_TYPE,1,@FLAG_MYSTERY_BOX | @FLAG_CAN_SEND_ACCT | @FLAG_NOAUCTION | @FLAG_CANEQUIP | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
@@ -23684,6 +23686,12 @@ INSERT INTO `item_basic` VALUES (29341,0,'moogle_storage_slip_30','storage_slip_
 INSERT INTO `item_basic` VALUES (29342,0,'moogle_storage_slip_31','storage_slip_31','モグの預り帳【31】',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (29343,0,'moogle_storage_slip_32','storage_slip_32','モグの預り帳【32】',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (29344,0,'moogle_storage_slip_33','storage_slip_33','モグの預り帳【33】',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
+INSERT INTO `item_basic` VALUES (29425,0,'piece_of_celestite_accuracy','celestite_acc.','命中のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);       -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (29426,0,'piece_of_celestite_evasion','celestite_evasion','回避のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);     -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (29427,0,'piece_of_celestite_attack','celestite_attack','攻撃のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);       -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (29428,0,'piece_of_celestite_defense','celestite_defense','防御のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);     -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (29429,0,'piece_of_celestite_magic_atk.','celestite_m._atk.','魔攻のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);  -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (29430,0,'piece_of_celestite_magic_def.','celestite_m._def.','魔防のセレスタイト',@TRUST_EQUIPMENT_TYPE,1,0,@NONE,0);  -- TODO: Verify AH category, Verify NPC sale price
 INSERT INTO `item_basic` VALUES (29695,0,'mangled_mess','mangled_mess','？？？',@GENERAL_TYPE,1,@FLAG_NOAUCTION | @FLAG_NOSALE | @FLAG_NODELIVERY,@NONE,0);
 INSERT INTO `item_basic` VALUES (65535,0,'gil','gil','ギル',@CURRENCY_TYPE,0,0,@NONE,0);
 /*!40000 ALTER TABLE `item_basic` ENABLE KEYS */;

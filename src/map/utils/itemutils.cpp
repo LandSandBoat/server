@@ -273,6 +273,7 @@ void LoadItemList()
         switch (itemType)
         {
             case ItemType::General:
+            case ItemType::TrustEquipment:
                 return std::make_unique<CItemGeneral>(itemId);
             case ItemType::Linkshell:
                 return std::make_unique<CItemLinkshell>(itemId);

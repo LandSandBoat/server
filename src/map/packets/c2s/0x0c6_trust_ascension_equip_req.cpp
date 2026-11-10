@@ -19,12 +19,16 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x0c6_trust_ascension_equip_req.h"
 
-#include "base.h"
+#include "packets/c2s/validation.h"
 
-// https://github.com/atom0s/XiPackets/tree/main/world/client/0x00C1
-// This packet is sent by the client when upgrading alter ego categories.
-GP_CLI_PACKET(GP_CLI_COMMAND_ALTER_EGO_POINTS,
-              uint16_t CategoryIndex;
-              uint16_t padding00;);
+auto GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_REQ::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult
+{
+    // TODO: Trust equipment is not implemented.
+    return PacketValidator(PChar);
+}
+
+void GP_CLI_COMMAND_TRUST_ASCENSION_EQUIP_REQ::process(MapSession* PSession, CCharEntity* PChar) const
+{
+}

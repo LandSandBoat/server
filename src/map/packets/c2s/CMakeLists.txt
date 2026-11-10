@@ -149,12 +149,16 @@ target_sources(xi_map_packets_c2s PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0bf_job_points_spend.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c0_job_points_req.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c0_job_points_req.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c1_alter_ego_points.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c1_alter_ego_points.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c1_trust_ascension_points.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c1_trust_ascension_points.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c3_group_comlink_make.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c3_group_comlink_make.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c4_group_comlink_active.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0c4_group_comlink_active.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c5_trust_ascension_equip_set.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c5_trust_ascension_equip_set.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c6_trust_ascension_equip_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c6_trust_ascension_equip_req.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0cb_myroom_is.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0cb_myroom_is.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_map_group.cpp
