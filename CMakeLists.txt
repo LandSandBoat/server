@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.27)
 
 # Modules are included by their folder, e.g. include(settings/PreProject).
 # cmake/find is also listed on its own because find_package() only looks for Find<Name>.cmake at the top of each path.
