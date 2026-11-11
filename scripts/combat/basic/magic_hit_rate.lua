@@ -439,7 +439,16 @@ local function calculateTargetMagicEvasion(actor, target, params)
     local magicEva = target:getMod(xi.mod.MEVA) -- Base MACC.
 
     -- Elemental magic evasion. All actions and effects have an associated element.
-    if params.magicalElement ~= xi.element.NONE then
+    -- Exception: on mobs where a status effect has a resist trait for the associated debuff do not do this but instead use a resistance rank
+    -- sources:
+    -- https://www.ffxiah.com/forum/topic/55398/anything-you-can-do-i-can-do-better-rdm-guide/9/#3697751
+    -- https://forum.square-enix.com/ffxi/threads/9435-%E3%81%93%E3%82%8C%E3%81%A3%E3%81%A6%E4%B8%8D%E5%85%B7%E5%90%88%E3%81%A7%E3%81%99%E3%81%8B%EF%BC%9F?p=590476&viewfull=1#post590476
+    -- https://forum.square-enix.com/ffxi/threads/9435-%E3%81%93%E3%82%8C%E3%81%A3%E3%81%A6%E4%B8%8D%E5%85%B7%E5%90%88%E3%81%A7%E3%81%99%E3%81%8B%EF%BC%9F?p=590648&viewfull=1#post590648
+    if
+        params.magicalElement ~= xi.element.NONE and
+        (not target:isMob() or
+        xi.data.statusEffect.getAssociatedResistTraitModifier(params.effectId) == xi.mod.NONE)
+    then
         magicEva = magicEva + target:getMod(xi.data.element.getElementalMEVAModifier(params.magicalElement))
     end
 
