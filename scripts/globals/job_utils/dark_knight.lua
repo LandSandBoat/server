@@ -150,17 +150,23 @@ xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability, actio
         not xi.data.statusEffect.isTargetResistant(player, target, xi.effect.STUN) and
         not xi.data.statusEffect.isEffectNullified(target, xi.effect.STUN, 0)
     then
+        local mainWeapon = player:getEquippedItem(xi.slot.MAIN)
+        local skillType  = mainWeapon and mainWeapon:getSkillType() or xi.skill.NONE
+
+        -- Testing similar to Shield Bash, 0 skill (gkt on 37 DRK) vs lvl 100 chapuli resulted in 95% land hit rate
+        -- Assuming same bonus as Shield Bash (+512)
         local maccParams =
         {
             effectId       = xi.effect.STUN,
             magicalElement = xi.element.THUNDER,
-            skillRank      = xi.skillRank.A_PLUS,
+            skillType      = skillType, -- Assumed it pulls currently equipped weapon as base macc but unproven
             actorStat      = xi.mod.INT,
+            maccBonus      = 512,
         }
 
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
         if xi.data.statusEffect.isResistRateSuccessfull(xi.effect.STUN, resistanceRate, 0) then
-            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = math.randomInt(2, 8) * resistanceRate, origin = player })
+            target:addStatusEffect(xi.effect.STUN, { power = 1, duration = math.randomInt(4.2, 6.2) * resistanceRate, origin = player })
         end
     end
 
