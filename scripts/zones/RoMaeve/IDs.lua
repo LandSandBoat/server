@@ -20,8 +20,10 @@ zones[xi.zone.ROMAEVE] =
         CONQUEST_BASE                 = 7073,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7232,  -- You can't fish here.
         MYSTERIOUS_ANCIENT_MONUMENT   = 7333,  -- There is a mysterious ancient monument here...
+        DOOR_IS_LOCKED                = 7414,  -- The door is locked.
         PILE_OF_RUBBLE                = 7415,  -- It is nothing but a pile of rubble.
         A_CHILL_RUNS_DOWN_SPINE       = 7416,  -- A chill runs down your spine.
+        HEXAGONAL_DEPRESSION          = 7418,  -- On close inspection, you see a hexagonal depression on the door.
         SENSE_OMINOUS_PRESENCE        = 7419,  -- You sense an ominous presence...
         ITEMS_ITEMS_LA_LA             = 7422,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY           = 7428,  -- The Goblin slipped away when you were not looking...
@@ -40,6 +42,9 @@ zones[xi.zone.ROMAEVE] =
         ROGUE_RECEPTACLE = GetFirstID('Rogue_Receptacle'),
         ELDHRIMNIR       = GetFirstID('Eldhrimnir'),
         MOKKURKALFI      = GetFirstID('Mokkurkalfi'),
+        STEELY_WEAPON    = GetTableOfIDs('Steely_Weapon'), -- ASA-8
+        LODE_GOLEM       = GetTableOfIDs('Lode_Golem'),    -- ASA-8
+        FIRED_URN        = GetTableOfIDs('Fired_Urn'),     -- ASA-8
     },
     npc =
     {

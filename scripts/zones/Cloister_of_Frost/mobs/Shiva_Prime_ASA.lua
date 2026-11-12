@@ -5,8 +5,14 @@
 -----------------------------------
 require('scripts/missions/asa/helpers')
 -----------------------------------
+require('scripts/missions/asa/helpers')
+-----------------------------------
 ---@type TMobEntity
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.asa.helpers.onAvatarInitialize(mob)
+end
 
 entity.onMobSpawn = function(mob)
     -- ASA-4: Avatar is Unkillable Until Its Used Astral Flow At Least 5 times At Specified Intervals

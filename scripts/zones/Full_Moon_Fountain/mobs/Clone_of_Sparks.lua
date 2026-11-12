@@ -1,0 +1,15 @@
+-----------------------------------
+-- Area: Full Moon Fountain
+--  Mob: Clone of Sparks
+-- BCNM: Battaru Royale (ASA-10)
+-----------------------------------
+require('scripts/missions/asa/helpers')
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobFight = function(mob, target)
+    xi.asa.helpers.onCloneFight(mob, target)
+end
+
+return entity
