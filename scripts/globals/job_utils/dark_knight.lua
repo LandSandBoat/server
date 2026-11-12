@@ -161,7 +161,7 @@ xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability, actio
             magicalElement = xi.element.THUNDER,
             skillType      = skillType, -- Assumed it pulls currently equipped weapon as base macc but unproven
             actorStat      = xi.mod.INT,
-            maccBonus      = 512,
+            bonusMacc      = 512,
         }
 
         local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
