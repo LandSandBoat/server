@@ -148,7 +148,7 @@ m:addOverrideByEra('xi.job_utils.paladin.useShieldBash', {
                 magicalElement = xi.element.THUNDER,
                 skillType      = xi.skill.SHIELD, -- Guessed
                 actorStat      = xi.mod.INT,
-                maccBonus      = 512,
+                bonusMacc      = 512,
             }
 
             local resistanceRate = xi.combat.magicHitRate.calculateResistRate(player, target, maccParams)
@@ -158,10 +158,10 @@ m:addOverrideByEra('xi.job_utils.paladin.useShieldBash', {
         end
 
         -- Randomize damage
-        local randomizer = 1 + (math.randomInt(1, 5) / 100)
+        local randomizer = 1 + math.randomInt(1, 5) / 100
 
-        damage = damage * randomizer
-        damage = utils.handleStoneskin(target, damage)
+        damage = math.floor(damage * randomizer)
+        damage = utils.handleStoneskin(target, damage, xi.attackType.PHYSICAL)
 
         target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
         target:updateEnmityFromDamage(player, damage)
