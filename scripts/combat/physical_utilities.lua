@@ -134,7 +134,8 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
     if isH2H then
         local naturalH2hDamage = math.floor(actor:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11) + 3
 
-        if actor:isMob() then
+        -- TODO: Check if Trusts get penalized on their H2H calculations
+        if not actor:isPC() then
             local mobH2HPenalty = 1
             local regionID      = actor:getCurrentRegion()
             local fSTR          = xi.combat.physical.calculateMeleeStatFactor(actor, target)
@@ -213,9 +214,7 @@ xi.combat.physical.calculateAttackDamage = function(actor, target, slot, physica
 
     --- Low level mobs can get negative fSTR so low they crater their (base weapon damage + fstr) to below 0.
     --- Absorption isn't possible at this point in the calculation, so zero it.
-    if damage < 0 then
-        damage = 0
-    end
+    damage = math.max(damage, 0)
 
     -- Apply Restraint Weaponskill Damage
     if
