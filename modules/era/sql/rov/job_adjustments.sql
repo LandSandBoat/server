@@ -34,6 +34,14 @@ UPDATE traits SET level = 70 WHERE name = 'max hp boost' AND job = 2 AND rank = 
 UPDATE abilities SET recastTime = 300 WHERE name = 'rampart';
 
 ------------------------------------
+-- Beastmaster
+------------------------------------
+
+-- Fight: Revert recast from 5 to 10 seconds
+-- Source: https://forum.square-enix.com/ffxi/threads/50942
+UPDATE abilities SET recastTime = 10 WHERE name = 'fight';
+
+------------------------------------
 -- Ranger
 ------------------------------------
 
@@ -310,3 +318,14 @@ UPDATE pet_skills SET pet_anim_time = 2000, pet_prepare_time = 1500 WHERE pet_sk
 UPDATE pet_skills SET pet_anim_time = 3300, pet_prepare_time = 1000 WHERE pet_skill_name = 'predatory_glare';
 UPDATE pet_skills SET pet_anim_time = 3000, pet_prepare_time = 1500 WHERE pet_skill_name = 'hoof_volley';
 UPDATE pet_skills SET pet_anim_time = 2000, pet_prepare_time = 1500 WHERE pet_skill_name = 'nihility_song';
+
+------------------------------------
+-- Puppetmaster
+-- Source: https://forum.square-enix.com/ffxi/threads/50942
+------------------------------------
+
+-- Deploy: Revert recast from 5 to 10 seconds
+UPDATE abilities SET recastTime = 10 WHERE name = 'deploy';
+
+-- Retrieve: Revert recast from 5 to 10 seconds
+UPDATE abilities SET recastTime = 10 WHERE name = 'retrieve';
