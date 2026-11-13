@@ -67,6 +67,7 @@ xi.events.registeredEvents =
 {
     require('scripts/events/starlight_celebration'),
     require('scripts/events/egg_hunt_egg-stravaganza'),
+    require('scripts/events/harvest_festival'),
     require('scripts/events/mog_bonanza'),
     require('scripts/events/strange_happenings'),
 }
