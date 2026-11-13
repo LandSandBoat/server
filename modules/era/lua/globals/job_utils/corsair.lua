@@ -462,6 +462,13 @@ m:addOverrideByEra('xi.job_utils.corsair.useElementalShot', {
             damage = xi.job_utils.corsair.handleQuickDrawDamage(actor, target, action, data.element, resist)
         end
 
+        -- Absorbed: report the heal and skip the effect boost
+        if damage < 0 then
+            ability:setMsg(xi.msg.basic.JA_RECOVERS_HP)
+
+            return damage
+        end
+
         -- Handle effect boost.
         xi.job_utils.corsair.handleQuickDrawEffectBoost(actor, target, abilityId, data.multiplier)
 

@@ -285,12 +285,11 @@ m:addOverrideByEra('xi.actions.abilities.pets.ecliptic_growl.onPetAbility', {
 
         local buffValue = cycleBuffs[moonCycle]
 
-        target:delStatusEffect(xi.effect.STR_BOOST)
-        target:delStatusEffect(xi.effect.DEX_BOOST)
-        target:delStatusEffect(xi.effect.VIT_BOOST)
-        target:delStatusEffect(xi.effect.AGI_BOOST)
-        target:delStatusEffect(xi.effect.MND_BOOST)
-        target:delStatusEffect(xi.effect.CHR_BOOST)
+        -- TODO: Glittering Ruby does not overwrite this.
+        -- This does not overwrite Glittering Ruby.
+        -- This can overwrite itself.
+        -- Unknown how it interacts with STAT_DOWN effects.
+        -- Unknown how it interacts with GAIN/BOOST spells.
 
         target:addStatusEffect(xi.effect.STR_BOOST, { power = buffValue, duration = duration, origin = pet })
         target:addStatusEffect(xi.effect.DEX_BOOST, { power = buffValue, duration = duration, origin = pet })
