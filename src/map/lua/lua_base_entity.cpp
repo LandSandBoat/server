@@ -2168,7 +2168,7 @@ auto CLuaBaseEntity::atPoint(sol::variadic_args va) -> bool
         pos.z = vec[2];
     }
 
-    return isWithinDistance(m_PBaseEntity->loc.p, pos, 0.01f);
+    return isWithinDistance(m_PBaseEntity->loc.p, pos, 0.1f);
 }
 
 /************************************************************************
