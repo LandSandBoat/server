@@ -148,7 +148,7 @@ xi.brigandsChart.onEventFinish = function(player, csid, option, npc)
             shimmerArg:entityAnimationPacket(xi.animationString.SHIMMER)
         end)
 
-        player:showText(npc, ID.text.MY_ITEM, xi.item.PENGUIN_RING)
+        player:showText(npc, ID.text.MY_ITEM, xi.item.PENGUIN_RING_2)
 
         -- Events will occur for the next 180 seconds according to eventTable
         emoteChecking(npc, 180, GetSystemTime(), 1)
@@ -181,8 +181,8 @@ xi.brigandsChart.rewards =
     special =
     {
         {
-            { itemId = xi.item.NONE,         weight = xi.loot.weight.NORMAL },
-            { itemId = xi.item.PENGUIN_RING, weight = xi.loot.weight.NORMAL },
+            { itemId = xi.item.NONE,           weight = xi.loot.weight.NORMAL },
+            { itemId = xi.item.PENGUIN_RING_2, weight = xi.loot.weight.NORMAL },
         },
     },
 }
@@ -219,7 +219,7 @@ xi.brigandsChart.jadeEtuiOnTrigger = function(player, npc)
         local specialReward = utils.selectFromLootGroups(player, xi.brigandsChart.rewards.special)[1]
         if
             specialReward and
-            specialReward.itemId == xi.item.PENGUIN_RING
+            specialReward.itemId == xi.item.PENGUIN_RING_2
         then
             table.insert(rewardTable, specialReward.itemId)
             table.insert(rewardTable, xi.item.YELLOW_GLOBE)

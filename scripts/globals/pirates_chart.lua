@@ -49,7 +49,7 @@ local pChartLoot =
     },
 
     {
-        { itemId = xi.item.ALBATROSS_RING, weight = 1000 }, -- 100%
+        { itemId = xi.item.ALBATROSS_RING_2, weight = 1000 }, -- 100%
     },
 }
 
