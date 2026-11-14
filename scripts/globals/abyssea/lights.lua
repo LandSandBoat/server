@@ -2,6 +2,7 @@
 -- Abyssea Lights Global
 -----------------------------------
 require('scripts/globals/abyssea')
+require('scripts/globals/abyssea/cruor')
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
@@ -523,6 +524,12 @@ local lightTypes =
     [xi.abyssea.deathType.WS_MAGICAL]  = { light = xi.abyssea.lightType.AMBER, lightType = 'amber' }, -- Amber
 }
 
+local function isCruorKillRewardsEnabled()
+    local value = xi.settings.main.ABYSSEA_ENABLE_CRUOR_KILL_REWARDS
+
+    return value == true or value == 1
+end
+
 xi.abyssea.RemoveDeathListeners = function(mob)
     mob:removeListener('ABYSSEA_PHYSICAL_DEATH_CHECK')
     mob:removeListener('ABYSSEA_MAGIC_DEATH_CHECK')
@@ -569,6 +576,10 @@ xi.abyssea.AddDeathListeners = function(mob)
         local deathType = mobArg:getDeathType()
         if deathType == xi.abyssea.deathType.NONE then
             deathType = xi.abyssea.deathType.PHYSICAL
+        end
+
+        if isCruorKillRewardsEnabled() then
+            xi.abyssea.cruor.onMobDefeat(player, mobArg)
         end
 
         xi.abyssea.DropLights(player, mobArg:getName(), deathType, mobArg)
