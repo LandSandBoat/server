@@ -38,6 +38,7 @@ zones[xi.zone.AL_ZAHBI] =
         GAJAAD_DONATION_THANKS        = 7980, -- Why, thank you! This brings your total donation to <number>. Keep it up for the sake of Al Zahbi!
         GAJAAD_DONATION_REWARD        = 7981, -- Why, thank you! This brings your total donation to <number>. I would like to show my appreciation for your efforts... Please accept this.
         SANCTION                      = 7999, -- You have received the Empire's Sanction.
+        GAJAAD_CHOCHOROON_CAPTURED    = 8147, -- I hear that Chochoroon the appraiser has been taken by the beastmen... Oh my...! If he should be forced to talk, then they might come looking for me next time!
     },
     mob =
     {

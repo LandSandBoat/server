@@ -88,6 +88,11 @@ end
 function GetConquestBalance()
 end
 
+---@param points integer
+---@return nil
+function AddImperialDefense(points)
+end
+
 ---@nodiscard
 ---@return boolean
 function IsConquestAlliance()

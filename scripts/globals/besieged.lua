@@ -174,11 +174,24 @@ end
 -----------------------------------
 local function getImperialDefenseStats()
     local successiveWins = 0
-    local defenseBonus   = 0
+    local defenseValue   = GetServerVariable('[Besieged]ImperialDefense')
     local imperialWins   = 0
     local beastmanWins   = 0
 
-    return { successiveWins, defenseBonus, imperialWins, beastmanWins }
+    return { successiveWins, defenseValue, imperialWins, beastmanWins }
+end
+
+-- Observed on retail: the Imperial defense value stops recovering at 150.
+xi.besieged.addImperialDefense = function(points)
+    local oldValue = GetServerVariable('[Besieged]ImperialDefense')
+    local newValue = math.min(oldValue + points, 150)
+
+    if newValue <= oldValue then
+        return
+    end
+
+    SetServerVariable('[Besieged]ImperialDefense', newValue)
+    AddImperialDefense(newValue - oldValue)
 end
 
 -----------------------------------

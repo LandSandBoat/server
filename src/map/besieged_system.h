@@ -51,4 +51,6 @@ auto GetArrapagoForces() -> uint8;
 auto GetArrapagoMirrors() -> uint8;
 auto GetArrapagoPrisoners() -> uint8;
 
+void AddImperialDefense(int32 points);
+
 }; // namespace besieged

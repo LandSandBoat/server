@@ -43,6 +43,11 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
+    if GetServerVariable('[Besieged]ChochoroonCaptured') == 1 then
+        player:showText(npc, ID.text.GAJAAD_CHOCHOROON_CAPTURED)
+        return
+    end
+
     local oldTotal = player:getCharVar('walahraCoinCount')
     local newTotal = oldTotal + tradeCount
     local reward   = 0
@@ -61,6 +66,10 @@ entity.onTrade = function(player, npc, trade)
     end
 
     player:setCharVar('walahraCoinCount', newTotal)
+
+    -- Observed on retail: 5-coin donations raise the defense value by 1 each.
+    -- TODO: Donations of 54, 101 and 5 (at value 133) were observed raising it by 6, 13 and 0.
+    xi.besieged.addImperialDefense(math.floor(tradeCount / 5))
 
     -- Donating cancels the donor's pending yell.
     if npc:getLocalVar('reminderTarget') == player:getID() then
@@ -82,8 +91,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    -- TODO besiege result can effect if this NPC will accept trades
-    -- TODO: Identify parameters 5/6 (6098/29, 6098/54, or 0/0).
+    -- Parameters 5 and 6 are leftovers retail sometimes fills. Event 102 never reads them.
     player:startEvent(102, xi.item.IMPERIAL_BRONZE_PIECE, 1, player:getCharVar('walahraCoinCount'), 0, 0, 0, 3, xi.item.IMPERIAL_BRONZE_PIECE)
 end
 

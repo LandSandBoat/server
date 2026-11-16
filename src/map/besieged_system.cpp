@@ -21,6 +21,9 @@
 
 #include "besieged_system.h"
 
+#include "common/regional_event.h"
+#include "ipc_client.h"
+
 namespace besieged
 {
 
@@ -107,6 +110,16 @@ auto GetArrapagoMirrors() -> uint8
 auto GetArrapagoPrisoners() -> uint8
 {
     return 0;
+}
+
+void AddImperialDefense(const int32 points)
+{
+    message::send(ipc::BesiegedEvent{
+        .type    = BesiegedMessage::M2W_AddImperialDefense,
+        .payload = ipc::toBytes(BesiegedAddImperialDefense{
+            .points = points,
+        }),
+    });
 }
 
 }; // namespace besieged

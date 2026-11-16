@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/macros.h"
+#include "common/regional_event.h"
 #include "world_engine.h"
 
 class BesiegedSystem
@@ -39,6 +40,13 @@ public:
 
     auto handleMessage(uint8 messageType, IPPMessage&& message) -> bool
     {
+        switch (static_cast<BesiegedMessage>(messageType))
+        {
+            // TODO: Own the Imperial defense value here. Map servers keep it in a server var for now.
+            case BesiegedMessage::M2W_AddImperialDefense:
+                return true;
+        }
+
         return false;
     }
 

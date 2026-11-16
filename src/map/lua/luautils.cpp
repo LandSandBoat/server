@@ -84,6 +84,7 @@
 #include "ability.h"
 #include "action/action.h"
 #include "battlefield.h"
+#include "besieged_system.h"
 #include "conquest_system.h"
 #include "daily_system.h"
 #include "data/datasets/zones/mobs/dataset.h"
@@ -330,6 +331,7 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("GetRegionInfluence", &luautils::GetRegionInfluence);
     lua.set_function("GetNationRank", &luautils::GetNationRank);
     lua.set_function("GetConquestBalance", &luautils::GetConquestBalance);
+    lua.set_function("AddImperialDefense", &besieged::AddImperialDefense);
     lua.set_function("IsConquestAlliance", &luautils::IsConquestAlliance);
     lua.set_function("SpawnMob", &luautils::SpawnMob);
     lua.set_function("DespawnMob", &luautils::DespawnMob);
