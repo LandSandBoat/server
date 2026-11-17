@@ -155,6 +155,49 @@ describe('Equipment', function()
         assert(weapon:getID() == xi.item.BRONZE_SWORD)
     end)
 
+    it('changing support job keeps a dual-wield offhand when the main job still dual wields', function()
+        player = xi.test.world:spawnPlayer({ job = xi.job.NIN, level = 75, zone = xi.zone.SOUTHERN_SAN_DORIA })
+        player:gotoMogHouse(xi.zone.WINDURST_WOODS)
+        if player:isInEvent() then
+            player.events:finish()
+        end
+
+        player:changesJob(xi.job.WAR)
+        player:setsLevel(37)
+        player:unlockJob(xi.job.WHM)
+
+        player:addItem(xi.item.KUNAI)
+        player:addItem(xi.item.BRONZE_KNIFE)
+        player:equipItem(xi.item.KUNAI, nil, xi.slot.MAIN)
+        player:equipItem(xi.item.BRONZE_KNIFE, nil, xi.slot.SUB)
+        assert(player:getEquippedItem(xi.slot.SUB), 'offhand not equipped')
+
+        player.actions:changeJob(0, xi.job.WHM)
+
+        assert(player:getEquippedItem(xi.slot.SUB), 'offhand wrongly removed on a support job change')
+    end)
+
+    it('changing support job drops a dual-wield offhand when Dual Wield came from the old support job', function()
+        player:gotoMogHouse(xi.zone.WINDURST_WOODS)
+        if player:isInEvent() then
+            player.events:finish()
+        end
+
+        player:changesJob(xi.job.NIN)
+        player:setsLevel(37)
+        player:unlockJob(xi.job.WHM)
+
+        player:addItem(xi.item.BRONZE_DAGGER)
+        player:addItem(xi.item.BRASS_DAGGER)
+        player:equipItem(xi.item.BRONZE_DAGGER, nil, xi.slot.MAIN)
+        player:equipItem(xi.item.BRASS_DAGGER, nil, xi.slot.SUB)
+        assert(player:getEquippedItem(xi.slot.SUB), 'offhand not equipped')
+
+        player.actions:changeJob(0, xi.job.WHM)
+
+        assert(player:getEquippedItem(xi.slot.SUB) == nil, 'offhand kept without Dual Wield')
+    end)
+
     it('equipped ammo stack decrements on use', function()
         player:addItem(xi.item.FIRE_ARROW, 50)
         player:equipItem(xi.item.FIRE_ARROW, nil, xi.slot.AMMO)

@@ -122,17 +122,6 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
         PChar->SetSLevel(PChar->jobs.job[static_cast<uint8>(PChar->GetSJob())]);
 
         puppetutils::LoadAutomaton(PChar);
-
-        xi::DamageType subType = xi::DamageType::None;
-        if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]))
-        {
-            subType = weapon->getDmgType();
-        }
-
-        if (subType > xi::DamageType::None && subType < xi::DamageType::HandToHand)
-        {
-            charutils::UnequipItem(PChar, SLOT_SUB);
-        }
     }
 
     // Refresh blue magic for the resulting jobs.
@@ -157,6 +146,18 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     charutils::BuildingCharSkillsTable(PChar);
     charutils::CalculateStats(PChar);
     charutils::BuildingCharTraitsTable(PChar);
+
+    // Remove an off-hand weapon left without Dual Wield
+    if (changingSubJob && !subJobMatchesMain)
+    {
+        const auto* PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
+        if (PSubWeapon && PSubWeapon->getSkillType() != xi::SkillType::None && !PChar->hasTrait(TRAIT_DUAL_WIELD))
+        {
+            charutils::UnequipItem(PChar, SLOT_SUB);
+            luautils::CheckForGearSet(PChar);
+        }
+    }
+
     PChar->PRecastContainer->ChangeJob();
     charutils::BuildingCharAbilityTable(PChar);
     charutils::BuildingCharWeaponSkills(PChar);
