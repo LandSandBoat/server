@@ -140,9 +140,14 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
         spellGroup     = xi.magic.spellGroup.BLACK,
     }
 
+    local magicBurstTier = xi.combat.magicBurst.getMagicBurstTier(target, xi.element.DARK)
+    local canMBurst      = magicBurstTier > 0
+
     -- Multipliers.
     local resistTier             = xi.combat.magicHitRate.calculateResistRate(caster, target, maccParams)
     local additionalResistTier   = xi.spells.damage.calculateAdditionalResistTier(caster, target, xi.element.DARK)
+    local magicBurst             = canMBurst and xi.spells.damage.calculateIfMagicBurst(caster, target, xi.element.DARK, magicBurstTier) or 1
+    local magicBurstBonus        = canMBurst and xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spellId, xi.skill.DARK_MAGIC, xi.element.DARK) or 1
     local sdt                    = xi.combat.damage.magicalElementSDT(target, xi.element.DARK)
     local elementalStaffBonus    = xi.spells.damage.calculateElementalStaffBonus(caster, xi.element.DARK)
     local elementalAffinityBonus = xi.spells.damage.calculateElementalAffinityBonus(caster, xi.element.DARK)
@@ -157,6 +162,8 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     -- Operations.
     finalDamage = math.floor(baseDamage * resistTier)
     finalDamage = math.floor(finalDamage * additionalResistTier)
+    finalDamage = math.floor(finalDamage * magicBurst)
+    finalDamage = math.floor(finalDamage * magicBurstBonus)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * elementalStaffBonus)
     finalDamage = math.floor(finalDamage * elementalAffinityBonus)
@@ -221,6 +228,14 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
     else
         caster:addMP(finalDamage)
         target:delMP(finalDamage)
+    end
+
+    if magicBurst > 1 then
+        if modAbsorbed == xi.mod.HP then
+            spell:setMsg(xi.msg.basic.MAGIC_BURST_HP_DRAIN)
+        else
+            spell:setMsg(xi.msg.basic.MAGIC_BURST_MP_DRAIN)
+        end
     end
 
     -- Displayed damage in log is the amount the player heals by, not the damage actually done.
