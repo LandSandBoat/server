@@ -102,9 +102,17 @@ struct ConquestAddCounter
 
 enum BesiegedMessage : uint8
 {
+    // Players restored Al Zahbi's Imperial defense value.
+    M2W_AddImperialDefense,
 };
 
 DECLARE_FORMAT_AS_UNDERLYING(BesiegedMessage);
+
+// M2W_AddImperialDefense
+struct BesiegedAddImperialDefense
+{
+    int32 points;
+};
 
 //
 // Campaign
