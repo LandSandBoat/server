@@ -378,17 +378,44 @@ def write_configs():
         yaml.dump(dump, file)
 
 
-def fetch_module_files():
+def fetch_module_paths():
+    paths = []
     with open(from_server_path("modules/init.txt"), "r", encoding="utf-8") as file:
         for line in file.readlines():
             if not line.startswith("#") and line.strip() and not line in ["\n", "\r\n"]:
-                line = from_server_path("modules/" + line.strip())
-                if pathlib.Path(line).is_dir():
-                    for filename in sorted(pathlib.Path(line).glob("**/*.sql")):
-                        import_files.append(str(filename).replace("\\", "/"))
-                else:
-                    if line.endswith(".sql"):
-                        import_files.append(str(line).replace("\\", "/"))
+                paths.append(from_server_path("modules/" + line.strip()))
+    return paths
+
+
+def fetch_module_sql():
+    files = []
+    for line in fetch_module_paths():
+        if pathlib.Path(line).is_dir():
+            for filename in sorted(pathlib.Path(line).glob("**/*.sql")):
+                files.append(str(filename).replace("\\", "/"))
+        else:
+            if line.endswith(".sql"):
+                files.append(str(line).replace("\\", "/"))
+    return files
+
+
+def fetch_module_files():
+    import_files.extend(fetch_module_sql())
+
+
+# Changes to init.txt count too
+def module_sql_changed():
+    paths = [
+        path
+        for path in fetch_module_paths()
+        if pathlib.Path(path).is_dir() or path.endswith(".sql")
+    ]
+    paths.append(from_server_path("modules/init.txt"))
+    for diff in repo.commit(db_ver).diff(release_version, paths=paths):
+        path = diff.b_path or diff.a_path
+        if path.endswith(".sql") or path == "modules/init.txt":
+            return True
+    return False
 
 
 def check_protected():
@@ -439,10 +466,15 @@ def fetch_files(express=False):
                     > 0
                 ):
                     express_enabled = True
+            if module_sql_changed():
+                express_enabled = True
         except Exception as e:
             print_red("Error checking diffs.\nCheck that hash is valid in config.yaml.")
             print(e)
-    else:
+        if express_enabled and fetch_module_sql():
+            import_files.clear()
+            express = False
+    if not express:
         for _, _, filenames in os.walk(from_server_path("sql/")):
             for filename in sorted(filenames):
                 if filename.endswith(".sql"):
