@@ -206,34 +206,30 @@ end
 ---@param allowCurrentPosition boolean?
 ---@return table
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
-    local npc = GetNPCByID(npcID)
-    local positionIndex  = 1 -- Default to position one in the table if it can't be found.
-    local tableSize      = 0
-    local newPosition    = math.randomInt(1, tableSize)
-    allowCurrentPosition = allowCurrentPosition or false
+    local newPosition
 
-    for i, v in ipairs(positionTable) do   -- Looking for the current position
+    if allowCurrentPosition then
+        newPosition = math.randomInt(1, #positionTable)
+    else
+        local npc           = GetNPCByID(npcID)
+        local positionIndex = 1 -- Default to position one in the table if it can't be found.
 
-        if not allowCurrentPosition then
-            -- Finding by comparing the NPC's coords
+        for i, v in ipairs(positionTable) do
             if
                 npc and
                 math.floor(v[1]) == math.floor(npc:getXPos()) and
                 math.floor(v[2]) == math.floor(npc:getYPos()) and
                 math.floor(v[3]) == math.floor(npc:getZPos())
             then
-                positionIndex = i -- Found where the NPC is!
+                positionIndex = i
             end
         end
 
-        tableSize = tableSize + 1 -- Counting the array size
-    end
-
-    if not allowCurrentPosition then
-        -- Pick a new pos that isn't the current
-        repeat
-            newPosition = math.randomInt(1, tableSize)
-        until (newPosition ~= positionIndex)
+        -- Roll over the other positions and step past the current one, so no reroll is needed.
+        newPosition = math.randomInt(1, #positionTable - 1)
+        if newPosition >= positionIndex then
+            newPosition = newPosition + 1
+        end
     end
 
     return { ['x'] = positionTable[newPosition][1], ['y'] = positionTable[newPosition][2], ['z'] = positionTable[newPosition][3] }

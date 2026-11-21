@@ -26,6 +26,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7642, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7678, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7685, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        GREAT_STAR_TREE_RELEASED      = 7744, -- The power of the Great Star Tree has been released!
         ENTERING_THE_BATTLEFIELD_FOR  = 7776, -- Entering the battlefield for [The Moonlit Path/Moon Reading/Waking the Beast/Battaru Royale/★The Moonlit Path/★Waking the Beast]!
         PLAY_TIME_IS_OVER             = 7778, -- Play time is over! Powers of dark mana, answer my call!
         YOU_SHOULD_BE_THANKFUL        = 7779, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
@@ -43,9 +44,11 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         FENRIR_PRIME    = GetFirstID('Fenrir_Prime'),
         CARBUNCLE_PRIME = GetFirstID('Carbuncle_Prime'),
         ACE_OF_CUPS     = GetFirstID('Ace_of_Cups'),
+        CLONE_OF_FLAMES = GetFirstID('Clone_of_Flames'), -- ASA-10, 8 clones per area at +0, +2 .. +14, each avatar at +1
     },
     npc =
     {
+        MS_ENTRANCE = GetFirstID('MS_Entrance'),
     },
 }
 

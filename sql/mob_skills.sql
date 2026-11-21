@@ -2508,16 +2508,16 @@ INSERT INTO `mob_skills` VALUES (2457,1695,'level-6-holy',1,0.0,18.0,2000,1000,4
 -- INSERT INTO `mob_skills` VALUES (2477,2221,'stags_charge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2478,2222,'orcsbane',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2479,2223,'temblor_blade',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2480,2224,'inferno',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2481,2225,'tidal_wave',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2482,2226,'earthen_fury',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2483,2227,'diamond_dust',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2484,2228,'judgment_bolt',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2485,2229,'aerial_blast',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2486,2230,'salvation_scythe',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2487,2231,'salvation_scythe',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2488,2232,'divine_malison',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2489,2233,'divine_malison',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2480,534,'inferno',1,0.0,30.0,536,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2481,560,'tidal_wave',1,0.0,30.0,568,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2482,547,'earthen_fury',1,0.0,30.0,552,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2483,586,'diamond_dust',1,0.0,30.0,600,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2484,599,'judgment_bolt',1,0.0,30.0,616,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2485,573,'aerial_blast',1,0.0,30.0,584,8000,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2486,259,'salvation_scythe',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2487,259,'salvation_scythe',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2488,258,'divine_malison',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
+INSERT INTO `mob_skills` VALUES (2489,258,'divine_malison',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0); -- TODO: Capture needed, the area of effect is a wiki guess
 -- INSERT INTO `mob_skills` VALUES (2490,1728,'fire_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2491,1729,'ice_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2492,1730,'wind_overload',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
