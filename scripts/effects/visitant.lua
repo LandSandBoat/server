@@ -1,10 +1,40 @@
 -----------------------------------
 -- xi.effect.VISITANT
 -----------------------------------
+require('scripts/globals/abyssea')
 ---@type TEffect
 local effectObject = {}
 
 local remainingTimeLimits = { 300, 240, 180, 120, 60, 30, 10, 5, 4, 3, 2, 1 }
+
+local function getGoldenExpBonusPct(player)
+    local cap = 200
+    local lightTable = xi.abyssea.getLightsTable(player)
+    local golden = math.min(lightTable[xi.abyssea.lightType.GOLDEN] or 0, cap)
+    local ebon = math.min(lightTable[xi.abyssea.lightType.EBON] or 0, cap)
+
+    local goldenBonus = (golden / cap) * 50
+    local ebonFactor = 1 + (ebon / cap)
+
+    return math.floor(goldenBonus * ebonFactor)
+end
+
+local function updateGoldenExpBonus(player)
+    local applied = player:getLocalVar('abysseaGoldenExpBonusApplied')
+    local newBonus = getGoldenExpBonusPct(player)
+
+    if applied ~= newBonus then
+        if applied > 0 then
+            player:delMod(xi.mod.EXP_BONUS, applied)
+        end
+
+        if newBonus > 0 then
+            player:addMod(xi.mod.EXP_BONUS, newBonus)
+        end
+
+        player:setLocalVar('abysseaGoldenExpBonusApplied', newBonus)
+    end
+end
 
 -- NOTE: Update the last
 local reportTimeRemaining
@@ -74,6 +104,7 @@ effectObject.onEffectGain = function(target, effect)
     effect:addEffectFlag(xi.effectFlag.HIDE_TIMER)
 
     target:setLocalVar('lastTimeUpdate', effect:getTimeRemaining() / 1000 + 1)
+    updateGoldenExpBonus(target)
 end
 
 effectObject.onEffectTick = function(target, effect)
@@ -86,6 +117,8 @@ effectObject.onEffectTick = function(target, effect)
     if target:getLocalVar('tetherTimer') == 11 then
         xi.abyssea.searingWardTimer(target)
     end
+
+    updateGoldenExpBonus(target)
 
     -- Handle Time Remaining Messages. This will no longer be called if the time
     -- remaining is less that 30s, as then we move to timers set on the player to
@@ -119,9 +152,20 @@ effectObject.onEffectLose = function(target, effect)
         target:setCharVar('abysseaTimeStored', timeRemaining)
     end
 
+    local appliedGoldenExpBonus = target:getLocalVar('abysseaGoldenExpBonusApplied')
+    if appliedGoldenExpBonus > 0 then
+        target:delMod(xi.mod.EXP_BONUS, appliedGoldenExpBonus)
+        target:setLocalVar('abysseaGoldenExpBonusApplied', 0)
+    end
+
     -- Reset Abyssea Lights
     target:setCharVar('abysseaLights1', 0)
     target:setCharVar('abysseaLights2', 0)
+
+    -- Reset Cruor reverse-chain progress when visitant status is lost.
+    target:setCharVar('AbysseaCruorChainCount', 0)
+    target:setCharVar('AbysseaCruorLastIdentity', 0)
+    target:setCharVar('AbysseaCruorLastKillTime', 0)
 end
 
 return effectObject
