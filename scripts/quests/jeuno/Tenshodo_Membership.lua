@@ -1,4 +1,4 @@
------------------------------------
+﻿-----------------------------------
 -- Tenshodo Membership
 -----------------------------------
 -- Log ID: 3, Quest ID: 17
@@ -36,6 +36,18 @@ quest.sections =
                     if player:getFameLevel(xi.fameArea.JEUNO) >= 3 then
                         if player:hasKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM) then
                             return quest:progressEvent(107)
+                        elseif
+                            player:hasKeyItem(xi.keyItem.PSOXJA_PASS) and
+                            not player:hasKeyItem(xi.keyItem.ASTRAL_COVENANT)
+                        then
+                            local astralCovenantCD = player:getCharVar('[ENM]AstralCovenant')
+                            if astralCovenantCD < VanadielTime() then
+                                -- Tells player about Florid Stone, with hidden option from quest
+                                return quest:event(106, 0, 1, xi.item.FLORID_STONE, xi.keyItem.PSOXJA_PASS, xi.keyItem.ASTRAL_COVENANT)
+                            else
+                                -- Tells player they are on cooldown, with hidden option from quest
+                                return quest:event(106, 0, 2, xi.keyItem.ASTRAL_COVENANT, astralCovenantCD)
+                            end
                         else
                             return quest:event(106)
                         end
