@@ -16,7 +16,9 @@ local content = Battlefield:new({
     entryNpc         = 'MC_Entrance',
     exitNpc          = 'Memento_Circle',
     requiredKeyItems = { xi.keyItem.ASTRAL_COVENANT, message = ID.text.ASTRAL_DISINTEGRATES },
-    grantXP          = 3000,
+
+    grantXP            = 3000,
+    recommendedPlayers = 6,
 })
 
 content:addEssentialMobs({ 'Pasuk' })

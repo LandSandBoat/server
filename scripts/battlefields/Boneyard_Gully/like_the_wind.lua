@@ -15,7 +15,8 @@ local content = Battlefield:new({
     exitNpcs         = { '_082', '_084', '_086' },
     requiredKeyItems = { xi.keyItem.MIASMA_FILTER },
 
-    grantXP = 2000,
+    grantXP            = 2000,
+    recommendedPlayers = 3,
 
     experimental = true,
 })

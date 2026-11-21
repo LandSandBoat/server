@@ -72,7 +72,7 @@ public:
     void setTimeLimit(uint32 seconds);
     void setWipeTime(uint32 seconds);
     void setRecord(const std::string& name, uint32 seconds);
-    void setStatus(uint8 status);
+    auto setStatus(uint8 status) -> bool;
     void setLocalVar(const std::string& name, uint64_t value);
     auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> CBaseEntity*;
     auto cleanup(bool cleanup) -> bool;

@@ -23,7 +23,8 @@ local content = Battlefield:new({
         boneyardGullyID.mob.PARATA + 26,
     },
 
-    grantXP = 3000,
+    grantXP            = 3000,
+    recommendedPlayers = 12,
 })
 
 content.groups =

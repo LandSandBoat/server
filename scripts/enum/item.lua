@@ -3461,6 +3461,7 @@ xi.item =
     BOTTLE_OF_PSYCHOANIMA               = 5261,
     BOTTLE_OF_HYSTEROANIMA              = 5262,
     BOTTLE_OF_TERROANIMA                = 5263,
+    BOTTLE_OF_YELLOW_LIQUID             = 5264,
     MISTMELT                            = 5265,
     CHUNK_OF_SHUMEYO_SALT               = 5267,
     CCB_POLYMER                         = 5268,

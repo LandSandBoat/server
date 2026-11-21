@@ -23,7 +23,9 @@ local content = Battlefield:new({
     entryNpc         = "Wind_Pillar_4",
     exitNpc          = "Wind_Pillar_Exit",
     requiredKeyItems = { xi.keyItem.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
-    grantXP          = 3500,
+
+    grantXP            = 3500,
+    recommendedPlayers = 6,
 })
 ```
 
@@ -137,12 +139,13 @@ end
 - **exitNpc**: The name of the NPC used for exiting
 - **allowSubjob**: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 - **hasWipeGrace**: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
-- **canLoseExp**: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
+- **canLoseExp**: Determines if a character loses experience points upon death while inside the battlefield. Defaults to false for ENMs and true otherwise. (optional)
 - **delayToExit**: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 - **requiredItems**: Items required to be traded to enter the battlefield. Needs to be in the format of `{ itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }`. (optional)
 - **requiredKeyItems**: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
 - **title**: Title given to players upon victory (optional)
-- **grantXP**: Amount of XP to grant upon victory (optional)
+- **grantXP** sets the base EXP reward for victory. (optional)
+- **recommendedPlayers** sets the party size for full ENM crate EXP. Larger groups receive less EXP per player. Omit this field for battlefields that award EXP at the victory cutscene. (optional)
 - **lossEventParams**: Parameters given to the loss event (32002). Defaults to none. (optional)
 
 #### BattlefieldMission Parameters

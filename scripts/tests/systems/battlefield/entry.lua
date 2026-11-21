@@ -3,10 +3,14 @@
 -- Entry event options are (menu index << 4) + arena, asked one arena at a time.
 -- Clearance is the Battlefield effect, which names the battlefield and arena it was granted for.
 -----------------------------------
+require('scripts/globals/interaction/quest')
+-----------------------------------
 local entryEventId = 32000
 local exitEventId  = 32003
 local entryNpc     = 'SD_Entrance'
 local exitNpc      = 'SD_BCNM_Exit_1'
+local patrolQuest  = xi.quest.id.otherAreas.UNINVITED_GUESTS
+local patrolProg   = Quest.getVarPrefix(xi.questLog.OTHER_AREAS, patrolQuest) .. 'Prog'
 
 -- Distinct per arena so position requests can be told apart
 local arenaX = { -600, 0, 600, 0 }
@@ -24,6 +28,15 @@ local function spawnCandidate(params)
     local player = xi.test.world:spawnPlayer(params)
     player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
     player:setCharVar('Mission[6][248]Status', 2)
+
+    return player
+end
+
+local function spawnUninvitedGuestsCandidate()
+    local player = xi.test.world:spawnPlayer({ zone = xi.zone.MONARCH_LINN })
+    player:addQuest(xi.questLog.OTHER_AREAS, patrolQuest)
+    player:setCharVar(patrolProg, 1)
+    player:addKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
 
     return player
 end
@@ -213,7 +226,7 @@ describe('Battlefield entry', function()
         assert(next:getBattlefield():getArea() == 1, 'the arena should be free again')
     end)
 
-    it('opens the entry for the battlefield an orb is traded for', function()
+    it('accepts an orb trade and pays the normal battlefield crate', function()
         local player = xi.test.world:spawnPlayer({ zone = xi.zone.HORLAIS_PEAK })
         table.insert(players, player)
         player:addItem(xi.item.CLOUDY_ORB)
@@ -223,6 +236,48 @@ describe('Battlefield entry', function()
         local battlefield = player:getBattlefield()
         assert(battlefield and battlefield:getID() == xi.battlefield.id.SHOOTING_FISH, 'player did not enter the orb battlefield')
         assert(player:hasItem(xi.item.CLOUDY_ORB), 'the orb is only worn on a win, not taken at the door')
+
+        player.bcnm:killMobs()
+        local gil = player:getGil()
+        player.entities:gotoAndTrigger(battlefield:getArmouryCrate())
+        assert(battlefield:getStatus() == xi.battlefield.status.WON)
+        assert(player:getGil() == gil + 1500 * xi.settings.main.GIL_RATE)
+        player.assert:hasItem(xi.item.SHALL_SHELL)
+    end)
+end)
+
+describe('Uninvited Guests victory credit', function()
+    local player
+    local battlefield
+
+    before_each(function()
+        player = spawnUninvitedGuestsCandidate()
+        player.bcnm:enter(entryNpc, xi.battlefield.id.UNINVITED_GUESTS)
+        battlefield = assert(player:getBattlefield())
+    end)
+
+    after_each(function()
+        leaveBattlefields({ player })
+    end)
+
+    it('does not let a win replace a recorded loss', function()
+        assert(battlefield:setStatus(xi.battlefield.status.LOST))
+        assert(not battlefield:setStatus(xi.battlefield.status.WON))
+
+        xi.test.world:skipTime(2)
+
+        player.events:expect({ eventId = 32002 })
+        assert(player:getCharVar(patrolProg) == 1)
+    end)
+
+    it('credits a timely win even if the battlefield clock expires before cleanup', function()
+        assert(battlefield:setStatus(xi.battlefield.status.WON))
+        battlefield:setTimeLimit(0)
+
+        xi.test.world:skipTime(2)
+
+        player.events:expect({ eventId = 32001 })
+        assert(player:getCharVar(patrolProg) == 2)
     end)
 end)
 
@@ -254,6 +309,39 @@ describe('Battlefield clearance', function()
         assert(battlefield, 'member did not enter a battlefield')
         assert(battlefield:getInitiator() == leader:getID(), 'member should have joined the leader')
         assert(battlefield:getArea() == leader:getBattlefield():getArea(), 'member should share the leader arena')
+    end)
+
+    it('refuses newly copied clearance for a different battlefield than the one selected', function()
+        local leader = spawnUninvitedGuestsCandidate()
+        local member = spawnCandidate()
+        table.insert(players, leader)
+        table.insert(players, member)
+
+        formParty(leader, member)
+
+        member.entities:gotoAndTrigger(entryNpc)
+        leader.bcnm:enter(entryNpc, xi.battlefield.id.UNINVITED_GUESTS)
+        assert(member:hasStatusEffect(xi.effect.BATTLEFIELD), 'Uninvited Guests clearance should reach the member')
+
+        local reply, moved = requestArena(member, 1)
+        member.events:finish(entryEventId, 0)
+
+        assert(reply == xi.battlefield.returnCode.REQS_NOT_MET and not moved, 'the old menu must reject mismatched clearance')
+        assert(not member:getBattlefield(), 'the member must stay outside')
+        assert(member:hasStatusEffect(xi.effect.BATTLEFIELD), 'the old menu must preserve the new clearance')
+    end)
+
+    it('rechecks the patrol permit when confirming Uninvited Guests', function()
+        local player = spawnUninvitedGuestsCandidate()
+        table.insert(players, player)
+
+        player.entities:gotoAndTrigger(entryNpc)
+        player:delKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
+        local reply, moved = requestArena(player, 1, xi.battlefield.id.UNINVITED_GUESTS)
+        player.events:finish(entryEventId, 0)
+
+        assert(reply == xi.battlefield.returnCode.REQS_NOT_MET and not moved, 'the old menu must reject a missing permit')
+        assert(not player:getBattlefield(), 'the player must stay outside')
     end)
 
     it('is not handed to a member who joined the party after registration', function()

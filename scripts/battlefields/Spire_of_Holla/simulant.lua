@@ -16,7 +16,10 @@ local content = Battlefield:new({
     entryNpc         = '_0h0',
     exitNpcs         = { '_0h1', '_0h2', '_0h3' },
     requiredKeyItems = { xi.keyItem.CENSER_OF_ABANDONMENT, message = spireOfHollaID.text.FADES_INTO_NOTHINGNESS },
-    grantXP          = 3000,
+
+    grantXP            = 3000,
+    recommendedPlayers = 6,
+
     armouryCrates    =
     {
         spireOfHollaID.mob.COGITATOR + 4,

@@ -15,7 +15,10 @@ local content = Battlefield:new({
     entryNpc         = 'Wind_Pillar_3',
     exitNpc          = 'Wind_Pillar_Exit',
     requiredKeyItems = { xi.keyItem.ZEPHYR_FAN, message = bearclawID.text.ZEPHYR_RIPS },
-    grantXP          = 3000,
+
+    grantXP            = 3000,
+    recommendedPlayers = 6,
+
     armouryCrates    =
     {
         bearclawID.mob.SNOW_DEVIL + 6,

@@ -20,7 +20,9 @@ local content = Battlefield:new({
     entryNpc         = "Wind_Pillar_5",
     exitNpc          = "Wind_Pillar_Exit",
     requiredKeyItems = { xi.keyItem.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
-    grantXP          = 4000,
+
+    grantXP            = 4000,
+    recommendedPlayers = 6,
 })
 
 content:addEssentialMobs({ "Apis" })

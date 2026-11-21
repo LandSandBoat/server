@@ -21,7 +21,9 @@ local content = Battlefield:new({
         boneyardGullyID.mob.TUCHULCHA + 10,
         boneyardGullyID.mob.TUCHULCHA + 16,
     },
-    grantXP = 2500,
+
+    grantXP            = 2500,
+    recommendedPlayers = 6,
 })
 
 content.groups =

@@ -13,11 +13,15 @@ local content = Battlefield:new({
     levelCap         = 60,
     allowSubjob      = false,
     timeLimit        = utils.minutes(15),
+    delayToExit      = 0,
     index            = 3,
     entryNpc         = '_0d0',
     exitNpcs         = { '_0d1', '_0d2', '_0d3' },
     requiredKeyItems = { xi.keyItem.SHAFT_GATE_OPERATING_DIAL, message = mineshaftID.text.SNAPS_IN_TWO, },
-    grantXP          = 2000,
+
+    grantXP            = 2000,
+    recommendedPlayers = 1,
+
     armouryCrates    =
     {
         mineshaftID.mob.MOBLIN_FANTOCCINIMAN + 1,
@@ -151,7 +155,7 @@ local lootTables =
     [18] = { xi.item.ATTUNER, xi.item.TACTICAL_PROCESSOR, xi.item.DRUM_MAGAZINE, xi.item.EQUALIZER, xi.item.TARGET_MARKER, xi.item.MANA_CHANNELER, xi.item.ERASER, xi.item.SMOKE_SCREEN },
 }
 
-local function getLootPool(battlefield)
+content.crateLoot = function(battlefield)
     -- Get loot table based on job. PUP gets two chances to drop an additional attachment.
     local key            = battlefield:getLocalVar('initiatorJob')
     local lootPool       = lootTables[key]
@@ -191,19 +195,7 @@ local function getLootPool(battlefield)
         })
     end
 
-    return lootTable or content.loot
-end
-
-function content:handleOpenArmouryCrate(player, npc)
-    npcUtil.openCrate(npc, function()
-        local battlefield = player:getBattlefield()
-        local lootPool    = getLootPool(battlefield)
-
-        self:handleLootRolls(battlefield, lootPool, npc, player:getMod(xi.mod.MOGHANCEMENT_GIL_BONUS_P))
-        battlefield:setStatus(xi.battlefield.status.WON)
-
-        return true
-    end)
+    return lootTable
 end
 
 return content:register()
