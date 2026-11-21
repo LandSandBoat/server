@@ -7,4 +7,5 @@ return {
     ['Sprightly_Footsteps'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Warhorse_Hoofprint' ] = { messageSpecial = ID.text.WARHORSE_HOOFPRINT      },
     ['qm8'                ] = { messageSpecial = ID.text.DETACHED_PART           },
+    ['qm11'               ] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
 }
