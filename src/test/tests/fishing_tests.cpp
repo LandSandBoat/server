@@ -20,12 +20,30 @@
 */
 
 #include "common/xirand.h"
+#include "map/entities/mob_entity.h"
 #include "map/utils/fishingutils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 #include <cmath>
 #include <cstdlib>
+
+TEST_CASE("A fished NM starts its respawn cooldown once on death", "[fishing]")
+{
+    auto mob                     = CMobEntity{};
+    mob.m_FishingRespawnDuration = 10min;
+
+    const auto beforeDeath = timer::now();
+    mob.Die();
+    const auto respawnAt = mob.m_FishingRespawnAt;
+
+    CHECK(respawnAt >= beforeDeath + 10min);
+    CHECK(respawnAt <= timer::now() + 10min);
+    CHECK(mob.m_FishingRespawnDuration == timer::duration::zero());
+
+    mob.Die();
+    CHECK(mob.m_FishingRespawnAt == respawnAt);
+}
 
 TEST_CASE("Fishing legendary attack bonuses also increase wrong-arrow healing", "[fishing]")
 {
