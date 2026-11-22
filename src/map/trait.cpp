@@ -69,14 +69,14 @@ void LoadTraitsList()
 
         auto* PTrait = new CTrait(std::to_underlying(entry.Id));
 
-        PTrait->setJob(static_cast<int8>(entry.Job));
+        PTrait->setJob(entry.Job);
         PTrait->setLevel(entry.Level);
         PTrait->setRank(entry.Rank);
         PTrait->setMod(entry.Mod);
         PTrait->setValue(entry.Value);
-        PTrait->setMeritId(std::to_underlying(entry.Merit));
+        PTrait->setMerit(entry.Merit);
 
-        PTraitsList[static_cast<uint8>(entry.Job)].emplace_back(PTrait);
+        PTraitsList[std::to_underlying(entry.Job)].emplace_back(PTrait);
     }
 
     auto rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value, tier, job_points_only "
@@ -88,7 +88,7 @@ void LoadTraitsList()
     {
         auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"), rset->get<bool>("job_points_only"));
 
-        PTrait->setJob(static_cast<int8>(xi::Job::BLU));
+        PTrait->setJob(xi::Job::BLU);
         PTrait->setRank(rset->get<uint8>("tier"));
         PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
         PTrait->setMod(rset->get<xi::Mod>("modifier"));

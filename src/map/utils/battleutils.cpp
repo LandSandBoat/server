@@ -5386,14 +5386,14 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
                     // Check if we still have the merit required for this trait
                     if (PChar)
                     {
-                        if (PExistingTrait->getMeritID() > 0)
+                        if (PExistingTrait->getMerit() != xi::Merit::None)
                         {
-                            if (PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PExistingTrait->getMeritID()))->count == 0)
+                            if (PChar->PMeritPoints->GetMerit(PExistingTrait->getMerit())->count == 0)
                             {
                                 PEntity->delTrait(PExistingTrait);
                                 break;
                             }
-                            else if (PExistingTrait->getMeritID() == PTrait->getMeritID())
+                            else if (PExistingTrait->getMerit() == PTrait->getMerit())
                             {
                                 add = false;
                                 break;
@@ -5417,7 +5417,7 @@ void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
             // Don't add traits that aren't merited yet
             if (PChar)
             {
-                if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit(static_cast<xi::Merit>(PTrait->getMeritID()))->count == 0)
+                if (PTrait->getMerit() != xi::Merit::None && PChar->PMeritPoints->GetMerit(PTrait->getMerit())->count == 0)
                 {
                     add = false;
                 }

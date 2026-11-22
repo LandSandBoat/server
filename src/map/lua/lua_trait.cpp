@@ -38,7 +38,7 @@ auto CLuaTrait::getID() const -> xi::Trait
     return trait_->getID();
 }
 
-auto CLuaTrait::getJob() const -> uint8
+auto CLuaTrait::getJob() const -> xi::Job
 {
     return trait_->getJob();
 }
@@ -63,9 +63,9 @@ auto CLuaTrait::getRank() const -> uint8
     return trait_->getRank();
 }
 
-auto CLuaTrait::getMeritID() const -> uint32
+auto CLuaTrait::getMeritID() const -> xi::Merit
 {
-    return trait_->getMeritID();
+    return trait_->getMerit();
 }
 
 //==========================================================//

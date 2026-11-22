@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/macros.h"
 #include "data/enums/job.h"
+#include "data/enums/merit.h"
 #include "data/enums/trait.h"
 
 #include "modifier.h"
@@ -43,7 +44,7 @@ public:
         return m_id;
     }
 
-    auto getJob() const -> uint8
+    auto getJob() const -> xi::Job
     {
         return m_job;
     }
@@ -68,12 +69,12 @@ public:
         return m_rank;
     }
 
-    auto getMeritID() const -> uint32
+    auto getMerit() const -> xi::Merit
     {
-        return m_meritId;
+        return m_merit;
     }
 
-    void setJob(const int8 job)
+    void setJob(const xi::Job job)
     {
         m_job = job;
     }
@@ -98,19 +99,19 @@ public:
         m_rank = rank;
     }
 
-    void setMeritId(const uint32 meritId)
+    void setMerit(const xi::Merit merit)
     {
-        m_meritId = meritId;
+        m_merit = merit;
     }
 
 private:
     xi::Trait m_id{};
-    uint8     m_job{ 0 };
+    xi::Job   m_job{};
     uint8     m_level{ 0 };
     xi::Mod   m_mod{ xi::Mod::NONE };
     int16     m_value{ 0 };
     uint8     m_rank{ 0 };
-    uint32    m_meritId{ 0 };
+    xi::Merit m_merit{};
 };
 
 using TraitList_t = std::vector<CTrait*>;

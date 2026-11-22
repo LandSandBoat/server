@@ -35,6 +35,6 @@ function CTrait:getRank()
 end
 
 ---@nodiscard
----@return integer
+---@return xi.merit
 function CTrait:getMeritID()
 end
