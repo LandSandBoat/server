@@ -3444,7 +3444,7 @@ npcs:
       moving:        7
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17748171:
     script:       Matrimonial_Coffer
@@ -3457,7 +3457,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17748172:
     script:       Celebratory_Chest
@@ -3470,7 +3470,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17748173:
     script:       Synergy_Furnace

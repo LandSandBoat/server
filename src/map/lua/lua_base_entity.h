@@ -274,6 +274,8 @@ public:
     auto hasItem(uint16 itemID, const sol::object& location) -> bool;
     auto getItemCount(uint16 itemID) -> uint32;
     auto addItem(sol::variadic_args va) const -> CItem*;
+    auto purchaseItems(const sol::table& itemIds, uint32 price) const -> bool;
+    auto issueWeddingCertificate(uint8 nation, CLuaBaseEntity* partner) const -> bool;
     auto delItem(uint16 itemID, int32 quantity, const sol::object& containerID) -> bool;
     auto delItemAt(uint16 itemID, int32 quantity, uint8 containerId, uint8 slotId) -> bool;
     auto delContainerItems(const sol::object& containerID) -> bool;
@@ -599,6 +601,7 @@ public:
     auto getParty() -> sol::table;
     auto getPartyWithTrusts() -> sol::table;
     auto getPartySize(const sol::object& arg0) -> uint8;
+    auto isPartyOfTwoWith(uint32 memberId) const -> bool;
     auto hasPartyJob(uint8 job) -> bool;
     auto getPartyMember(uint8 member, uint8 allianceparty) -> CBaseEntity*;
     auto getPartyLeader() -> CBaseEntity*;

@@ -11,11 +11,15 @@ itemObject.onItemCheck = function(target, item, caster)
 end
 
 itemObject.onItemUse = function(target)
-    local alliance = target:getAlliance()
-    for i, member in pairs(alliance) do
-        if member:getZoneID() == target:getZoneID() then
-            member:changeMusic(xi.musicSlot.ZONE_DAY, 214)   -- Eternal Oath
-            member:changeMusic(xi.musicSlot.ZONE_NIGHT, 214) -- Eternal Oath
+    local zoneId = target:getZoneID()
+    local eternalOath = 214
+
+    for _, member in ipairs(target:getAlliance()) do
+        if member:getZoneID() == zoneId then
+            member:changeMusic(xi.musicSlot.ZONE_DAY, eternalOath)
+            member:changeMusic(xi.musicSlot.ZONE_NIGHT, eternalOath)
+            member:changeMusic(xi.musicSlot.COMBAT_SOLO, eternalOath)
+            member:changeMusic(xi.musicSlot.COMBAT_PARTY, eternalOath)
         end
     end
 end

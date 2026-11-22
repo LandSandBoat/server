@@ -511,8 +511,29 @@ auto canSynthesizeHQ(CCharEntity* PChar, uint8 skillID) -> bool
     return (PChar->getMod(ModID) == 0);
 }
 
+auto isMatrimonyResynthesis(const CCraftState& craftState) -> bool
+{
+    const auto ingredientId = craftState.ingredientItemId(0);
+    if ((ingredientId != MATRIMONY_RING && ingredientId != MATRIMONY_BAND) ||
+        craftState.element() != ELEMENT_WIND ||
+        craftState.craftMode() != CRAFT_SYNTHESIS ||
+        craftState.ingredientItemId(1) != 0)
+    {
+        return false;
+    }
+
+    const auto& result = craftState.resultTier(SynthesisOutcome::NQ);
+    return result.itemId == ingredientId && result.qty == 1;
+}
+
 auto calculateSynthResult(CCharEntity* PChar) -> SynthesisOutcome
 {
+    // Retail captures had no breaks or HQ outcomes, including at Goldsmithing 0.
+    if (isMatrimonyResynthesis(PChar->craftState()))
+    {
+        return SynthesisOutcome::NQ;
+    }
+
     auto   synthResult     = SynthesisOutcome::NQ;
     uint8  skillID         = 0;
     uint8  finalHQTier     = 4;
@@ -937,6 +958,9 @@ constexpr std::array<std::array<uint8, 5>, 15> skillUpAmountWeights = { {
 // Used in: sendSynthDone
 void doSynthSkillUp(CCharEntity* PChar)
 {
+    const auto& craftState = PChar->craftState();
+    const bool  isDesynth  = craftState.craftMode() == CRAFT_DESYNTHESIS;
+
     for (uint8 skillID = static_cast<uint8>(xi::SkillType::Woodworking); skillID <= static_cast<uint8>(xi::SkillType::Cooking); ++skillID) // Check for all skills involved in a recipe, to check for skill up
     {
         //------------------------------
@@ -944,27 +968,37 @@ void doSynthSkillUp(CCharEntity* PChar)
         //------------------------------
 
         // We don't Skill Up if the recipe doesn't involve the currently checked skill.
-        if (PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) == 0)
+        const uint8 skillRequired = craftState.skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking));
+        if (skillRequired == 0)
         {
             continue; // Break current loop iteration.
         }
 
-        uint16 maxSkill  = (PChar->RealSkills.rank[skillID] + 1) * 100; // Skill cap, depending on rank
-        uint16 charSkill = PChar->RealSkills.skill[skillID];            // Compare against real character skill, without image support, gear or moghancements
+        const uint16 maxSkill  = (PChar->RealSkills.rank[skillID] + 1) * 100; // Skill cap, depending on rank
+        const uint16 charSkill = PChar->RealSkills.skill[skillID];            // Compare against real character skill, without image support, gear or moghancements
 
-        // We don't skill Up if the involved skill is caped (As a fail-safe measure, we also check if a naughty GM has set its skill over cap aswell)
         if (charSkill >= maxSkill)
         {
-            continue; // Break current loop iteration.
+            continue;
+        }
+
+        // The nonzero skill field selects Goldsmithing. The effective recipe level is 0,
+        // with retail gains ending at 11.0.
+        const bool   matrimonyResynthesis = !isDesynth && skillID == static_cast<uint8>(xi::SkillType::Goldsmithing) && isMatrimonyResynthesis(craftState);
+        const uint8  recipeLevel          = matrimonyResynthesis ? 0 : skillRequired;
+        const uint16 maxSkillUp           = matrimonyResynthesis ? std::min<uint16>(maxSkill, 110) : maxSkill;
+
+        if (matrimonyResynthesis && charSkill >= maxSkillUp)
+        {
+            continue;
         }
 
         const bool modernSystem = settings::get<bool>("map.CRAFT_MODERN_SYSTEM");
-        const bool isDesynth    = PChar->craftState().craftMode() == CRAFT_DESYNTHESIS;
 
         // We don't Skill Up if the recipe isn't difficult enough.
         // Era -> Char lvl must be bellow recipe level. Retail -> Char level myst be bellow recipe level + 10.
         // Char level does NOT count the effects of image support/gear.
-        const int16 baseDiff = static_cast<int16>(PChar->craftState().skillRequired(skillID - static_cast<uint8>(xi::SkillType::Woodworking)) - charSkill / 10);
+        const int16 baseDiff = static_cast<int16>(recipeLevel - charSkill / 10);
         const int8  minDiff  = modernSystem ? -11 : 0;
         if (baseDiff <= minDiff)
         {
@@ -1063,8 +1097,7 @@ void doSynthSkillUp(CCharEntity* PChar)
             }
         }
 
-        // Cap skill gain amount if character hits the current cap
-        skillUpAmount = static_cast<uint8>(std::min<uint16>(skillUpAmount, maxSkill - charSkill));
+        skillUpAmount = static_cast<uint8>(std::min<uint16>(skillUpAmount, maxSkillUp - charSkill));
 
         //------------------------------
         // Section 5: Spezialization System (Craft delevel system over certain point)
@@ -1072,7 +1105,7 @@ void doSynthSkillUp(CCharEntity* PChar)
         uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
         uint16 skillCumulation   = skillUpAmount;
         uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
-        uint16 skillHighestValue = settings::get<uint16>("map.CRAFT_COMMON_CAP");
+        uint16 skillHighestValue = craftCommonCap;
 
         if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
         {

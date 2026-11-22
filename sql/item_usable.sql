@@ -2501,7 +2501,7 @@ INSERT INTO `item_usable` VALUES (6680,'???_earring_run',1,1,0,0,0,0,0,0);     -
 INSERT INTO `item_usable` VALUES (6681,'???_earring_run_+1',1,1,0,0,0,0,0,0);  -- TODO: verify animation
 INSERT INTO `item_usable` VALUES (6682,'???_earring_run_+2',1,1,0,0,0,0,0,0);  -- TODO: verify animation
 INSERT INTO `item_usable` VALUES (6683,'porcelain_mine',1,1,0,0,0,0,0,0);      -- TODO: verify animation
-INSERT INTO `item_usable` VALUES (6684,'popper_ii',1,1,0,0,0,0,0,0);           -- TODO: verify animation
+INSERT INTO `item_usable` VALUES (6684,'popper_ii',1,1,125,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6685,'obsidian_wing',1,1,0,0,0,0,0,0);       -- TODO: verify animation
 INSERT INTO `item_usable` VALUES (6686,'gyudon',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6687,'gyudon_+1',1,1,28,0,0,0,0,0);

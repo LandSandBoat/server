@@ -1,12 +1,12 @@
 -----------------------------------
--- Area: Heavens Tower
+-- Area: Heavens Tower (242)
 --  NPC: Matrimonial Coffer
 -- !pos -5.955 0.249 24.360 242
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrigger = function(player, npc)
+entity.onTrigger = function(player)
     xi.matrimonialcoffer.startEvent(player)
 end
 

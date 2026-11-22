@@ -10,8 +10,8 @@ local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
+    player:messageText(npc, ID.text.CELEBRATORY_GOODS, false, 6)
     xi.shop.celebratory(player)
-    player:messageSpecial(ID.text.CELEBRATORY_GOODS)
 end
 
 return entity

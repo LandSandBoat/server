@@ -6447,7 +6447,7 @@ INSERT INTO `item_basic` VALUES (6680,0,'???_earring_run','???_earring_run','？
 INSERT INTO `item_basic` VALUES (6681,0,'???_earring_run_+1','???_ear._run_+1','？？？ピアス：剣+1',@USABLE_TYPE,99,@FLAG_MOG_GARDEN | @FLAG_NOAUCTION | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NODELIVERY | @FLAG_EX,@NONE,4812);
 INSERT INTO `item_basic` VALUES (6682,0,'???_earring_run_+2','???_ear._run_+2','？？？ピアス：剣+2',@USABLE_TYPE,99,@FLAG_MOG_GARDEN | @FLAG_NOAUCTION | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NODELIVERY | @FLAG_EX,@NONE,5775);
 INSERT INTO `item_basic` VALUES (6683,0,'porcelain_mine','porcelain_mine','ポーセレンマイン',@USABLE_TYPE,99,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@NONE,0);                                   -- TODO: Verify AH category, Verify NPC sale price
-INSERT INTO `item_basic` VALUES (6684,0,'popper_ii','popper_ii','ポッパーII',@USABLE_TYPE,99,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@NONE,0);                                             -- TODO: Verify AH category, Verify NPC sale price
+INSERT INTO `item_basic` VALUES (6684,0,'popper_ii','popper_ii','ポッパーII',@USABLE_TYPE,99,@FLAG_MYSTERY_BOX | @FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@ALCHEMY_2,20);
 INSERT INTO `item_basic` VALUES (6685,0,'obsidian_wing','obsid._wing','カザナル帰巣蝶',@USABLE_TYPE,1,@FLAG_NOAUCTION | @FLAG_CANUSE | @FLAG_CANTRADENPC | @FLAG_NOSALE | @FLAG_NODELIVERY | @FLAG_EX | @FLAG_RARE,@NONE,0);
 INSERT INTO `item_basic` VALUES (6686,0,'gyudon','gyudon','牛丼',@USABLE_TYPE,12,@FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@MEAT_EGGS,162);
 INSERT INTO `item_basic` VALUES (6687,0,'gyudon_+1','gyudon_+1','牛丼+1',@USABLE_TYPE,12,@FLAG_MOG_GARDEN | @FLAG_CANUSE | @FLAG_CANTRADENPC,@MEAT_EGGS,250);

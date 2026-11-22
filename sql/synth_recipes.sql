@@ -4897,6 +4897,16 @@ INSERT INTO `synth_recipes` VALUES (77670,0,2040,0,0,0,0,0,0,0,89,4099,4241,620,
 INSERT INTO `synth_recipes` VALUES (77671,0,2040,0,0,0,0,0,0,0,89,4099,4241,620,1652,4509,5457,9200,0,0,0,5163,5163,5163,5163,1,1,1,1,'Sole Sushi +1','ROV'); -- Capture needed
 INSERT INTO `synth_recipes` VALUES (77672,0,2040,0,0,0,0,0,0,0,94,4099,4241,620,1652,4509,5140,9200,0,0,0,5666,5666,5666,5666,1,1,1,1,'Fin Sushi +1','ROV'); -- Capture needed
 INSERT INTO `synth_recipes` VALUES (77673,0,2040,0,0,0,0,0,0,0,98,4099,4241,620,1652,4485,4509,9200,0,0,0,5179,5179,5179,5179,1,1,1,1,'Dorado Sushi +1','ROV'); -- Capture needed
+-- Wedding ring recipes: https://support.na.square-enix.com/faqarticle.php?id=20&kid=51803
+-- JP Wiki lists Goldsmithing 65 for both Fire/Inferno recipes.
+-- Matrimony Ring: https://wiki.ffo.jp/html/18526.html
+-- Matrimony Band: https://wiki.ffo.jp/html/18527.html
+INSERT INTO `synth_recipes` VALUES (77674,0,0,0,0,65,0,0,0,0,0,4096,4238,746,746,787,0,0,0,0,0,15847,15847,15847,15847,1,1,1,1,'Matrimony Ring','ASA');
+INSERT INTO `synth_recipes` VALUES (77675,0,0,0,0,65,0,0,0,0,0,4096,4238,746,746,787,787,787,787,787,0,15848,15848,15848,15848,1,1,1,1,'Matrimony Band','ASA');
+-- Gold=1 identifies the craft for the level-zero Wind/Cyclone recipes. See synthutils.cpp.
+INSERT INTO `synth_recipes` VALUES (77676,0,0,0,0,1,0,0,0,0,0,4098,4240,15847,0,0,0,0,0,0,0,15847,15847,15847,15847,1,1,1,1,'Matrimony Ring','ASA');
+INSERT INTO `synth_recipes` VALUES (77677,0,0,0,0,1,0,0,0,0,0,4098,4240,15848,0,0,0,0,0,0,0,15848,15848,15848,15848,1,1,1,1,'Matrimony Band','ASA');
+
 -- -----------
 -- RECIPES END
 

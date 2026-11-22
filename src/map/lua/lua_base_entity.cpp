@@ -46,6 +46,7 @@
 #include "instance.h"
 #include "ipc_client.h"
 #include "item_container.h"
+#include "items.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -4669,6 +4670,128 @@ auto CLuaBaseEntity::addItem(sol::variadic_args va) const -> CItem*
     }
 
     return AddedItem;
+}
+
+/************************************************************************
+ *  Function: purchaseItems()
+ *  Purpose : Buy one copy of each item in a list as a single gil purchase
+ *  Example : player:purchaseItems({ xi.item.BENEDIGHT_COAT, xi.item.BENEDIGHT_HOSE }, 200000)
+ *  Notes   : Item messages are the responsibility of the caller
+ ************************************************************************/
+
+auto CLuaBaseEntity::purchaseItems(const sol::table& itemIds, const uint32 price) const -> bool
+{
+    auto*      PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    const auto count = itemIds.size();
+    if (!PChar || count == 0 || price == 0 || count > PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount())
+    {
+        return false;
+    }
+
+    // The item claim can only release its undo records after the database commits.
+    if (db::getDatabase().isInTransaction())
+    {
+        return false;
+    }
+
+    auto       claim  = ItemClaimTransaction::start(PChar);
+    bool       paid   = false;
+    const bool stored = db::transaction(
+        [&]()
+        {
+            paid = claim->pay(price);
+            if (!paid)
+            {
+                return;
+            }
+
+            for (std::size_t index = 1; index <= count; ++index)
+            {
+                const auto itemId = itemIds.get<sol::optional<uint16>>(index);
+                if (!itemId || !claim->give(LOC_INVENTORY, *itemId, 1, Silence::Yes))
+                {
+                    throw std::runtime_error(fmt::format("purchaseItems: could not give item {} of {} to {}", index, count, PChar->getName()));
+                }
+            }
+        });
+    return stored && paid && claim->commit();
+}
+
+// Keep the certificate and the marriage it records together if the server stops during an award.
+auto CLuaBaseEntity::issueWeddingCertificate(const uint8 nation, CLuaBaseEntity* partner) const -> bool
+{
+    static const std::string spouseVar = "WeddingSpouse";
+    static const std::string nationVar = "WeddingCertificateNation";
+    constexpr std::array     certificates{ SAN_DORIAN_MARRIAGE_CERT, BASTOKAN_MARRIAGE_CERT, WINDURSTIAN_MARRIAGE_CERT };
+
+    auto* PChar    = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PPartner = partner ? dynamic_cast<CCharEntity*>(partner->GetBaseEntity()) : nullptr;
+    if (!PChar || nation == 0 || nation > certificates.size() ||
+        (partner && (!PPartner || PPartner == PChar || PPartner->loc.zone != PChar->loc.zone)))
+    {
+        return false;
+    }
+
+    const auto spouseId = static_cast<uint32>(PChar->getCharVar(spouseVar));
+    const auto issuer   = PChar->getCharVar(nationVar);
+    const bool first    = spouseId == 0 && issuer == 0;
+    if ((issuer != 0 && issuer != nation) || (!PPartner && !first))
+    {
+        return false;
+    }
+
+    if (PPartner)
+    {
+        const auto partnerSpouseId = static_cast<uint32>(PPartner->getCharVar(spouseVar));
+        const auto partnerIssuer   = PPartner->getCharVar(nationVar);
+        const bool married         = spouseId == PPartner->id && partnerSpouseId == PChar->id;
+        const bool bothNew         = first && partnerSpouseId == 0 && partnerIssuer == 0;
+        if ((!married && !bothNew) || (partnerIssuer != 0 && partnerIssuer != nation))
+        {
+            return false;
+        }
+    }
+
+    auto       claim  = ItemClaimTransaction::start(PChar);
+    bool       given  = false;
+    const bool stored = db::transaction(
+        [&]()
+        {
+            given = claim->give(LOC_INVENTORY, certificates[nation - 1], 1, Silence::Yes).has_value();
+            if (!given)
+            {
+                return;
+            }
+
+            if (first && PPartner &&
+                !db::preparedStmt("INSERT INTO char_vars (charid, varname, value) VALUES (?, ?, ?), (?, ?, ?)",
+                                  PChar->id,
+                                  spouseVar,
+                                  PPartner->id,
+                                  PPartner->id,
+                                  spouseVar,
+                                  PChar->id))
+            {
+                throw std::runtime_error("Could not record the wedding partners");
+            }
+
+            if (issuer == 0 && !db::preparedStmt("INSERT INTO char_vars (charid, varname, value) VALUES (?, ?, ?)", PChar->id, nationVar, nation))
+            {
+                throw std::runtime_error("Could not record the wedding certificate issuer");
+            }
+        });
+    if (!stored || !given || !claim->commit())
+    {
+        return false;
+    }
+
+    if (first && PPartner)
+    {
+        PChar->updateCharVarCache(spouseVar, PPartner->id);
+        PPartner->updateCharVarCache(spouseVar, PChar->id);
+    }
+    PChar->updateCharVarCache(nationVar, nation);
+    return true;
 }
 
 /************************************************************************
@@ -11926,6 +12049,26 @@ auto CLuaBaseEntity::getPartySize(const sol::object& arg0) -> uint8
     }
 
     return partysize;
+}
+
+// A member who is zoning or on another map process can be absent from the local roster.
+auto CLuaBaseEntity::isPartyOfTwoWith(const uint32 memberId) const -> bool
+{
+    if (m_PBaseEntity->objtype != TYPE_PC || memberId == m_PBaseEntity->id)
+    {
+        return false;
+    }
+
+    const auto rset = db::preparedStmt(
+        "SELECT 1 FROM accounts_parties AS requester "
+        "JOIN accounts_parties AS partner USING (partyid, allianceid) "
+        "WHERE requester.charid = ? AND partner.charid = ? AND requester.partyid <> 0 "
+        "AND (SELECT COUNT(*) FROM accounts_parties WHERE partyid = requester.partyid) = 2 "
+        "AND (requester.allianceid = 0 OR NOT EXISTS "
+        "(SELECT 1 FROM accounts_parties WHERE allianceid = requester.allianceid AND partyid <> requester.partyid))",
+        m_PBaseEntity->id,
+        memberId);
+    return rset && rset->next();
 }
 
 /************************************************************************
@@ -20892,6 +21035,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     SOL_REGISTER("getItemCount", CLuaBaseEntity::getItemCount);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
+    SOL_REGISTER("purchaseItems", CLuaBaseEntity::purchaseItems);
+    SOL_REGISTER("issueWeddingCertificate", CLuaBaseEntity::issueWeddingCertificate);
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
     SOL_REGISTER("delItemAt", CLuaBaseEntity::delItemAt);
     SOL_REGISTER("delContainerItems", CLuaBaseEntity::delContainerItems);
@@ -21213,6 +21358,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getParty", CLuaBaseEntity::getParty);
     SOL_REGISTER("getPartyWithTrusts", CLuaBaseEntity::getPartyWithTrusts);
     SOL_REGISTER("getPartySize", CLuaBaseEntity::getPartySize);
+    SOL_REGISTER("isPartyOfTwoWith", CLuaBaseEntity::isPartyOfTwoWith);
     SOL_REGISTER("hasPartyJob", CLuaBaseEntity::hasPartyJob);
     SOL_REGISTER("getPartyMember", CLuaBaseEntity::getPartyMember);
     SOL_REGISTER("getPartyLeader", CLuaBaseEntity::getPartyLeader);

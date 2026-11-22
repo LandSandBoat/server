@@ -1971,7 +1971,7 @@ npcs:
       moving:       21
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17768561:
     script:       Matrimonial_Coffer
@@ -1984,7 +1984,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17768562:
     script:       Celebratory_Chest
@@ -1997,7 +1997,7 @@ npcs:
       moving: 1
     status:   normal
     widescan: true
-    content:  abyssea
+    content:  asa
 
   17768563:
     script: blank
