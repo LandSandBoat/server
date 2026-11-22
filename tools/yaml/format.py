@@ -60,6 +60,7 @@ def cmake_python():
 try:
     import yaml as pyyaml
     from ruamel.yaml import YAML
+    from ruamel.yaml.representer import RoundTripRepresenter
 except ImportError as exc:
     # Retry through the build's interpreter, which has the deps installed.
     build_python = None if os.environ.get(REEXEC_GUARD) else cmake_python()
@@ -86,12 +87,24 @@ def represent_none(dumper, _data):
     return dumper.represent_scalar("tag:yaml.org,2002:null", "null")
 
 
+NUMBER_THEN_TEXT = re.compile(r"[+-]?(?:0[xX][0-9A-Fa-f_]+|0[bB][01_]+|0[oO][0-7_]+|(?:[0-9][0-9_]*(?:\.[0-9_]*)?|\.[0-9][0-9_]*)(?:[eE][+-]?[0-9]+)?)[,\s]")
+
+
+def represent_str(dumper, data):
+    """Keep quotes on a string that starts with a number then a comma or a space; glaze's generic reader rejects it plain."""
+    if NUMBER_THEN_TEXT.match(data):
+        style = '"' if "'" in data else "'"
+        return dumper.represent_scalar("tag:yaml.org,2002:str", data, style=style)
+    return RoundTripRepresenter.represent_str(dumper, data)
+
+
 def normalize(text):
     ruamel = YAML()
     ruamel.indent(mapping=2, sequence=4, offset=2)
     ruamel.width = 4096  # never wrap
     ruamel.preserve_quotes = False  # normalize quote style
     ruamel.representer.add_representer(type(None), represent_none)
+    ruamel.representer.add_representer(str, represent_str)
     data = ruamel.load(text)
     buf = StringIO()
     ruamel.dump(data, buf)
