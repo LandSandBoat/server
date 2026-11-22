@@ -49,10 +49,12 @@ mission.sections =
             onEventFinish =
             {
                 [10117] = function(player, csid, option, npc)
-                    if option == 2 then
+                    if
+                        option == 2 and
+                        player:delGil(1000000)
+                    then
                         -- Paid to skip ahead, handle this manually
                         mission:complete(player)
-                        player:delGil(1000000)
                         npcUtil.giveKeyItem(player, xi.keyItem.ADOULINIAN_CHARTER_PERMIT)
                     end
                 end,

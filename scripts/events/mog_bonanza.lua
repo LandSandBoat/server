@@ -368,11 +368,13 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
         local baseCs = csidLookup[player:getZoneID()]
 
         if csid == baseCs then
-            if option == 3 then
+            if
+                option == 3 and
+                player:delGil(localSettings.PEARL_COST)
+            then
                 local selectedNumber = player:getLocalVar('selectedNumber')
                 local ID             = zones[zoneId]
 
-                player:delGil(localSettings.PEARL_COST)
                 giveBonanzaPearl(player, selectedNumber)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BONANZA_PEARL)
             end

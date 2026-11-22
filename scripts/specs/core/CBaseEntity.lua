@@ -2113,7 +2113,7 @@ function CBaseEntity:setGil(amount)
 end
 
 ---@param gil integer
----@return nil
+---@return boolean
 function CBaseEntity:delGil(gil)
 end
 

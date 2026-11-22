@@ -172,8 +172,11 @@ mission.sections =
                 [507] = function(player, csid, option, npc)
                     if option == 0 then -- Dont Pay
                         player:needToZone(true)
-                    elseif option == 1 then -- Pay
+                    -- Pay
+                    elseif
+                        option == 1 and
                         player:delGil(5000)
+                    then
                         player:delKeyItem(xi.keyItem.RIPE_STARFRUIT)
                         player:setMissionStatus(xi.mission.log_id.AMK, 1)
                     end

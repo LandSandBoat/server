@@ -82,9 +82,12 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 144 and option == 1 then                     -- Gullible's Travels: First CS
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
-    elseif csid == 146 then                                  -- Gullible's Travels: Final CS
-        player:confirmTrade()
+    -- Gullible's Travels: Final CS
+    elseif
+        csid == 146 and
         player:delGil(player:getCharVar('MAGRIFFON_GIL_REQUEST'))
+    then
+        player:confirmTrade()
         player:setCharVar('MAGRIFFON_GIL_REQUEST', 0)
         player:addFame(xi.fameArea.WINDURST, 30)
         player:setTitle(xi.title.GULLIBLES_TRAVELS)
@@ -92,9 +95,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:needToZone(true)
     elseif csid == 148 and option == 1 then                  -- Even More Guillible's Travels First CS
         player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
-    elseif csid == 150 then                                  -- Even More Guillible's Travels Second CS
-        player:confirmTrade()
+    -- Even More Guillible's Travels Second CS
+    elseif
+        csid == 150 and
         player:delGil(35000)
+    then
+        player:confirmTrade()
         player:setCharVar('EVEN_MORE_GULLIBLES_PROGRESS', 1)
         player:setTitle(xi.title.EVEN_MORE_GULLIBLES_TRAVELS)
         npcUtil.giveKeyItem(player, xi.keyItem.TREASURE_MAP)
