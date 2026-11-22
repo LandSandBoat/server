@@ -353,25 +353,12 @@ local function performNextAction(player, containerId, handlerId, actions, target
     -- Figure out which action to perform if there's multiple
     local actionCount = #actions
     if actionCount > 1 then
-        local nextIndex = 1
-
         -- Keep track of which action we're at in a local variable
-        local actionCycleId = actionUtil.getActionVarName(containerId, handlerId)
-        local previousActionId = player:getLocalVar(actionCycleId)
-        if previousActionId > 0 then
-            for idx, currentAction in ipairs(actions) do
-                if currentAction.id == previousActionId then
-                    nextIndex = idx + 1
-                end
-            end
-        end
-
-        if nextIndex > actionCount then
-            nextIndex = 1
-        end
+        local actionCycleId = actionUtil.getActionVarName(containerId, handlerId, 'Cycle')
+        local nextIndex = (player:getLocalVar(actionCycleId) % actionCount) + 1
 
         actionToPerform = actions[nextIndex]
-        player:setLocalVar(actionCycleId, actionToPerform.id)
+        player:setLocalVar(actionCycleId, nextIndex)
     end
 
     local didPerformAction = actionToPerform ~= nil
