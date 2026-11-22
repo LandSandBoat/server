@@ -72,8 +72,6 @@ struct fishresponse_t
     lsbret_t lose;            // chance of losing
     lsbret_t rbreak;          // chance of break
     lsbret_t lsnap;           // chance of snap
-    bool     nm;              // is this an NM
-    uint32   nmFlags;         // if NM, it's flags
     uint32   fishingToken;    // fishing token
     uint8    distance;        // distance from player (mob/npc)
     int8     angle;           // angle variation from directly behind (mob/npc)
@@ -103,8 +101,6 @@ struct fishresponse_t
     , weight(0)
     , ranking(0)
     , epic(false)
-    , nm(false)
-    , nmFlags(0)
     , fishingToken(0)
     , distance(0)
     , angle(0)
@@ -932,7 +928,6 @@ auto GetFishingArea(CCharEntity* PChar) -> fishingarea_t*;
 // Catching
 auto BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate) -> bool;
 void RodBreak(CCharEntity* PChar);
-auto CanFishMob(CMobEntity* PMob) -> bool;
 auto LoseCatch(CCharEntity* PChar, uint8 FailType) -> int32;
 auto CatchNothing(CCharEntity* PChar, uint8 FailType) -> int32;
 auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length, uint16 weight, uint8 Count) -> int32;

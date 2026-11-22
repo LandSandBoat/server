@@ -162,6 +162,9 @@ public:
     timer::duration m_RespawnTime;  // respawn time
     timer::duration m_DropItemTime; // time until monster death animation
 
+    timer::duration   m_FishingRespawnDuration{}; // Armed when a timed NM is landed
+    timer::time_point m_FishingRespawnAt{ timer::time_point::min() };
+
     uint32            m_DropID;     // global drop list from SQL. To be deprecated
     const DropList_t* m_DropList{}; // shared by every spawn of one template, null when the template has no loot
 
@@ -244,6 +247,8 @@ protected:
     void DropItems(CCharEntity* PChar);
 
 private:
+    void StartFishingRespawnCooldown();
+
     timer::time_point                     m_DespawnTimer{ timer::time_point::min() }; // Despawn Timer to despawn mob after set duration
     FlatHashMap<xi::MobMod, int16>        m_mobModStat;
     FlatHashMap<xi::MobMod, int16>        m_mobModStatSave;

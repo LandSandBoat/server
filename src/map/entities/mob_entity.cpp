@@ -734,6 +734,8 @@ void CMobEntity::Spawn()
 
     CBattleEntity::Spawn();
 
+    m_FishingRespawnDuration = timer::duration::zero();
+
     m_giveExp        = true;
     m_HiPCLvl        = 0;
     m_HiPartySize    = 0;
@@ -1423,6 +1425,15 @@ void CMobEntity::OnDeathTimer()
     }
 }
 
+void CMobEntity::StartFishingRespawnCooldown()
+{
+    if (m_FishingRespawnDuration > timer::duration::zero())
+    {
+        m_FishingRespawnAt       = timer::now() + m_FishingRespawnDuration;
+        m_FishingRespawnDuration = timer::duration::zero();
+    }
+}
+
 void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
@@ -1435,6 +1446,7 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
         PMobPet->SetDespawnTime(1ms);
     }
 
+    StartFishingRespawnCooldown();
     luautils::OnMobDespawn(this);
     PAI->EventHandler.triggerListener("DESPAWN", this);
 }
@@ -1442,6 +1454,8 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
 void CMobEntity::Die()
 {
     TracyZoneScopedN("CMobEntity::Die");
+
+    StartFishingRespawnCooldown();
 
     if (PBattlefield != nullptr)
     {
