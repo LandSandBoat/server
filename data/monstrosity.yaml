@@ -826,7 +826,7 @@ monstrosity:
       id:     27
       cost:   6
       name:   Manticore instinct I
-      effect: +30 'Store TP'+5 Breath damage dealt +20%
+      effect: "+30 'Store TP'+5 Breath damage dealt +20%"
       mods:
         fire_meva:        30
         storetp:           5
@@ -1275,7 +1275,7 @@ monstrosity:
       id:     88
       cost:   6
       name:   Crawler instinct II
-      effect: +30 Accuracy+5 Physical damage taken -2%
+      effect: '+30 Accuracy+5 Physical damage taken -2%'
       mods:
         fire_meva:   30
         acc:          5
@@ -1465,7 +1465,7 @@ monstrosity:
       id:     109
       cost:   8
       name:   Wamoura instinct II
-      effect: +100 'Resist Virus'+100 Magic damage taken -3%
+      effect: "+100 'Resist Virus'+100 Magic damage taken -3%"
       mods:
         fire_meva:  100
         virusres:   100
