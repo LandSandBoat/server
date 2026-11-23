@@ -623,7 +623,7 @@ auto saveCharacter(uint32 accid, uint32 charid, char_mini* createchar) -> int32
 {
     const auto charName = asStringFromUntrustedSource(createchar->m_name, sizeof(createchar->m_name));
 
-    if (!db::preparedStmt("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(?, ?, ?, ?, ?)", charid, accid, charName, createchar->m_zone, createchar->m_nation))
+    if (!db::preparedStmt("INSERT INTO chars(charid,accid,original_accid,charname,original_charname,pos_zone,nation) VALUES(?, ?, ?, ?, ?, ?, ?)", charid, accid, accid, charName, charName, createchar->m_zone, createchar->m_nation))
     {
         ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", charName, accid, charid));
         return -1;
