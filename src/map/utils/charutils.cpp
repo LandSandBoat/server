@@ -679,7 +679,7 @@ auto LoadFromCharStatsSQL(CCharEntity* PChar) -> CharStatsRow
         MP = rset->get<int32>("mp");
 
         PChar->profile.mhflag = rset->get<uint16>("mhflag");
-        PChar->profile.title  = rset->get<uint16>("title");
+        PChar->profile.title  = static_cast<xi::Title>(rset->get<uint16>("title"));
 
         std::array<uint8, 512> bazaarMessageArray{};
         db::extractFromBlob(rset, "bazaar_message", bazaarMessageArray);
@@ -4216,22 +4216,22 @@ void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId)
  *                                                                       *
  ************************************************************************/
 
-auto hasTitle(CCharEntity* PChar, uint16 Title) -> int32
+auto hasTitle(CCharEntity* PChar, const xi::Title Title) -> int32
 {
-    return hasBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
+    return hasBit(std::to_underlying(Title), PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
 
-auto addTitle(CCharEntity* PChar, uint16 Title) -> int32
+auto addTitle(CCharEntity* PChar, const xi::Title Title) -> int32
 {
-    return addBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
+    return addBit(std::to_underlying(Title), PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
 
-auto delTitle(CCharEntity* PChar, uint16 Title) -> int32
+auto delTitle(CCharEntity* PChar, const xi::Title Title) -> int32
 {
-    return delBit(Title, PChar->m_TitleList, sizeof(PChar->m_TitleList));
+    return delBit(std::to_underlying(Title), PChar->m_TitleList, sizeof(PChar->m_TitleList));
 }
 
-void setTitle(CCharEntity* PChar, uint16 Title)
+void setTitle(CCharEntity* PChar, const xi::Title Title)
 {
     PChar->profile.title = Title;
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
@@ -5595,7 +5595,7 @@ void SaveTitles(CCharEntity* PChar)
                      "WHERE charid = ? "
                      "LIMIT 1",
                      PChar->m_TitleList,
-                     PChar->profile.title,
+                     std::to_underlying(PChar->profile.title),
                      PChar->id);
 }
 

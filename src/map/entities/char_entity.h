@@ -24,6 +24,7 @@
 #include "aman.h"
 #include "data/enums/mog_house.h"
 #include "data/enums/nation.h"
+#include "data/enums/title.h"
 #include "enums/char_persist.h"
 #include "event_info.h"
 #include "gmcall_container.h"
@@ -103,6 +104,8 @@ struct Fame
     uint16 Adoulin;
 };
 
+inline constexpr std::size_t kTitleListSize = std::to_underlying(xi::data::EnumTraits<xi::Title>::kEntries.back().second) / 8 + 1;
+
 struct profile_t
 {
     xi::Nation nation{}; // Your Nation Allegiance.
@@ -119,7 +122,7 @@ struct profile_t
     // 0x0100: ^ As above
     uint16 mhflag{};
 
-    uint16     title{};
+    xi::Title  title{};
     Fame       fame{};
     uint8      rank[3]{}; // RANK in three kingdoms
     uint16     rankpoints{};
@@ -415,13 +418,13 @@ public:
     void clearEquip(uint8 equipSlot);
     auto equipLocation(uint8 equipSlot) const -> Maybe<ItemLocation>;
 
-    uint8            m_ZonesVisitedList[38]{}; // List of zones visited by the character
-    xi::bitset<1024> m_SpellList{};            // List of learned spells
-    uint8            m_TitleList[143]{};       // List of obtained titles
-    uint8            m_Abilities[64]{};        // List of current abilities
-    uint8            m_LearnedAbilities[49]{}; // Learnable abilities (corsair rolls)
-    xi::bitset<128>  m_LearnedWeaponskills{};  // Learnable Weaponskills
-    uint8            m_TraitList[18]{};        // List of active job traits in the form of a bit mask
+    uint8            m_ZonesVisitedList[38]{};      // List of zones visited by the character
+    xi::bitset<1024> m_SpellList{};                 // List of learned spells
+    uint8            m_TitleList[kTitleListSize]{}; // List of obtained titles
+    uint8            m_Abilities[64]{};             // List of current abilities
+    uint8            m_LearnedAbilities[49]{};      // Learnable abilities (corsair rolls)
+    xi::bitset<128>  m_LearnedWeaponskills{};       // Learnable Weaponskills
+    uint8            m_TraitList[18]{};             // List of active job traits in the form of a bit mask
     uint8            m_PetCommands[64]{};
     uint8            m_WeaponSkills[32]{};
     questlog_t       m_questLog[MAX_QUESTAREA]{};     // Quest List

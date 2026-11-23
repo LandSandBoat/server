@@ -72,7 +72,7 @@ GP_SERV_COMMAND_CLISTATUS::GP_SERV_COMMAND_CLISTATUS(CCharEntity* PChar)
     packet.statusdata.def_elem[6] = PChar->getMod(xi::Mod::LIGHT_MEVA);
     packet.statusdata.def_elem[7] = PChar->getMod(xi::Mod::DARK_MEVA);
 
-    packet.statusdata.designation = PChar->profile.title;
+    packet.statusdata.designation = std::to_underlying(PChar->profile.title);
     packet.statusdata.rank        = PChar->profile.rank[static_cast<uint8>(PChar->profile.nation)];
     packet.statusdata.rankbar     = PChar->profile.rankpoints;
     packet.statusdata.BindZoneNo  = static_cast<uint16>(PChar->profile.home_point.destination);

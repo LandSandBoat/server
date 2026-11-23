@@ -2661,7 +2661,7 @@ void OnGameIn(CCharEntity* PChar, bool zoning)
     // You can DC in the intro CS when logging in and your playtime is non-zero
     // However, in charCreate, it adds NEW_ADVENTURER title. so lets check that to determine if charCreate needs to be called
     // `xi.player.onGameIn` calls `xi.player.charCreate` when the 2nd param is true
-    bool needsFirstLogin = !charutils::hasTitle(PChar, 206); // 206 == xi.title.NEW_ADVENTURER
+    bool needsFirstLogin = !charutils::hasTitle(PChar, xi::Title::NewAdventurer);
 
     callGlobal<void>("xi.player.onGameIn", PChar, needsFirstLogin, zoning);
 }

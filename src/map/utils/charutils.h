@@ -24,6 +24,7 @@
 #include "common/cbasetypes.h"
 #include "common/types/flag.h"
 #include "data/enums/quest_log.h"
+#include "data/enums/title.h"
 
 #include <memory>
 #include <string>
@@ -182,10 +183,10 @@ auto hasAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // checking the 
 auto addAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // add an ability
 auto delAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // delete an ability
 
-auto hasTitle(CCharEntity* PChar, uint16 Title) -> int32;
-auto addTitle(CCharEntity* PChar, uint16 Title) -> int32;
-auto delTitle(CCharEntity* PChar, uint16 Title) -> int32;
-void setTitle(CCharEntity* PChar, uint16 Title); // set title if not, save and update player
+auto hasTitle(CCharEntity* PChar, xi::Title Title) -> int32;
+auto addTitle(CCharEntity* PChar, xi::Title Title) -> int32;
+auto delTitle(CCharEntity* PChar, xi::Title Title) -> int32;
+void setTitle(CCharEntity* PChar, xi::Title Title); // set title if not, save and update player
 
 auto hasPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32; // same as Ability but for pet commands (e.g. Healing Ruby)
 auto addPetAbility(CCharEntity* PChar, uint16 AbilityID) -> int32;

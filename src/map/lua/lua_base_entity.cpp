@@ -7903,12 +7903,12 @@ auto CLuaBaseEntity::getMonstrosityExits(const xi::ZoneId zoneId) -> sol::table
  *  Example : if player:getTitle()) == xi.title.FAKE_MOUSTACHED_INVESTIGATOR then
  ************************************************************************/
 
-auto CLuaBaseEntity::getTitle() -> uint16
+auto CLuaBaseEntity::getTitle() -> xi::Title
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return 0;
+        return xi::Title::None;
     }
 
     return static_cast<CCharEntity*>(m_PBaseEntity)->profile.title;
@@ -7920,7 +7920,7 @@ auto CLuaBaseEntity::getTitle() -> uint16
  *  Example : if player:hasTitle(xi.title.AWESOME_SAUCE) then
  ************************************************************************/
 
-auto CLuaBaseEntity::hasTitle(uint16 titleID) -> bool
+auto CLuaBaseEntity::hasTitle(xi::Title titleID) -> bool
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -7938,7 +7938,7 @@ auto CLuaBaseEntity::hasTitle(uint16 titleID) -> bool
  *  Notes   : Use setTitle to both change and add
  ************************************************************************/
 
-void CLuaBaseEntity::addTitle(uint16 titleID)
+void CLuaBaseEntity::addTitle(xi::Title titleID)
 {
     if (!(m_PBaseEntity->objtype & TYPE_PC))
     {
@@ -7958,10 +7958,10 @@ void CLuaBaseEntity::addTitle(uint16 titleID)
 /************************************************************************
  *  Function: setTitle()
  *  Purpose : Updates the player's current title and adds to their profile
- *  Example : player:setTitle(xi.title.SOB_SUPERHERO)
+ *  Example : player:setTitle(xi.title.SOB_SUPER_HERO)
  ************************************************************************/
 
-void CLuaBaseEntity::setTitle(uint16 titleID)
+void CLuaBaseEntity::setTitle(xi::Title titleID)
 {
     if (!(m_PBaseEntity->objtype & TYPE_PC))
     {
@@ -7979,7 +7979,7 @@ void CLuaBaseEntity::setTitle(uint16 titleID)
  *  Example : player:delTitle(xi.title.FODDERCHIEF_FLAYER)
  ************************************************************************/
 
-void CLuaBaseEntity::delTitle(uint16 titleID)
+void CLuaBaseEntity::delTitle(xi::Title titleID)
 {
     if (!(m_PBaseEntity->objtype & TYPE_PC))
     {
@@ -7993,7 +7993,7 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
     {
         if (PChar->profile.title == titleID)
         {
-            PChar->profile.title = 0;
+            PChar->profile.title = xi::Title::None;
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);

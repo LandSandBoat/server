@@ -1713,27 +1713,27 @@ function CBaseEntity:isMonstrosityPassageZone(zoneId)
 end
 
 ---@nodiscard
----@return integer
+---@return xi.title
 function CBaseEntity:getTitle()
 end
 
 ---@nodiscard
----@param titleID integer
+---@param titleID xi.title
 ---@return boolean
 function CBaseEntity:hasTitle(titleID)
 end
 
----@param titleID integer
+---@param titleID xi.title
 ---@return nil
 function CBaseEntity:addTitle(titleID)
 end
 
----@param titleID integer
+---@param titleID xi.title
 ---@return nil
 function CBaseEntity:setTitle(titleID)
 end
 
----@param titleID integer
+---@param titleID xi.title
 ---@return nil
 function CBaseEntity:delTitle(titleID)
 end
