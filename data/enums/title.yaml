@@ -1,0 +1,1111 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.title
+
+values:
+  none:                                         0 # N/A
+  fodderchief_flayer:                           1 # Fodderchief Flayer
+  warchief_wrecker:                             2 # Warchief Wrecker
+  dread_dragon_slayer:                          3 # Dread Dragon Slayer
+  overlord_executioner:                         4 # Overlord Executioner
+  dark_dragon_slayer:                           5 # Dark Dragon Slayer
+  adamantking_killer:                           6 # Adamantking Killer
+  black_dragon_slayer:                          7 # Black Dragon Slayer
+  manifest_mauler:                              8 # Manifest Mauler
+  behemoths_bane:                               9 # Behemoth's Bane
+  archmage_assassin:                           10 # Archmage Assassin
+  hellsbane:                                   11 # Hellsbane
+  giant_killer:                                12 # Giant Killer
+  lich_banisher:                               13 # Lich Banisher
+  jellybane:                                   14 # Jellybane
+  bogeydowner:                                 15 # Bogeydowner
+  beakbender:                                  16 # Beakbender
+  skullcrusher:                                17 # Skullcrusher
+  morbolbane:                                  18 # Morbolbane
+  goliath_killer:                              19 # Goliath Killer
+  marys_guide:                                 20 # Mary's Guide
+  simurgh_poacher:                             21 # Simurgh Poacher
+  roc_star:                                    22 # Roc Star
+  serket_breaker:                              23 # Serket Breaker
+  cassienova:                                  24 # Cassienova
+  the_hornsplitter:                            25 # The Hornsplitter
+  tortoise_torturer:                           26 # Tortoise Torturer
+  mon_cherry:                                  27 # Mon Cherry
+  behemoth_dethroner:                          28 # Behemoth Dethroner
+  the_vivisector:                              29 # The Vivisector
+  dragon_asher:                                30 # Dragon Asher
+  expeditionary_trooper:                       31 # Expeditionary Trooper
+  bearer_of_the_wisewomans_hope:               32 # Bearer of the Wisewoman's Hope
+  bearer_of_the_eight_prayers:                 33 # Bearer of the Eight Prayers
+  lightweaver:                                 34 # Lightweaver
+  destroyer_of_antiquity:                      35 # Destroyer of Antiquity
+  sealer_of_the_portal_of_the_gods:            36 # Sealer of the Portal of the Gods
+  burier_of_the_illusion:                      37 # Burier of the Illusion
+  family_counselor:                            39 # Family Counselor
+  great_grappler_scorpio:                      41 # Great Grappler Scorpio!?
+  bond_fixer:                                  42 # Bond Fixer
+  vampire_hunter_d_minus:                      43 # Vampire Hunter D-Minus
+  sheeps_milk_deliverer:                       44 # Sheep's Milk Deliverer
+  bean_cuisine_salter:                         45 # Bean Cuisine Salter
+  total_loser:                                 46 # Total Loser
+  doctor_shantottos_flavor_of_the_month:       47 # Doctor Shantotto's Flavor of the Month
+  pilgrim_to_holla:                            48 # Pilgrim to Holla
+  pilgrim_to_dem:                              49 # Pilgrim to Dem
+  pilgrim_to_mea:                              50 # Pilgrim to Mea
+  daybreak_gambler:                            51 # Daybreak Gambler
+  the_pious_one:                               52 # The Pious One
+  a_moss_kind_person:                          53 # A Moss Kind Person
+  entrance_denied:                             54 # Entrance Denied
+  apiarist:                                    55 # Apiarist
+  rabbiter:                                    56 # Rabbiter
+  royal_grave_keeper:                          57 # Royal Grave Keeper
+  courier_extraordinaire:                      58 # Courier Extraordinaire
+  ronfaurian_rescuer:                          59 # Ronfaurian Rescuer
+  pickpocket_pincher:                          60 # Pickpocket Pincher
+  fang_finder:                                 61 # Fang Finder
+  faith_like_a_candle:                         62 # Faith like a Candle
+  the_pure_one:                                63 # The Pure One
+  lost_child_officer:                          64 # Lost Child Officer
+  silencer_of_the_lambs:                       65 # Silencer of the Lambs
+  lost_found_officer:                          66 # Lost & Found Officer
+  green_grocer:                                67 # Green Grocer
+  the_benevolent_one:                          68 # The Benevolent One
+  knight_in_training:                          69 # Knight in Training
+  lizard_skinner:                              70 # Lizard Skinner
+  bug_catcher:                                 71 # Bug Catcher
+  spelunker:                                   72 # Spelunker
+  arms_trader:                                 73 # Arms Trader
+  traveling_medicine_man:                      74 # Traveling Medicine Man
+  cat_skinner:                                 75 # Cat Skinner
+  carp_diem:                                   76 # Carp Diem
+  advertising_executive:                       77 # Advertising Executive
+  third_rate_organizer:                        78 # Third-rate Organizer
+  second_rate_organizer:                       79 # Second-rate Organizer
+  first_rate_organizer:                        80 # First-rate Organizer
+  bastok_welcoming_committee:                  81 # Bastok Welcoming Committee
+  shell_outer:                                 82 # Shell Outer
+  bucket_fisher:                               83 # Bucket Fisher
+  pursuer_of_the_past:                         84 # Pursuer of the Past
+  pursuer_of_the_truth:                        85 # Pursuer of the Truth
+  mommys_helper:                               86 # Mommy's Helper
+  hot_dog:                                     87 # Hot Dog
+  stampeder:                                   88 # Stampeder
+  qijis_friend:                                89 # Qiji's Friend
+  qijis_rival:                                 90 # Qiji's Rival
+  contest_rigger:                              91 # Contest Rigger
+  ringbearer:                                  92 # Ringbearer
+  kulatz_bridge_companion:                     93 # Kulatz Bridge Companion
+  beadeaux_surveyor:                           94 # Beadeaux Surveyor
+  avenger:                                     95 # Avenger
+  treasure_scavenger:                          96 # Treasure Scavenger
+  airship_denouncer:                           97 # Airship Denouncer
+  zeruhn_sweeper:                              98 # Zeruhn Sweeper
+  tearjerker:                                  99 # Tearjerker
+  crab_crusher:                               100 # Crab Crusher
+  star_of_ifrit:                              101 # Star of Ifrit
+  sorrow_drowner:                             102 # Sorrow Drowner
+  brygid_approved:                            103 # Brygid-approved
+  drachenfall_ascetic:                        104 # Drachenfall Ascetic
+  steaming_sheep_regular:                     105 # "Steaming Sheep" Regular
+  purple_belt:                                106 # Purple Belt
+  gustaberg_tourist:                          107 # Gustaberg Tourist
+  sand_blaster:                               108 # Sand Blaster
+  black_death:                                109 # Black Death
+  fresh_north_winds_recruit:                  111 # Fresh "North Winds" Recruit
+  new_best_of_the_west_recruit:               112 # New "Best of the West" Recruit
+  new_buumas_boomers_recruit:                 113 # New "Buuma's Boomers" Recruit
+  heavens_tower_gatehouse_recruit:            114 # Heavens Tower Gatehouse Recruit
+  cat_burglar_groupie:                        115 # Cat Burglar Groupie
+  crawler_culler:                             116 # Crawler Culler
+  savior_of_knowledge:                        117 # Savior of Knowledge
+  star_ordained_warrior:                      118 # Star-ordained Warrior
+  lower_than_the_lowest_tunnel_worm:          119 # Lower than the Lowest Tunnel Worm
+  star_onion_brigade_member:                  120 # Star Onion Brigade Member
+  star_onion_brigadier:                       121 # Star Onion Brigadier
+  quick_fixer:                                122 # Quick Fixer
+  fake_moustached_investigator:               123 # Fake-moustached Investigator
+  hakkuru_rinkurus_benefactor:                124 # Hakkuru-Rinkuru's Benefactor
+  sob_super_hero:                             125 # S.O.B. Super Hero
+  editors_hatchet_man:                        126 # Editor's Hatchet Man
+  doctor_shantottos_guinea_pig:               127 # Doctor Shantotto's Guinea Pig
+  spoilsport:                                 128 # Spoilsport
+  super_model:                                129 # Super Model
+  ghostie_buster:                             130 # Ghostie Buster
+  night_sky_navigator:                        131 # Night Sky Navigator
+  fast_food_deliverer:                        132 # Fast Food Deliverer
+  cupids_florist:                             133 # Cupid's Florist
+  tarutaru_murder_suspect:                    134 # Tarutaru Murder Suspect
+  hexer_vexer:                                135 # Hexer Vexer
+  cardian_tutor:                              136 # Cardian Tutor
+  deliverer_of_tearful_news:                  137 # Deliverer of Tearful News
+  fossilized_sea_farer:                       138 # Fossilized Sea Farer
+  down_piper_pipe_upperer:                    139 # Down Piper Pipe-upperer
+  kisser_make_upper:                          140 # Kisser Make-upper
+  timekeeper:                                 141 # Timekeeper
+  fortune_teller_in_training:                 142 # Fortune-teller in Training
+  torchbearer:                                143 # Torchbearer
+  tenshodo_member:                            144 # Tenshodo Member
+  chocobo_trainer:                            145 # Chocobo Trainer
+  bringer_of_bliss:                           146 # Bringer of Bliss
+  activist_for_kindness:                      147 # Activist for Kindness
+  envoy_to_the_north:                         148 # Envoy to the North
+  exorcist_in_training:                       149 # Exorcist in Training
+  professional_loafer:                        150 # Professional Loafer
+  clock_tower_preservationist:                151 # Clock Tower Preservationist
+  life_saver:                                 152 # Life Saver
+  fools_errand_runner:                        153 # Fool's Errand Runner
+  card_collector:                             154 # Card Collector
+  researcher_of_classics:                     155 # Researcher of Classics
+  street_sweeper:                             156 # Street Sweeper
+  mercy_errand_runner:                        157 # Mercy Errand Runner
+  twos_company:                               158 # Two's Company
+  believer_of_altana:                         159 # Believer of Altana
+  trader_of_mysteries:                        160 # Trader of Mysteries
+  trader_of_antiquities:                      161 # Trader of Antiquities
+  trader_of_renown:                           162 # Trader of Renown
+  brown_belt:                                 163 # Brown Belt
+  horizon_breaker:                            164 # Horizon Breaker
+  goblins_exclusive_fashion_mannequin:        165 # Goblin's Exclusive Fashion Mannequin
+  summit_breaker:                             166 # Summit Breaker
+  sky_breaker:                                167 # Sky Breaker
+  cloud_breaker:                              168 # Cloud Breaker
+  star_breaker:                               169 # Star Breaker
+  greedalox:                                  170 # Greedalox
+  certified_rhinostery_venturer:              171 # Certified Rhinostery Venturer
+  cordon_bleu_fisher:                         172 # Cordon Bleu Fisher
+  ace_angler:                                 173 # Ace Angler
+  lu_shang_like_fisher_king:                  174 # Lu Shang-like Fisher King
+  matchmaker:                                 175 # Matchmaker
+  ecologist:                                  176 # Ecologist
+  lil_cupid:                                  177 # Li'l Cupid
+  the_love_doctor:                            178 # The Love Doctor
+  savior_of_love:                             179 # Savior of Love
+  honorary_citizen_of_selbina:                180 # Honorary Citizen of Selbina
+  purveyor_in_training:                       181 # Purveyor in Training
+  one_star_purveyor:                          182 # One-star Purveyor
+  two_star_purveyor:                          183 # Two-star Purveyor
+  three_star_purveyor:                        184 # Three-star Purveyor
+  four_star_purveyor:                         185 # Four-star Purveyor
+  five_star_purveyor:                         186 # Five-star Purveyor
+  doctor_yoran_oran_supporter:                187 # Doctor Yoran-Oran Supporter
+  doctor_shantotto_supporter:                 188 # Doctor Shantotto Supporter
+  professor_koru_moru_supporter:              189 # Professor Koru-Moru Supporter
+  rainbow_weaver:                             190 # Rainbow Weaver
+  shadow_walker:                              191 # Shadow Walker
+  heir_to_the_holy_crest:                     192 # Heir to the Holy Crest
+  bushido_blade:                              193 # Bushido Blade
+  paragon_of_paladin_excellence:              195 # Paragon of Paladin Excellence
+  paragon_of_beastmaster_excellence:          196 # Paragon of Beastmaster Excellence
+  paragon_of_ranger_excellence:               197 # Paragon of Ranger Excellence
+  paragon_of_dark_knight_excellence:          198 # Paragon of Dark Knight Excellence
+  paragon_of_bard_excellence:                 199 # Paragon of Bard Excellence
+  paragon_of_samurai_excellence:              200 # Paragon of Samurai Excellence
+  paragon_of_dragoon_excellence:              201 # Paragon of Dragoon Excellence
+  paragon_of_ninja_excellence:                202 # Paragon of Ninja Excellence
+  paragon_of_summoner_excellence:             203 # Paragon of Summoner Excellence
+  new_adventurer:                             206 # New Adventurer
+  certified_adventurer:                       207 # Certified Adventurer
+  shadow_banisher:                            208 # Shadow Banisher
+  tried_and_tested_knight:                    209 # Tried and Tested Knight
+  dark_sider:                                 210 # Dark Sider
+  the_fanged_one:                             211 # The Fanged One
+  have_wings_will_fly:                        212 # Have Wings, Will Fly
+  animal_trainer:                             213 # Animal Trainer
+  wandering_minstrel:                         214 # Wandering Minstrel
+  mogs_master:                                215 # Mog's Master
+  mogs_kind_master:                           216 # Mog's Kind Master
+  mogs_exceptionally_kind_master:             217 # Mog's Exceptionally Kind Master
+  paragon_of_warrior_excellence:              218 # Paragon of Warrior Excellence
+  paragon_of_monk_excellence:                 219 # Paragon of Monk Excellence
+  paragon_of_red_mage_excellence:             220 # Paragon of Red Mage Excellence
+  paragon_of_thief_excellence:                221 # Paragon of Thief Excellence
+  paragon_of_black_mage_excellence:           222 # Paragon of Black Mage Excellence
+  paragon_of_white_mage_excellence:           223 # Paragon of White Mage Excellence
+  mogs_loving_master:                         224 # Mog's Loving Master
+  royal_archer:                               226 # Royal Archer
+  royal_spearman:                             227 # Royal Spearman
+  royal_squire:                               228 # Royal Squire
+  royal_swordsman:                            229 # Royal Swordsman
+  royal_cavalier:                             230 # Royal Cavalier
+  royal_guard:                                231 # Royal Guard
+  grand_knight_of_the_realm:                  232 # Grand Knight of the Realm
+  grand_temple_knight:                        233 # Grand Temple Knight
+  reserve_knight_captain:                     234 # Reserve Knight Captain
+  elite_royal_guard:                          235 # Elite Royal Guard
+  legionnaire:                                236 # Legionnaire
+  decurion:                                   237 # Decurion
+  centurion:                                  238 # Centurion
+  junior_musketeer:                           239 # Junior Musketeer
+  senior_musketeer:                           240 # Senior Musketeer
+  musketeer_commander:                        241 # Musketeer Commander
+  gold_musketeer:                             242 # Gold Musketeer
+  praefectus:                                 243 # Praefectus
+  senior_gold_musketeer:                      244 # Senior Gold Musketeer
+  praefectus_castrorum:                       245 # Praefectus Castrorum
+  freesword:                                  246 # Freesword
+  mercenary:                                  247 # Mercenary
+  mercenary_captain:                          248 # Mercenary Captain
+  combat_caster:                              249 # Combat Caster
+  tactician_magician:                         250 # Tactician Magician
+  wise_wizard:                                251 # Wise Wizard
+  patriarch_protector:                        252 # Patriarch Protector
+  caster_captain:                             253 # Caster Captain
+  master_caster:                              254 # Master Caster
+  mercenary_major:                            255 # Mercenary Major
+  fugitive_minister_bounty_hunter:            256 # Fugitive Minister Bounty Hunter
+  king_of_the_opo_opos:                       257 # King of the Opo-opos
+  excommunicate_of_kazham:                    258 # Excommunicate of Kazham
+  kazham_caller:                              259 # Kazham Caller
+  dream_dweller:                              260 # Dream Dweller
+  apprentice_sommelier:                       261 # Apprentice Sommelier
+  desert_hunter:                              262 # Desert Hunter
+  seeker_of_truth:                            263 # Seeker of Truth
+  kuftal_tourist:                             264 # Kuftal Tourist
+  the_immortal_fisher_lu_shang:               265 # The Immortal Fisher, Lu Shang
+  looks_sublime_in_a_subligar:                266 # Looks Sublime in a Subligar
+  looks_good_in_leggings:                     267 # Looks Good in Leggings
+  honorary_doctorate_majoring_in_tonberries:  268 # Honorary Doctorate, Majoring in Tonberries
+  treasure_house_ransacker:                   269 # Treasure-house Ransacker
+  cracker_of_the_secret_code:                 270 # Cracker of the Secret Code
+  black_marketeer:                            271 # Black Marketeer
+  acquirer_of_ancient_arcanum:                272 # Acquirer of Ancient Arcanum
+  ya_done_good:                               273 # Ya Done Good
+  heir_of_the_great_fire:                     274 # Heir of the Great Fire
+  heir_of_the_great_earth:                    275 # Heir of the Great Earth
+  heir_of_the_great_water:                    276 # Heir of the Great Water
+  heir_of_the_great_wind:                     277 # Heir of the Great Wind
+  heir_of_the_great_ice:                      278 # Heir of the Great Ice
+  heir_of_the_great_lightning:                279 # Heir of the Great Lightning
+  guider_of_souls_to_the_sanctuary:           280 # Guider of Souls to the Sanctuary
+  bearer_of_bonds_beyond_time:                281 # Bearer of Bonds Beyond Time
+  friend_of_the_opo_opos:                     282 # Friend of the Opo-opos
+  hero_on_behalf_of_windurst:                 283 # Hero on Behalf of Windurst
+  victor_of_the_balga_contest:                284 # Victor of the Balga Contest
+  gullibles_travels:                          285 # Gullible's Travels
+  even_more_gullibles_travels:                286 # Even More Gullible's Travels
+  heir_of_the_new_moon:                       287 # Heir of the New Moon
+  assassin_reject:                            288 # Assassin Reject
+  black_belt:                                 289 # Black Belt
+  vermillion_venturer:                        290 # Vermillion Venturer
+  cerulean_soldier:                           291 # Cerulean Soldier
+  emerald_exterminator:                       292 # Emerald Exterminator
+  guiding_star:                               293 # Guiding Star
+  vestal_chamberlain:                         294 # Vestal Chamberlain
+  san_dorian_royal_heir:                      295 # San d'Orian Royal Heir
+  hero_among_heroes:                          296 # Hero Among Heroes
+  dynamis_san_doria_interloper:               297 # Dynamis-San d'Oria Interloper
+  dynamis_bastok_interloper:                  298 # Dynamis-Bastok Interloper
+  dynamis_windurst_interloper:                299 # Dynamis-Windurst Interloper
+  dynamis_jeuno_interloper:                   300 # Dynamis-Jeuno Interloper
+  dynamis_beaucedine_interloper:              301 # Dynamis-Beaucedine Interloper
+  dynamis_xarcabard_interloper:               302 # Dynamis-Xarcabard Interloper
+  discerning_individual:                      303 # Discerning Individual
+  very_discerning_individual:                 304 # Very Discerning Individual
+  extremely_discerning_individual:            305 # Extremely Discerning Individual
+  royal_wedding_planner:                      306 # Royal Wedding Planner
+  consort_candidate:                          307 # Consort Candidate
+  obsidian_storm:                             308 # Obsidian Storm
+  pentacide_perpetrator:                      309 # Pentacide Perpetrator
+  wood_worshiper:                             310 # Wood Worshiper
+  lumber_lather:                              311 # Lumber Lather
+  accomplished_carpenter:                     312 # Accomplished Carpenter
+  anvil_advocate:                             313 # Anvil Advocate
+  forge_fanatic:                              314 # Forge Fanatic
+  accomplished_blacksmith:                    315 # Accomplished Blacksmith
+  trinket_turner:                             316 # Trinket Turner
+  silver_smelter:                             317 # Silver Smelter
+  accomplished_goldsmith:                     318 # Accomplished Goldsmith
+  knitting_know_it_all:                       319 # Knitting Know-It-All
+  loom_lunatic:                               320 # Loom Lunatic
+  accomplished_weaver:                        321 # Accomplished Weaver
+  formula_fiddler:                            322 # Formula Fiddler
+  potion_potentate:                           323 # Potion Potentate
+  accomplished_alchemist:                     324 # Accomplished Alchemist
+  bone_beautifier:                            325 # Bone Beautifier
+  shell_scrimshander:                         326 # Shell Scrimshander
+  accomplished_boneworker:                    327 # Accomplished Boneworker
+  hide_handler:                               328 # Hide Handler
+  leather_lauder:                             329 # Leather Lauder
+  accomplished_tanner:                        330 # Accomplished Tanner
+  fastriver_fisher:                           331 # Fastriver Fisher
+  coastline_caster:                           332 # Coastline Caster
+  accomplished_angler:                        333 # Accomplished Angler
+  gourmand_gratifier:                         334 # Gourmand Gratifier
+  banquet_bestower:                           335 # Banquet Bestower
+  accomplished_chef:                          336 # Accomplished Chef
+  fine_tuner:                                 337 # Fine Tuner
+  friend_of_the_helmed:                       338 # Friend of the Helmed
+  tavnazian_squire:                           339 # Tavnazian Squire
+  ducal_dupe:                                 340 # Ducal Dupe
+  hyper_ultra_sonic_adventurer:               341 # Hyper Ultra Sonic Adventurer
+  rod_retriever:                              342 # Rod Retriever
+  deed_verifier:                              343 # Deed Verifier
+  chocobo_love_guru:                          344 # Chocobo Love Guru
+  pick_up_artist:                             345 # Pick-up Artist
+  trash_collector:                            346 # Trash Collector
+  ancient_flame_follower:                     347 # Ancient Flame Follower
+  tavnazian_traveler:                         348 # Tavnazian Traveler
+  transient_dreamer:                          349 # Transient Dreamer
+  the_lost_one:                               350 # The Lost One
+  treader_of_an_icy_past:                     351 # Treader of an Icy Past
+  branded_by_lightning:                       352 # Branded by Lightning
+  seeker_of_the_light:                        353 # Seeker of the Light
+  dead_body:                                  354 # Dead Body
+  frozen_dead_body:                           355 # Frozen Dead Body
+  dreambreaker:                               356 # Dreambreaker
+  mist_melter:                                357 # Mist Melter
+  delta_enforcer:                             358 # Delta Enforcer
+  omega_ostracizer:                           359 # Omega Ostracizer
+  ultima_undertaker:                          360 # Ultima Undertaker
+  ulmias_soulmate:                            361 # Ulmia's Soulmate
+  tenzens_ally:                               362 # Tenzen's Ally
+  companion_of_louverance:                    363 # Companion of Louverance
+  true_companion_of_louverance:               364 # True Companion of Louverance
+  prishes_buddy:                              365 # Prishe's Buddy
+  nagmoladas_underling:                       366 # Nag'molada's Underling
+  eshantarls_comrade_in_arms:                 367 # Esha'ntarl's Comrade in Arms
+  the_chebukkis_worst_nightmare:              368 # The Chebukkis' Worst Nightmare
+  brown_mage_guinea_pig:                      369 # Brown Mage Guinea Pig
+  brown_magic_by_product:                     370 # Brown Magic By-Product
+  bastoks_second_best_dressed:                371 # Bastok's Second Best Dressed
+  rookie_hero_instructor:                     372 # Rookie Hero Instructor
+  goblin_in_disguise:                         373 # Goblin in Disguise
+  apostate_for_hire:                          374 # Apostate for Hire
+  talks_with_tonberries:                      375 # Talks with Tonberries
+  rook_buster:                                376 # Rook Buster
+  banneret:                                   377 # Banneret
+  gold_ballistar:                             378 # Gold Balli☆☆☆☆star
+  mythril_ballistar:                          379 # Mythril Balli☆☆☆star
+  silver_ballistar:                           380 # Silver Balli☆☆star
+  bronze_ballistar:                           381 # Bronze Balli☆star
+  searingstar:                                382 # Searing★Star
+  strikingstar:                               383 # Striking★Star
+  soothingstar:                               384 # Soothing★Star
+  sablestar:                                  385 # Sable★Star
+  scarletstar:                                386 # Scarlet★Star
+  sonicstar:                                  387 # Sonic★Star
+  saintlystar:                                388 # Saintly★Star
+  shadowystar:                                389 # Shadowy★Star
+  savagestar:                                 390 # Savage★Star
+  singingstar:                                391 # Singing★Star
+  snipingstar:                                392 # Sniping★Star
+  slicingstar:                                393 # Slicing★Star
+  sneakingstar:                               394 # Sneaking★Star
+  spearingstar:                               395 # Spearing★Star
+  summoningstar:                              396 # Summoning★Star
+  putrid_purveyor_of_pungent_petals:          397 # Putrid Purveyor of Pungent Petals
+  unquenchable_light:                         398 # Unquenchable Light
+  ballistager:                                399 # Ballistager
+  ultimate_champion_of_the_world:             400 # Ultimate Champion of the World
+  warrior_of_the_crystal:                     401 # Warrior of the Crystal
+  indomitable_fisher:                         402 # Indomitable Fisher
+  averter_of_the_apocalypse:                  403 # Averter of the Apocalypse
+  banisher_of_emptiness:                      404 # Banisher of Emptiness
+  random_adventurer:                          405 # Random Adventurer
+  irresponsible_adventurer:                   406 # Irresponsible Adventurer
+  odorous_adventurer:                         407 # Odorous Adventurer
+  insignificant_adventurer:                   408 # Insignificant Adventurer
+  final_ballistar:                            409 # Final Balli☆☆☆☆star
+  ballistar_royale:                           410 # Balli☆☆☆☆star Royale
+  destined_fellow:                            411 # Destined Fellow
+  orcish_serjeant:                            412 # Orcish Serjeant
+  bronze_quadav:                              413 # Bronze Quadav
+  yagudo_initiate:                            414 # Yagudo Initiate
+  moblin_kinsman:                             415 # Moblin Kinsman
+  sin_hunter_hunter:                          416 # Sin Hunter Hunter
+  disciple_of_justice:                        417 # Disciple of Justice
+  monarch_linn_patrol_guard:                  418 # Monarch Linn Patrol Guard
+  team_player:                                419 # Team Player
+  worthy_of_trust:                            420 # Worthy of Trust
+  conqueror_of_fate:                          421 # Conqueror of Fate
+  breaker_of_the_chains:                      422 # Breaker of the Chains
+  a_friend_indeed:                            423 # A Friend Indeed
+  heir_to_the_realm_of_dreams:                424 # Heir to the Realm of Dreams
+  gold_hook:                                  425 # Gold Hook
+  mythril_hook:                               426 # Mythril Hook
+  silver_hook:                                427 # Silver Hook
+  copper_hook:                                428 # Copper Hook
+  dynamis_valkurm_interloper:                 430 # Dynamis-Valkurm Interloper
+  dynamis_buburimu_interloper:                431 # Dynamis-Buburimu Interloper
+  dynamis_qufim_interloper:                   432 # Dynamis-Qufim Interloper
+  dynamis_tavnazia_interloper:                433 # Dynamis-Tavnazia Interloper
+  confronter_of_nightmares:                   434 # Confronter of Nightmares
+  disturber_of_slumber:                       435 # Disturber of Slumber
+  interrupter_of_dreams:                      436 # Interrupter of Dreams
+  sapphirestar:                               437 # Sapphire★Star
+  surgingstar:                                438 # Surging★Star
+  swayingstar:                                439 # Swaying★Star
+  dark_resistant:                             440 # Dark Resistant
+  bearer_of_the_mark_of_zahak:                441 # Bearer of the Mark of Zahak
+  seagull_phratrie_crew_member:               442 # Seagull Phratrie Crew Member
+  proud_automaton_owner:                      443 # Proud Automaton Owner
+  private_second_class:                       444 # Private Second Class
+  private_first_class:                        445 # Private First Class
+  superior_private:                           446 # Superior Private
+  wildcat_publicist:                          447 # Wildcat Publicist
+  adamantking_usurper:                        448 # Adamantking Usurper
+  overlord_overthrower:                       449 # Overlord Overthrower
+  deity_debunker:                             450 # Deity Debunker
+  fafnir_slayer:                              451 # Fafnir Slayer
+  aspidochelone_sinker:                       452 # Aspidochelone Sinker
+  nidhogg_slayer:                             453 # Nidhogg Slayer
+  maat_masher:                                454 # Maat Masher
+  kirin_captivator:                           455 # Kirin Captivator
+  cactrot_desacelerador:                      456 # Cactrot Desacelerador
+  lifter_of_shadows:                          457 # Lifter of Shadows
+  tiamat_trouncer:                            458 # Tiamat Trouncer
+  vrtra_vanquisher:                           459 # Vrtra Vanquisher
+  world_serpent_slayer:                       460 # World Serpent Slayer
+  xolotl_xtrapolator:                         461 # Xolotl Xtrapolator
+  boroka_beleaguerer:                         462 # Boroka Beleaguerer
+  ouryu_overwhelmer:                          463 # Ouryu Overwhelmer
+  vinegar_evaporator:                         464 # Vinegar Evaporator
+  virtuous_saint:                             465 # Virtuous Saint
+  bye_bye_taisai:                             466 # Bye-bye, Taisai
+  temenos_liberator:                          467 # Temenos Liberator
+  apollyon_ravager:                           468 # Apollyon Ravager
+  wyrm_astonisher:                            469 # Wyrm Astonisher
+  nightmare_awakener:                         470 # Nightmare Awakener
+  cerberus_muzzler:                           471 # Cerberus Muzzler
+  hydra_headhunter:                           472 # Hydra Headhunter
+  shining_scale_rifler:                       473 # Shining Scale Rifler
+  troll_subjugator:                           474 # Troll Subjugator
+  gorgonstone_sunderer:                       475 # Gorgonstone Sunderer
+  khimaira_carver:                            476 # Khimaira Carver
+  elite_einherjar:                            477 # Elite Einherjar
+  star_charioteer:                            478 # Star Charioteer
+  sun_charioteer:                             479 # Sun Charioteer
+  subduer_of_the_mamool_ja:                   480 # Subduer of the Mamool Ja
+  subduer_of_the_trolls:                      481 # Subduer of the Trolls
+  subduer_of_the_undead_swarm:                482 # Subduer of the Undead Swarm
+  agent_of_the_allied_forces:                 483 # Agent of the Allied Forces
+  scenic_snapshotter:                         484 # Scenic Snapshotter
+  branded_by_the_five_serpents:               485 # Branded by the Five Serpents
+  immortal_lion:                              486 # Immortal Lion
+  paragon_of_blue_mage_excellence:            487 # Paragon of Blue Mage Excellence
+  paragon_of_corsair_excellence:              488 # Paragon of Corsair Excellence
+  paragon_of_puppetmaster_excellence:         489 # Paragon of Puppetmaster Excellence
+  lance_corporal:                             490 # Lance Corporal
+  corporal:                                   491 # Corporal
+  master_of_ambition:                         492 # Master of Ambition
+  master_of_chance:                           493 # Master of Chance
+  master_of_manipulation:                     494 # Master of Manipulation
+  ovjangs_errand_runner:                      495 # Ovjang's Errand Runner
+  sergeant:                                   496 # Sergeant
+  sergeant_major:                             497 # Sergeant Major
+  karababas_tour_guide:                       498 # Karababa's Tour Guide
+  karababas_bodyguard:                        499 # Karababa's Bodyguard
+  karababas_secret_agent:                     500 # Karababa's Secret Agent
+  skyserpent_aggrandizer:                     501 # Skyserpent Aggrandizer
+  chief_sergeant:                             502 # Chief Sergeant
+  aphmaus_mercenary:                          503 # Aphmau's Mercenary
+  nashmeiras_mercenary:                       504 # Nashmeira's Mercenary
+  chocorookie:                                505 # Chocorookie
+  second_lieutenant:                          506 # Second Lieutenant
+  galeserpent_guardian:                       507 # Galeserpent Guardian
+  stoneserpent_shocktrooper:                  508 # Stoneserpent Shocktrooper
+  photopticator_operator:                     509 # Photopticator Operator
+  salaheems_risk_assessor:                    510 # Salaheem's Risk Assessor
+  treasure_trove_tender:                      511 # Treasure Trove Tender
+  gesshos_mercy:                              512 # Gessho's Mercy
+  emissary_of_the_empress:                    513 # Emissary of the Empress
+  endymion_paratrooper:                       514 # Endymion Paratrooper
+  najas_comrade_in_arms:                      515 # Naja's Comrade-In-Arms
+  nashmeiras_loyalist:                        516 # Nashmeira's Loyalist
+  preventer_of_ragnarok:                      517 # Preventer of Ragnarok
+  champion_of_aht_urhgan:                     518 # Champion of Aht Urhgan
+  first_lieutenant:                           519 # First Lieutenant
+  captain:                                    520 # Captain
+  crystal_stakes_cupholder:                   521 # Crystal Stakes Cupholder
+  winning_owner:                              522 # Winning Owner
+  victorious_owner:                           523 # Victorious Owner
+  triumphant_owner:                           524 # Triumphant Owner
+  high_roller:                                525 # High Roller
+  fortunes_favorite:                          526 # Fortune's Favorite
+  superhero:                                  527 # Superhero
+  superheroine:                               528 # Superheroine
+  bloody_berserker:                           529 # Bloody Berserker
+  the_sixth_serpent:                          530 # The Sixth Serpent
+  eternal_mercenary:                          531 # Eternal Mercenary
+  springserpent_sentry:                       532 # Springserpent Sentry
+  sprightlystar:                              533 # Sprightly★Star
+  sagaciousstar:                              534 # Sagacious★Star
+  schultz_scholar:                            535 # Schultz Scholar
+  knight_of_the_iron_ram:                     536 # Knight of the Iron Ram
+  fourth_division_soldier:                    537 # Fourth Division Soldier
+  cobra_unit_mercenary:                       538 # Cobra Unit Mercenary
+  windtalker:                                 539 # Windtalker
+  lady_killer:                                540 # Lady Killer
+  troupe_brilioth_dancer:                     541 # Troupe Brilioth Dancer
+  cait_siths_assistant:                       542 # Cait Sith's Assistant
+  ajido_marujidos_minder:                     543 # Ajido-Marujido's Minder
+  comet_charioteer:                           544 # Comet Charioteer
+  moon_charioteer:                            545 # Moon Charioteer
+  sandworm_wrangler:                          546 # Sandworm Wrangler
+  ixion_hornbreaker:                          547 # Ixion Hornbreaker
+  lambton_worm_desegmenter:                   548 # Lambton Worm Desegmenter
+  pandemonium_queller:                        549 # Pandemonium Queller
+  debaser_of_dynasties:                       550 # Debaser of Dynasties
+  disperser_of_darkness:                      551 # Disperser of Darkness
+  ender_of_idolatry:                          552 # Ender of Idolatry
+  lugh_exorcist:                              553 # Lugh Exorcist
+  elatha_exorcist:                            554 # Elatha Exorcist
+  ethniu_exorcist:                            555 # Ethniu Exorcist
+  tethra_exorcist:                            556 # Tethra Exorcist
+  buarainech_exorcist:                        557 # Buarainech Exorcist
+  oupire_impaler:                             558 # Oupire Impaler
+  scylla_skinner:                             559 # Scylla Skinner
+  zirnitra_wingclipper:                       560 # Zirnitra Wingclipper
+  dawon_trapper:                              561 # Dawon Trapper
+  krabkatoa_steamer:                          562 # Krabkatoa Steamer
+  orcus_trophy_hunter:                        563 # Orcus Trophy Hunter
+  blobdingnag_burster:                        564 # Blobdingnag Burster
+  verthandi_ensnarer:                         565 # Verthandi Ensnarer
+  ruthven_entomber:                           566 # Ruthven Entomber
+  yilbegan_hideflayer:                        567 # Yilbegan Hideflayer
+  torchbearer_of_the_1st_walk:                568 # Torchbearer of the 1st Walk
+  torchbearer_of_the_2nd_walk:                569 # Torchbearer of the 2nd Walk
+  torchbearer_of_the_3rd_walk:                570 # Torchbearer of the 3rd Walk
+  torchbearer_of_the_4th_walk:                571 # Torchbearer of the 4th Walk
+  torchbearer_of_the_5th_walk:                572 # Torchbearer of the 5th Walk
+  torchbearer_of_the_6th_walk:                573 # Torchbearer of the 6th Walk
+  torchbearer_of_the_7th_walk:                574 # Torchbearer of the 7th Walk
+  torchbearer_of_the_8th_walk:                575 # Torchbearer of the 8th Walk
+  furniture_store_owner:                      576 # Furniture Store Owner
+  armory_owner:                               577 # Armory Owner
+  jewelry_store_owner:                        578 # Jewelry Store Owner
+  boutique_owner:                             579 # Boutique Owner
+  apothecary_owner:                           580 # Apothecary Owner
+  curiosity_shop_owner:                       581 # Curiosity Shop Owner
+  shoeshop_owner:                             582 # Shoeshop Owner
+  fishmonger_owner:                           583 # Fishmonger Owner
+  restaurant_owner:                           584 # Restaurant Owner
+  assistant_detective:                        585 # Assistant Detective
+  promising_dancer:                           586 # Promising Dancer
+  stardust_dancer:                            587 # Stardust Dancer
+  elegant_dancer:                             588 # Elegant Dancer
+  dazzling_dance_diva:                        589 # Dazzling Dance Diva
+  friend_of_lehko_habhoka:                    590 # Friend of Lehko Habhoka
+  summa_cum_laude:                            591 # Summa Cum Laude
+  grimoire_bearer:                            592 # Grimoire Bearer
+  seasoning_connoisseur:                      593 # Seasoning Connoisseur
+  fine_young_griffon:                         594 # Fine Young Griffon
+  babbans_traveling_companion:                595 # Babban's Traveling Companion
+  fellow_fortifier:                           596 # Fellow Fortifier
+  chocochampion:                              597 # Chocochampion
+  traverser_of_time:                          598 # Traverser of Time
+  mythril_musketeer_no_6:                     599 # Mythril Musketeer No. 6
+  jewel_of_the_cobra_unit:                    600 # Jewel of the Cobra Unit
+  knight_of_the_swiftwing_griffin:            601 # Knight of the Swiftwing Griffin
+  wyrmsworn_protector:                        602 # Wyrmsworn Protector
+  flameserpent_facilitator:                   603 # Flameserpent Facilitator
+  maze_wanderer:                              604 # Maze Wanderer
+  maze_navigator:                             605 # Maze Navigator
+  maze_scholar:                               606 # Maze Scholar
+  maze_artisan:                               607 # Maze Artisan
+  maze_overlord:                              608 # Maze Overlord
+  swarminator:                                609 # Swarminator
+  battle_of_jeuno_veteran:                    610 # Battle of Jeuno Veteran
+  grand_greedalox:                            611 # Grand Greedalox
+  karaha_baruhas_research_assistant:          612 # Karaha-Baruha's Research Assistant
+  honorary_knight_of_the_cardinal_stag:       613 # Honorary Knight of the Cardinal Stag
+  detector_of_deception:                      614 # Detector of Deception
+  silencer_of_the_echo:                       615 # Silencer of the Echo
+  bestrider_of_futures:                       616 # Bestrider of Futures
+  mog_house_handyperson:                      617 # Mog House Handyperson
+  presidential_protector:                     618 # Presidential Protector
+  the_moons_companion:                        619 # The Moon's Companion
+  arrester_of_the_ascension:                  620 # Arrester of the Ascension
+  house_aurchiat_retainer:                    621 # House Aurchiat Retainer
+  wanderer_of_time:                           622 # Wanderer of Time
+  smiter_of_the_shadow:                       623 # Smiter of the Shadow
+  heir_of_the_blessed_radiance:               624 # Heir of the Blessed Radiance
+  heir_of_the_blighted_gloom:                 625 # Heir of the Blighted Gloom
+  sworn_to_the_dark_divinity:                 626 # Sworn to the Dark Divinity
+  temperer_of_mythril:                        627 # Temperer of Mythril
+  star_in_the_azure_sky:                      628 # Star in the Azure Sky
+  fangmonger_forestaller:                     629 # Fangmonger Forestaller
+  visitor_to_abyssea:                         630 # Visitor to Abyssea
+  friend_of_abyssea:                          631 # Friend of Abyssea
+  warrior_of_abyssea:                         632 # Warrior of Abyssea
+  stormer_of_abyssea:                         633 # Stormer of Abyssea
+  devastator_of_abyssea:                      634 # Devastator of Abyssea
+  hero_of_abyssea:                            635 # Hero of Abyssea
+  champion_of_abyssea:                        636 # Champion of Abyssea
+  conqueror_of_abyssea:                       637 # Conqueror of Abyssea
+  savior_of_abyssea:                          638 # Savior of Abyssea
+  vanquisher_of_spite:                        639 # Vanquisher of Spite
+  hadhayosh_halterer:                         640 # Hadhayosh Halterer
+  briareus_feller:                            641 # Briareus Feller
+  karkinos_clawcrusher:                       642 # Karkinos Clawcrusher
+  carabosse_quasher:                          643 # Carabosse Quasher
+  ovni_obliterator:                           644 # Ovni Obliterator
+  ruminator_confounder:                       645 # Ruminator Confounder
+  eccentricity_expunger:                      646 # Eccentricity Expunger
+  fistule_drainer:                            647 # Fistule Drainer
+  kukulkan_defanger:                          648 # Kukulkan Defanger
+  turul_grounder:                             649 # Turul Grounder
+  bloodeye_banisher:                          650 # Bloodeye Banisher
+  satiator_depriver:                          651 # Satiator Depriver
+  iratham_capturer:                           652 # Iratham Capturer
+  lacovie_capsizer:                           653 # Lacovie Capsizer
+  chloris_uprooter:                           654 # Chloris Uprooter
+  myrmecoleon_tamer:                          655 # Myrmecoleon Tamer
+  glavoid_stampeder:                          656 # Glavoid Stampeder
+  usurper_deposer:                            657 # Usurper Deposer
+  yaanei_crasher:                             658 # Yaanei Crasher
+  kutharei_unhorser:                          659 # Kutharei Unhorser
+  sippoy_capturer:                            660 # Sippoy Capturer
+  titlacauan_dismemberer:                     661 # Titlacauan Dismemberer
+  smok_defogger:                              662 # Smok Defogger
+  amhuluk_inundater:                          663 # Amhuluk Inundater
+  pulverizer_dismantler:                      664 # Pulverizer Dismantler
+  durinn_deceiver:                            665 # Durinn Deceiver
+  karkadann_exoculator:                       666 # Karkadann Exoculator
+  ulhuadshi_desiccator:                       667 # Ulhuadshi Desiccator
+  itzpapalotl_declawer:                       668 # Itzpapalotl Declawer
+  sobek_mummifier:                            669 # Sobek Mummifier
+  cirein_croin_harpooner:                     670 # Cirein-croin Harpooner
+  bukhis_tetherer:                            671 # Bukhis Tetherer
+  sedna_tuskbreaker:                          672 # Sedna Tuskbreaker
+  cleaver_dismantler:                         673 # Cleaver Dismantler
+  executioner_dismantler:                     674 # Executioner Dismantler
+  severer_dismantler:                         675 # Severer Dismantler
+  lusca_debunker:                             676 # Lusca Debunker
+  tristitia_deliverer:                        677 # Tristitia Deliverer
+  ketea_beacher:                              678 # Ketea Beacher
+  rani_decrowner:                             679 # Rani Decrowner
+  orthrus_decapitator:                        680 # Orthrus Decapitator
+  dragua_slayer:                              681 # Dragua Slayer
+  bennu_deplumer:                             682 # Bennu Deplumer
+  hedjedjet_destinger:                        683 # Hedjedjet Destinger
+  cuijatender_desiccator:                     684 # Cuijatender Desiccator
+  brulo_extinguisher:                         685 # Brulo Extinguisher
+  pantokrator_disprover:                      686 # Pantokrator Disprover
+  apademak_annihilator:                       687 # Apademak Annihilator
+  isgebind_defroster:                         688 # Isgebind Defroster
+  resheph_eradicator:                         689 # Resheph Eradicator
+  empousa_expurgator:                         690 # Empousa Expurgator
+  indrik_immolator:                           691 # Indrik Immolator
+  ogopogo_overturner:                         692 # Ogopogo Overturner
+  raja_regicide:                              693 # Raja Regicide
+  alfard_detoxifier:                          694 # Alfard Detoxifier
+  azdaja_abolisher:                           695 # Azdaja Abolisher
+  amphitrite_shucker:                         696 # Amphitrite Shucker
+  fuath_purifier:                             697 # Fuath Purifier
+  killakriq_excoriator:                       698 # Killakriq Excoriator
+  maere_bestirrer:                            699 # Maere Bestirrer
+  wyrm_god_defier:                            700 # Wyrm God Defier
+  hahava_condemner:                           701 # Hahava Condemner
+  celaeno_silencer:                           702 # Celaeno Silencer
+  voidwrought_deconstructor:                  703 # Voidwrought Deconstructor
+  devourer_of_shadows:                        704 # Devourer of Shadows
+  kaggen_clobberer:                           705 # Kaggen Clobberer
+  akvan_absterger:                            706 # Akvan Absterger
+  pil_unfrocker:                              707 # Pil Unfrocker
+  qilin_contravener:                          708 # Qilin Contravener
+  uptala_reprobator:                          709 # Uptala Reprobator
+  aello_abator:                               710 # Aello Abator
+  torchbearer_of_the_9th_walk:                711 # Torchbearer of the 9th Walk
+  torchbearer_of_the_10th_walk:               712 # Torchbearer of the 10th Walk
+  torchbearer_of_the_11th_walk:               713 # Torchbearer of the 11th Walk
+  nightmare_illuminator:                      714 # Nightmare Illuminator
+  gaunab_gutter:                              715 # Gaunab Gutter
+  kalasutrax_cremator:                        716 # Kalasutrax Cremator
+  ocythoe_overrider:                          717 # Ocythoe Overrider
+  ig_alima_inhumer:                           718 # Ig-Alima Inhumer
+  botulus_rex_engorger:                       719 # Botulus Rex Engorger
+  torchbearer_of_the_12th_walk:               720 # Torchbearer of the 12th Walk
+  torchbearer_of_the_13th_walk:               721 # Torchbearer of the 13th Walk
+  torchbearer_of_the_14th_walk:               722 # Torchbearer of the 14th Walk
+  torchbearer_of_the_15th_walk:               723 # Torchbearer of the 15th Walk
+  delver_of_the_depths:                       724 # Delver of the Depths
+  subjugator_of_the_lofty:                    725 # Subjugator of the Lofty
+  subjugator_of_the_mired:                    726 # Subjugator of the Mired
+  subjugator_of_the_soaring:                  727 # Subjugator of the Soaring
+  subjugator_of_the_veiled:                   728 # Subjugator of the Veiled
+  legendary_legionnaire:                      729 # Legendary Legionnaire
+  witness_to_provenance:                      730 # Witness to Provenance
+  bismarck_flenser:                           731 # Bismarck Flenser
+  morta_extirpator:                           732 # Morta Extirpator
+  unsung_heroine:                             733 # Unsung Heroine
+  epic_heroine:                               734 # Epic Heroine
+  epic_einherjar:                             735 # Epic Einherjar
+  mender_of_wings:                            736 # Mender of Wings
+  champion_of_the_dawn:                       737 # Champion of the Dawn
+  bushin_aspirant:                            738 # Bushin Aspirant
+  bushin_ryu_inheritor:                       739 # Bushin-Ryu Inheritor
+  temenos_emancipator:                        740 # Temenos Emancipator
+  apollyon_razer:                             741 # Apollyon Razer
+  goldwing_squasher:                          742 # Goldwing Squasher
+  silagilith_detonator:                       743 # Silagilith Detonator
+  surtr_smotherer:                            744 # Surtr Smotherer
+  dreyruk_predominator:                       745 # Dreyruk Predominator
+  samursk_vitiator:                           746 # Samursk Vitiator
+  umagrhk_manemangler:                        747 # Umagrhk Manemangler
+  supernal_savant:                            748 # Supernal Savant
+  solar_sage:                                 749 # Solar Sage
+  bolide_baron:                               750 # Bolide Baron
+  moon_maven:                                 751 # Moon Maven
+  izyx_vexer:                                 752 # Izyx Vexer
+  grannus_garroter:                           753 # Grannus Garroter
+  svaha_striker:                              754 # Svaha Striker
+  melisseus_domesticator:                     755 # Melisseus Domesticator
+  waterway_exemplar:                          756 # Waterway Exemplar
+  cavern_exemplar:                            757 # Cavern Exemplar
+  muyingwa_wingcrusher:                       758 # Muyingwa Wingcrusher
+  dakuwaqa_trawler:                           759 # Dakuwaqa Trawler
+  tojil_douser:                               760 # Tojil Douser
+  colkhab_dethroner:                          761 # Colkhab Dethroner
+  achuka_glaciator:                           762 # Achuka Glaciator
+  tchakka_desiccator:                         763 # Tchakka Desiccator
+  weald_exemplar:                             764 # Weald Exemplar
+  hurkan_birdlimeist:                         765 # Hurkan Birdlimeist
+  yumcax_logger:                              766 # Yumcax Logger
+  colkhab_hivecrusher:                        767 # Colkhab Hivecrusher
+  achuka_coagulator:                          768 # Achuka Coagulator
+  tchakka_filleter:                           769 # Tchakka Filleter
+  rabbit_tussler:                             770 # Rabbit Tussler
+  helminth_mincer:                            771 # Helminth Mincer
+  mandragardener:                             772 # Mandragardener
+  moppet_massacrer:                           773 # Moppet Massacrer
+  rip_roaring_limbrender:                     774 # Rip-roaring Limbrender
+  shell_shocker:                              775 # Shell Shocker
+  yagudo_coopkeeper:                          776 # Yagudo Coopkeeper
+  gigasplosion_expert:                        777 # Gigasplosion Expert
+  brother_in_arms:                            778 # Brother-in-arms
+  antica_hunter:                              779 # Antica Hunter
+  amphibian_adulterator:                      780 # Amphibian Adulterator
+  tonberry_toppler:                           781 # Tonberry Toppler
+  bloodline_corrupter:                        782 # Bloodline Corrupter
+  kumhau_roaster:                             783 # Kumhau Roaster
+  brilliance_manifest:                        784 # Brilliance Manifest
+  quieter_of_ancient_thoughts:                785 # Quieter of Ancient Thoughts
+  ark_hume_humiliator:                        786 # Ark Hume Humiliator
+  ark_elvaan_eviscerator:                     787 # Ark Elvaan Eviscerator
+  ark_mithra_maligner:                        788 # Ark Mithra Maligner
+  ark_tarutaru_trouncer:                      789 # Ark Tarutaru Trouncer
+  ark_galka_gouger:                           790 # Ark Galka Gouger
+  pentarch_pacifier:                          791 # Pentarch Pacifier
+  dream_distiller:                            792 # Dream Distiller
+  rakaznar_exemplar:                          793 # Ra'Kaznar Exemplar
+  utkux_peltburner:                           794 # Utkux Peltburner
+  cailimh_plumageplucker:                     795 # Cailimh Plumageplucker
+  wopket_trunksplitter:                       796 # Wopket Trunksplitter
+  ouryu_obfuscator:                           797 # Ouryu Obfuscator
+  unwavering_blaze:                           798 # Unwavering Blaze
+  lancelord_divester:                         799 # Lancelord Divester
+  gessho_pinioner:                            800 # Gessho Pinioner
+  sin_purger:                                 801 # Sin Purger
+  adumbration_disperser:                      802 # Adumbration Disperser
+  queller_of_otherworldly_gales:              803 # Queller of Otherworldly Gales
+  blaze_marshaller:                           804 # Blaze Marshaller
+  penitentes_blaster:                         805 # Penitentes Blaster
+  sirocco_tamer:                              806 # Sirocco Tamer
+  suchian_feller:                             807 # Suchian Feller
+  ombifid_slayer:                             808 # Ombifid Slayer
+  nilotican_decimator:                        809 # Nilotican Decimator
+  illuminator_of_the_1st_walk:                810 # Illuminator of the 1st Walk
+  illuminator_of_the_2nd_walk:                811 # Illuminator of the 2nd Walk
+  illuminator_of_the_3rd_walk:                812 # Illuminator of the 3rd Walk
+  illuminator_of_the_4th_walk:                813 # Illuminator of the 4th Walk
+  illuminator_of_the_5th_walk:                814 # Illuminator of the 5th Walk
+  illuminator_of_the_6th_walk:                815 # Illuminator of the 6th Walk
+  illuminator_of_the_7th_walk:                816 # Illuminator of the 7th Walk
+  illuminator_of_the_8th_walk:                817 # Illuminator of the 8th Walk
+  illuminator_of_the_9th_walk:                818 # Illuminator of the 9th Walk
+  illuminator_of_the_10th_walk:               819 # Illuminator of the 10th Walk
+  illuminator_of_the_11th_walk:               820 # Illuminator of the 11th Walk
+  illuminator_of_the_12th_walk:               821 # Illuminator of the 12th Walk
+  illuminator_of_the_13th_walk:               822 # Illuminator of the 13th Walk
+  illuminator_of_the_14th_walk:               823 # Illuminator of the 14th Walk
+  illuminator_of_the_15th_walk:               824 # Illuminator of the 15th Walk
+  lithosphere_annihilator:                    825 # Lithosphere Annihilator
+  fulmination_disruptor:                      826 # Fulmination Disruptor
+  bore_repulsor:                              827 # Bore Repulsor
+  palloritus_punisher:                        828 # Palloritus Punisher
+  putraxia_pulverizer:                        829 # Putraxia Pulverizer
+  rancibus_ravager:                           830 # Rancibus Ravager
+  alluvion_assailant:                         831 # Alluvion Assailant
+  perfidien_paindealer:                       832 # Perfidien Paindealer
+  plouton_pincer:                             833 # Plouton Pincer
+  fleetstalker_fileter:                       834 # Fleetstalker Fileter
+  shockmaw_subjugator:                        835 # Shockmaw Subjugator
+  geodancer:                                  836 # Geodancer
+  runic_engraver:                             837 # Runic Engraver
+  apprentice_tarutaru_sauce_manager:          838 # Apprentice Tarutaru Sauce Manager
+  vegetable_revolutionary:                    839 # Vegetable Revolutionary
+  friend_to_gluttons:                         840 # Friend to Gluttons
+  waypoint_warrior:                           841 # Waypoint Warrior
+  ulbukan_stalwart:                           842 # Ulbukan Stalwart
+  toxin_tussler:                              843 # Toxin Tussler
+  spiritualstar:                              844 # Spiritual★Star
+  stipplingstar:                              845 # Stippling★Star
+  geomancipator:                              846 # Geomancipator
+  trialed_and_true_runeist:                   847 # Trialed-and-True Runeist
+  queens_confidante:                          848 # Queen's Confidante
+  princesss_partisan:                         849 # Princess's Partisan
+  potation_pathfinder:                        850 # Potation Pathfinder
+  storied_geomancer:                          851 # Storied Geomancer
+  ultimate_runeist:                           852 # Ultimate Runeist
+  mog_garden_seedling:                        853 # Mog Garden Seedling
+  kit_empathizer:                             854 # Kit Empathizer
+  jingly_dangler:                             855 # Jingly Dangler
+  mole_manipulator:                           856 # Mole Manipulator
+  agrarian_novice:                            857 # Agrarian Novice
+  agrarian_initiate:                          858 # Agrarian Initiate
+  agrarian_professional:                      859 # Agrarian Professional
+  agrarian_virtuoso:                          860 # Agrarian Virtuoso
+  agrarian_tutelar:                           861 # Agrarian Tutelar
+  weed_praetor:                               862 # Weed Praetor
+  tree_praetor:                               863 # Tree Praetor
+  thicket_praetor:                            864 # Thicket Praetor
+  forest_praetor:                             865 # Forest Praetor
+  jungle_praetor:                             866 # Jungle Praetor
+  copper_mattock:                             867 # Copper Mattock
+  silver_mattock:                             868 # Silver Mattock
+  mythril_mattock:                            869 # Mythril Mattock
+  gold_mattock:                               870 # Gold Mattock
+  adamanttock:                                871 # Adamanttock
+  puddle_patron:                              872 # Puddle Patron
+  swamp_savant:                               873 # Swamp Savant
+  pond_preceptor:                             874 # Pond Preceptor
+  river_regent:                               875 # River Regent
+  monke_onke_master:                          876 # Monke-Onke Master
+  sardineophyte:                              877 # Sardineophyte
+  calamareeler:                               878 # Calamareeler
+  octopotentate:                              879 # Octopotentate
+  giant_squimperator:                         880 # Giant Squimperator
+  leviauthority:                              881 # Leviauthority
+  novice_nurseryman:                          882 # Novice Nurseryman
+  lesser_landscaper:                          883 # Lesser Landscaper
+  greater_gardener:                           884 # Greater Gardener
+  honored_horticulturist:                     885 # Honored Horticulturist
+  mog_gardener:                               886 # Mog Gardener
+  brygidesque_manager:                        887 # Brygidesque Manager
+  vegetable_evolutionary:                     888 # Vegetable Evolutionary
+  blade_enthusiast:                           889 # Blade Enthusiast
+  runic_emissary:                             890 # Runic Emissary
+  maester_of_maddening:                       891 # Maester of Maddening
+  sunshine_cadet:                             892 # Sunshine Cadet
+  quartet_captivator:                         893 # Quartet Captivator
+  the_trustworthy:                            894 # The Trustworthy
+  the_lovelorn:                               895 # The Lovelorn
+  inventor_extraordinaire:                    896 # Inventor Extraordinaire
+  boomy_and_busty:                            897 # Boomy and Busty
+  weatherer_of_brumal_climes:                 898 # Weatherer of Brumal Climes
+  white_knight:                               899 # White Knight
+  light_of_dawn:                              900 # Light of Dawn
+  observer_of_fateful_cubes:                  901 # Observer of Fateful Cubes
+  knower_of_untruths:                         902 # Knower of Untruths
+  ulbukan_understudy:                         903 # Ulbukan Understudy
+  keeper_of_ulbuka:                           904 # Keeper of Ulbuka
+  radiance_of_daybreak:                       905 # Radiance of Daybreak
+  wibbly_wobbly_woozy_warrior:                906 # Wibbly Wobbly Woozy Warrior
+  heir_of_eternity:                           907 # Heir of Eternity
+  prospective_pamperer:                       908 # Prospective Pamperer
+  novice_nuzzler:                             909 # Novice Nuzzler
+  serious_snuggler:                           910 # Serious Snuggler
+  cultivated_coddler:                         911 # Cultivated Coddler
+  respected_ruffler:                          912 # Respected Ruffler
+  dung_disseminator:                          913 # Dung Disseminator
+  fauna_feeder:                               914 # Fauna Feeder
+  confident_caretaker:                        915 # Confident Caretaker
+  glorious_groomer:                           916 # Glorious Groomer
+  transcendental_tamer:                       917 # Transcendental Tamer
+  bond_building_breeder:                      918 # Bond-building Breeder
+  clumsy_cleaver:                             919 # Clumsy Cleaver
+  disciplined_dissector:                      920 # Disciplined Dissector
+  established_examiner:                       921 # Established Examiner
+  sublime_slicer:                             922 # Sublime Slicer
+  lifter_of_spirits:                          923 # Lifter of Spirits
+  shedder_of_harlequin_tears:                 924 # Shedder of Harlequin Tears
+  hope_for_the_future:                        925 # Hope for the Future
+  thousand_year_traveler:                     926 # Thousand-Year Traveler
+  vanquisher_of_ashrakk:                      927 # Vanquisher of Ashrakk
+  vanquisher_of_dhokmak:                      928 # Vanquisher of Dhokmak
+  protected_by_ulbukan_spirits:               929 # Protected by Ulbukan Spirits
+  receiver_of_sigils:                         930 # Receiver of Sigils
+  destroyer_of_hades:                         931 # Destroyer of Hades
+  bringer_of_the_dawn:                        932 # Bringer of the Dawn
+  the_one_true_pioneer:                       933 # The One True Pioneer
+  bringer_of_hope:                            934 # Bringer of Hope
+  good_dew_er:                                935 # Good Dew-er
+  lifecycler:                                 936 # Lifecycler
+  sword_saint:                                937 # Sword Saint
+  the_fated:                                  938 # The Fated
+  protector_of_the_sacred_city:               939 # Protector of the Sacred City
+  urmahlullu_usurper:                         940 # Urmahlullu Usurper
+  blazewing_berater:                          941 # Blazewing Berater
+  coven_collapser:                            942 # Coven Collapser
+  pazuzu_perplexer:                           943 # Pazuzu Perplexer
+  wrathare_waxer:                             944 # Wrathare Waxer
+  lupine_liquidator:                          945 # Lupine Liquidator
+  ruby_repulser:                              946 # Ruby Repulser
+  devils_demise:                              947 # Devil's Demise
+  custodian_of_ulbuka:                        948 # Custodian of Ulbuka
+  azi_dahaka_annihilator:                     949 # Azi Dahaka Annihilator
+  naga_raja_nullifier:                        950 # Naga Raja Nullifier
+  quetzalcoatl_plucker:                       951 # Quetzalcoatl Plucker
+  pakecet_pacifier:                           952 # Pakecet Pacifier
+  duke_vepar_vanquisher:                      953 # Duke Vepar Vanquisher
+  virava_vegetator:                           954 # Vir'ava Vegetator
+  byakko_tamer:                               955 # Byakko Tamer
+  genbu_cracker:                              956 # Genbu Cracker
+  seiryu_clipper:                             957 # Seiryu Clipper
+  suzaku_plucker:                             958 # Suzaku Plucker
+  kirin_dismantler:                           959 # Kirin Dismantler
+  vanquisher_of_apathy:                       960 # Vanquisher of Apathy
+  vanquisher_of_cowardice:                    961 # Vanquisher of Cowardice
+  vanquisher_of_envy:                         962 # Vanquisher of Envy
+  vanquisher_of_arrogance:                    963 # Vanquisher of Arrogance
+  vanquisher_of_rage:                         964 # Vanquisher of Rage
+  purger_of_the_warder:                       965 # Purger of the Warder
+  conquerer_of_fear:                          966 # Conquerer of Fear
+  dawns_delight:                              967 # Dawn's Delight
+  maju_mauler:                                968 # Maju Mauler
+  yakshi_yanker:                              969 # Yakshi Yanker
+  neak_nullifier:                             970 # Neak Nullifier
+  teles_terrifier:                            971 # Teles Terrifier
+  assistant_extraordinaire:                   972 # Assistant Extraordinaire
+  exalted_fisherman:                          973 # Exalted Fisherman
+  sauce_supreme:                              974 # Sauce Supreme
+  fish_whisperer:                             975 # Fish Whisperer
+  abyssal_purveyor:                           976 # Abyssal Purveyor
+  banisher_of_the_profane:                    977 # Banisher of the Profane
+  spirit_seeker:                              978 # Spirit Seeker
+  one_eyed_jack:                              979 # One-Eyed Jack
+  curator_culler:                             980 # Curator Culler
+  master_centurion:                           981 # Master Centurion
+  master_brawler:                             982 # Master Brawler
+  master_healer:                              983 # Master Healer
+  master_wizard:                              984 # Master Wizard
+  master_warlock:                             985 # Master Warlock
+  master_rogue:                               986 # Master Rogue
+  master_templar:                             987 # Master Templar
+  master_soulstealer:                         988 # Master Soulstealer
+  master_tamer:                               989 # Master Tamer
+  master_lyricist:                            990 # Master Lyricist
+  master_hunter:                              991 # Master Hunter
+  master_mononofu:                            992 # Master Mononofu
+  master_shinobi:                             993 # Master Shinobi
+  master_hussar:                              994 # Master Hussar
+  master_evoker:                              995 # Master Evoker
+  master_magus:                               996 # Master Magus
+  master_privateer:                           997 # Master Privateer
+  master_puppeteer:                           998 # Master Puppeteer
+  master_headliner:                           999 # Master Headliner
+  master_academic:                           1000 # Master Academic
+  master_naturalist:                         1001 # Master Naturalist
+  master_runeist:                            1002 # Master Runeist
+  zerde_zapper:                              1003 # Zerde Zapper
+  vinipata_vanquisher:                       1004 # Vinipata Vanquisher
+  schah_scraper:                             1005 # Schah Scraper
+  albumen_aggrivator:                        1006 # Albumen Aggrivator
+  onychophora_obliterator:                   1007 # Onychophora Obliterator
+  erinys_engulfer:                           1008 # Erinys Engulfer
+  herald_of_a_new_age:                       1009 # Herald of a New Age
+  preventer_of_the_second_coming:            1010 # Preventer of the Second Coming
+  lux_ex_tenebris:                           1011 # Lux Ex Tenebris
+  the_triumphant:                            1012 # The Triumphant
+  fu_fighter:                                1013 # Fu Fighter
+  kyou_killer:                               1014 # Kyou Killer
+  kei_combuster:                             1015 # Kei Combuster
+  gin_gagger:                                1016 # Gin Gagger
+  kin_kicker:                                1017 # Kin Kicker
+  ou_obliterator:                            1018 # Ou Obliterator
+  dynamis_san_doria_d_trespasser:            1019 # Dynamis-San d'Oria [D] Trespasser
+  dynamis_san_doria_d_infiltrator:           1020 # Dynamis-San d'Oria [D] Infiltrator
+  dynamis_san_doria_d_dominator:             1021 # Dynamis-San d'Oria [D] Dominator
+  dynamis_bastok_d_trespasser:               1022 # Dynamis-Bastok [D] Trespasser
+  dynamis_bastok_d_infiltrator:              1023 # Dynamis-Bastok [D] Infiltrator
+  dynamis_bastok_d_dominator:                1024 # Dynamis-Bastok [D] Dominator
+  dynamis_windurst_d_trespasser:             1025 # Dynamis-Windurst [D] Trespasser
+  dynamis_windurst_d_infiltrator:            1026 # Dynamis-Windurst [D] Infiltrator
+  dynamis_windurst_d_dominator:              1027 # Dynamis-Windurst [D] Dominator
+  dynamis_jeuno_d_trespasser:                1028 # Dynamis-Jeuno [D] Trespasser
+  dynamis_jeuno_d_infiltrator:               1029 # Dynamis-Jeuno [D] Infiltrator
+  dynamis_jeuno_d_dominator:                 1030 # Dynamis-Jeuno [D] Dominator
+  mimic_masher:                              1031 # Mimic Masher
+  judge_jury_and_executioner:                1032 # Judge, Jury, and Executioner
+  zeroine_to_heroine:                        1033 # Zeroine to Heroine
+  every_ilm_a_heroine:                       1034 # Every Ilm a Heroine
+  dread_purger:                              1035 # Dread Purger
+  sidhe_smasher:                             1036 # Sidhe Smasher
+  alexander_annihilator:                     1037 # Alexander Annihilator
+  lilith_liquidator:                         1038 # Lilith Liquidator
+  mireu_mincer:                              1039 # Mireu Mincer
+  draconic_interloper:                       1040 # Draconic Interloper
+  crystal_crusher:                           1041 # Crystal Crusher
+  vegetable_hero:                            1044 # Vegetable Hero
+  contributer_from_the_shadows:              1045 # Contributer from the Shadows
+  the_decider:                               1046 # The Decider
+  the_ascended:                              1047 # The Ascended
+  the_savior_of_vanadiel:                    1048 # The Savior of Vana'diel
+  blessed_by_the_avatars:                    1049 # Blessed by the Avatars
+  seer_of_songs:                             1050 # Seer of Songs
+  the_eternal_wind:                          1051 # The Eternal Wind
+  dealan_dhe_dimmer:                         1052 # Dealan-dhe Dimmer
+  sgili_stomper:                             1053 # Sgili Stomper
+  u_bnai_underminer:                         1054 # U Bnai Underminer
+  gogmagog_grinder:                          1055 # Gogmagog Grinder
+  aristaeus_assailer:                        1056 # Aristaeus Assailer
+  marmorkrebs_mauler:                        1057 # Marmorkrebs Mauler
+  gigelorum_gagger:                          1058 # Gigelorum Gagger
+  raskovniche_render:                        1059 # Raskovniche Render
+  procne_punisher:                           1060 # Procne Punisher
+  henwen_harrier:                            1061 # Henwen Harrier
+  xevioso_zapper:                            1062 # Xevioso Zapper
+  ngai_nabber:                               1063 # Ngai Nabber
+  kalunga_collapser:                         1064 # Kalunga Collapser
+  mboze_mauler:                              1065 # Mboze Mauler
+  ongo_obliterator:                          1066 # Ongo Obliterator
+  arebati_assaulter:                         1067 # Arebati Assaulter
+  bumba_befouler:                            1068 # Bumba Befouler
+  dhartok_defiler:                           1069 # Dhartok Defiler
+  gartell_grinder:                           1070 # Gartell Grinder
+  triboulex_terrorizer:                      1071 # Triboulex Terrorizer
+  aita_abnegater:                            1072 # Aita Abnegater
+  aminon_apprehender:                        1073 # Aminon Apprehender
+  paradise_regained:                         1074 # Paradise Regained
+  founders_pride:                            1075 # Founder's Pride
+  master_of_all:                             1076 # Master of All
+  eternal_master:                            1077 # Eternal Master
+  raptor_wrangler:                           1116 # Raptor Wrangler
+  gardener_for_the_ages:                     1117 # Gardener for the Ages
+  lagoon_explorer:                           1118 # Lagoon Explorer
+  servant_to_the_servant:                    1119 # Servant to the Servant
+  legendary_woodworker:                      1120 # Legendary Woodworker
+  legendary_blacksmith:                      1121 # Legendary Blacksmith
+  legendary_goldsmith:                       1122 # Legendary Goldsmith
+  legendary_weaver:                          1123 # Legendary Weaver
+  legendary_tanner:                          1124 # Legendary Tanner
+  legendary_boneworker:                      1125 # Legendary Boneworker
+  legendary_alchemist:                       1126 # Legendary Alchemist
+  legendary_culinarian:                      1127 # Legendary Culinarian
+  eternal_communer:                          1128 # Eternal Communer
+  destiny_destroyerdestroyer:                1129 # Destiny Destroyer...Destroyer
+  fully_baked_hero:                          1130 # Fully-Baked Hero
+  ghdwk_vshdnhu:                             1131 # Ghdwk Vshdnhu
+  love_is_alive:                             1132 # Love is Alive
+  the_awakener:                              1133 # The Awakener
+  get_over_here:                             1134 # Get Over Here!
+  bond_renewer:                              1135 # Bond Renewer
+  treasure_of_olduum:                        1136 # Treasure of Olduum
+  beloved_by_the_sea_god:                    1137 # Beloved by the Sea God
+  destiny_master:                            1138 # Destiny Master
+  tireless_tracker:                          1139 # Tireless Tracker
+  galkan_hazard:                             1140 # Galkan Hazard
+  bearer_of_secrets:                         1141 # Bearer of Secrets
+  long_live_mumor:                           1142 # Long Live Mumor
+  parter_of_the_veil:                        1143 # Parter of the Veil
+  demonic_dreamer:                           1144 # Demonic Dreamer
+  searcher_of_the_voracious:                 1145 # Searcher of the Voracious
+  another_psyche:                            1146 # Another Psyche
+  sender_of_shadow:                          1147 # Sender of Shadow
+  astral_aligner:                            1148 # Astral Aligner
+  venerated_adventurer:                      1149 # Venerated Adventurer
