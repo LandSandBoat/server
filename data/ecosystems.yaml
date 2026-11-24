@@ -8555,7 +8555,7 @@ ecosystems:
           legendary_wyvern:
             id: 233
             attributes:
-              element: water
+              element: wind
               resists:
                 rank_element:
                   fire:     4
@@ -8607,7 +8607,7 @@ ecosystems:
           wyvern:
             id: 235
             attributes:
-              element: water
+              element: wind
               resists:
                 rank_element:
                   fire:     4
