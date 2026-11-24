@@ -9960,7 +9960,7 @@ void CLuaBaseEntity::setGil(int32 amount)
  *  Function: delGil()
  *  Purpose : Takes a specified amount of gil from the player
  *  Example : player:delGil(100)
- *  Notes   : Returns bool on success/fail
+ *  Notes   : Returns false and takes nothing if the player cannot afford it
  ************************************************************************/
 
 auto CLuaBaseEntity::delGil(int32 gil) -> bool
@@ -9977,23 +9977,23 @@ auto CLuaBaseEntity::delGil(int32 gil) -> bool
         return false;
     }
 
-    bool result = false;
+    auto*  PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
-    CItem* PItem = static_cast<CCharEntity*>(m_PBaseEntity)->getStorage(LOC_INVENTORY)->GetItem(0);
-
-    if (PItem != nullptr && PItem->isType(ITEM_CURRENCY) && (int32)PItem->getQuantity() >= gil)
+    if (PItem == nullptr || !PItem->isType(ITEM_CURRENCY))
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-        auto transaction = ItemClaimTransaction::start(PChar);
-        result           = transaction && transaction->pay(gil) && transaction->commit();
-    }
-    else
-    {
-        ShowCritical("lua::delGil : Not enough Gil in currency slot");
+        ShowCritical("lua::delGil : No Gil in currency slot");
+        return false;
     }
 
-    return result;
+    if (static_cast<int32>(PItem->getQuantity()) < gil)
+    {
+        return false;
+    }
+
+    auto transaction = ItemClaimTransaction::start(PChar);
+
+    return transaction && transaction->pay(gil) && transaction->commit();
 }
 
 /************************************************************************

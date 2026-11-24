@@ -140,6 +140,35 @@ describe('Item transaction invariants', function()
             assert(not player:delGil(60), 'the second payment should not have fit')
             assert(player:getGil() == 40, 'gil after one payment: ' .. tostring(player:getGil()))
         end)
+
+        it('spends the whole balance when the cost matches it', function()
+            player:setGil(100)
+
+            assert(player:delGil(100), 'a payment of the exact balance was refused')
+            assert(player:getGil() == 0, 'gil after spending everything: ' .. tostring(player:getGil()))
+        end)
+
+        it('is refused one gil short of the cost', function()
+            player:setGil(99)
+
+            assert(not player:delGil(100), 'a payment one gil short reported success')
+            assert(player:getGil() == 99, 'gil after a refused payment: ' .. tostring(player:getGil()))
+        end)
+
+        it('is refused with an empty purse', function()
+            player:setGil(0)
+
+            assert(not player:delGil(1), 'a payment from an empty purse reported success')
+            assert(player:getGil() == 0, 'gil after a refused payment: ' .. tostring(player:getGil()))
+        end)
+
+        -- Scripts hand out the reward inside "if player:delGil(cost) then", so the result has to be a real boolean
+        it('answers with a boolean either way', function()
+            player:setGil(100)
+
+            assert(player:delGil(500) == false, 'a refused payment did not answer false')
+            assert(player:delGil(100) == true, 'an accepted payment did not answer true')
+        end)
     end)
 
     describe('claims', function()

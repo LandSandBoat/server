@@ -22,9 +22,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 130 and
-        option ~= utils.EVENT_CANCELLED_OPTION
-    then
+        option ~= utils.EVENT_CANCELLED_OPTION and
         player:delGil(9800)
+    then
         player:setCharVar('ChangedWyvernName', 1)
         player:setPetName(xi.petType.WYVERN, option + 1)
     end

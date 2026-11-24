@@ -177,7 +177,10 @@ local function goToHP(player, choice, index)
             return
         end
 
-        player:delGil(getCost(origin, index, hasKI))
+        if not player:delGil(getCost(origin, index, hasKI)) then
+            return
+        end
+
         player:setPos(unpack(homepointData[index].dest))
     end
 end

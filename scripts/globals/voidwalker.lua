@@ -258,10 +258,12 @@ xi.voidwalker.npcOnEventFinish = function(player, csid, option, npc)
     local opt = bit.band(option, 0xF)
 
     if csid == 10120 then
-        if opt == 1 then
+        if
+            opt == 1 and
+            player:delGil(1000)
+        then
             local msg = zones[xi.zone.RULUDE_GARDENS]
             local ki  = abyssiteKeyitems[1]
-            player:delGil(1000)
             player:addKeyItem(ki)
             player:messageSpecial(msg.text.KEYITEM_OBTAINED, ki)
         elseif opt == 2 then

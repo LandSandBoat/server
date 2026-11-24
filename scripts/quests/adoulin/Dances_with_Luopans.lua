@@ -278,6 +278,13 @@ quest.sections =
                         return
                     end
 
+                    if
+                        paymentOption == 1 and
+                        player:getGil() < 300000
+                    then
+                        return
+                    end
+
                     if npcUtil.giveItem(player, { xi.item.MATRE_BELL }) then
                         if paymentOption == 1 then
                             player:delGil(300000)

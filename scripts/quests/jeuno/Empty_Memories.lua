@@ -22,12 +22,20 @@ local rewardItems =
 
 local memoriesOnEventFinish = function(player, csid, option, npc)
     local rewardItem = quest:getLocalVar(player, 'rewardItem')
+    local gil        = rewardItems[rewardItem].gil
+
+    if
+        gil and
+        player:getGil() < gil
+    then
+        return
+    end
 
     if npcUtil.giveItem(player, rewardItem) then
         player:confirmTrade()
 
-        if rewardItems[rewardItem].gil then
-            player:delGil(rewardItems[rewardItem].gil)
+        if gil then
+            player:delGil(gil)
         end
 
         if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then

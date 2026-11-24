@@ -18,9 +18,13 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 221 and player:getZPos() < -28.750 then -- This means they have crossed. Option returned is always 0.
-        player:addKeyItem(xi.keyItem.FERRY_TICKET)
+    -- This means they have crossed. Option returned is always 0.
+    if
+        csid == 221 and
+        player:getZPos() < -28.750 and
         player:delGil(100)
+    then
+        player:addKeyItem(xi.keyItem.FERRY_TICKET)
     end
 end
 
