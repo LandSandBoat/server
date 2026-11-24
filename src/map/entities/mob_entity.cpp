@@ -1554,7 +1554,7 @@ void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasi
     }
 }
 
-auto CMobEntity::OnAttack(CAttackState& state, action_t& action) -> bool
+auto CMobEntity::OnAttack(CBattleEntity* PTarget, action_t& action) -> bool
 {
     TracyZoneScopedN("CMobEntity::OnAttack");
 
@@ -1566,7 +1566,7 @@ auto CMobEntity::OnAttack(CAttackState& state, action_t& action) -> bool
     }
     else
     {
-        return CBattleEntity::OnAttack(state, action);
+        return CBattleEntity::OnAttack(PTarget, action);
     }
 }
 

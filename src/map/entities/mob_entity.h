@@ -144,7 +144,7 @@ public:
     void OnEngage(CAttackState&) override;
 
     auto GetRangedAttackRange() -> float override;
-    auto OnAttack(CAttackState&, action_t&) -> bool override;
+    auto OnAttack(CBattleEntity* PTarget, action_t& action) -> bool override;
     auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
     void OnCastFinished(CMagicState&, action_t&) override;
     void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;

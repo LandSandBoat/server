@@ -291,7 +291,7 @@ public:
 
     /* State callbacks */
     /* Auto attack */
-    virtual auto OnAttack(CAttackState&, action_t&) -> bool;
+    virtual auto OnAttack(CBattleEntity* PTarget, action_t& action) -> bool;
 
     virtual auto OnAttackError(CAttackState&) -> bool
     {

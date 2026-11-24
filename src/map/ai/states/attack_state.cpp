@@ -97,7 +97,7 @@ auto CAttackState::Update(timer::time_point tick) -> bool
                 return true;
             }
             action_t action{};
-            if (m_PEntity->OnAttack(*this, action))
+            if (m_PEntity->OnAttack(PTarget, action))
             {
                 // TODO: what about AoE auto attacks?
                 battleutils::handleKillshotEnmity(m_PEntity, PTarget);

@@ -3606,11 +3606,9 @@ auto CBattleEntity::GetBattleTarget() const -> CBattleEntity*
     return battleTarget_.resolve<CBattleEntity>();
 }
 
-auto CBattleEntity::OnAttack(CAttackState& state, action_t& action) -> bool
+auto CBattleEntity::OnAttack(CBattleEntity* PTarget, action_t& action) -> bool
 {
     TracyZoneScopedN("CBattleEntity::OnAttack");
-
-    auto* PTarget = state.target().resolve<CBattleEntity>();
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
     PTarget->LastAttacked = timer::now();

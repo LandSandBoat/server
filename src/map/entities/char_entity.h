@@ -812,7 +812,7 @@ public:
 
     /* State callbacks */
     auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
-    auto OnAttack(CAttackState&, action_t&) -> bool override;
+    auto OnAttack(CBattleEntity* PTarget, action_t& action) -> bool override;
     auto OnAttackError(CAttackState&) -> bool override;
     auto IsValidTarget(uint16 targid, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
     auto IsValidTarget(EntityId target, xi::TargetType validTargetFlags, std::unique_ptr<CBasicPacket>& errMsg) -> CBattleEntity* override;
