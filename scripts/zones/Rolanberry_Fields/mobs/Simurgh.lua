@@ -43,12 +43,6 @@ entity.onMobFight = function(mob, target)
     utils.drawIn(target, drawInTable)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.SIMURGH_POACHER)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.randomInt(3600, 7200)) -- 1 to 2 hours
 end

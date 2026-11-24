@@ -331,10 +331,6 @@ entity.onMagicHit = function(caster, target, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.VIRTUOUS_SAINT)
-    end
-
     local firstCall = optParams.isKiller or optParams.noKiller
     if firstCall then
         local mobid = mob:getID()

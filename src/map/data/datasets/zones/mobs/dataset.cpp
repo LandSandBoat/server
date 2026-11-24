@@ -204,6 +204,7 @@ auto convertTemplate(const std::string& key, const wire::Template& source) -> Mo
         .Loot        = convertLoot(source.loot, key),
         .Allegiance  = yaml::resolveEnum(source.allegiance),
         .Content     = yaml::resolveEnum(source.content),
+        .Title       = yaml::resolveEnum(source.title),
     };
 }
 

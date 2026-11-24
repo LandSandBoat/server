@@ -975,6 +975,7 @@ templates:
     species:       khimaira
     type:          [notorious]
     skill_list_id: 168
+    title:         khimaira_carver
     attributes:
       combat:
         skill: scythe

@@ -43,10 +43,6 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.TROLL_SUBJUGATOR)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
             DespawnMob(i)

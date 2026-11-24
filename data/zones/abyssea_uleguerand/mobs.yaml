@@ -1073,6 +1073,7 @@ templates:
     species:       diremite
     type:          [notorious]
     skill_list_id: 970
+    title:         resheph_eradicator
     attributes:
       combat:
         skill: great_katana

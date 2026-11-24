@@ -44,7 +44,7 @@ xi.titleChanger.onEventFinish = function(player, csid, option, eventId, titleInf
         local group = titleInfo[bit.rshift(option, 8) + 1]
         if group then
             local title = group.title[option % 256]
-            if title and player:delGil(group.cost) then
+            if title and player:hasTitle(title) and player:delGil(group.cost) then
                 player:setTitle(title)
             end
         end

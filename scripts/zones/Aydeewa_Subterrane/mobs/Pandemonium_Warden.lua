@@ -388,10 +388,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.PANDEMONIUM_QUELLER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.PW_WHO_DARES + 1)
     end

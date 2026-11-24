@@ -277,6 +277,7 @@ templates:
     species:       roc
     type:          [notorious]
     skill_list_id: 933
+    title:         bennu_deplumer
     attributes:
       combat:
         skill: great_axe
@@ -1189,6 +1190,7 @@ templates:
     type:          [notorious]
     spell_list_id: 160
     skill_list_id: 947
+    title:         rani_decrowner
     attributes:
       combat:
         skill: staff

@@ -68,6 +68,7 @@ templates:
     type:          [notorious]
     spell_list_id: 280
     skill_list_id: 977
+    title:         amphitrite_shucker
     attributes:
       combat:
         skill: staff
@@ -1141,6 +1142,7 @@ templates:
     type:          [notorious]
     spell_list_id: 163
     skill_list_id: 992
+    title:         raja_regicide
     attributes:
       combat:
         skill: staff

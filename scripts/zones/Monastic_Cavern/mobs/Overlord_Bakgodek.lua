@@ -28,10 +28,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.OVERLORD_OVERTHROWER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.ORC_KING_DEATH)
     end

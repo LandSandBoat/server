@@ -1498,6 +1498,7 @@ templates:
     type:          [notorious]
     spell_list_id: 256
     skill_list_id: 927
+    title:         sedna_tuskbreaker
     attributes:
       combat:
         skill: staff
@@ -1594,6 +1595,7 @@ templates:
     type:          [notorious]
     spell_list_id: 158
     skill_list_id: 450
+    title:         sippoy_capturer
     attributes:
       combat:
         skill: staff

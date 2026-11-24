@@ -160,6 +160,7 @@ templates:
     type:          [notorious]
     spell_list_id: 497
     skill_list_id: 245
+    title:         mon_cherry
     attributes:
       combat:
         skill: scythe
@@ -1595,6 +1596,7 @@ templates:
     type:          [notorious]
     spell_list_id: 57
     skill_list_id: 391
+    title:         vrtra_vanquisher
     attributes:
       combat:
         skill: scythe

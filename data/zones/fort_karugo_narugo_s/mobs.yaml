@@ -630,6 +630,7 @@ templates:
     species:       monoceros
     type:          [notorious]
     skill_list_id: 2061
+    title:         ixion_hornbreaker
     attributes:
       combat:
         skill:    great_axe

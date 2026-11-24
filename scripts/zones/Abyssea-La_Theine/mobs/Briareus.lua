@@ -59,10 +59,4 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
     return cueMove
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.BRIAREUS_FELLER)
-    end
-end
-
 return entity

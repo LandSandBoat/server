@@ -35,10 +35,4 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 1800) -- 30 minutes
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.TORTOISE_TORTURER)
-    end
-end
-
 return entity

@@ -17,10 +17,4 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.RANI_DECROWNER)
-    end
-end
-
 return entity

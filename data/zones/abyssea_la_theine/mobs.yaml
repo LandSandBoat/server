@@ -212,6 +212,7 @@ templates:
     species:       gigas
     type:          [notorious]
     skill_list_id: 811
+    title:         briareus_feller
     attributes:
       combat:
         skill: great_katana

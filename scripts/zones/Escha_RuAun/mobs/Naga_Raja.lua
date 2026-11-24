@@ -53,10 +53,6 @@ entity.onMobSpellChoose = function(mob, target, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.NAGA_RAJA_NULLIFIER)
-    end
-
     -- TODO: Process DI completion, award points, tear down fence etc
 end
 

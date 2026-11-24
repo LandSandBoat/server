@@ -8,6 +8,7 @@ templates:
     type:          [notorious]
     spell_list_id: 145
     skill_list_id: 329
+    title:         virtuous_saint
     attributes:
       combat:
         skill:    polearm

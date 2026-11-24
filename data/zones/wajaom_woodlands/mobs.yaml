@@ -1377,6 +1377,7 @@ templates:
     species:       hydra
     type:          [notorious]
     skill_list_id: 164
+    title:         hydra_headhunter
     attributes:
       combat:
         skill:    scythe

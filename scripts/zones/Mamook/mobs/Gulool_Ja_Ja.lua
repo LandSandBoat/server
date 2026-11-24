@@ -49,10 +49,6 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.SHINING_SCALE_RIFLER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
             DespawnMob(i)

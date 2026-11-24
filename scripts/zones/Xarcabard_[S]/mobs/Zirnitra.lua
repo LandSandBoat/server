@@ -39,7 +39,6 @@ entity.onMobDespawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:setTitle(xi.title.ZIRNITRA_WINGCLIPPER)
     xi.hunts.checkHunt(mob, player, 543)
 end
 

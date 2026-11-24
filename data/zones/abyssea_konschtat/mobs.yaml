@@ -589,6 +589,7 @@ templates:
     species:       morbol
     type:          [notorious]
     skill_list_id: 796
+    title:         eccentricity_expunger
     attributes:
       combat:
         skill: great_axe
@@ -914,6 +915,7 @@ templates:
     species:       clot
     type:          [notorious]
     skill_list_id: 798
+    title:         fistule_drainer
     attributes:
       combat:
         skill: axe
@@ -1470,6 +1472,7 @@ templates:
     species:       peiste
     type:          [notorious]
     skill_list_id: 803
+    title:         kukulkan_defanger
     attributes:
       combat:
         skill: dagger
@@ -2524,6 +2527,7 @@ templates:
     roam:          [stealth]
     spell_list_id: 174
     skill_list_id: 807
+    title:         turul_grounder
     attributes:
       combat:
         skill: staff

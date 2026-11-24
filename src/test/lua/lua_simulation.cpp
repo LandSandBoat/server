@@ -676,7 +676,7 @@ auto CLuaSimulation::spawnPlayer(sol::optional<sol::table> params) -> CLuaClient
     if (!isNewPlayer)
     {
         uint8 titles[sizeof(CCharEntity::m_TitleList)]{};
-        addBit(206, titles, sizeof(titles)); // 206 == xi.title.NEW_ADVENTURER
+        addBit(std::to_underlying(xi::Title::NewAdventurer), titles, sizeof(titles));
         db::preparedStmt("UPDATE chars SET playtime = 60, titles = ? WHERE charid = ?", titles, testChar->charId());
     }
 

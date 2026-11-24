@@ -1192,6 +1192,7 @@ templates:
     type:          [notorious]
     spell_list_id: 46
     skill_list_id: 273
+    title:         serket_breaker
     attributes:
       combat:
         skill:    scythe
@@ -1268,6 +1269,7 @@ templates:
     species:       cockatrice
     type:          [notorious]
     skill_list_id: 70
+    title:         beakbender
     attributes:
       combat:
         skill: axe

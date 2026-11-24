@@ -585,6 +585,7 @@ templates:
     type:          [notorious]
     spell_list_id: 23
     skill_list_id: 281
+    title:         kirin_captivator
     attributes:
       combat:
         skill: scythe

@@ -8,6 +8,7 @@ templates:
     type:          [notorious]
     spell_list_id: 21
     skill_list_id: 169
+    title:         hellsbane
     attributes:
       combat:
         skill: great_katana
@@ -45,6 +46,7 @@ templates:
     species:       kindred
     type:          [notorious]
     skill_list_id: 169
+    title:         hellsbane
     attributes:
       combat:
         skill: great_sword
@@ -81,6 +83,7 @@ templates:
     type:          [notorious]
     spell_list_id: 5
     skill_list_id: 169
+    title:         hellsbane
     attributes:
       combat:
         skill: axe
@@ -1330,6 +1333,7 @@ templates:
     type:          [notorious]
     spell_list_id: 31
     skill_list_id: 169
+    title:         hellsbane
     attributes:
       combat:
         skill: great_sword

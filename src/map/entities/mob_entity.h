@@ -35,6 +35,7 @@
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/spawn_type.h"
+#include "data/enums/title.h"
 
 enum class MsgBasic : uint16_t;
 
@@ -211,6 +212,8 @@ public:
     bool   m_neutral;       // stop linking / aggroing
 
     position_t m_SpawnPoint; // spawn point of mob
+
+    xi::Title m_Title{}; // granted to the killer's alliance on death
 
     uint8  m_Element;
     uint8  m_HiPCLvl;        // Highest Level of Player Character that hit the Monster

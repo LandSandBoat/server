@@ -48,6 +48,7 @@ templates:
     species:       crawler
     type:          [notorious]
     skill_list_id: 79
+    title:         bogeydowner
     attributes:
       combat:
         skill: club

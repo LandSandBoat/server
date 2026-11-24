@@ -56,12 +56,6 @@ entity.onMobSpellChoose = function(mob, target, spellId)
     return xi.magic.spell.BINDGA
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.SERKET_BREAKER)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.randomInt(75600, 86400)) -- 21 to 24 hours
 end

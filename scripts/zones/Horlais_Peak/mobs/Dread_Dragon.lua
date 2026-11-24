@@ -12,10 +12,4 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.PARALYZE)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.DREAD_DRAGON_SLAYER)
-    end
-end
-
 return entity

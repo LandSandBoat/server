@@ -911,6 +911,7 @@ templates:
     species:       slime
     type:          [notorious]
     skill_list_id: 229
+    title:         jellybane
     attributes:
       combat:
         skill: scythe

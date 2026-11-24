@@ -106,10 +106,4 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
-    end
-end
-
 return entity

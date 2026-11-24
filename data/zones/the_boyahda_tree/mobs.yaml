@@ -1271,6 +1271,7 @@ templates:
     species:       morbol
     type:          [notorious]
     skill_list_id: 411
+    title:         the_vivisector
     attributes:
       combat:
         skill: scythe

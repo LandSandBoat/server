@@ -126,12 +126,6 @@ entity.onMobDisengage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.KHIMAIRA_CARVER)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.randomInt(48, 72) * 3600) -- 48 to 72 hours, in 1-hour increments
 end

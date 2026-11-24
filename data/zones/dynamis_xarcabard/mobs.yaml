@@ -1236,6 +1236,7 @@ templates:
     type:          [notorious]
     spell_list_id: 86
     skill_list_id: 361
+    title:         lifter_of_shadows
     attributes:
       combat:
         skill: scythe

@@ -44,10 +44,4 @@ entity.onMobDisengage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.THE_VIVISECTOR)
-    end
-end
-
 return entity

@@ -471,6 +471,7 @@ templates:
     type:          [notorious]
     spell_list_id: 30
     skill_list_id: 360
+    title:         deity_debunker
     attributes:
       combat:
         skill:    staff

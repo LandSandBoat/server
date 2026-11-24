@@ -33,7 +33,7 @@ GP_SERV_COMMAND_INSPECT_MESSAGE::GP_SERV_COMMAND_INSPECT_MESSAGE(const CCharEnti
     packet.MyFlag     = PChar == PTarget ? 1 : 0;
     packet.Race       = 1;
 
-    packet.DesignationNo = PTarget->profile.title;
+    packet.DesignationNo = std::to_underlying(PTarget->profile.title);
 
     std::memcpy(packet.sName, PTarget->getName().c_str(), std::min<size_t>(PTarget->getName().size(), sizeof(packet.sName)));
 }

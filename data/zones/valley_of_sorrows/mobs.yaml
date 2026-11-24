@@ -7,6 +7,7 @@ templates:
     species:       adamantoise
     type:          [notorious]
     skill_list_id: 2
+    title:         tortoise_torturer
     attributes:
       combat:
         skill: scythe
@@ -81,6 +82,7 @@ templates:
     species:       adamantoise
     type:          [notorious]
     skill_list_id: 2
+    title:         aspidochelone_sinker
     attributes:
       combat:
         skill: scythe

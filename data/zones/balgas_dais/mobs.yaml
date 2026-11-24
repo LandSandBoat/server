@@ -118,6 +118,7 @@ templates:
     species:       dragon
     type:          [notorious, battlefield]
     skill_list_id: 2070
+    title:         black_dragon_slayer
     attributes:
       combat:
         skill: staff

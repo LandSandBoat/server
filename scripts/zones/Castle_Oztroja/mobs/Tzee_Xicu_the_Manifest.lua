@@ -93,10 +93,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.DEITY_DEBUNKER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         mob:showText(mob, ID.text.YAGUDO_KING_DEATH)
     end

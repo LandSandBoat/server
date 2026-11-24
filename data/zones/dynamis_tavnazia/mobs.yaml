@@ -42,6 +42,7 @@ templates:
     type:          [notorious]
     spell_list_id: 108
     skill_list_id: 35
+    title:         nightmare_awakener
     attributes:
       combat:
         skill: staff
@@ -77,6 +78,7 @@ templates:
     type:          [notorious]
     spell_list_id: 107
     skill_list_id: 35
+    title:         nightmare_awakener
     attributes:
       combat:
         skill: staff
@@ -112,6 +114,7 @@ templates:
     type:          [notorious]
     spell_list_id: 106
     skill_list_id: 35
+    title:         nightmare_awakener
     attributes:
       combat:
         skill: scythe
@@ -271,6 +274,7 @@ templates:
     species:       diabolos
     type:          [notorious]
     skill_list_id: 35
+    title:         nightmare_awakener
     attributes:
       combat:
         skill: great_axe

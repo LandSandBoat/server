@@ -189,6 +189,7 @@ templates:
     species:       cerberus
     type:          [notorious]
     skill_list_id: 62
+    title:         cerberus_muzzler
     attributes:
       combat:
         skill:    scythe

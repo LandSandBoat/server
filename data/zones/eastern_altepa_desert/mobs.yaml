@@ -398,6 +398,7 @@ templates:
     type:          [notorious]
     roam:          [ignore]
     skill_list_id: 703
+    title:         cactrot_desacelerador
     attributes:
       speed:           180
       animation_speed: 180

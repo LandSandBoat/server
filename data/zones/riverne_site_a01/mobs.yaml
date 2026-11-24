@@ -499,6 +499,7 @@ templates:
     type:          [notorious, battlefield]
     spell_list_id: 109
     skill_list_id: 259
+    title:         ouryu_overwhelmer
     attributes:
       combat:
         skill: scythe
