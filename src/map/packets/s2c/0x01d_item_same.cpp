@@ -29,15 +29,15 @@ GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(CCharEntity* PChar)
     auto& packet = this->data();
 
     packet.State        = GP_SERV_COMMAND_ITEM_SAME_STATE::AllLoaded;
-    packet.padding00[0] = CONTAINER_ID::MAX_CONTAINER_ID;
+    packet.padding00[0] = MAX_CONTAINER_ID;
     packet.Flags        = PChar->inventorySyncState().getSyncedFlags();
 }
 
-GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(const CONTAINER_ID id, CCharEntity* PChar)
+GP_SERV_COMMAND_ITEM_SAME::GP_SERV_COMMAND_ITEM_SAME(const xi::Container id, CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     packet.State        = GP_SERV_COMMAND_ITEM_SAME_STATE::StillLoading;
-    packet.padding00[0] = id;
+    packet.padding00[0] = static_cast<uint8>(id);
     packet.Flags        = PChar->inventorySyncState().getSyncedFlags();
 }

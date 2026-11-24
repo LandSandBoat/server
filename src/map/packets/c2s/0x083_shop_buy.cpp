@@ -153,7 +153,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     const auto cost = price * quantity;
 
     // Track the gil the player had before the transaction
-    const CItem* PCharGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+    const CItem* PCharGil = PChar->getStorage(xi::Container::Inventory)->GetItem(0);
     if (!PCharGil)
     {
         return;
@@ -161,7 +161,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
 
     const uint32 gilBefore = PCharGil->getQuantity();
 
-    if (!transaction->pay(cost) || !transaction->give(LOC_INVENTORY, itemId, quantity) || !transaction->commit())
+    if (!transaction->pay(cost) || !transaction->give(xi::Container::Inventory, itemId, quantity) || !transaction->commit())
     {
         return;
     }
@@ -172,7 +172,7 @@ void GP_CLI_COMMAND_SHOP_BUY::process(MapSession* PSession, CCharEntity* PChar) 
     }
 
     // Audit the purchase if enabled
-    const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+    const auto appliedGil = static_cast<int32>(PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
     auditPurchase(*PSession->scheduler, PChar, itemId, quantity, price, appliedGil);
 
     ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->getName(), quantity, itemId);

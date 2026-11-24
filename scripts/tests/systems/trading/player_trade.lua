@@ -92,7 +92,7 @@ describe('PlayerTradeTransaction', function()
         local slot = item:getSlotID()
 
         -- equipped items are busy, so the trade window has to refuse them
-        p1:equipItem(gear, xi.inventoryLocation.INVENTORY, xi.slot.MAIN)
+        p1:equipItem(gear, xi.inv.INVENTORY, xi.slot.MAIN)
         assert(item:state() == xi.itemState.EQUIPPED, 'state: ' .. tostring(item:state()))
 
         openTrade()
@@ -111,13 +111,13 @@ describe('PlayerTradeTransaction', function()
 
         openTrade()
         p1.actions:tradeOffer(1, lowerSlot, itemA, 5)
-        p1.actions:sortContainer(xi.inventoryLocation.INVENTORY)
+        p1.actions:sortContainer(xi.inv.INVENTORY)
 
         assert(totalOf(itemA) == 10, 'merge destination: ' .. tostring(totalOf(itemA)))
 
         p1.actions:tradeClearSlot(1, lowerSlot, itemA)
         p1.actions:tradeOffer(1, lowerSlot + 1, itemA, 5)
-        p1.actions:sortContainer(xi.inventoryLocation.INVENTORY)
+        p1.actions:sortContainer(xi.inv.INVENTORY)
 
         assert(totalOf(itemA) == 10, 'merge source: ' .. tostring(totalOf(itemA)))
     end)
@@ -182,7 +182,7 @@ describe('PlayerTradeTransaction', function()
         p1:setGil(5000)
         p2:setGil(0)
 
-        while p2:getFreeSlotsCount(xi.inventoryLocation.INVENTORY) > 0 do
+        while p2:getFreeSlotsCount(xi.inv.INVENTORY) > 0 do
             p2:addItem(itemA)
         end
 
@@ -204,7 +204,7 @@ describe('PlayerTradeTransaction', function()
         p1.actions:tradeOffer(1, origSlot, itemA, 1)
         p1.actions:tradeCancel()
 
-        local restored = findItem(p1, itemA, xi.inventoryLocation.INVENTORY)
+        local restored = findItem(p1, itemA, xi.inv.INVENTORY)
         assert(restored:getSlotID() == origSlot, 'came back in slot ' .. tostring(restored:getSlotID()))
         assert(restored:state() == xi.itemState.FREE, 'state after cancel: ' .. tostring(restored:state()))
     end)

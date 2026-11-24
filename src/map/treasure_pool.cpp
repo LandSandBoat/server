@@ -327,7 +327,7 @@ void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     }
 
     // Cannot lot if player's inventory is full
-    if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
+    if (PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() == 0)
     {
         return;
     }
@@ -485,7 +485,7 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
 
     const auto& timeStamp = m_PoolItems[SlotID].TimeStamp;
     if (!timeStamp.has_value() || (tick - *timeStamp) > treasure_livetime ||
-        (memberCount() == 1 && m_Members[0]->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0) ||
+        (memberCount() == 1 && m_Members[0]->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() != 0) ||
         m_PoolItems[SlotID].Lotters.size() == memberCount())
     {
         // Find item's highest lotter
@@ -502,11 +502,11 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
         // Check to see if we have any lotters (excluding anyone who passed)
         if (highestInfo.member != nullptr && highestInfo.lot != 0)
         {
-            if (highestInfo.member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
+            if (highestInfo.member->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() != 0)
             {
                 // add item as they have room!
                 auto transaction = ItemClaimTransaction::start(highestInfo.member);
-                if (transaction && transaction->give(LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
+                if (transaction && transaction->give(xi::Container::Inventory, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
                 {
                     treasureWon(highestInfo.member, SlotID);
                 }
@@ -532,7 +532,7 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
                     continue;
                 }
 
-                if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !hasPassedItem(member, SlotID))
+                if (member->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() != 0 && !hasPassedItem(member, SlotID))
                 {
                     candidates.emplace_back(member);
                 }
@@ -548,7 +548,7 @@ void CTreasurePool::checkTreasureItem(timer::time_point tick, uint8 SlotID)
                 CCharEntity* PChar = candidates.at(xirand::GetRandomNumber(candidates.size()));
 
                 auto transaction = ItemClaimTransaction::start(PChar);
-                if (transaction && transaction->give(LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
+                if (transaction && transaction->give(xi::Container::Inventory, m_PoolItems[SlotID].ID, 1, Silence::Yes) && transaction->commit())
                 {
                     treasureWon(PChar, SlotID);
                 }

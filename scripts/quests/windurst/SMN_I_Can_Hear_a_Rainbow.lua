@@ -54,7 +54,7 @@ local zoneEventTable =
 }
 
 local function handleZoneIn(player, prevZone)
-    if player:hasItem(xi.item.CARBUNCLES_RUBY, xi.inventoryLocation.INVENTORY) then
+    if player:hasItem(xi.item.CARBUNCLES_RUBY, xi.inv.INVENTORY) then
         local zone    = player:getZone(true)
         local weather = zone:getWeather()
 
@@ -119,7 +119,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
-                player:hasItem(xi.item.CARBUNCLES_RUBY, xi.inventoryLocation.INVENTORY)
+                player:hasItem(xi.item.CARBUNCLES_RUBY, xi.inv.INVENTORY)
         end,
 
         [xi.zone.WINDURST_WALLS] =

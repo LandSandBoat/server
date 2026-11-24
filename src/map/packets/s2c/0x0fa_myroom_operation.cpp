@@ -23,7 +23,7 @@
 
 #include "items/item.h"
 
-GP_SERV_COMMAND_MYROOM_OPERATION::GP_SERV_COMMAND_MYROOM_OPERATION(const CItem* PItem, CONTAINER_ID locationId, uint8 slotId)
+GP_SERV_COMMAND_MYROOM_OPERATION::GP_SERV_COMMAND_MYROOM_OPERATION(const CItem* PItem, xi::Container locationId, uint8 slotId)
 {
     auto& packet = this->data();
 

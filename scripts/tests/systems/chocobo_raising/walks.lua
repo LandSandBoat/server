@@ -319,7 +319,7 @@ describe('Chocobo raising walks', function()
             assert(walk[2] == 7, 'Expected the item found')
 
             local itemId = player:getChocoboRaisingInfo().held_item
-            player:changeContainerSize(xi.inventoryLocation.INVENTORY, -player:getFreeSlotsCount())
+            player:changeContainerSize(xi.inv.INVENTORY, -player:getFreeSlotsCount())
 
             local fullWatch = careAction(watchOverOption)
             raisingClient.finish(client, 0)
@@ -328,7 +328,7 @@ describe('Chocobo raising walks', function()
             assert(player:getChocoboRaisingInfo().held_item == itemId, 'Expected the chocobo to keep the item')
             player.assert.no:hasItem(itemId)
 
-            player:changeContainerSize(xi.inventoryLocation.INVENTORY, 1)
+            player:changeContainerSize(xi.inv.INVENTORY, 1)
             raisingClient.setChocobo(player, { energy = 100 })
 
             local watch = careAction(watchOverOption)

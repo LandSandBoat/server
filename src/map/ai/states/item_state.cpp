@@ -53,7 +53,7 @@ CItemState::CItemState(xi::Badge<CState>, CCharEntity* PEntity, const EntityId& 
 : CState(PEntity, target)
 , m_PEntity(PEntity)
 , m_PItem(nullptr)
-, m_location(loc)
+, m_location(static_cast<xi::Container>(loc))
 , m_slot(slotid)
 {
     // Capture constructor arguments into members and nothing else. All other logic goes into init().
@@ -261,7 +261,7 @@ void CItemState::Cleanup(timer::time_point tick)
         m_PItem = nullptr;
     }
 
-    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(m_PItem, static_cast<CONTAINER_ID>(m_location), m_slot);
+    m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(m_PItem, m_location, m_slot);
     m_PEntity->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PEntity);
 }
 

@@ -72,7 +72,7 @@ public:
     void setResultDelivery(CCraftState::Result result);
 
     // the inventory shows one less free slot until the result is delivered
-    auto heldSlots(uint8 location) const -> uint8 override;
+    auto heldSlots(xi::Container location) const -> uint8 override;
 
 protected:
     auto doCommit() -> bool override;

@@ -128,24 +128,24 @@ CCharEntity::CCharEntity()
 
     allegiance = xi::Allegiance::Player;
 
-    m_Inventory  = std::make_unique<CItemContainer>(LOC_INVENTORY, this);
-    m_Mogsafe    = std::make_unique<CItemContainer>(LOC_MOGSAFE, this);
-    m_Storage    = std::make_unique<CItemContainer>(LOC_STORAGE, this);
-    m_Tempitems  = std::make_unique<CItemContainer>(LOC_TEMPITEMS, this);
-    m_Moglocker  = std::make_unique<CItemContainer>(LOC_MOGLOCKER, this);
-    m_Mogsatchel = std::make_unique<CItemContainer>(LOC_MOGSATCHEL, this);
-    m_Mogsack    = std::make_unique<CItemContainer>(LOC_MOGSACK, this);
-    m_Mogcase    = std::make_unique<CItemContainer>(LOC_MOGCASE, this);
-    m_Wardrobe   = std::make_unique<CItemContainer>(LOC_WARDROBE, this);
-    m_Mogsafe2   = std::make_unique<CItemContainer>(LOC_MOGSAFE2, this);
-    m_Wardrobe2  = std::make_unique<CItemContainer>(LOC_WARDROBE2, this);
-    m_Wardrobe3  = std::make_unique<CItemContainer>(LOC_WARDROBE3, this);
-    m_Wardrobe4  = std::make_unique<CItemContainer>(LOC_WARDROBE4, this);
-    m_Wardrobe5  = std::make_unique<CItemContainer>(LOC_WARDROBE5, this);
-    m_Wardrobe6  = std::make_unique<CItemContainer>(LOC_WARDROBE6, this);
-    m_Wardrobe7  = std::make_unique<CItemContainer>(LOC_WARDROBE7, this);
-    m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8, this);
-    m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN, this);
+    m_Inventory  = std::make_unique<CItemContainer>(xi::Container::Inventory, this);
+    m_Mogsafe    = std::make_unique<CItemContainer>(xi::Container::MogSafe, this);
+    m_Storage    = std::make_unique<CItemContainer>(xi::Container::Storage, this);
+    m_Tempitems  = std::make_unique<CItemContainer>(xi::Container::TempItems, this);
+    m_Moglocker  = std::make_unique<CItemContainer>(xi::Container::MogLocker, this);
+    m_Mogsatchel = std::make_unique<CItemContainer>(xi::Container::MogSatchel, this);
+    m_Mogsack    = std::make_unique<CItemContainer>(xi::Container::MogSack, this);
+    m_Mogcase    = std::make_unique<CItemContainer>(xi::Container::MogCase, this);
+    m_Wardrobe   = std::make_unique<CItemContainer>(xi::Container::Wardrobe, this);
+    m_Mogsafe2   = std::make_unique<CItemContainer>(xi::Container::MogSafe2, this);
+    m_Wardrobe2  = std::make_unique<CItemContainer>(xi::Container::Wardrobe2, this);
+    m_Wardrobe3  = std::make_unique<CItemContainer>(xi::Container::Wardrobe3, this);
+    m_Wardrobe4  = std::make_unique<CItemContainer>(xi::Container::Wardrobe4, this);
+    m_Wardrobe5  = std::make_unique<CItemContainer>(xi::Container::Wardrobe5, this);
+    m_Wardrobe6  = std::make_unique<CItemContainer>(xi::Container::Wardrobe6, this);
+    m_Wardrobe7  = std::make_unique<CItemContainer>(xi::Container::Wardrobe7, this);
+    m_Wardrobe8  = std::make_unique<CItemContainer>(xi::Container::Wardrobe8, this);
+    m_RecycleBin = std::make_unique<CItemContainer>(xi::Container::RecycleBin, this);
 
     m_SpellList.reset();
     std::memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
@@ -550,7 +550,7 @@ auto CCharEntity::hasAutoTargetEnabled() const -> bool
     return !playerConfig.AutoTargetOffFlg;
 }
 
-auto CCharEntity::heldSlots(const uint8 location) const -> uint8
+auto CCharEntity::heldSlots(const xi::Container location) const -> uint8
 {
     uint8 held = 0;
     for (const auto& transaction : transactions_)
@@ -779,49 +779,49 @@ auto CCharEntity::getAutomatonElementCapacity(const uint8 element) const -> uint
  *
  ************************************************************************/
 
-auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
+auto CCharEntity::getStorage(const xi::Container locationId) const -> CItemContainer*
 {
     switch (locationId)
     {
-        case LOC_INVENTORY:
+        case xi::Container::Inventory:
             return m_Inventory.get();
-        case LOC_MOGSAFE:
+        case xi::Container::MogSafe:
             return m_Mogsafe.get();
-        case LOC_STORAGE:
+        case xi::Container::Storage:
             return m_Storage.get();
-        case LOC_TEMPITEMS:
+        case xi::Container::TempItems:
             return m_Tempitems.get();
-        case LOC_MOGLOCKER:
+        case xi::Container::MogLocker:
             return m_Moglocker.get();
-        case LOC_MOGSATCHEL:
+        case xi::Container::MogSatchel:
             return m_Mogsatchel.get();
-        case LOC_MOGSACK:
+        case xi::Container::MogSack:
             return m_Mogsack.get();
-        case LOC_MOGCASE:
+        case xi::Container::MogCase:
             return m_Mogcase.get();
-        case LOC_WARDROBE:
+        case xi::Container::Wardrobe:
             return m_Wardrobe.get();
-        case LOC_MOGSAFE2:
+        case xi::Container::MogSafe2:
             return m_Mogsafe2.get();
-        case LOC_WARDROBE2:
+        case xi::Container::Wardrobe2:
             return m_Wardrobe2.get();
-        case LOC_WARDROBE3:
+        case xi::Container::Wardrobe3:
             return m_Wardrobe3.get();
-        case LOC_WARDROBE4:
+        case xi::Container::Wardrobe4:
             return m_Wardrobe4.get();
-        case LOC_WARDROBE5:
+        case xi::Container::Wardrobe5:
             return m_Wardrobe5.get();
-        case LOC_WARDROBE6:
+        case xi::Container::Wardrobe6:
             return m_Wardrobe6.get();
-        case LOC_WARDROBE7:
+        case xi::Container::Wardrobe7:
             return m_Wardrobe7.get();
-        case LOC_WARDROBE8:
+        case xi::Container::Wardrobe8:
             return m_Wardrobe8.get();
-        case LOC_RECYCLEBIN:
+        case xi::Container::RecycleBin:
             return m_RecycleBin.get();
     }
 
-    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", locationId);
+    ShowWarning("Unhandled or Invalid Location ID (%d) passed to function.", static_cast<uint8>(locationId));
     return nullptr;
 }
 
@@ -915,7 +915,7 @@ auto CCharEntity::hasBazaar() const -> bool
         return false;
     }
 
-    CItemContainer* playerInventory = getStorage(LOC_INVENTORY);
+    CItemContainer* playerInventory = getStorage(xi::Container::Inventory);
     if (!playerInventory)
     {
         return false;
@@ -1051,7 +1051,7 @@ auto CCharEntity::equipLocation(const uint8 equipSlot) const -> Maybe<ItemLocati
     }
 
     return ItemLocation{
-        static_cast<CONTAINER_ID>(equipped_[equipSlot]->getLocationID()),
+        static_cast<xi::Container>(equipped_[equipSlot]->getLocationID()),
         equipped_[equipSlot]->getSlotID(),
     };
 }
@@ -1282,7 +1282,7 @@ void CCharEntity::flushEquipChanges()
         }
         else
         {
-            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, change.equipSlot, LOC_INVENTORY);
+            pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, change.equipSlot, xi::Container::Inventory);
         }
 
         pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
@@ -1294,7 +1294,7 @@ void CCharEntity::flushEquipChanges()
     {
         for (const auto& change : inventorySyncState_.pendingEquipChanges())
         {
-            if (static_cast<CONTAINER_ID>(change.item->getLocationID()) == container)
+            if (static_cast<xi::Container>(change.item->getLocationID()) == container)
             {
                 if (change.item->isSubType(ITEM_CHARGED))
                 {
@@ -2662,7 +2662,7 @@ void CCharEntity::UpdateMoghancement()
 
     // Add up all of the installed furniture auras
     std::array<uint16, 8> elements = { 0 };
-    for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    for (auto containerID : { xi::Container::MogSafe, xi::Container::MogSafe2 })
     {
         auto* PContainer = getStorage(containerID);
         PContainer->ForEachItem(
@@ -2703,7 +2703,7 @@ void CCharEntity::UpdateMoghancement()
     uint16 newMoghancementID = 0;
     if (!hasTiedElements && dominantAura > 0)
     {
-        for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+        for (auto containerID : { xi::Container::MogSafe, xi::Container::MogSafe2 })
         {
             auto* PContainer = getStorage(containerID);
             PContainer->ForEachItem(
@@ -3098,8 +3098,8 @@ void CCharEntity::tryStartNextEvent()
         {
             switch (PStatusEffect->GetPower())
             {
-                case MOUNT_CHOCOBO:
-                case MOUNT_NOBLE_CHOCOBO:
+                case static_cast<uint8>(xi::Mount::Chocobo):
+                case static_cast<uint8>(xi::Mount::NobleChocobo):
                     animation = xi::Animation::Chocobo;
                     break;
                 default:

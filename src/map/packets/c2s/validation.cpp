@@ -162,7 +162,7 @@ auto PacketValidator::isValidContainer(const std::string& fieldName, const uint3
         return *this;
     }
 
-    if (containerId >= MAX_CONTAINER_ID || !PChar_->getStorage(static_cast<uint8>(containerId)))
+    if (containerId >= MAX_CONTAINER_ID || !PChar_->getStorage(static_cast<xi::Container>(containerId)))
     {
         result_.addError(std::format("{} value {} is not a valid container.", fieldName, containerId));
     }

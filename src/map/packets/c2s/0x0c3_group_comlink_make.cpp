@@ -66,7 +66,7 @@ void GP_CLI_COMMAND_GROUP_COMLINK_MAKE::process(MapSession* PSession, CCharEntit
         std::memcpy(PItemLinkPearl->m_extra, PItemLinkshell->m_extra, 24);
         PItemLinkPearl->SetLSType(LSTYPE_LINKPEARL);
         auto transaction = ItemClaimTransaction::start(PChar);
-        if (!transaction || !transaction->give(LOC_INVENTORY, std::move(PItem)) || !transaction->commit())
+        if (!transaction || !transaction->give(xi::Container::Inventory, std::move(PItem)) || !transaction->commit())
         {
             ShowErrorFmt("GP_CLI_COMMAND_GROUP_COMLINK_MAKE: {} did not receive the linkshell", PChar->getName());
             return;

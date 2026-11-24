@@ -55,7 +55,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
 
     if (linkshellId != 0)
     {
-        PChar->getStorage(data.Category)->RemoveItem(data.ItemIndex);
+        PChar->getStorage(static_cast<xi::Container>(data.Category))->RemoveItem(data.ItemIndex);
         PItemLinkshell = nullptr;
 
         auto PItem = xi::items::spawn(ITEMID::LINKSHELL);
@@ -66,7 +66,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
 
         PItemLinkshell = static_cast<CItemLinkshell*>(PItem.get());
         PItemLinkshell->setQuantity(1);
-        PChar->getStorage(data.Category)->InsertItem(std::move(PItem), data.ItemIndex);
+        PChar->getStorage(static_cast<xi::Container>(data.Category))->InsertItem(std::move(PItem), data.ItemIndex);
         PItemLinkshell->SetLSID(linkshellId);
         PItemLinkshell->SetLSType(LSTYPE_LINKSHELL);
         PItemLinkshell->setSignature(DecodedName);
@@ -80,7 +80,7 @@ const auto createLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshe
                                            data.ItemIndex);
         if (rset && rset->rowsAffected())
         {
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<xi::Container>(data.Category), data.ItemIndex);
         }
     }
     else
@@ -119,7 +119,7 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
                          PItemLinkshell->getLocationID(),
                          PItemLinkshell->getSlotID());
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<xi::Container>(PItemLinkshell->getLocationID()), PItemLinkshell->getSlotID());
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellNoLongerExists);
 
@@ -164,7 +164,7 @@ const auto equipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshel
     charutils::SaveCharEquip(PChar);
 
     PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<xi::Container>(data.Category), data.ItemIndex);
 };
 
 const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinkshell, const GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE& data)
@@ -181,7 +181,7 @@ const auto unequipLinkshell = [](CCharEntity* PChar, CItemLinkshell* PItemLinksh
     charutils::SaveCharEquip(PChar);
 
     PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, data.LinkshellId);
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(data.Category), data.ItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<xi::Container>(data.Category), data.ItemIndex);
 };
 
 } // namespace
@@ -201,7 +201,7 @@ auto GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::validate(MapSession* PSession, const C
 
 void GP_CLI_COMMAND_GROUP_COMLINK_ACTIVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PItemLinkshell = static_cast<CItemLinkshell*>(PChar->getStorage(this->Category)->GetItem(this->ItemIndex));
+    auto* PItemLinkshell = static_cast<CItemLinkshell*>(PChar->getStorage(static_cast<xi::Container>(this->Category))->GetItem(this->ItemIndex));
 
     if (!PItemLinkshell || !PItemLinkshell->isType(ITEM_LINKSHELL))
     {

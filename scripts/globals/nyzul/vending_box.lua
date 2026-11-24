@@ -59,7 +59,7 @@ local function buildTemporaryItemBitmask(player)
     local hasTempItem = 1 -- All players start with 1 temporary item in inventory. Can't be thrown. Uses bit 0.
 
     for _, itemList in pairs(itemsTable) do
-        if player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
+        if player:hasItem(itemList.item, xi.inv.TEMP_ITEMS) then
             hasTempItem = hasTempItem + itemList.slot
         end
     end
@@ -71,7 +71,7 @@ local function giveAllTemporaryItems(player)
     -- TODO: Check if items are given 1 by 1 or in bulk, currency wise.
 
     for _, itemList in pairs(itemsTable) do
-        if not player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
+        if not player:hasItem(itemList.item, xi.inv.TEMP_ITEMS) then
             if player:getCurrency('nyzul_isle_assault_point') >= itemList.cost then
                 player:addTempItem(itemList.item)
                 player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemList.item)
@@ -122,7 +122,7 @@ local function giveAllTemporaryItemsPrefered(player)
             local itemId = itemsTable[option].item
 
             if itemId ~= nil then
-                if not player:hasItem(itemId, xi.inventoryLocation.TEMPITEMS) then
+                if not player:hasItem(itemId, xi.inv.TEMP_ITEMS) then
                     player:addTempItem(itemId)
                     player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemId)
                     player:delCurrency('nyzul_isle_assault_point', itemsTable[option].cost)

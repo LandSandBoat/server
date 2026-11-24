@@ -36,63 +36,63 @@ namespace
 {
 
 const std::set wardrobeContainers = {
-    LOC_WARDROBE,
-    LOC_WARDROBE2,
-    LOC_WARDROBE3,
-    LOC_WARDROBE4,
-    LOC_WARDROBE5,
-    LOC_WARDROBE6,
-    LOC_WARDROBE7,
-    LOC_WARDROBE8,
+    xi::Container::Wardrobe,
+    xi::Container::Wardrobe2,
+    xi::Container::Wardrobe3,
+    xi::Container::Wardrobe4,
+    xi::Container::Wardrobe5,
+    xi::Container::Wardrobe6,
+    xi::Container::Wardrobe7,
+    xi::Container::Wardrobe8,
 };
 
 // List of containers valid for character current status
 // Note: When sharing Mog House, client restricts menu but retail honors injected packets.
 //       However, you do not get access to your own Safe, Locker or Storage.
-const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<xi::Container>
 {
     // These are always available in both LSB and retail.
     std::set allowedContainers = {
-        LOC_INVENTORY,
-        LOC_MOGCASE,
-        LOC_WARDROBE,
-        LOC_WARDROBE2,
+        xi::Container::Inventory,
+        xi::Container::MogCase,
+        xi::Container::Wardrobe,
+        xi::Container::Wardrobe2,
     };
 
     // Global containers optionally unlockable
     const std::set unlockableContainers = {
-        LOC_MOGSACK,   // Artisan Moogle
-        LOC_WARDROBE3, // Always available in LSB but paid feature on retail.
-        LOC_WARDROBE4,
-        LOC_WARDROBE5,
-        LOC_WARDROBE6,
-        LOC_WARDROBE7,
-        LOC_WARDROBE8,
-        LOC_MOGSATCHEL, // Always available in LSB but gated by OTP on retail.
+        xi::Container::MogSack,   // Artisan Moogle
+        xi::Container::Wardrobe3, // Always available in LSB but paid feature on retail.
+        xi::Container::Wardrobe4,
+        xi::Container::Wardrobe5,
+        xi::Container::Wardrobe6,
+        xi::Container::Wardrobe7,
+        xi::Container::Wardrobe8,
+        xi::Container::MogSatchel, // Always available in LSB but gated by OTP on retail.
     };
 
     // Retail allows injecting into Safe from anywhere in a zone with a Nomad Moogle.
     if (PChar->loc.zone->CanUseMisc(xi::ZoneMisc::Mogmenu) || PChar->m_moghouseID == PChar->id)
     {
-        allowedContainers.insert(LOC_MOGSAFE);
+        allowedContainers.insert(xi::Container::MogSafe);
 
         // Bitflag indicating if Mog 2F is unlocked
         if ((PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F"))
         {
-            allowedContainers.insert(LOC_MOGSAFE2);
+            allowedContainers.insert(xi::Container::MogSafe2);
         }
     }
 
     // Same comment as Safe, but this is handled in the helper.
     if (charutils::hasMogLockerAccess(PChar))
     {
-        allowedContainers.insert(LOC_MOGLOCKER);
+        allowedContainers.insert(xi::Container::MogLocker);
     }
 
     // Storage only allowed if in your OWN Mog House.
     if (PChar->m_moghouseID == PChar->id)
     {
-        allowedContainers.insert(LOC_STORAGE);
+        allowedContainers.insert(xi::Container::Storage);
     }
 
     for (const auto containerId : unlockableContainers)
@@ -105,14 +105,14 @@ const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_
 
     if (settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN"))
     {
-        allowedContainers.insert(LOC_RECYCLEBIN);
+        allowedContainers.insert(xi::Container::RecycleBin);
     }
 
     return allowedContainers;
 };
 
 // Validate that moving item 'itemIndex' from container 'from' to container 'to' is allowed.
-const auto isValidMovement = [](const CCharEntity* PChar, const CONTAINER_ID from, const CONTAINER_ID to, const uint16_t itemIndex) -> bool
+const auto isValidMovement = [](const CCharEntity* PChar, const xi::Container from, const xi::Container to, const uint16_t itemIndex) -> bool
 {
     const CItem* PItem = PChar->getStorage(from)->GetItem(itemIndex);
 
@@ -122,15 +122,15 @@ const auto isValidMovement = [](const CCharEntity* PChar, const CONTAINER_ID fro
     }
 
     // Retail accurate: Recycle Bin can be moved to Inventory or Mog Locker.
-    if (from == LOC_RECYCLEBIN &&
-        to != LOC_INVENTORY && to != LOC_MOGLOCKER)
+    if (from == xi::Container::RecycleBin &&
+        to != xi::Container::Inventory && to != xi::Container::MogLocker)
     {
         return false;
     }
 
     // Retail accurate: Can move Locker items straight to Recycle Bin.
     // Every other movement is ignored and must go through 0x028 ITEM_DUMP
-    if (to == LOC_RECYCLEBIN && from != LOC_MOGLOCKER)
+    if (to == xi::Container::RecycleBin && from != xi::Container::MogLocker)
     {
         return false;
     }
@@ -156,13 +156,13 @@ auto GP_CLI_COMMAND_ITEM_MOVE::validate(MapSession* PSession, const CCharEntity*
 
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .oneOf("Category1", static_cast<CONTAINER_ID>(this->Category1), validContainersForChar)
-        .oneOf("Category2", static_cast<CONTAINER_ID>(this->Category2), validContainersForChar)
+        .oneOf("Category1", static_cast<xi::Container>(this->Category1), validContainersForChar)
+        .oneOf("Category2", static_cast<xi::Container>(this->Category2), validContainersForChar)
         .custom([&](PacketValidator& v)
                 {
                     v.mustEqual(isValidMovement(PChar,
-                                                static_cast<CONTAINER_ID>(this->Category1),
-                                                static_cast<CONTAINER_ID>(this->Category2),
+                                                static_cast<xi::Container>(this->Category1),
+                                                static_cast<xi::Container>(this->Category2),
                                                 this->ItemIndex1),
                                 true,
                                 "Illegal movement");
@@ -171,7 +171,10 @@ auto GP_CLI_COMMAND_ITEM_MOVE::validate(MapSession* PSession, const CCharEntity*
 
 void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItem* PItem = PChar->getStorage(this->Category1)->GetItem(this->ItemIndex1);
+    const auto fromContainer = static_cast<xi::Container>(this->Category1);
+    const auto toContainer   = static_cast<xi::Container>(this->Category2);
+
+    CItem* PItem = PChar->getStorage(fromContainer)->GetItem(this->ItemIndex1);
 
     if (!PItem)
     {
@@ -192,12 +195,12 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
 
     if (const uint32 newQty = PItem->getQuantity() - this->ItemNum; newQty != 0) // split item stack
     {
-        if (!transaction->claimSlot(this->Category1, this->ItemIndex1))
+        if (!transaction->claimSlot(fromContainer, this->ItemIndex1))
         {
             return;
         }
 
-        if (!transaction->split(this->Category1, this->ItemIndex1, this->Category2, this->ItemNum) || !transaction->commit())
+        if (!transaction->split(fromContainer, this->ItemIndex1, toContainer, this->ItemNum) || !transaction->commit())
         {
             ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not split item {}", PChar->getName(), PItem->getID());
         }
@@ -207,7 +210,7 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
         if (this->ItemIndex2 < 82) // 80 + 1
         {
             ShowDebug("GP_CLI_COMMAND_ITEM_MOVE: Trying to unite items", this->Category1, this->ItemIndex1);
-            const CItem* PItem2 = PChar->getStorage(this->Category2)->GetItem(this->ItemIndex2);
+            const CItem* PItem2 = PChar->getStorage(toContainer)->GetItem(this->ItemIndex2);
 
             if (!PItem2 || PItem2->getID() != PItem->getID() ||
                 PItem2->isBusy())
@@ -232,12 +235,12 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
                 {
                     moveQty = PItem->getQuantity();
                 }
-                if (!transaction->claimSlot(this->Category1, this->ItemIndex1) || !transaction->claimSlot(this->Category2, this->ItemIndex2))
+                if (!transaction->claimSlot(fromContainer, this->ItemIndex1) || !transaction->claimSlot(toContainer, this->ItemIndex2))
                 {
                     return;
                 }
 
-                if (moveQty > 0 && (!transaction->moveBetween(this->Category1, this->ItemIndex1, this->Category2, this->ItemIndex2, moveQty) || !transaction->commit()))
+                if (moveQty > 0 && (!transaction->moveBetween(fromContainer, this->ItemIndex1, toContainer, this->ItemIndex2, moveQty) || !transaction->commit()))
                 {
                     ShowErrorFmt("GP_CLI_COMMAND_ITEM_MOVE: {} could not combine stacks", PChar->getName());
                 }
@@ -246,8 +249,8 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             return;
         }
 
-        auto* PSrc      = PChar->getStorage(this->Category1);
-        auto* PDst      = PChar->getStorage(this->Category2);
+        auto* PSrc      = PChar->getStorage(fromContainer);
+        auto* PDst      = PChar->getStorage(toContainer);
         uint8 newSlotId = PSrc->MoveItemTo(this->ItemIndex1, *PDst);
         if (newSlotId != ERROR_SLOTID)
         {
@@ -260,8 +263,8 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
             if (rset && rset->rowsAffected())
             {
                 auto* PInserted = PDst->GetItem(newSlotId);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(this->Category1), this->ItemIndex1, PInserted);
-                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, static_cast<CONTAINER_ID>(this->Category2), newSlotId);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, fromContainer, this->ItemIndex1, PInserted);
+                PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, toContainer, newSlotId);
             }
             else
             {
@@ -272,12 +275,12 @@ void GP_CLI_COMMAND_ITEM_MOVE::process(MapSession* PSession, CCharEntity* PChar)
         {
             // Client assumed the location was not full when it is
             // Resend the packets to inform the client of the storage sizes
-            const uint8 size = PChar->getStorage(this->Category2)->GetSize();
+            const uint8 size = PChar->getStorage(toContainer)->GetSize();
             for (uint8 slotID = 0; slotID <= size; ++slotID)
             {
-                if (CItem* PSlotItem = PChar->getStorage(Category2)->GetItem(slotID); PSlotItem != nullptr)
+                if (CItem* PSlotItem = PChar->getStorage(toContainer)->GetItem(slotID); PSlotItem != nullptr)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PSlotItem, static_cast<CONTAINER_ID>(this->Category2), slotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PSlotItem, toContainer, slotID);
                 }
             }
 

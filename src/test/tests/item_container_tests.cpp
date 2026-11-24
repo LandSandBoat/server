@@ -36,7 +36,7 @@
 
 TEST_CASE("CItemContainer Clear resets the item count", "[item_container]")
 {
-    auto container = CItemContainer(LOC_TEMPITEMS);
+    auto container = CItemContainer(xi::Container::TempItems);
 
     container.SetSize(10);
 

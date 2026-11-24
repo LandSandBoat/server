@@ -49,25 +49,25 @@ entity.onTrade = function(player, npc, trade)
             end
         elseif numGold > 0 or numMythril > 0 then
             -- see if we can expand the size
-            local slotSize = player:getContainerSize(xi.inv.MOGLOCKER)
+            local slotSize = player:getContainerSize(xi.inv.MOG_LOCKER)
             if slotSize == 30 and numMythril == 4 and numGold == 0 then
-                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOG_LOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 40)
             elseif slotSize == 40 and numMythril == 0 and numGold == 2 then
-                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOG_LOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 50)
             elseif slotSize == 50 and numMythril == 0 and numGold == 3 then
-                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOG_LOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 60)
             elseif slotSize == 60 and numMythril == 0 and numGold == 5 then
-                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOG_LOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 70)
             elseif slotSize == 70 and numMythril == 0 and numGold == 10 then
-                player:changeContainerSize(xi.inv.MOGLOCKER, 10)
+                player:changeContainerSize(xi.inv.MOG_LOCKER, 10)
                 player:tradeComplete()
                 player:startEvent(602, 0, 0, 0, 80)
             end
@@ -87,8 +87,8 @@ entity.onTrigger = function(player, npc)
             accessType = xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALZAHBI)
         end
 
-        player:startEvent(600, mogLockerExpiryTimestamp, accessType, xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(xi.inv.MOGLOCKER),
-            coinCost[player:getContainerSize(xi.inv.MOGLOCKER)], 2, 3, xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS)
+        player:startEvent(600, mogLockerExpiryTimestamp, accessType, xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS, player:getContainerSize(xi.inv.MOG_LOCKER),
+            coinCost[player:getContainerSize(xi.inv.MOG_LOCKER)], 2, 3, xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS)
     else
         player:startEvent(600)
     end
@@ -104,7 +104,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.moghouse.getMogLockerExpiryTimestamp(player), -- Only this parameter is relevant
             1,                                               -- Fixed on retail, unknown
             7,                                               -- Fixed on retail, unknown
-            player:getContainerSize(xi.inv.MOGLOCKER)        -- Fixed on retail, assumed
+            player:getContainerSize(xi.inv.MOG_LOCKER)       -- Fixed on retail, assumed
         )
     end
 end

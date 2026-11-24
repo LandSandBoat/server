@@ -129,7 +129,7 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
     }
 
     // Track the gil the player had before the transaction
-    const uint32 gilBefore = PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity();
+    const uint32 gilBefore = PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity();
 
     const auto result = luautils::callGlobal<sol::table>("xi.guildShops.onPlayerSell", PChar, PNpc, this->ItemNo, transaction->claimed());
     if (!result.valid())
@@ -164,7 +164,7 @@ void GP_CLI_COMMAND_GUILD_SELL::process(MapSession* PSession, CCharEntity* PChar
         }
 
         // Audit the sale if enabled
-        const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+        const auto appliedGil = static_cast<int32>(PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
         auditSale(*PSession->scheduler, PChar, itemNo, price, sold, appliedGil);
     }
 

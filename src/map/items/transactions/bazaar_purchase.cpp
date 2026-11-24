@@ -67,7 +67,7 @@ auto BazaarPurchaseTransaction::start(CCharEntity* buyer, CCharEntity* seller, c
 // pay() and earn() claim the gil, so only the listing needs claiming here
 auto BazaarPurchaseTransaction::claimListing() -> bool
 {
-    auto* PListing = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
+    auto* PListing = this->seller_->getStorage(xi::Container::Inventory)->GetItem(this->bazaarSlot_);
     if (!PListing)
     {
         return false;
@@ -90,7 +90,7 @@ void BazaarPurchaseTransaction::restoreDisplay()
     this->release(this->listing_);
 
     // looked up again because a full buyout leaves nothing to put back
-    auto* PRemaining = this->seller_->getStorage(LOC_INVENTORY)->GetItem(this->bazaarSlot_);
+    auto* PRemaining = this->seller_->getStorage(xi::Container::Inventory)->GetItem(this->bazaarSlot_);
     if (!PRemaining || PRemaining->getCharPrice() == 0)
     {
         return;
@@ -125,7 +125,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
     clone->setQuantity(this->quantity_);
 
     // each step below records an undo, so a later failure unwinds the earlier ones
-    const auto delivered = this->give(this->buyer_, LOC_INVENTORY, std::move(clone));
+    const auto delivered = this->give(this->buyer_, xi::Container::Inventory, std::move(clone));
     if (!delivered)
     {
         return false;
@@ -149,7 +149,7 @@ auto BazaarPurchaseTransaction::doCommit() -> bool
         return false;
     }
 
-    if (!this->take(this->seller_, LOC_INVENTORY, this->bazaarSlot_, this->quantity_))
+    if (!this->take(this->seller_, xi::Container::Inventory, this->bazaarSlot_, this->quantity_))
     {
         ShowErrorFmt("BazaarPurchaseTransaction: {} kept item in slot {} after it was sold", this->seller_->getName(), this->bazaarSlot_);
         this->deliveredSlot_.reset();

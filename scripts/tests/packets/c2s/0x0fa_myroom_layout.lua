@@ -4,9 +4,9 @@ describe('Furniture layout', function()
 
     local function stockSafe(itemId)
         player:addItem(itemId)
-        player.actions:moveItem(xi.inv.INVENTORY, player:findItem(itemId, xi.inv.INVENTORY):getSlotID(), xi.inv.MOGSAFE, 1)
+        player.actions:moveItem(xi.inv.INVENTORY, player:findItem(itemId, xi.inv.INVENTORY):getSlotID(), xi.inv.MOG_SAFE, 1)
 
-        return player:findItem(itemId, xi.inv.MOGSAFE)
+        return player:findItem(itemId, xi.inv.MOG_SAFE)
     end
 
     before_each(function()
@@ -25,15 +25,15 @@ describe('Furniture layout', function()
         local mapleTable = stockSafe(xi.item.MAPLE_TABLE)
         local pot        = stockSafe(xi.item.EARTHEN_FLOWERPOT)
 
-        player.actions:placeFurniture(xi.inv.MOGSAFE, mapleTable:getSlotID(), 0, 0)
-        player.actions:placeFurniture(xi.inv.MOGSAFE, pot:getSlotID(), 1, 1, 10)
+        player.actions:placeFurniture(xi.inv.MOG_SAFE, mapleTable:getSlotID(), 0, 0)
+        player.actions:placeFurniture(xi.inv.MOG_SAFE, pot:getSlotID(), 1, 1, 10)
         player.actions:finishFurnishing()
 
         -- the client sends stacked items before their parent when moving it
-        player.actions:placeFurniture(xi.inv.MOGSAFE, pot:getSlotID(), 1, 3, 10)
-        player.actions:placeFurniture(xi.inv.MOGSAFE, mapleTable:getSlotID(), 0, 2)
+        player.actions:placeFurniture(xi.inv.MOG_SAFE, pot:getSlotID(), 1, 3, 10)
+        player.actions:placeFurniture(xi.inv.MOG_SAFE, mapleTable:getSlotID(), 0, 2)
         player.actions:finishFurnishing()
 
-        assert(player:findItem(xi.item.MAPLE_TABLE, xi.inv.MOGSAFE):getExData().y == 2, 'table did not move')
+        assert(player:findItem(xi.item.MAPLE_TABLE, xi.inv.MOG_SAFE):getExData().y == 2, 'table did not move')
     end)
 end)

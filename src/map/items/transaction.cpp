@@ -49,14 +49,14 @@
 namespace
 {
 
-auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation
+auto applyItemUpdate(CCharEntity* PChar, xi::Container LocationID, uint8 slotID, int32 quantity, const Transaction* owner) -> ItemMutation
 {
     CItem* PItem = PChar->getStorage(LocationID)->GetItem(slotID);
 
     if (PItem == nullptr)
     {
         ShowDebug("UpdateItem: No item in slot %u", slotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, LocationID, slotID);
         return {};
     }
 
@@ -127,7 +127,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
         }
 
         PItem->setQuantity(newQuantity);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(static_cast<CONTAINER_ID>(LocationID), slotID, newQuantity);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(LocationID, slotID, newQuantity);
     }
     else if (newQuantity == 0)
     {
@@ -144,7 +144,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
 
         removed = PChar->getStorage(LocationID)->RemoveItem(slotID);
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), slotID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, LocationID, slotID);
 
         luautils::OnItemDrop(PChar, PItem);
 
@@ -158,7 +158,7 @@ auto applyItemUpdate(CCharEntity* PChar, uint8 LocationID, uint8 slotID, int32 q
     return { .itemId = ItemID, .applied = true, .delta = static_cast<int32>(newQuantity) - static_cast<int32>(oldQuantity), .removed = std::move(removed) };
 }
 
-auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> PItem, const Silence silence, const Transaction* owner, int32& applied) -> uint8
+auto applyAddItem(CCharEntity* PChar, xi::Container LocationID, std::unique_ptr<CItem> PItem, const Silence silence, const Transaction* owner, int32& applied) -> uint8
 {
     applied = 0;
 
@@ -190,7 +190,7 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
     uint8 SlotID   = PStorage->InsertItem(std::move(PItem));
     if (SlotID == ERROR_SLOTID)
     {
-        ShowDebug("AddItem: Location %i is full", LocationID);
+        ShowDebug("AddItem: Location %i is full", static_cast<uint8>(LocationID));
         return SlotID;
     }
 
@@ -217,14 +217,14 @@ auto applyAddItem(CCharEntity* PChar, uint8 LocationID, std::unique_ptr<CItem> P
 
     applied = static_cast<int32>(PInserted->getQuantity());
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, static_cast<CONTAINER_ID>(LocationID), SlotID);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, LocationID, SlotID);
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
     return SlotID;
 }
 
 // Undos are recorded against a slot, so a stack that returned to a different one would strand every undo still pointing at the original
-auto restoreItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, std::unique_ptr<CItem> PItem, const Transaction* owner) -> uint8
+auto restoreItem(CCharEntity* PChar, xi::Container LocationID, uint8 SlotID, std::unique_ptr<CItem> PItem, const Transaction* owner) -> uint8
 {
     auto* PStorage = PChar->getStorage(LocationID);
 
@@ -256,13 +256,13 @@ auto restoreItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, std::unique
         return ERROR_SLOTID;
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PRestored, static_cast<CONTAINER_ID>(LocationID), SlotID);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PRestored, LocationID, SlotID);
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
     return SlotID;
 }
 
-auto applyAddItem(CCharEntity* PChar, const uint8 LocationID, const uint16 ItemID, const uint32 quantity, const Silence silence, const Transaction* owner, int32& applied) -> uint8
+auto applyAddItem(CCharEntity* PChar, const xi::Container LocationID, const uint16 ItemID, const uint32 quantity, const Silence silence, const Transaction* owner, int32& applied) -> uint8
 {
     applied = 0;
 
@@ -455,13 +455,13 @@ auto Transaction::reversible() const -> bool
     return true;
 }
 
-auto Transaction::heldSlots(uint8 /* location */) const -> uint8
+auto Transaction::heldSlots(xi::Container /* location */) const -> uint8
 {
     return 0;
 }
 
 // The undo takes back what landed rather than what was requested; the two differ when a stack hits its size limit
-auto Transaction::recordGive(CCharEntity* PChar, const uint8 location, const uint8 slot, const int32 applied) -> std::optional<uint8>
+auto Transaction::recordGive(CCharEntity* PChar, const xi::Container location, const uint8 slot, const int32 applied) -> std::optional<uint8>
 {
     if (slot == ERROR_SLOTID)
     {
@@ -479,7 +479,7 @@ auto Transaction::recordGive(CCharEntity* PChar, const uint8 location, const uin
     return slot;
 }
 
-auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
+auto Transaction::give(CCharEntity* PChar, const xi::Container location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
     int32 applied = 0;
 
@@ -488,7 +488,7 @@ auto Transaction::give(CCharEntity* PChar, const uint8 location, const uint16 it
     return this->recordGive(PChar, location, slot, applied);
 }
 
-auto Transaction::give(CCharEntity* PChar, const uint8 location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
+auto Transaction::give(CCharEntity* PChar, const xi::Container location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
 {
     if (!item)
     {
@@ -502,7 +502,7 @@ auto Transaction::give(CCharEntity* PChar, const uint8 location, std::unique_ptr
     return this->recordGive(PChar, location, slot, applied);
 }
 
-auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slot, const uint32 quantity) -> bool
+auto Transaction::take(CCharEntity* PChar, const xi::Container location, const uint8 slot, const uint32 quantity) -> bool
 {
     const CItem* PItem = PChar->getStorage(location)->GetItem(slot);
     if (!PItem || PItem->getQuantity() < quantity)
@@ -563,7 +563,7 @@ auto Transaction::take(CCharEntity* PChar, const uint8 location, const uint8 slo
     return true;
 }
 
-auto Transaction::mergeInto(CCharEntity* PChar, const uint8 location, const uint8 slot, const uint32 quantity) -> bool
+auto Transaction::mergeInto(CCharEntity* PChar, const xi::Container location, const uint8 slot, const uint32 quantity) -> bool
 {
     const auto merged = this->updateItem(PChar, location, slot, static_cast<int32>(quantity));
     if (!merged.applied)
@@ -585,7 +585,7 @@ auto Transaction::mergeInto(CCharEntity* PChar, const uint8 location, const uint
 
 auto Transaction::pay(CCharEntity* PChar, const uint32 gil) -> bool
 {
-    return PChar && this->take(PChar, LOC_INVENTORY, 0, gil);
+    return PChar && this->take(PChar, xi::Container::Inventory, 0, gil);
 }
 
 auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
@@ -595,7 +595,7 @@ auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
         return false;
     }
 
-    const auto earned = this->updateItem(PChar, LOC_INVENTORY, 0, static_cast<int32>(gil));
+    const auto earned = this->updateItem(PChar, xi::Container::Inventory, 0, static_cast<int32>(gil));
     if (!earned.applied)
     {
         return false;
@@ -603,7 +603,7 @@ auto Transaction::earn(CCharEntity* PChar, const uint32 gil) -> bool
 
     this->undoWith([this, PChar, granted = earned.delta]()
                    {
-                       if (!this->updateItem(PChar, LOC_INVENTORY, 0, -granted).applied)
+                       if (!this->updateItem(PChar, xi::Container::Inventory, 0, -granted).applied)
                        {
                            ShowErrorFmt("Transaction: could not take back {} gil from {}", granted, PChar->getName());
                        }
@@ -625,7 +625,7 @@ auto Transaction::enterTx(CItem* item) -> bool
     return xi::items::detail::ItemAccess::enterTransaction(item, xi::Badge<Transaction>{});
 }
 
-auto Transaction::updateItem(CCharEntity* PChar, const uint8 locationId, const uint8 slotId, const int32 quantity) const -> ItemMutation
+auto Transaction::updateItem(CCharEntity* PChar, const xi::Container locationId, const uint8 slotId, const int32 quantity) const -> ItemMutation
 {
     return applyItemUpdate(PChar, locationId, slotId, quantity, this);
 }

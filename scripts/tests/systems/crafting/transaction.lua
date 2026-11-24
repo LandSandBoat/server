@@ -106,28 +106,28 @@ describe('SynthTransaction', function()
         player:addItem(crystal)
         player:addItem(ingredient)
 
-        local ingItem = player:findItem(ingredient, xi.inventoryLocation.INVENTORY)
+        local ingItem = player:findItem(ingredient, xi.inv.INVENTORY)
         assert(ingItem, 'expected ingredient in inventory')
         local srcSlot = ingItem:getSlotID()
 
         player.actions:craft(crystal, { ingredient })
         assert(ingItem:state() == xi.itemState.IN_TRANSACTION)
 
-        player.actions:moveItem(xi.inventoryLocation.INVENTORY, srcSlot, xi.inventoryLocation.MOGSAFE, 1)
+        player.actions:moveItem(xi.inv.INVENTORY, srcSlot, xi.inv.MOG_SAFE, 1)
 
-        local stillInInv = player:findItem(ingredient, xi.inventoryLocation.INVENTORY)
+        local stillInInv = player:findItem(ingredient, xi.inv.INVENTORY)
         assert(stillInInv, 'ingredient should still be in inventory')
         assert(stillInInv:getSlotID() == srcSlot, 'ingredient slot must not change')
         assert(stillInInv:state() == xi.itemState.IN_TRANSACTION, 'state must still be IN_TRANSACTION')
 
-        local inMogSafe = player:findItem(ingredient, xi.inventoryLocation.MOGSAFE)
+        local inMogSafe = player:findItem(ingredient, xi.inv.MOG_SAFE)
         assert(not inMogSafe, 'ingredient must not have moved to mog safe')
     end)
 
     local function leaveOneFreeSlot()
         player:addItem(crystal, 2)
         player:addItem(ingredient)
-        player:changeContainerSize(xi.inventoryLocation.INVENTORY, 1 - player:getFreeSlotsCount())
+        player:changeContainerSize(xi.inv.INVENTORY, 1 - player:getFreeSlotsCount())
     end
 
     it('inventory has one less free slot while crafting', function()
@@ -144,7 +144,7 @@ describe('SynthTransaction', function()
         xi.test.world:skipTime(15)
 
         player:delContainerItems(xi.inv.INVENTORY)
-        assert(player:getFreeSlotsCount() == player:getContainerSize(xi.inventoryLocation.INVENTORY))
+        assert(player:getFreeSlotsCount() == player:getContainerSize(xi.inv.INVENTORY))
     end)
 
     it('cannot buy from a bazaar while crafting', function()
@@ -169,7 +169,7 @@ describe('SynthTransaction', function()
     it('cannot synth with a full inventory', function()
         player:addItem(crystal)
         player:addItem(ingredient)
-        player:changeContainerSize(xi.inventoryLocation.INVENTORY, -player:getFreeSlotsCount())
+        player:changeContainerSize(xi.inv.INVENTORY, -player:getFreeSlotsCount())
 
         player.actions:craft(crystal, { ingredient })
 

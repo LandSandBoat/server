@@ -118,9 +118,9 @@ auto collidesOnFloor(CItemFurnishing* other, const uint8 x, const uint8 z, const
 
 // Walks every installed furnishing in both mog safes (skipping the
 // self entry) and returns true if pred matches one.
-auto anyInstalledFurnishing(CCharEntity* PChar, const uint8 selfCat, const uint8 selfSlot, auto&& pred) -> bool
+auto anyInstalledFurnishing(CCharEntity* PChar, const xi::Container selfCat, const uint8 selfSlot, auto&& pred) -> bool
 {
-    for (const auto cat : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    for (const auto cat : { xi::Container::MogSafe, xi::Container::MogSafe2 })
     {
         auto* PContainer = PChar->getStorage(cat);
 
@@ -167,13 +167,13 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    if (this->MyroomCategory != LOC_MOGSAFE && this->MyroomCategory != LOC_MOGSAFE2)
+    if (this->MyroomCategory != static_cast<uint8>(xi::Container::MogSafe) && this->MyroomCategory != static_cast<uint8>(xi::Container::MogSafe2))
     {
         RATE_LIMIT(30s, ShowErrorFmt("Invalid container requested: {}", PChar->getName()));
         return;
     }
 
-    auto* PContainer = PChar->getStorage(this->MyroomCategory);
+    auto* PContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomCategory));
 
     // Reject out of bounds item index
     if (this->MyroomItemIndex > PContainer->GetSize())
@@ -225,7 +225,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             // Items on the floor (y=0) must not overlap other floor furniture.
             // Stacked items (y>0) skip this because the client sends them before
             // the parent when repositioning, so the parent isn't at its new spot yet.
-            if (this->y == 0 && anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+            if (this->y == 0 && anyInstalledFurnishing(PChar, static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex, [&](CItemFurnishing* other)
                                                        {
                                                            return collidesOnFloor(other, this->x, this->z, itemWidth, itemDepth, is2F);
                                                        }))
@@ -239,7 +239,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             // sends the child packet before the parent's.
             if (placement == FurnishingPlacement::OnTable && this->y > 0 && !PItem->isInstalled())
             {
-                const bool hasParent = anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+                const bool hasParent = anyInstalledFurnishing(PChar, static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex, [&](CItemFurnishing* other)
                                                               {
                                                                   if (other->placement() != FurnishingPlacement::Surface || other->getOn2ndFloor() != is2F)
                                                                   {
@@ -280,7 +280,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
                 return;
             }
 
-            const bool occupied = anyInstalledFurnishing(PChar, this->MyroomCategory, this->MyroomItemIndex, [&](CItemFurnishing* other)
+            const bool occupied = anyInstalledFurnishing(PChar, static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex, [&](CItemFurnishing* other)
                                                          {
                                                              return other->placement() == FurnishingPlacement::Wall &&
                                                                     other->getOn2ndFloor() == is2F &&
@@ -334,7 +334,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
         PItem->setLevel(this->y);
         PItem->setRotation(this->v);
 
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory "
                                            "SET "
@@ -350,7 +350,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             // Storage mods only apply on the 1st floor
             if (!PItem->getOn2ndFloor())
             {
-                PChar->getStorage(LOC_STORAGE)->AddBuff(PItem->getStorage());
+                PChar->getStorage(xi::Container::Storage)->AddBuff(PItem->getStorage());
             }
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
@@ -360,7 +360,7 @@ void GP_CLI_COMMAND_MYROOM_LAYOUT::process(MapSession* PSession, CCharEntity* PC
             PChar->loc.zone->SpawnConditionalNPCs(PChar);
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

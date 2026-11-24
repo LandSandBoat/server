@@ -46,7 +46,7 @@ auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition
 
     switch (const auto mount = effect->GetPower())
     {
-        case MOUNT_CHOCOBO:
+        case static_cast<uint8>(xi::Mount::Chocobo):
         {
             // Customized chocobos need ChocoboIndex 2
             if (isPersonalChocobo(PChar))
@@ -62,7 +62,7 @@ auto packetDefinition(const CCharEntity* PChar) -> MountPacketDefinition
                 .ChocoboIndex = 1,
             };
         }
-        case MOUNT_NOBLE_CHOCOBO:
+        case static_cast<uint8>(xi::Mount::NobleChocobo):
         {
             // Noble Chocobo is a special case, it should return 3
             // if following other mounts logic, however captures show it uses 4, likely to indicate it is a Chocobo.
@@ -90,7 +90,7 @@ auto isPersonalChocobo(const CCharEntity* PChar) -> bool
     const auto* effect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Mounted);
 
     return effect &&
-           effect->GetPower() == MOUNT_CHOCOBO &&
+           effect->GetPower() == static_cast<uint8>(xi::Mount::Chocobo) &&
            (effect->GetSubPower() & kPersonalChocoboFlag) != 0;
 }
 

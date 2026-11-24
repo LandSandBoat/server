@@ -283,7 +283,7 @@ auto NpcTradeTransaction::consumeSlot(Slot& slot, const uint32 quantity) -> bool
         return false;
     }
 
-    if (!this->take(this->player_, LOC_INVENTORY, invSlot, quantity))
+    if (!this->take(this->player_, xi::Container::Inventory, invSlot, quantity))
     {
         ShowErrorFmt("NpcTradeTransaction: {} kept the item in slot {} after trading it away", this->player_->getName(), invSlot);
         return false;

@@ -253,7 +253,7 @@ end
 ---@param player CClientEntityPair
 ---@param count integer
 function raisingClient.leaveFreeSlots(player, count)
-    player:changeContainerSize(xi.inventoryLocation.INVENTORY, count - player:getFreeSlotsCount())
+    player:changeContainerSize(xi.inv.INVENTORY, count - player:getFreeSlotsCount())
     assert(player:getFreeSlotsCount() == count, string.format('Expected %d free slots, got %d', count, player:getFreeSlotsCount()))
 end
 

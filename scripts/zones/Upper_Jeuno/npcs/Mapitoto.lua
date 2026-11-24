@@ -39,7 +39,7 @@ entity.onTrade = function(player, npc, trade)
             -- These are all offset by one due to Red Raptor
             player:setLocalVar('FullSpeedAheadReward', xi.keyItem.TIGER_COMPANION + mount - 1)
             player:startEvent(10227, item, xi.keyItem.TRAINERS_WHISTLE, xi.mount.TIGER + mount - 2)
-        elseif mount >= xi.mount.CHOCOBO and mount <= xi.mount.MOUNT_MAX then
+        elseif mount >= xi.mount.CHOCOBO and mount <= xi.mount.BUBBLE_CRAB then
             player:setLocalVar('FullSpeedAheadReward', xi.keyItem.TIGER_COMPANION + mount)
             player:startEvent(10227, item, xi.keyItem.TRAINERS_WHISTLE, xi.mount.TIGER + mount - 1)
         end

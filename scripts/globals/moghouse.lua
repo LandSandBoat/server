@@ -428,8 +428,8 @@ xi.moghouse.unlockMogLocker = function(player)
     player:setCharVar('mog-locker-expiry-timestamp', -1)
 
     -- Safety check in case some servers auto-set 80 slots for mog locker items.
-    if player:getContainerSize(xi.inv.MOGLOCKER) == 0 then
-        player:changeContainerSize(xi.inv.MOGLOCKER, 30)
+    if player:getContainerSize(xi.inv.MOG_LOCKER) == 0 then
+        player:changeContainerSize(xi.inv.MOG_LOCKER, 30)
     end
 
     return -1
@@ -516,7 +516,7 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
     player:setCharVar('mog-locker-expiry-timestamp', newTs)
 
     -- Send an invent size packet to enable the items if they weren't.
-    player:changeContainerSize(xi.inv.MOGLOCKER, 0)
+    player:changeContainerSize(xi.inv.MOG_LOCKER, 0)
 
     return true
 end

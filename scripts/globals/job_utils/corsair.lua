@@ -903,8 +903,8 @@ xi.job_utils.corsair.checkQuickDraw = function(player, ability)
     end
 
     if
-        not player:hasItem(data.cardAmmo, xi.inventoryLocation.INVENTORY) and
-        not player:hasItem(xi.item.TRUMP_CARD, xi.inventoryLocation.INVENTORY)
+        not player:hasItem(data.cardAmmo, xi.inv.INVENTORY) and
+        not player:hasItem(xi.item.TRUMP_CARD, xi.inv.INVENTORY)
     then
         return xi.msg.basic.CANNOT_PERFORM, 0
     end

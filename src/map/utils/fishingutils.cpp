@@ -1545,7 +1545,7 @@ auto BaitLoss(CCharEntity* PChar, RemoveFly removeFly, SendUpdate sendUpdate) ->
                 {
                     charutils::UnequipItem(PChar, SLOT_AMMO);
                 }
-                const uint8 baitLocation = PBait->getLocationID();
+                const auto  baitLocation = static_cast<xi::Container>(PBait->getLocationID());
                 const uint8 baitSlot     = PBait->getSlotID();
 
                 if (auto transaction = ItemClaimTransaction::start(PChar); !transaction || !transaction->take(baitLocation, baitSlot, 1) || !transaction->commit())
@@ -1583,7 +1583,7 @@ void RodBreak(CCharEntity* PChar)
     {
         BaitLoss(PChar, RemoveFly::Yes, SendUpdate::No);
         charutils::UnequipItem(PChar, SLOT_RANGED);
-        uint8 location    = PRanged->getLocationID();
+        auto  location    = static_cast<xi::Container>(PRanged->getLocationID());
         uint8 rodSlot     = PRanged->getSlotID();
         auto  transaction = ItemClaimTransaction::start(PChar);
         if (!transaction ||
@@ -1660,7 +1660,7 @@ auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length
     PChar->animation     = xi::Animation::NewFishingCaught;
     PChar->updatemask |= UPDATE_HP;
 
-    if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
+    if (PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() != 0)
     {
         auto Fish = GetFish(FishID);
 
@@ -1690,7 +1690,7 @@ auto CatchFish(CCharEntity* PChar, uint16 FishID, BigFish bigFish, uint16 length
         Fish->setQuantity(Count);
 
         auto transaction = ItemClaimTransaction::start(PChar);
-        if (!transaction || !transaction->give(LOC_INVENTORY, std::move(Fish)) || !transaction->commit())
+        if (!transaction || !transaction->give(xi::Container::Inventory, std::move(Fish)) || !transaction->commit())
         {
             ShowErrorFmt("fishingutils: {} did not receive the fish they caught", PChar->getName());
             return 0;
@@ -1736,7 +1736,7 @@ auto CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1) -> int32
         return 1;
     }
 
-    if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0)
+    if (PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() != 0)
     {
         const auto* PItem = xi::items::lookup(ItemID);
         if (PItem == nullptr)
@@ -1755,7 +1755,7 @@ auto CatchItem(CCharEntity* PChar, uint16 ItemID, uint8 Count = 1) -> int32
         }
 
         auto transaction = ItemClaimTransaction::start(PChar);
-        if (!transaction || !transaction->give(LOC_INVENTORY, ItemID, Count) || !transaction->commit())
+        if (!transaction || !transaction->give(xi::Container::Inventory, ItemID, Count) || !transaction->commit())
         {
             ShowErrorFmt("fishingutils: {} did not receive item {} they caught", PChar->getName(), ItemID);
             return 0;

@@ -109,7 +109,7 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    const CItem* PItem = transaction->claimSlot(LOC_INVENTORY, slotId);
+    const CItem* PItem = transaction->claimSlot(xi::Container::Inventory, slotId);
     if (!PItem)
     {
         ShowWarning("GP_CLI_COMMAND_SHOP_SELL_SET: Player %s trying to sell an item that is missing or already claimed!", PChar->getName());
@@ -139,15 +139,15 @@ void GP_CLI_COMMAND_SHOP_SELL_SET::process(MapSession* PSession, CCharEntity* PC
     const auto cost      = quantity * unitPrice;
 
     // Track the gil the player had before the transaction
-    const uint32 gilBefore = PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity();
+    const uint32 gilBefore = PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity();
 
-    if (!transaction->take(LOC_INVENTORY, slotId, quantity) || !transaction->earn(cost) || !transaction->commit())
+    if (!transaction->take(xi::Container::Inventory, slotId, quantity) || !transaction->earn(cost) || !transaction->commit())
     {
         ShowWarningFmt("GP_CLI_COMMAND_SHOP_SELL_SET: Player {} could not sell item ID {}", PChar->getName(), itemId);
         return;
     }
 
-    const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+    const auto appliedGil = static_cast<int32>(PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
 
     // TODO: Don't pass around Scheduler& through PSession
     auditSale(*PSession->scheduler, PChar, itemId, quantity, unitPrice, appliedGil);

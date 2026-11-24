@@ -24,8 +24,8 @@ describe('confirmTrade & confirmItem', function()
         player:addItem(xi.item.BARRAGE_TURBINE, 2)
         player:addItem(xi.item.BARRIER_MODULE_II)
 
-        local turbineAttachment = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY):getSubID()
-        local moduleAttachment  = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY):getSubID()
+        local turbineAttachment = player:findItem(xi.item.BARRAGE_TURBINE, xi.inv.INVENTORY):getSubID()
+        local moduleAttachment  = player:findItem(xi.item.BARRIER_MODULE_II, xi.inv.INVENTORY):getSubID()
 
         player.actions:tradeNpc('Tateeya',
             {
@@ -42,13 +42,13 @@ describe('confirmTrade & confirmItem', function()
 
         assert(player:hasAttachment(turbineAttachment), 'barrage turbine is unlocked')
 
-        local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
+        local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inv.INVENTORY)
 
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'player still has a single barrage turbine in inventory')
         assert(turbine:state() == xi.itemState.FREE, 'the barrage turbine is not claimed')
 
-        local barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY)
+        local barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inv.INVENTORY)
 
         assert(barrierModule, 'player still has a barrier module in inventory')
         assert(barrierModule:state() == xi.itemState.FREE, 'the barrier module is not claimed')
@@ -69,11 +69,11 @@ describe('confirmTrade & confirmItem', function()
         assert(player:hasAttachment(moduleAttachment), 'barrier module II is unlocked')
 
         -- pointer should be stale - search for the barrier module again
-        barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inventoryLocation.INVENTORY)
+        barrierModule = player:findItem(xi.item.BARRIER_MODULE_II, xi.inv.INVENTORY)
         assert(barrierModule == nil, 'player does not have a barrier module in inventory')
 
         -- search for the turbine again
-        turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
+        turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inv.INVENTORY)
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'player still has a single barrage turbine in inventory')
         assert(turbine:state() == xi.itemState.FREE, 'the barrage turbine is not claimed')
@@ -104,7 +104,7 @@ describe('confirmTrade & confirmItem', function()
             },
             { eventId = 651 })
 
-        local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inventoryLocation.INVENTORY)
+        local turbine = player:findItem(xi.item.BARRAGE_TURBINE, xi.inv.INVENTORY)
 
         assert(turbine, 'player still has a barrage turbine in inventory')
         assert(turbine:getQuantity() == 1, 'only the confirmed turbine was taken')

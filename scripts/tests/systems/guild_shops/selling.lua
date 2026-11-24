@@ -139,7 +139,7 @@ describe('Guild shop selling', function()
         assert(player:getGil() == gil, 'gil paid for a refused sale')
         assert(player:getItemCount(offered) == 5, 'refused item was taken')
 
-        local stack = player:findItems(offered, xi.inventoryLocation.INVENTORY)[1]
+        local stack = player:findItems(offered, xi.inv.INVENTORY)[1]
         assert(stack:state() == xi.itemState.FREE, 'stack left locked after the refusal')
     end)
 

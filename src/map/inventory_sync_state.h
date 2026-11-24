@@ -34,11 +34,11 @@ using Equipping = xi::Flag<struct EquippingTag>;
 
 struct equip_change_t
 {
-    CONTAINER_ID container{};       // Container where the item is located
-    uint8        containerSlotId{}; // Item slot in container (0 for unequip)
-    SLOTTYPE     equipSlot{};       // Equipment slot
-    CItem*       item{};            // The item being equipped/unequipped
-    Equipping    equipping;         // Yes = equip (NoDrop), No = unequip (Normal)
+    xi::Container container{};       // Container where the item is located
+    uint8         containerSlotId{}; // Item slot in container (0 for unequip)
+    SLOTTYPE      equipSlot{};       // Equipment slot
+    CItem*        item{};            // The item being equipped/unequipped
+    Equipping     equipping;         // Yes = equip (NoDrop), No = unequip (Normal)
 };
 
 // Tracks which inventory containers have been synced with the client
@@ -46,18 +46,18 @@ class InventorySyncState
 {
 public:
     // Which containers have been sent to the client
-    void markSynced(CONTAINER_ID id);
-    auto isSynced(CONTAINER_ID id) const -> bool;
+    void markSynced(xi::Container id);
+    auto isSynced(xi::Container id) const -> bool;
     auto getSyncedFlags() const -> uint32_t;
 
     // Equipment change queue
-    void queueEquipChange(CONTAINER_ID container, uint8 containerSlotId, SLOTTYPE equipSlot, CItem* item, Equipping equipping);
+    void queueEquipChange(xi::Container container, uint8 containerSlotId, SLOTTYPE equipSlot, CItem* item, Equipping equipping);
     void removeEquipChange(const CItem* item);
     auto hasEquipChange(const CItem* item) const -> bool;
     void clearEquipChanges();
     auto hasPendingEquipChanges() const -> bool;
     auto pendingEquipChanges() const -> const std::vector<equip_change_t>&;
-    auto dirtyContainers() const -> const std::set<CONTAINER_ID>&;
+    auto dirtyContainers() const -> const std::set<xi::Container>&;
 
     // Dirty item exdata flush
     void flushDirtyItems(class CCharEntity* PChar) const;
@@ -65,5 +65,5 @@ public:
 private:
     xi::bitset<MAX_CONTAINER_ID> syncedContainers_{};
     std::vector<equip_change_t>  pendingEquipChanges_;
-    std::set<CONTAINER_ID>       dirtyContainers_;
+    std::set<xi::Container>      dirtyContainers_;
 };

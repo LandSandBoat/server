@@ -789,7 +789,7 @@ void CLuaClientEntityPairActions::linkshellActive(const uint8 invSlot, const uin
 
     data->a           = 15;
     data->ItemIndex   = invSlot;
-    data->Category    = LOC_INVENTORY;
+    data->Category    = static_cast<uint8_t>(xi::Container::Inventory);
     data->ActiveFlg   = active ? 1 : 0;
     data->LinkshellId = lsNum;
 
@@ -1172,7 +1172,7 @@ void CLuaClientEntityPairActions::equipSet(const sol::table& entries) const
         auto entry                  = val.as<sol::table>();
         p->Equipment[idx].ItemIndex = entry.get_or<uint8_t>("index", 0);
         p->Equipment[idx].EquipKind = entry.get_or<uint8_t>("kind", 0);
-        p->Equipment[idx].Category  = entry.get_or<uint8_t>("container", 0); // 0 == LOC_INVENTORY
+        p->Equipment[idx].Category  = entry.get_or<uint8_t>("container", 0); // 0 == xi::Container::Inventory
         ++idx;
     }
 
@@ -1257,7 +1257,7 @@ namespace
 
 auto storageItemNo(CCharEntity* PChar, const uint8 container, const uint8 slot) -> uint16
 {
-    CItemContainer* PContainer = PChar->getStorage(container);
+    CItemContainer* PContainer = PChar->getStorage(static_cast<xi::Container>(container));
     CItem*          PItem      = PContainer ? PContainer->GetItem(slot) : nullptr;
 
     return PItem ? PItem->getID() : 0;
@@ -1345,7 +1345,7 @@ void CLuaClientEntityPairActions::plantDry(const uint8 potContainer, const uint8
 /************************************************************************
  *  Function: placeFurniture()
  *  Purpose : Install a furnishing on the 1st floor at grid cell (x, z), optionally stacked at elevation y.
- *  Example : player.actions:placeFurniture(xi.inv.MOGSAFE, slot, 0, 0)
+ *  Example : player.actions:placeFurniture(xi.inv.MOG_SAFE, slot, 0, 0)
  ************************************************************************/
 
 void CLuaClientEntityPairActions::placeFurniture(const uint8 container, const uint8 slot, const uint8 x, const uint8 z, sol::optional<uint8> y) const

@@ -209,8 +209,8 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
                     newShellItem->setQuantity(1);
                     std::memcpy(newShellItem->m_extra, PItemLinkshell->m_extra, 24);
                     newShellItem->SetLSType(newId == ITEMID::PEARLSACK ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL);
-                    uint8 LocationID = PItemLinkshell->getLocationID();
-                    uint8 SlotID     = PItemLinkshell->getSlotID();
+                    const auto LocationID = static_cast<xi::Container>(PItemLinkshell->getLocationID());
+                    uint8      SlotID     = PItemLinkshell->getSlotID();
 
                     PMember->clearEquip(slot);
                     PMember->getStorage(LocationID)->RemoveItem(SlotID);
@@ -241,7 +241,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, const uint8 req
 
                     PMember->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkshell, ItemLockFlg::Normal);
                     PMember->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PMember, lsID);
-                    PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, static_cast<CONTAINER_ID>(LocationID), SlotID);
+                    PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkshell, LocationID, SlotID);
                 }
 
                 charutils::SaveCharStats(PMember);
@@ -291,9 +291,9 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
                 PMember->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PMember, lsNum);
             }
 
-            for (uint8 LocationID = 0; LocationID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocationID)
+            for (uint8 LocationID = 0; LocationID < MAX_CONTAINER_ID; ++LocationID)
             {
-                auto* PContainer = PMember->getStorage(LocationID);
+                auto* PContainer = PMember->getStorage(static_cast<xi::Container>(LocationID));
                 PContainer->ForEachItem(
                     [&](CItem* PItem)
                     {
@@ -315,7 +315,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 request
                                              LocationID,
                                              newPItemLinkshell->getSlotID());
 
-                            PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(newPItemLinkshell, static_cast<CONTAINER_ID>(LocationID), newPItemLinkshell->getSlotID());
+                            PMember->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(newPItemLinkshell, static_cast<xi::Container>(LocationID), newPItemLinkshell->getSlotID());
                         }
                     });
             }

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.mount
+
+values:
+  chocobo:         0
+  quest_raptor:    1 # This now appears as a plain chocobo
+  raptor:          2
+  tiger:           3
+  crab:            4
+  red_crab:        5
+  bomb:            6
+  sheep:           7
+  morbol:          8
+  crawler:         9
+  fenrir:         10
+  beetle:         11
+  moogle:         12
+  magic_pot:      13
+  tulfaire:       14
+  warmachine:     15
+  xzomit:         16
+  hippogryph:     17
+  spectral_chair: 18
+  spheroid:       19
+  omega:          20
+  coeurl:         21
+  goobbue:        22
+  raaz:           23
+  levitus:        24
+  adamantoise:    25
+  dhalmel:        26
+  doll:           27
+  golden_bomb:    28
+  buffalo:        29
+  wivre:          30
+  red_raptor:     31
+  iron_giant:     32
+  byakko:         33
+  noble_chocobo:  34 # Uses Chocobo animation, and CustomProperties[1] set to 1
+  ixion:          35
+  phuabo:         36
+  craklaw:        37
+  alicorn:        38
+  bubble_crab:    39

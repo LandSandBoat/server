@@ -62,8 +62,8 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
         return;
     }
 
-    CItemContainer* PBazaar         = PTarget->getStorage(LOC_INVENTORY);
-    CItemContainer* PBuyerInventory = PChar->getStorage(LOC_INVENTORY);
+    CItemContainer* PBazaar         = PTarget->getStorage(xi::Container::Inventory);
+    CItemContainer* PBuyerInventory = PChar->getStorage(xi::Container::Inventory);
     if (PBazaar == nullptr || PBuyerInventory == nullptr)
     {
         return;
@@ -172,7 +172,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
         PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SALE>(PChar, PItem);
 
-        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(this->BazaarItemIndex), LOC_INVENTORY, this->BazaarItemIndex);
+        PTarget->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PBazaar->GetItem(this->BazaarItemIndex), xi::Container::Inventory, this->BazaarItemIndex);
         PTarget->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PTarget);
 
         DebugBazaarsFmt("Bazaar Interaction [Purchase Successful] - Buyer: {}, Seller: {}, Item: {}, Qty: {}, Cost: {}", PChar->name, PTarget->name, PItem->getName(), this->BuyNum, PriceWithTax);

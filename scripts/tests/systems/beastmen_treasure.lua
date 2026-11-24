@@ -244,7 +244,7 @@ describe('Beastmen Treasure', function()
                 player.actions:tradeNpc(zones[hunt.zone].npc.BEASTMEN_TREASURE_OFFSET, { xi.item.PICKAXE })
                 player.events:expectNotInEvent()
 
-                local pickaxe = player:findItem(xi.item.PICKAXE, xi.inventoryLocation.INVENTORY)
+                local pickaxe = player:findItem(xi.item.PICKAXE, xi.inv.INVENTORY)
                 assert(pickaxe, 'rejected excavation consumed the pickaxe')
                 assert(pickaxe:state() == xi.itemState.FREE, 'rejected excavation left the pickaxe claimed')
                 assert(player:getGil() == gilBefore, 'rejected excavation paid gil')
@@ -260,7 +260,7 @@ describe('Beastmen Treasure', function()
                 player.actions:tradeNpc(zones[hunt.zone].npc.BEASTMEN_TREASURE_OFFSET + 1, { xi.item.PICKAXE })
                 player.events:expectNotInEvent()
 
-                local pickaxe = player:findItem(xi.item.PICKAXE, xi.inventoryLocation.INVENTORY)
+                local pickaxe = player:findItem(xi.item.PICKAXE, xi.inv.INVENTORY)
                 assert(pickaxe, 'wrong-site excavation consumed the pickaxe')
                 assert(pickaxe:state() == xi.itemState.FREE, 'wrong-site excavation left the pickaxe claimed')
                 assert(player:getGil() == gilBefore, 'wrong-site excavation paid gil')
@@ -285,7 +285,7 @@ describe('Beastmen Treasure', function()
 
             if hunt.zone == xi.zone.YUHTUNGA_JUNGLE then
                 it('uses the five chip colors with their assigned weights', function()
-                    player:changeContainerSize(xi.inventoryLocation.INVENTORY, 80)
+                    player:changeContainerSize(xi.inv.INVENTORY, 80)
                     rewardRolls.chipChance = 25
 
                     -- The weighted entries can appear in any order.
@@ -321,7 +321,7 @@ describe('Beastmen Treasure', function()
                     assert(player:getLocalVar(hunt.digsiteVar) == 0, 'failed payment left a pending dig site')
 
                     for _, itemId in ipairs({ xi.item.MERMAID_HEAD, xi.item.MERMAID_BODY, xi.item.MERMAID_HANDS }) do
-                        local item = player:findItem(itemId, xi.inventoryLocation.INVENTORY)
+                        local item = player:findItem(itemId, xi.inv.INVENTORY)
                         assert(item, 'failed payment consumed another component')
                         assert(item:state() == xi.itemState.FREE, 'failed payment left a component claimed')
                     end

@@ -138,17 +138,17 @@ void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 Pe
 void CheckWeaponSkill(CCharEntity* PChar, uint8 skill);
 auto HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycleBin = IncludeRecycleBin::Yes) -> bool;
 auto getItemCount(CCharEntity* PChar, uint16 ItemID) -> uint32;
-auto MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8;
+auto MoveItem(CCharEntity* PChar, xi::Container LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8;
 
-void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID);
+void DropItem(CCharEntity* PChar, xi::Container container, uint8 slotID, int32 quantity, uint16 ItemID);
 void CheckValidEquipment(CCharEntity* PChar, bool isDelevel = false);
 void SaveJobChangeGear(CCharEntity* PChar);
 void LoadJobChangeGear(CCharEntity* PChar);
-void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID);
+void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Container containerID);
 void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, xi::Flag<struct RecalculateTag> recalculate = Recalculate::Yes, bool isDelevel = false);
 auto hasSlotEquipped(CCharEntity* PChar, uint8 equipSlotID) -> bool;
 void RemoveSub(CCharEntity* PChar);
-auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID) -> bool;
+auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Container containerID) -> bool;
 void CheckUnarmedWeapon(CCharEntity* PChar);
 void SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
 void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);

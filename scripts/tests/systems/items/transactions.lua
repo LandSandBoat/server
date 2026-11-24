@@ -16,7 +16,7 @@ describe('Item transaction invariants', function()
     end
 
     local function slotOf(itemId)
-        local item = player:findItem(itemId, xi.inventoryLocation.INVENTORY)
+        local item = player:findItem(itemId, xi.inv.INVENTORY)
 
         assert(item, 'expected to be holding item ' .. tostring(itemId))
 
@@ -40,7 +40,7 @@ describe('Item transaction invariants', function()
 
             local slot = slotOf(stackable)
 
-            player.actions:moveItem(xi.inventoryLocation.INVENTORY, slot, xi.inventoryLocation.INVENTORY, 5)
+            player.actions:moveItem(xi.inv.INVENTORY, slot, xi.inv.INVENTORY, 5)
 
             assert(totalHeld(stackable) == stackSize, 'total after split: ' .. tostring(totalHeld(stackable)))
             assertAllFree(stackable)
@@ -51,7 +51,7 @@ describe('Item transaction invariants', function()
 
             local slot = slotOf(stackable)
 
-            player.actions:moveItem(xi.inventoryLocation.INVENTORY, slot, xi.inventoryLocation.INVENTORY, 5)
+            player.actions:moveItem(xi.inv.INVENTORY, slot, xi.inv.INVENTORY, 5)
 
             local split = nil
 
@@ -66,7 +66,7 @@ describe('Item transaction invariants', function()
 
             assert(split, 'the split half was never created')
 
-            player.actions:moveItem(xi.inventoryLocation.INVENTORY, split, xi.inventoryLocation.INVENTORY, 5, slot)
+            player.actions:moveItem(xi.inv.INVENTORY, split, xi.inv.INVENTORY, 5, slot)
 
             assert(totalHeld(stackable) == stackSize, 'total after merge: ' .. tostring(totalHeld(stackable)))
             assertAllFree(stackable)
@@ -94,7 +94,7 @@ describe('Item transaction invariants', function()
 
             assert(full and part, 'expected a full stack and a partial one')
 
-            player.actions:moveItem(xi.inventoryLocation.INVENTORY, part, xi.inventoryLocation.INVENTORY, 5, full)
+            player.actions:moveItem(xi.inv.INVENTORY, part, xi.inv.INVENTORY, 5, full)
 
             assert(totalHeld(stackable) == stackSize + 5, 'total after a merge that does not fit: ' .. tostring(totalHeld(stackable)))
             assertAllFree(stackable)
@@ -105,7 +105,7 @@ describe('Item transaction invariants', function()
             player:addItem(stackable, 4)
             player:addItem(stackable, 4)
 
-            player.actions:sortContainer(xi.inventoryLocation.INVENTORY)
+            player.actions:sortContainer(xi.inv.INVENTORY)
 
             assert(totalHeld(stackable) == 12, 'total after sort: ' .. tostring(totalHeld(stackable)))
             assertAllFree(stackable)
@@ -120,7 +120,7 @@ describe('Item transaction invariants', function()
 
             local slot = slotOf(stackable)
 
-            player.actions:moveItem(xi.inventoryLocation.INVENTORY, slot, xi.inventoryLocation.INVENTORY, 5)
+            player.actions:moveItem(xi.inv.INVENTORY, slot, xi.inv.INVENTORY, 5)
 
             assert(player:getGil() == before, 'gil moved during an item-only operation')
         end)
@@ -147,11 +147,11 @@ describe('Item transaction invariants', function()
         it('marks equipped gear busy and frees it again', function()
             player:addItem(xi.item.BRONZE_AXE)
 
-            local axe = player:findItem(xi.item.BRONZE_AXE, xi.inventoryLocation.INVENTORY)
+            local axe = player:findItem(xi.item.BRONZE_AXE, xi.inv.INVENTORY)
 
             assert(axe, 'the axe was not added')
 
-            player:equipItem(xi.item.BRONZE_AXE, xi.inventoryLocation.INVENTORY, xi.slot.MAIN)
+            player:equipItem(xi.item.BRONZE_AXE, xi.inv.INVENTORY, xi.slot.MAIN)
 
             assert(player:getEquipID(xi.slot.MAIN) == xi.item.BRONZE_AXE, 'the axe was not equipped')
             assert(axe:state() == xi.itemState.EQUIPPED, 'equipped state: ' .. tostring(axe:state()))
@@ -167,11 +167,11 @@ describe('Item transaction invariants', function()
 
             local slot = slotOf(stackable)
 
-            player.actions:dropItem(xi.inventoryLocation.INVENTORY, slot, 2)
+            player.actions:dropItem(xi.inv.INVENTORY, slot, 2)
 
-            assert(not player:findItem(stackable, xi.inventoryLocation.INVENTORY), 'the stack stayed in inventory')
+            assert(not player:findItem(stackable, xi.inv.INVENTORY), 'the stack stayed in inventory')
 
-            local binned = player:findItem(stackable, xi.inventoryLocation.RECYCLEBIN)
+            local binned = player:findItem(stackable, xi.inv.RECYCLE_BIN)
 
             assert(binned, 'the stack reached neither inventory nor the recycle bin')
             assert(binned:state() == xi.itemState.FREE, 'binned state: ' .. tostring(binned:state()))

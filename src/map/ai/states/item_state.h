@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/macros.h"
+#include "data/enums/container.h"
 #include "state.h"
 
 class CBattleEntity;
@@ -59,7 +60,7 @@ protected:
     CCharEntity* const m_PEntity;
 
     CItemUsable*        m_PItem;
-    uint8               m_location;
+    xi::Container       m_location;
     uint8               m_slot;
     timer::duration     m_castTime{};
     timer::duration     m_animationTime{};

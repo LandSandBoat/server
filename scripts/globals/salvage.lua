@@ -523,7 +523,7 @@ xi.salvage.tempBoxFinish = function(player, csid, option, npc)
                 local itemQnty = npc:getLocalVar('itemAmount_'..choice)
 
                 if item > 0 and itemQnty > 0 then
-                    if not player:hasItem(item, xi.inventoryLocation.TEMPITEMS) then
+                    if not player:hasItem(item, xi.inv.TEMP_ITEMS) then
                         player:addTempItem(item)
                         player:messageSpecial(ID.text.TEMP_ITEM, item)
                         npc:setLocalVar('itemAmount_'..choice, itemQnty - 1)

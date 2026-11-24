@@ -30,27 +30,27 @@
 namespace
 {
 
-const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<xi::Container>
 {
     // These are always available in both LSB and retail.
     std::set allowedContainers = {
-        LOC_INVENTORY,
-        LOC_WARDROBE,
-        LOC_WARDROBE2,
+        xi::Container::Inventory,
+        xi::Container::Wardrobe,
+        xi::Container::Wardrobe2,
     };
 
     // Global containers optionally unlockable
     const std::set unlockableContainers = {
-        LOC_WARDROBE3, // Always available in LSB but paid feature on retail.
-        LOC_WARDROBE4,
-        LOC_WARDROBE5,
-        LOC_WARDROBE6,
-        LOC_WARDROBE7,
-        LOC_WARDROBE8,
+        xi::Container::Wardrobe3, // Always available in LSB but paid feature on retail.
+        xi::Container::Wardrobe4,
+        xi::Container::Wardrobe5,
+        xi::Container::Wardrobe6,
+        xi::Container::Wardrobe7,
+        xi::Container::Wardrobe8,
     };
 
     const std::set additionalContainers = {
-        LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE
+        xi::Container::MogSatchel, xi::Container::MogSack, xi::Container::MogCase
     };
 
     for (const auto containerId : unlockableContainers)
@@ -93,7 +93,7 @@ auto GP_CLI_COMMAND_EQUIPSET_SET::validate(MapSession* PSession, const CCharEnti
             const auto& equipment = this->Equipment[i];
             pv
                 .oneOf<SLOTTYPE>(equipment.EquipKind)
-                .oneOf("equipment.Category", static_cast<CONTAINER_ID>(equipment.Category), allowedContainers);
+                .oneOf("equipment.Category", static_cast<xi::Container>(equipment.Category), allowedContainers);
         }
     }
 
@@ -113,7 +113,7 @@ void GP_CLI_COMMAND_EQUIPSET_SET::process(MapSession* PSession, CCharEntity* PCh
 
         const auto  slot    = static_cast<SLOTTYPE>(this->Equipment[i].EquipKind);
         const auto* PBefore = PChar->getEquip(slot);
-        charutils::EquipItem(PChar, this->Equipment[i].ItemIndex, this->Equipment[i].EquipKind, this->Equipment[i].Category);
+        charutils::EquipItem(PChar, this->Equipment[i].ItemIndex, this->Equipment[i].EquipKind, static_cast<xi::Container>(this->Equipment[i].Category));
         changed = changed || PChar->getEquip(slot) != PBefore;
     }
 

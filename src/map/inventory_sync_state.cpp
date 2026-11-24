@@ -28,17 +28,17 @@
 #include "packets/s2c/0x020_item_attr.h"
 
 // Marks a given container as having been entirely streamed to the client
-void InventorySyncState::markSynced(const CONTAINER_ID id)
+void InventorySyncState::markSynced(const xi::Container id)
 {
-    if (id < MAX_CONTAINER_ID)
+    if (static_cast<uint8>(id) < MAX_CONTAINER_ID)
     {
-        syncedContainers_.set(id);
+        syncedContainers_.set(static_cast<uint8>(id));
     }
 }
 
-auto InventorySyncState::isSynced(const CONTAINER_ID id) const -> bool
+auto InventorySyncState::isSynced(const xi::Container id) const -> bool
 {
-    return id < MAX_CONTAINER_ID && syncedContainers_.test(id);
+    return static_cast<uint8>(id) < MAX_CONTAINER_ID && syncedContainers_.test(static_cast<uint8>(id));
 }
 
 // Computes a flag for use in ITEM_FLAG representing containers that have been entirely streamed.
@@ -49,10 +49,10 @@ auto InventorySyncState::getSyncedFlags() const -> uint32_t
     return flags;
 }
 
-void InventorySyncState::queueEquipChange(CONTAINER_ID container, uint8 containerSlotId, SLOTTYPE equipSlot, CItem* item, Equipping equipping)
+void InventorySyncState::queueEquipChange(xi::Container container, uint8 containerSlotId, SLOTTYPE equipSlot, CItem* item, Equipping equipping)
 {
     pendingEquipChanges_.emplace_back(container, containerSlotId, equipSlot, item, equipping);
-    dirtyContainers_.insert(equipping ? container : static_cast<CONTAINER_ID>(item->getLocationID()));
+    dirtyContainers_.insert(equipping ? container : static_cast<xi::Container>(item->getLocationID()));
 }
 
 void InventorySyncState::removeEquipChange(const CItem* item)
@@ -89,7 +89,7 @@ auto InventorySyncState::pendingEquipChanges() const -> const std::vector<equip_
     return pendingEquipChanges_;
 }
 
-auto InventorySyncState::dirtyContainers() const -> const std::set<CONTAINER_ID>&
+auto InventorySyncState::dirtyContainers() const -> const std::set<xi::Container>&
 {
     return dirtyContainers_;
 }
@@ -98,7 +98,7 @@ void InventorySyncState::flushDirtyItems(CCharEntity* PChar) const
 {
     for (uint8 loc = 0; loc < MAX_CONTAINER_ID; ++loc)
     {
-        auto* PContainer = PChar->getStorage(loc);
+        auto* PContainer = PChar->getStorage(static_cast<xi::Container>(loc));
         if (!PContainer)
         {
             continue;
@@ -114,7 +114,7 @@ void InventorySyncState::flushDirtyItems(CCharEntity* PChar) const
                                      PChar->id,
                                      loc,
                                      PItem->getSlotID());
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(loc), PItem->getSlotID());
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<xi::Container>(loc), PItem->getSlotID());
                     PItem->setDirty(false);
                 }
             });

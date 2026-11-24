@@ -36,7 +36,7 @@
 namespace
 {
 
-const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+const std::set<xi::Container> validPlantCategories = { xi::Container::MogSafe, xi::Container::MogSafe2 };
 
 }
 
@@ -47,13 +47,13 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_ADD::validate(MapSession* PSession, const CChar
         .isInMogHouse(xi::MogHouse::Own)
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
         .mustNotEqual(this->MyroomAddItemNo, 0, "MyroomAddItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories)
-        .oneOf("MyroomAddCategory", this->MyroomAddCategory, validPlantCategories);
+        .oneOf("MyroomPlantCategory", static_cast<xi::Container>(this->MyroomPlantCategory), validPlantCategories)
+        .oneOf("MyroomAddCategory", static_cast<xi::Container>(this->MyroomAddCategory), validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomPlantCategory));
     auto*           PItem          = PItemContainer->GetItem(this->MyroomPlantItemIndex);
     auto*           PPotItem       = dynamic_cast<CItemFlowerpot*>(PItem);
 
@@ -106,7 +106,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
     }
 
     // the item id is client-supplied, so it has to match what is really in the slot
-    const auto* PAddItem = PChar->getStorage(this->MyroomAddCategory)->GetItem(this->MyroomAddItemIndex);
+    const auto* PAddItem = PChar->getStorage(static_cast<xi::Container>(this->MyroomAddCategory))->GetItem(this->MyroomAddItemIndex);
     if (!PAddItem || PAddItem->getID() != this->MyroomAddItemNo)
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant item {} that is not in slot {}", PChar->getName(), this->MyroomAddItemNo, this->MyroomAddItemIndex);
@@ -119,14 +119,14 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
         return;
     }
 
-    if (!transaction->claimSlot(this->MyroomAddCategory, this->MyroomAddItemIndex))
+    if (!transaction->claimSlot(static_cast<xi::Container>(this->MyroomAddCategory), this->MyroomAddItemIndex))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} trying to plant a claimed item {}", PChar->getName(), PItem->getID());
         return;
     }
 
     // seed first: a pot that turns out to have no use for it rolls the take back
-    if (!transaction->take(this->MyroomAddCategory, this->MyroomAddItemIndex, 1))
+    if (!transaction->take(static_cast<xi::Container>(this->MyroomAddCategory), this->MyroomAddItemIndex, 1))
     {
         ShowWarningFmt("GP_CLI_COMMAND_MYROOM_PLANT_ADD: {} could not spend item {}", PChar->getName(), PItem->getID());
         return;
@@ -178,9 +178,9 @@ void GP_CLI_COMMAND_MYROOM_PLANT_ADD::process(MapSession* PSession, CCharEntity*
                      PPotItem->getLocationID(),
                      PPotItem->getSlotID());
 
-    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

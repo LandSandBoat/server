@@ -20,7 +20,7 @@ commandObj.onTrigger = function(player, mount, target)
 
     -- validate mount
     mount = tonumber(mount) or xi.mount[string.upper(mount)]
-    if mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX then
+    if mount == nil or mount < 0 or mount > xi.mount.BUBBLE_CRAB then
         error(player, 'Invalid mount ID.')
         return
     end

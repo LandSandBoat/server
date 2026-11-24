@@ -509,7 +509,7 @@ xi.einherjar.onChamberExit = function(chamberData, player, isZoningOut)
     end
 
     log(chamberData.id, 'Player left: ' .. player:getName() .. ' (' .. playerId .. ')')
-    player:delContainerItems(xi.inv.TEMPITEMS)
+    player:delContainerItems(xi.inv.TEMP_ITEMS)
     player:removeListener('EINHERJAR_DEATH')
 
     chamberData.players[playerId] = nil

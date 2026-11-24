@@ -34,23 +34,23 @@ namespace
 
 // Retail honors _every_ container but Recycle Bin, even if you do not presently have access.
 const std::set validContainers = {
-    LOC_INVENTORY,
-    LOC_MOGSAFE,
-    LOC_MOGSAFE2,
-    LOC_STORAGE,
-    LOC_TEMPITEMS,
-    LOC_MOGLOCKER,
-    LOC_MOGSATCHEL,
-    LOC_MOGSACK,
-    LOC_MOGCASE,
-    LOC_WARDROBE,
-    LOC_WARDROBE2,
-    LOC_WARDROBE3,
-    LOC_WARDROBE4,
-    LOC_WARDROBE5,
-    LOC_WARDROBE6,
-    LOC_WARDROBE7,
-    LOC_WARDROBE8,
+    xi::Container::Inventory,
+    xi::Container::MogSafe,
+    xi::Container::MogSafe2,
+    xi::Container::Storage,
+    xi::Container::TempItems,
+    xi::Container::MogLocker,
+    xi::Container::MogSatchel,
+    xi::Container::MogSack,
+    xi::Container::MogCase,
+    xi::Container::Wardrobe,
+    xi::Container::Wardrobe2,
+    xi::Container::Wardrobe3,
+    xi::Container::Wardrobe4,
+    xi::Container::Wardrobe5,
+    xi::Container::Wardrobe6,
+    xi::Container::Wardrobe7,
+    xi::Container::Wardrobe8,
 };
 
 } // namespace
@@ -59,20 +59,20 @@ auto GP_CLI_COMMAND_ITEM_DUMP::validate(MapSession* PSession, const CCharEntity*
 {
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent })
-        .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers)
+        .oneOf("Category", static_cast<xi::Container>(this->Category), validContainers)
         .range("ItemNum", this->ItemNum, 0, 99); // Retail honors 0 quantity.
 }
 
 void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar) const
 {
     // Gil cannot be dropped.
-    if (this->Category == LOC_INVENTORY && this->ItemIndex == 0)
+    if (this->Category == static_cast<uint8>(xi::Container::Inventory) && this->ItemIndex == 0)
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(ITEMID::GIL, MsgStd::UnableToThrowAway);
         return;
     }
 
-    CItem* PItem = PChar->getStorage(this->Category)->GetItem(this->ItemIndex);
+    CItem* PItem = PChar->getStorage(static_cast<xi::Container>(this->Category))->GetItem(this->ItemIndex);
 
     if (!PItem || PItem->isBusy())
     {
@@ -120,9 +120,9 @@ void GP_CLI_COMMAND_ITEM_DUMP::process(MapSession* PSession, CCharEntity* PChar)
 
     // Retail accurate: Any item dropped from a container other than inventory skips the recycle bin.
     // Items with the NoRecycle flag bypass the recycle bin entirely (e.g. linkshells).
-    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || this->Category != CONTAINER_ID::LOC_INVENTORY || PItem->hasFlag(xi::ItemFlag::NoRecycle))
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || this->Category != static_cast<uint8>(xi::Container::Inventory) || PItem->hasFlag(xi::ItemFlag::NoRecycle))
     {
-        charutils::DropItem(PChar, this->Category, this->ItemIndex, this->ItemNum, PItem->getID());
+        charutils::DropItem(PChar, static_cast<xi::Container>(this->Category), this->ItemIndex, this->ItemNum, PItem->getID());
         return;
     }
 

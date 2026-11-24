@@ -23,7 +23,7 @@
 
 #include "entities/char_entity.h"
 
-GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const SLOTTYPE equipSlot, const CONTAINER_ID containerId)
+GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const SLOTTYPE equipSlot, const xi::Container containerId)
 {
     auto& packet = this->data();
 
