@@ -1508,13 +1508,13 @@ auto CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
     return true;
 }
 
-auto CCharEntity::OnAttack(CAttackState& state, action_t& action) -> bool
+auto CCharEntity::OnAttack(CBattleEntity* PTarget, action_t& action) -> bool
 {
     TracyZoneScopedN("CCharEntity::OnAttack");
 
     auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
     controller->setLastAttackTime(timer::now());
-    auto ret = CBattleEntity::OnAttack(state, action);
+    auto ret = CBattleEntity::OnAttack(PTarget, action);
 
     return ret;
 }
