@@ -56,50 +56,6 @@ enum ENTITYTYPE : uint8
 
 DECLARE_FORMAT_AS_UNDERLYING(ENTITYTYPE);
 
-enum MOUNTTYPE : uint8
-{
-    MOUNT_CHOCOBO        = 0,
-    MOUNT_QUEST_RAPTOR   = 1,
-    MOUNT_RAPTOR         = 2,
-    MOUNT_TIGER          = 3,
-    MOUNT_CRAB           = 4,
-    MOUNT_RED_CRAB       = 5,
-    MOUNT_BOMB           = 6,
-    MOUNT_RAM            = 7,
-    MOUNT_MORBOL         = 8,
-    MOUNT_CRAWLER        = 9,
-    MOUNT_FENRIR         = 10,
-    MOUNT_BEETLE         = 11,
-    MOUNT_MOOGLE         = 12,
-    MOUNT_MAGIC_POT      = 13,
-    MOUNT_TULFAIRE       = 14,
-    MOUNT_WARMACHINE     = 15,
-    MOUNT_XZOMIT         = 16,
-    MOUNT_HIPPOGRYPH     = 17,
-    MOUNT_SPECTRAL_CHAIR = 18,
-    MOUNT_SPHEROID       = 19,
-    MOUNT_OMEGA          = 20,
-    MOUNT_COEURL         = 21,
-    MOUNT_GOOBBUE        = 22,
-    MOUNT_RAAZ           = 23,
-    MOUNT_LEVITUS        = 24,
-    MOUNT_ADAMANTOISE    = 25,
-    MOUNT_DHAMEL         = 26,
-    MOUNT_DOLL           = 27,
-    MOUNT_GOLDEN_BOMB    = 28,
-    MOUNT_BUFFALO        = 29,
-    MOUNT_WIVRE          = 30,
-    MOUNT_RED_RAPTOR     = 31,
-    MOUNT_IRON_GIANT     = 32,
-    MOUNT_BYAKKO         = 33,
-    MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This uses Chocobo animation, and CustomProperties[1] set to 1
-    MOUNT_IXION          = 35,
-    MOUNT_PHUABO         = 36,
-    MOUNT_CRACKLAW       = 37,
-    //
-    MOUNT_MAX = 38,
-};
-
 enum UPDATETYPE : uint8
 {
     UPDATE_NONE     = 0x00,

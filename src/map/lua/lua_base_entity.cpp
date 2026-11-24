@@ -16963,7 +16963,7 @@ void CLuaBaseEntity::registerChocobo(const sol::table& chocobo) const
         userData.registeredWeather     = byteField("weather");
         userData.silksSpeedBonus       = byteField("silksSpeedBonus");
 
-        PChar->m_mountId = 0;
+        PChar->m_mountId = xi::Mount::Chocobo;
         saveChocoboUserData(PChar);
         return;
     }

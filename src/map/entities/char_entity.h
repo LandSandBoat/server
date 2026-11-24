@@ -23,6 +23,7 @@
 
 #include "aman.h"
 #include "data/enums/mog_house.h"
+#include "data/enums/mount.h"
 #include "data/enums/nation.h"
 #include "data/enums/title.h"
 #include "enums/char_persist.h"
@@ -442,7 +443,7 @@ public:
     std::array<uint8, 20> m_SetBlueSpells{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
 
     ChocoboUserData_t m_chocoboUserData{};
-    uint8             m_mountId{}; // Do not reset to 0. Only update when the mount changes.
+    xi::Mount         m_mountId{}; // Do not reset to 0. Only update when the mount changes.
     uint32            m_claimedDeeds[5]{};
     uint32            m_uniqueEvents[5]{};
 

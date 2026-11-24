@@ -433,7 +433,7 @@ void CCharUpdatePacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 
     {
         // MountIndex is almost always set, even when character is no longer riding.
         // The client needs it for characters that dismounted out of range, else they become invisible.
-        packet->Flags6.MountIndex = PChar->m_mountId;
+        packet->Flags6.MountIndex = static_cast<uint8>(PChar->m_mountId);
     }
 
     // Fields that are always checked if this isnt a despawn packet

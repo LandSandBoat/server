@@ -3098,8 +3098,8 @@ void CCharEntity::tryStartNextEvent()
         {
             switch (PStatusEffect->GetPower())
             {
-                case MOUNT_CHOCOBO:
-                case MOUNT_NOBLE_CHOCOBO:
+                case static_cast<uint8>(xi::Mount::Chocobo):
+                case static_cast<uint8>(xi::Mount::NobleChocobo):
                     animation = xi::Animation::Chocobo;
                     break;
                 default:

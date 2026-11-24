@@ -435,7 +435,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         case GP_CLI_COMMAND_ACTION_ACTIONID::ChocoboDig:
         {
             // Only rented and personal chocobos can dig.
-            if (PChar->m_mountId != MOUNT_CHOCOBO)
+            if (PChar->m_mountId != xi::Mount::Chocobo)
             {
                 return;
             }
@@ -568,7 +568,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Mount:
         {
-            if (this->Mount.MountId > 3108 - static_cast<uint16_t>(xi::KeyItem::ChocoboCompanion))
+            if (this->Mount.MountId > static_cast<uint16_t>(xi::KeyItem::BubbleCrabCompanion) - static_cast<uint16_t>(xi::KeyItem::ChocoboCompanion))
             {
                 return;
             }
@@ -630,7 +630,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                     return 0;
                 }();
 
-                PChar->m_mountId = static_cast<uint8>(mountId);
+                PChar->m_mountId = static_cast<xi::Mount>(mountId);
                 PChar->StatusEffectContainer->AddStatusEffectSilent(
                     xi::StatusEffect::Mounted,
                     static_cast<uint16>(xi::StatusEffect::Mounted),

@@ -56,7 +56,7 @@ const auto denyZone = [](CCharEntity* PChar, MsgStd message = MsgStd::CouldNotEn
 const auto isRidingRentalChocobo = [](const CCharEntity* PChar) -> bool
 {
     const auto* effect = PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Mounted);
-    return effect != nullptr && effect->GetPower() == MOUNT_CHOCOBO && effect->GetSubPower() == 0;
+    return effect != nullptr && effect->GetPower() == static_cast<uint8>(xi::Mount::Chocobo) && effect->GetSubPower() == 0;
 };
 
 } // namespace
