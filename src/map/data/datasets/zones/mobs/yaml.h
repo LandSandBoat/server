@@ -28,6 +28,7 @@
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/species.h"
+#include "data/enums/title.h"
 #include "data/shared_types/mob_attributes/yaml.h"
 #include "data/yaml/enum_token.h"
 
@@ -92,6 +93,7 @@ struct Template
 
     std::optional<yaml::EnumToken<xi::Allegiance>> allegiance;
     std::optional<yaml::EnumToken<xi::Content>>    content;
+    std::optional<yaml::EnumToken<xi::Title>>      title;
 };
 
 struct Spawn
@@ -183,6 +185,7 @@ struct glz::json_schema<xi::data::datasets::zones::mobs::wire::Template>
     glz::schema loot{ .description = "What this mob yields when killed, stolen from or despoiled." };
     glz::schema allegiance{ .description = "Who this mob fights for. Defaults to mob." };
     glz::schema content{ .description = "Content tag gating these spawns. Omitted means always enabled." };
+    glz::schema title{ .description = "Title every alliance member in the zone receives when this mob is killed." };
 };
 
 template <>

@@ -30,6 +30,7 @@
 #include "data/enums/mob_type.h"
 #include "data/enums/roam_flag.h"
 #include "data/enums/species.h"
+#include "data/enums/title.h"
 #include "data/enums/zone.h"
 #include "data/shared_types/mob_attributes/dataset.h"
 
@@ -79,6 +80,7 @@ struct MobTemplateData
     LootData       Loot{};
     xi::Allegiance Allegiance{};
     xi::Content    Content{};
+    xi::Title      Title{};
 };
 
 struct MobSpawnData

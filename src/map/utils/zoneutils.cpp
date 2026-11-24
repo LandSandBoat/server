@@ -379,7 +379,8 @@ void InsertMobs(CZone* PZone, const xi::ZoneId zoneId, const xi::data::Mobs& mob
                 PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(mobTemplate.SpellList);
             }
 
-            PMob->m_Pool = mobTemplate.Id;
+            PMob->m_Pool  = mobTemplate.Id;
+            PMob->m_Title = mobTemplate.Title;
 
             PMob->allegiance      = mobTemplate.Allegiance;
             PMob->namevis         = static_cast<xi::NameVis>(attributes.NameVis.value_or(0));

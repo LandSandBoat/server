@@ -258,6 +258,43 @@ spawns:
     REQUIRE_THROWS_AS(MobsDataset::decode(empty), std::runtime_error);
 }
 
+TEST_CASE("mobs: a template names the title its kill grants", "[data][mob]")
+{
+    constexpr auto titled = R"(
+templates:
+  Warchief_Vatgit:
+    id:      1
+    species: orc
+    title:   warchief_wrecker
+  Forest_Hare:
+    id:      2
+    species: rabbit
+spawns:
+  17186822: { template: Warchief_Vatgit }
+  17186823: { template: Forest_Hare }
+)";
+
+    const auto records = MobsDataset::decode(titled);
+
+    REQUIRE(records.Templates.at("Warchief_Vatgit").Title == xi::Title::WarchiefWrecker);
+    REQUIRE(records.Templates.at("Forest_Hare").Title == xi::Title::None);
+}
+
+TEST_CASE("mobs: an unknown title is rejected", "[data][mob]")
+{
+    constexpr auto unknownTitle = R"(
+templates:
+  Warchief_Vatgit:
+    id:      1
+    species: orc
+    title:   warchief_wreckers
+spawns:
+  17186822: { template: Warchief_Vatgit }
+)";
+
+    REQUIRE_THROWS(MobsDataset::decode(unknownTitle));
+}
+
 TEST_CASE("mobs: a spawn naming an unknown template is rejected", "[data][mob]")
 {
     constexpr auto unknownTemplate = R"(

@@ -4256,6 +4256,11 @@ void OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;
 
+                    if (const auto title = static_cast<CMobEntity*>(PMob)->m_Title; title != xi::Title::None)
+                    {
+                        charutils::setTitle(PMember, title);
+                    }
+
                     // onMobDeath(mob, player, optParams)
                     auto result = onMobDeathFramework(PMob, PMember, optParams, onMobDeath);
 
