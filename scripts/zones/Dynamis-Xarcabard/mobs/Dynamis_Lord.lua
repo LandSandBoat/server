@@ -421,7 +421,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.LIFTER_OF_SHADOWS)
         xi.dynamis.megaBossOnDeath(mob, player, optParams)
     end
 

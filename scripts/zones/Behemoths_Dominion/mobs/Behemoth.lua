@@ -51,10 +51,4 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.BEHEMOTHS_BANE)
-    end
-end
-
 return entity

@@ -96,6 +96,7 @@ templates:
     type:          [battlefield]
     spell_list_id: 1
     skill_list_id: 726
+    title:         wyrm_astonisher
     attributes:
       combat:
         skill: scythe
@@ -207,6 +208,7 @@ templates:
     type:          [notorious]
     spell_list_id: 6
     skill_list_id: 141
+    title:         boroka_beleaguerer
     attributes:
       combat:
         skill: dagger

@@ -755,6 +755,7 @@ templates:
     species:       skeleton
     spell_list_id: 28
     skill_list_id: 227
+    title:         lich_banisher
     attributes:
       combat:
         skill: great_katana
@@ -1199,6 +1200,7 @@ templates:
     species:       skeleton
     type:          [notorious]
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: axe
@@ -1228,6 +1230,7 @@ templates:
     species:       skeleton
     type:          [notorious]
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: great_sword
@@ -1256,6 +1259,7 @@ templates:
     species:       skeleton
     type:          [notorious]
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: great_sword
@@ -1285,6 +1289,7 @@ templates:
     species:       skeleton
     type:          [notorious]
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: axe
@@ -1315,6 +1320,7 @@ templates:
     type:          [notorious]
     spell_list_id: 28
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: axe
@@ -1346,6 +1352,7 @@ templates:
     type:          [notorious]
     spell_list_id: 28
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: axe
@@ -1376,6 +1383,7 @@ templates:
     species:       skeleton
     type:          [notorious]
     skill_list_id: 227
+    title:         skullcrusher
     attributes:
       combat:
         skill: dagger

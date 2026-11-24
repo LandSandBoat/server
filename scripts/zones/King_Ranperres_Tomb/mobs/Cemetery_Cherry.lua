@@ -57,10 +57,6 @@ entity.onMobMobskillChoose = function(mob, target, skillId)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.MON_CHERRY)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         mob:setLocalVar('wasKilled', 1)
     end

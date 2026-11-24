@@ -30,6 +30,7 @@ templates:
     species:       behemoth
     type:          [notorious]
     skill_list_id: 51
+    title:         behemoths_bane
     attributes:
       combat:
         skill: great_axe
@@ -199,6 +200,7 @@ templates:
     species:       behemoth
     type:          [notorious]
     skill_list_id: 479
+    title:         behemoth_dethroner
     attributes:
       combat:
         skill: great_axe

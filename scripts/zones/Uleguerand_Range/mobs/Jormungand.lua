@@ -219,12 +219,6 @@ entity.onMobDisengage = function(mob)
     mob:setAnimationSub(0)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.WORLD_SERPENT_SLAYER)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.randomInt(144, 240) * 1800) -- 3 to 5 days in 30 minute windows
 end

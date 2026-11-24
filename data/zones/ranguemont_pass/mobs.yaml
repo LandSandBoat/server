@@ -913,6 +913,7 @@ templates:
     type:          [notorious]
     spell_list_id: 81
     skill_list_id: 139
+    title:         bye_bye_taisai
     attributes:
       combat:
         skill: staff

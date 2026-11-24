@@ -997,6 +997,7 @@ templates:
     species:       great_scorpion
     type:          [notorious]
     skill_list_id: 274
+    title:         vinegar_evaporator
     attributes:
       combat:
         skill:    scythe

@@ -797,6 +797,7 @@ templates:
     species:       monoceros
     type:          [notorious]
     skill_list_id: 2061
+    title:         ixion_hornbreaker
     attributes:
       combat:
         skill:    great_axe
@@ -2261,6 +2262,7 @@ templates:
     id:      7010
     species: antlion
     type:    [notorious]
+    title:   orcus_trophy_hunter
     attributes:
       combat:
         skill: hand_to_hand
@@ -2934,6 +2936,7 @@ templates:
     species:       sandworm
     type:          [notorious]
     skill_list_id: 215
+    title:         sandworm_wrangler
     attributes:
       combat:
         skill:    scythe
@@ -3996,6 +3999,7 @@ templates:
     type:          [notorious]
     spell_list_id: 454
     skill_list_id: 470
+    title:         yilbegan_hideflayer
     attributes:
       combat:
         skill: scythe

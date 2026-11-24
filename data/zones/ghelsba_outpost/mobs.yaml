@@ -929,6 +929,7 @@ templates:
     species:       orc
     type:          [notorious]
     skill_list_id: 189
+    title:         warchief_wrecker
     attributes:
       combat:
         skill: dagger

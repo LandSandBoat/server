@@ -1590,6 +1590,7 @@ templates:
     species:       blue_wyrm
     type:          [notorious]
     spell_list_id: 1
+    title:         naga_raja_nullifier
     attributes:
       combat:
         skill:    scythe

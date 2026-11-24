@@ -98,10 +98,6 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         mob:setLocalVar('killed', 1)
     end
-
-    if player then
-        player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
-    end
 end
 
 entity.onMobDespawn = function(mob)

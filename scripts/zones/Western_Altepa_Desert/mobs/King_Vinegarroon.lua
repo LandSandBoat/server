@@ -120,12 +120,6 @@ entity.onMobDisengage = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.VINEGAR_EVAPORATOR)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(75600) -- Opens 21 hours after being defeated, or despawning.
 end

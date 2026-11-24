@@ -918,6 +918,7 @@ templates:
     type:          [notorious]
     spell_list_id: 236
     skill_list_id: 864
+    title:         itzpapalotl_declawer
     attributes:
       combat:
         skill: staff
@@ -1933,6 +1934,7 @@ templates:
     type:          [notorious]
     spell_list_id: 156
     skill_list_id: 882
+    title:         yaanei_crasher
     attributes:
       combat:
         skill: club

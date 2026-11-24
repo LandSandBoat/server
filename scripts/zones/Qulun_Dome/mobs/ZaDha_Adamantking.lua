@@ -32,10 +32,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.ADAMANTKING_USURPER)
-    end
-
     if optParams.isKiller then
         mob:showText(mob, ID.text.QUADAV_KING_DEATH)
     end

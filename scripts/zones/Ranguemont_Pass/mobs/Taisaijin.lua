@@ -20,12 +20,6 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.BLIND_RES_RANK, 9)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.BYE_BYE_TAISAI)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     local phIndex = mob:getLocalVar('phIndex')
 

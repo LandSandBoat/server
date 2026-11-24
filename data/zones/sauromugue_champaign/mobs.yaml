@@ -1149,6 +1149,7 @@ templates:
     type:          [notorious]
     spell_list_id: 45
     skill_list_id: 1004
+    title:         roc_star
     attributes:
       combat:
         skill:    club
@@ -1484,6 +1485,7 @@ templates:
     type:          [notorious]
     spell_list_id: 453
     skill_list_id: 195
+    title:         verthandi_ensnarer
     attributes:
       combat:
         skill: staff
@@ -1990,6 +1992,7 @@ templates:
     type:          [notorious]
     spell_list_id: 454
     skill_list_id: 470
+    title:         yilbegan_hideflayer
     attributes:
       combat:
         skill: scythe

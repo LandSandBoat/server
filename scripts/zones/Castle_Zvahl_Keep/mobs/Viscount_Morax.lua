@@ -17,7 +17,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.HELLSBANE)
         xi.hunts.checkHunt(mob, player, 356)
     end
 end

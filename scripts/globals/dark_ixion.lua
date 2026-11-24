@@ -402,10 +402,6 @@ xi.darkixion.zoneOnGameHour = function(zone)
 end
 
 xi.darkixion.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.IXION_HORNBREAKER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         -- only reset hp after dying (hp and horn status persist through zones when he runs away and despawns)
         xi.darkixion.hpValue = 0

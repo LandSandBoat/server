@@ -26,7 +26,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.YILBEGAN_HIDEFLAYER)
         xi.voidwalker.onMobDeath(mob, player, optParams, nil)
         xi.hunts.checkHunt(mob, player, 559)
     end

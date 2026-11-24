@@ -136,12 +136,6 @@ entity.onMobEngage = function(mob, target)
     mob:setAnimationSub(0)
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.CACTROT_DESACELERADOR)
-    end
-end
-
 entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.randomInt(172800, 259200)) -- 2 to 3 days
 end

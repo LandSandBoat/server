@@ -231,10 +231,6 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.WYRM_ASTONISHER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         mob:messageText(mob, ID.text.BAHAMUT_TAUNT + 9)
 

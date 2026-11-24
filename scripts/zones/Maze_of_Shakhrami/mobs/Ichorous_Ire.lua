@@ -6,10 +6,6 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.JELLYBANE)
-    end
-
     mob:setLocalVar('cooldown', GetSystemTime() + utils.minutes(10))
 end
 

@@ -1037,6 +1037,7 @@ templates:
     species:       morbol
     type:          [notorious]
     skill_list_id: 186
+    title:         morbolbane
     attributes:
       combat:
         skill: scythe

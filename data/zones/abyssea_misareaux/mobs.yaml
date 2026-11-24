@@ -385,6 +385,7 @@ templates:
     species:       ogrebon
     type:          [notorious]
     skill_list_id: 889
+    title:         cirein_croin_harpooner
     attributes:
       combat:
         skill: great_axe
@@ -1097,6 +1098,7 @@ templates:
     type:          [notorious]
     spell_list_id: 157
     skill_list_id: 899
+    title:         kutharei_unhorser
     attributes:
       combat:
         skill: dagger

@@ -15,7 +15,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.OUPIRE_IMPALER)
         xi.hunts.checkHunt(mob, player, 478)
     end
 end

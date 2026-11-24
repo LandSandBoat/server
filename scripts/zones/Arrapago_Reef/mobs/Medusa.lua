@@ -58,7 +58,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.GORGONSTONE_SUNDERER)
         player:showText(mob, ID.text.MEDUSA_DEATH)
     end
 

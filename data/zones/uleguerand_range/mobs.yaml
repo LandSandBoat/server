@@ -680,6 +680,7 @@ templates:
     type:          [notorious]
     spell_list_id: 111
     skill_list_id: 392
+    title:         world_serpent_slayer
     attributes:
       combat:
         skill: scythe

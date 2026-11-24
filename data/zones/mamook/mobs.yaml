@@ -372,6 +372,7 @@ templates:
     type:          [notorious]
     spell_list_id: 7
     skill_list_id: 285
+    title:         shining_scale_rifler
     attributes:
       combat:
         skill:    sword

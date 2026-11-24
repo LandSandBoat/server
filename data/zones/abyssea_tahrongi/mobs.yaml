@@ -764,6 +764,7 @@ templates:
     type:          [notorious]
     spell_list_id: 187
     skill_list_id: 839
+    title:         glavoid_stampeder
     attributes:
       combat:
         skill: scythe
@@ -1007,6 +1008,7 @@ templates:
     type:          [notorious]
     spell_list_id: 153
     skill_list_id: 841
+    title:         iratham_capturer
     attributes:
       combat:
         skill: staff

@@ -590,6 +590,7 @@ templates:
     species:       general
     type:          [notorious]
     skill_list_id: 326
+    title:         troll_subjugator
     attributes:
       combat:
         skill:    hand_to_hand

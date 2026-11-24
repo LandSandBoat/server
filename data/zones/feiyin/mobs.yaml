@@ -217,6 +217,7 @@ templates:
     species:       scarce_morbol
     type:          [notorious]
     skill_list_id: 411
+    title:         cassienova
     attributes:
       combat:
         skill:    scythe
@@ -514,6 +515,7 @@ templates:
     species:       golem
     type:          [notorious]
     skill_list_id: 135
+    title:         goliath_killer
     attributes:
       combat:
         skill: club

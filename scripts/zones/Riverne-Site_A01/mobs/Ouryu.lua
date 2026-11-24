@@ -229,10 +229,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.OURYU_OVERWHELMER)
-    end
-
     if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield then

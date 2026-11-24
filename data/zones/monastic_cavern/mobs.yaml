@@ -741,6 +741,7 @@ templates:
     type:          [notorious]
     spell_list_id: 4
     skill_list_id: 189
+    title:         overlord_overthrower
     attributes:
       combat:
         skill:    sword

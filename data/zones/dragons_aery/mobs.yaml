@@ -120,6 +120,7 @@ templates:
     species:       black_wyrm
     type:          [notorious]
     skill_list_id: 260
+    title:         fafnir_slayer
     attributes:
       combat:
         skill: scythe
@@ -182,6 +183,7 @@ templates:
     species:       black_wyrm
     type:          [notorious]
     skill_list_id: 263
+    title:         nidhogg_slayer
     attributes:
       combat:
         skill: scythe

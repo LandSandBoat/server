@@ -26,7 +26,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.KRABKATOA_STEAMER)
         xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.BLACK_ABYSSITE)
         xi.hunts.checkHunt(mob, player, 544)
     end

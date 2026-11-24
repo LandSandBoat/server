@@ -1445,6 +1445,7 @@ templates:
     type:          [notorious]
     spell_list_id: 78
     skill_list_id: 393
+    title:         tiamat_trouncer
     attributes:
       combat:
         skill: scythe
@@ -1699,6 +1700,7 @@ templates:
     type:          [notorious]
     spell_list_id: 1
     skill_list_id: 768
+    title:         xolotl_xtrapolator
     attributes:
       combat:
         skill: staff

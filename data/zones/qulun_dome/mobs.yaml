@@ -427,6 +427,7 @@ templates:
     type:          [notorious]
     spell_list_id: 20
     skill_list_id: 202
+    title:         adamantking_usurper
     attributes:
       combat:
         skill:    scythe

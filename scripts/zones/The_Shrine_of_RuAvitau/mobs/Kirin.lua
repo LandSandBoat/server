@@ -168,7 +168,6 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if player then
-        player:addTitle(xi.title.KIRIN_CAPTIVATOR)
         player:showText(mob, ID.text.KIRIN_OFFSET + 1)
     end
 end

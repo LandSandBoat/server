@@ -53,10 +53,4 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if player then
-        player:addTitle(xi.title.FISTULE_DRAINER)
-    end
-end
-
 return entity

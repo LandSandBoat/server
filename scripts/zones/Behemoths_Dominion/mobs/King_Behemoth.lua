@@ -80,10 +80,4 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.BEHEMOTH_DETHRONER)
-    end
-end
-
 return entity

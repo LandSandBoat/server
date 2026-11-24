@@ -305,6 +305,7 @@ templates:
     type:          [notorious]
     spell_list_id: 150
     skill_list_id: 284
+    title:         oupire_impaler
     attributes:
       combat:
         skill: scythe

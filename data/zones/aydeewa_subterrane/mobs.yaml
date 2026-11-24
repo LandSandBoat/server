@@ -1077,6 +1077,7 @@ templates:
     type:          [notorious]
     spell_list_id: 560
     skill_list_id: 316
+    title:         pandemonium_queller
     attributes:
       combat:
         skill: staff

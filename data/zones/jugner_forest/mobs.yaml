@@ -1214,6 +1214,7 @@ templates:
     species:       crab
     type:          [notorious]
     skill_list_id: 1150
+    title:         krabkatoa_steamer
     attributes:
       combat:
         skill: scythe
@@ -2422,6 +2423,7 @@ templates:
     type:          [notorious]
     spell_list_id: 454
     skill_list_id: 470
+    title:         yilbegan_hideflayer
     attributes:
       combat:
         skill: scythe

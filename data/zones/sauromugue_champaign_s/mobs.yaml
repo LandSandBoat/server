@@ -2567,6 +2567,7 @@ templates:
     species:       sandworm
     type:          [notorious]
     skill_list_id: 215
+    title:         sandworm_wrangler
     attributes:
       combat:
         skill:    scythe
@@ -3153,6 +3154,7 @@ templates:
     type:          [notorious]
     spell_list_id: 453
     skill_list_id: 195
+    title:         verthandi_ensnarer
     attributes:
       combat:
         skill: staff
@@ -3810,6 +3812,7 @@ templates:
     type:          [notorious]
     spell_list_id: 454
     skill_list_id: 470
+    title:         yilbegan_hideflayer
     attributes:
       combat:
         skill: scythe
