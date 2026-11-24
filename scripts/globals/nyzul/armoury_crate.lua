@@ -237,7 +237,7 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             item1 > 0 and
             npc:getLocalVar('itemAmount_1') > 0
         then
-            if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
+            if not player:hasItem(item1, xi.inv.TEMP_ITEMS) then
                 player:addTempItem(item1)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
                 npc:setLocalVar('itemAmount_1', npc:getLocalVar('itemAmount_1') - 1)
@@ -250,7 +250,7 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             item2 > 0 and
             npc:getLocalVar('itemAmount_2') > 0
         then
-            if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
+            if not player:hasItem(item2, xi.inv.TEMP_ITEMS) then
                 player:addTempItem(item2)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
                 npc:setLocalVar('itemAmount_2', npc:getLocalVar('itemAmount_2') - 1)
@@ -263,7 +263,7 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             item3 > 0 and
             npc:getLocalVar('itemAmount_3') > 0
         then
-            if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
+            if not player:hasItem(item3, xi.inv.TEMP_ITEMS) then
                 player:addTempItem(item3)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
                 npc:setLocalVar('itemAmount_3', npc:getLocalVar('itemAmount_3') - 1)

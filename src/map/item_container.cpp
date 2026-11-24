@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-CItemContainer::CItemContainer(uint16 LocationID, const CCharEntity* owner)
+CItemContainer::CItemContainer(const xi::Container LocationID, const CCharEntity* owner)
 : SortingPacket(0)
 , LastSortingTime(timer::time_point::min())
 , m_id(LocationID)
@@ -40,7 +40,7 @@ CItemContainer::CItemContainer(uint16 LocationID, const CCharEntity* owner)
 
 CItemContainer::~CItemContainer() = default;
 
-auto CItemContainer::GetID() const -> uint16
+auto CItemContainer::GetID() const -> xi::Container
 {
     return m_id;
 }
@@ -55,7 +55,7 @@ auto CItemContainer::GetFreeSlotsCount() const -> uint8
     int32 used = m_count;
     if (owner_)
     {
-        used += owner_->heldSlots(static_cast<uint8>(m_id));
+        used += owner_->heldSlots(m_id);
     }
 
     return static_cast<uint8>(std::max(m_size - used, 0));
@@ -96,7 +96,7 @@ auto CItemContainer::SetSize(uint8 size) -> uint8
             return m_size;
         }
     }
-    ShowDebug("ItemContainer <%u>: Bad new container size %u", m_id, size);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u", static_cast<uint8>(m_id), size);
     return -1;
 }
 
@@ -118,7 +118,7 @@ auto CItemContainer::AddSize(int8 size) -> uint8
             return m_size;
         }
     }
-    ShowDebug("ItemContainer <%u>: Bad new container size %u", m_id, newsize);
+    ShowDebug("ItemContainer <%u>: Bad new container size %u", static_cast<uint8>(m_id), newsize);
     return -1;
 }
 
@@ -143,7 +143,7 @@ auto CItemContainer::InsertItem(std::unique_ptr<CItem> PItem) -> uint8
             m_count++;
 
             PItem->setSlotID(SlotID);
-            PItem->setLocationID((uint8)m_id);
+            PItem->setLocationID(static_cast<uint8>(m_id));
 
             m_ItemList[SlotID] = std::move(PItem);
             return SlotID;
@@ -168,7 +168,7 @@ auto CItemContainer::InsertItem(std::unique_ptr<CItem> PItem, uint8 SlotID) -> u
     }
 
     PItem->setSlotID(SlotID);
-    PItem->setLocationID((uint8)m_id);
+    PItem->setLocationID(static_cast<uint8>(m_id));
 
     if (m_ItemList[SlotID] == nullptr && SlotID != 0)
     {

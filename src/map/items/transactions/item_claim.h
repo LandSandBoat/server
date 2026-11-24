@@ -46,20 +46,20 @@ public:
     DISALLOW_COPY_AND_MOVE(ItemClaimTransaction);
 
     // Null if the slot is empty or the item is already busy
-    [[nodiscard]] auto claimSlot(uint8 location, uint8 slot) -> CItem*;
+    [[nodiscard]] auto claimSlot(xi::Container location, uint8 slot) -> CItem*;
 
     // same as Transaction's, with the player implied
-    [[nodiscard]] auto give(uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
-    [[nodiscard]] auto give(uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
-    [[nodiscard]] auto take(uint8 location, uint8 slot, uint32 quantity) -> bool;
+    [[nodiscard]] auto give(xi::Container location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto give(xi::Container location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto take(xi::Container location, uint8 slot, uint32 quantity) -> bool;
     [[nodiscard]] auto pay(uint32 gil) -> bool;
     [[nodiscard]] auto earn(uint32 gil) -> bool;
 
     // undone as a unit
-    [[nodiscard]] auto split(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint32 quantity) -> bool;
+    [[nodiscard]] auto split(xi::Container fromLocation, uint8 fromSlot, xi::Container toLocation, uint32 quantity) -> bool;
 
     // undone as a unit
-    [[nodiscard]] auto moveBetween(uint8 fromLocation, uint8 fromSlot, uint8 toLocation, uint8 toSlot, uint32 quantity) -> bool;
+    [[nodiscard]] auto moveBetween(xi::Container fromLocation, uint8 fromSlot, xi::Container toLocation, uint8 toSlot, uint32 quantity) -> bool;
 
     // undo for work outside the item tables, run in reverse order on rollback
     using Transaction::undoWith;

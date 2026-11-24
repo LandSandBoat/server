@@ -37,7 +37,7 @@
 namespace
 {
 
-const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+const std::set<xi::Container> validPlantCategories = { xi::Container::MogSafe, xi::Container::MogSafe2 };
 
 }
 
@@ -47,12 +47,12 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_CROP::validate(MapSession* PSession, const CCha
         .blockedBy({ BlockedState::InEvent })
         .isInMogHouse(xi::MogHouse::Own)
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories);
+        .oneOf("MyroomPlantCategory", static_cast<xi::Container>(this->MyroomPlantCategory), validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomPlantCategory));
     auto*           PItem          = PItemContainer->GetItem(this->MyroomPlantItemIndex);
     auto*           PPotItem       = dynamic_cast<CItemFlowerpot*>(PItem);
 
@@ -103,7 +103,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             const uint8 stackSize             = xi::items::lookup(resultID)->getStackSize();
             const uint8 requiredSlots         = (uint8)ceil(float(totalQuantity) / stackSize);
             const bool  safe2Unlocked         = (PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F");
-            const uint8 totalFreeSlots        = PChar->getStorage(LOC_MOGSAFE)->GetFreeSlotsCount() + (safe2Unlocked ? PChar->getStorage(LOC_MOGSAFE2)->GetFreeSlotsCount() : 0);
+            const uint8 totalFreeSlots        = PChar->getStorage(xi::Container::MogSafe)->GetFreeSlotsCount() + (safe2Unlocked ? PChar->getStorage(xi::Container::MogSafe2)->GetFreeSlotsCount() : 0);
 
             if (requiredSlots > totalFreeSlots || totalQuantity == 0)
             {
@@ -122,8 +122,8 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
                 }
 
                 // falls through to the second safe when the first is full
-                const bool stored = transaction->give(LOC_MOGSAFE, resultID, quantity).has_value() ||
-                                    (safe2Unlocked && transaction->give(LOC_MOGSAFE2, resultID, quantity).has_value());
+                const bool stored = transaction->give(xi::Container::MogSafe, resultID, quantity).has_value() ||
+                                    (safe2Unlocked && transaction->give(xi::Container::MogSafe2, resultID, quantity).has_value());
 
                 if (!stored || !transaction->commit())
                 {
@@ -135,7 +135,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
             PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(resultID, totalQuantity, 134); // Your moogle <quantity> <item> from the plant!
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PPotItem->cleanPot();
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
@@ -144,7 +144,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CROP::process(MapSession* PSession, CCharEntity
                          PPotItem->getLocationID(),
                          PPotItem->getSlotID());
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PPotItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

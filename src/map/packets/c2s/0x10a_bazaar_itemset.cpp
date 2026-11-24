@@ -39,7 +39,7 @@ auto GP_CLI_COMMAND_BAZAAR_ITEMSET::validate(MapSession* PSession, const CCharEn
 
 void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const auto* PStorage = PChar->getStorage(LOC_INVENTORY);
+    const auto* PStorage = PChar->getStorage(xi::Container::Inventory);
     if (PStorage == nullptr)
     {
         return;
@@ -86,7 +86,7 @@ void GP_CLI_COMMAND_BAZAAR_ITEMSET::process(MapSession* PSession, CCharEntity* P
 
         PItem->setCharPrice(this->Price);
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, this->ItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, xi::Container::Inventory, this->ItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 
         DebugBazaarsFmt("Bazaar Interaction [Price Set] - Character: {}, Item: {}, Price: {}", PChar->name, PItem->getName(), this->Price);

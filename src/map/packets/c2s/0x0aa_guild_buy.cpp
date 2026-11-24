@@ -124,7 +124,7 @@ void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar)
     if (auto* PNpc = zoneutils::GetEntity(PChar->guildShopNpc_.UniqueNo, TYPE_NPC))
     {
         // Track the gil the player had before the transaction
-        const uint32 gilBefore = PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity();
+        const uint32 gilBefore = PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity();
 
         // onPlayerBuy returns { itemNo, count, tradeCode }; serialize it into the 0x082 result
         // (a rejection is { 0, 0, -1 }).
@@ -137,7 +137,7 @@ void GP_CLI_COMMAND_GUILD_BUY::process(MapSession* PSession, CCharEntity* PChar)
             PChar->pushPacket<GP_SERV_COMMAND_GUILD_BUY>(PChar, count, itemNo, static_cast<uint8>(tradeCode));
 
             // Audit the purchase if enabled
-            const auto appliedGil = static_cast<int32>(PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
+            const auto appliedGil = static_cast<int32>(PChar->getStorage(xi::Container::Inventory)->GetItem(0)->getQuantity()) - static_cast<int32>(gilBefore);
             if (tradeCode > 0 && appliedGil < 0)
             {
                 // TODO: Don't pass around Scheduler& through PSession

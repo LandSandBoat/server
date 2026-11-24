@@ -72,7 +72,7 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
     }
 
     // Must have the relevant linkshell equipping to offer a pearl
-    auto* POffered = PChar->getStorage(LOC_INVENTORY)->GetItem(this->ItemIndex);
+    auto* POffered = PChar->getStorage(xi::Container::Inventory)->GetItem(this->ItemIndex);
     if (this->ItemNum > 0 && POffered && POffered->isType(ITEM_LINKSHELL) && !hasLinkshellEquipped(PChar, static_cast<CItemLinkshell*>(POffered)))
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(MsgStd::LinkshellEquipBeforeUsing);

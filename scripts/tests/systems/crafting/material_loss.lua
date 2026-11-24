@@ -14,7 +14,7 @@ describe('Material loss', function()
         -- 11 levels under the recipe puts the break check at 0% success.
         player:setSkillLevel(xi.skill.LEATHERCRAFT, 590)
         player:setMod(xi.mod.SYNTH_SPEED_LEATHERCRAFT, 17000)
-        player:changeContainerSize(xi.inventoryLocation.INVENTORY, 80)
+        player:changeContainerSize(xi.inv.INVENTORY, 80)
     end)
 
     -- Runs one guaranteed break and returns how many of each ingredient survived it.

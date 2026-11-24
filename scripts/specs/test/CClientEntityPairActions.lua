@@ -62,7 +62,7 @@ end
 ---Use an item on a target
 ---@param target CBaseEntity Target entity
 ---@param slotId integer Inventory slot ID
----@param storageId? xi.inventoryLocation Storage location (defaults to inventory)
+---@param storageId? xi.inv Storage location (defaults to inventory)
 ---@return nil
 function CClientEntityPairActions:useItem(target, slotId, storageId)
 end
@@ -272,9 +272,9 @@ function CClientEntityPairActions:shopBuy(shopSlot, quantity)
 end
 
 ---Move an item between containers or split a stack
----@param srcContainer xi.inventoryLocation Source container
+---@param srcContainer xi.inv Source container
 ---@param srcSlot integer Source slot index
----@param dstContainer xi.inventoryLocation Destination container
+---@param dstContainer xi.inv Destination container
 ---@param quantity integer Quantity to move
 ---@param dstSlot? integer Destination slot (omit for first free)
 ---@return nil
@@ -282,13 +282,13 @@ function CClientEntityPairActions:moveItem(srcContainer, srcSlot, dstContainer, 
 end
 
 ---Sort a container, merging partial stacks
----@param container xi.inventoryLocation Container to sort
+---@param container xi.inv Container to sort
 ---@return nil
 function CClientEntityPairActions:sortContainer(container)
 end
 
 ---Drop an item (sends to recycle bin if enabled)
----@param container xi.inventoryLocation Source container
+---@param container xi.inv Source container
 ---@param slot integer Slot index
 ---@param quantity integer Quantity to drop
 ---@return nil
@@ -309,7 +309,7 @@ end
 ---@class EquipSetItem
 ---@field index integer Inventory slot within the container
 ---@field kind xi.slot Equipment slot to equip into
----@field container? xi.inventoryLocation Source container (defaults to inventory)
+---@field container? xi.inv Source container (defaults to inventory)
 
 ---Send an equipset packet to equip a list of items, targeting a specific copy by slot
 ---@param entries EquipSetItem[] Items to equip
@@ -332,9 +332,9 @@ function CClientEntityPairActions:craft(crystal, ingredients)
 end
 
 ---Sow a seed or feed a crystal to a gardening pot. Pot and add item must be in a mog safe.
----@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potContainer xi.inv Container holding the flowerpot
 ---@param potSlot integer Flowerpot slot index
----@param addContainer xi.inventoryLocation Container holding the seed or crystal
+---@param addContainer xi.inv Container holding the seed or crystal
 ---@param addSlot integer Seed or crystal slot index
 ---@return nil
 ---@param addItemNo integer? what the packet claims is being planted, defaults to the slot's item
@@ -342,14 +342,14 @@ function CClientEntityPairActions:plantAdd(potContainer, potSlot, addContainer, 
 end
 
 ---Examine a plant; resets its wilt timer.
----@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potContainer xi.inv Container holding the flowerpot
 ---@param potSlot integer Flowerpot slot index
 ---@return nil
 function CClientEntityPairActions:plantCheck(potContainer, potSlot)
 end
 
 ---Harvest a mature plant; uproot clears the pot instead.
----@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potContainer xi.inv Container holding the flowerpot
 ---@param potSlot integer Flowerpot slot index
 ---@param uproot? boolean Uproot instead of harvesting (default false)
 ---@return nil
@@ -357,14 +357,14 @@ function CClientEntityPairActions:plantHarvest(potContainer, potSlot, uproot)
 end
 
 ---Dry a plant so it stops growing and won't wilt.
----@param potContainer xi.inventoryLocation Container holding the flowerpot
+---@param potContainer xi.inv Container holding the flowerpot
 ---@param potSlot integer Flowerpot slot index
 ---@return nil
 function CClientEntityPairActions:plantDry(potContainer, potSlot)
 end
 
 ---Install a furnishing on the 1st floor at grid cell (x, z), optionally stacked at elevation y.
----@param container xi.inventoryLocation Container holding the furnishing
+---@param container xi.inv Container holding the furnishing
 ---@param slot integer Furnishing slot index
 ---@param x integer Grid x cell
 ---@param z integer Grid z cell

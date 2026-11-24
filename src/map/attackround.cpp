@@ -432,7 +432,7 @@ void CAttackRound::ProcFollowUpAttacks()
                         if (PAmmo && PAmmo->getID() == virtueStone && PAmmo->getQuantity() > 0)
                         {
                             auto  eloc = PChar->equipLocation(SLOT_AMMO);
-                            uint8 loc  = eloc ? static_cast<uint8>(eloc->Container) : 0;
+                            auto  loc  = eloc ? eloc->Container : xi::Container::Inventory;
                             uint8 slot = eloc ? eloc->Slot : 0;
 
                             if (AddFollowUpAttack(direction))

@@ -138,7 +138,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
         return;
     }
 
-    CItem* PItem = transaction->claimSlot(LOC_INVENTORY, ItemWorkNo);
+    CItem* PItem = transaction->claimSlot(xi::Container::Inventory, ItemWorkNo);
 
     if (ItemStacks == 0 || !PItem)
     {
@@ -221,7 +221,7 @@ void dboxutils::AddItemsToBeSent(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                     db::preparedStmt("DELETE FROM delivery_box WHERE charid = ? AND box = 2 AND slot = ?", charid, PostWorkNo);
                 });
 
-            if (!transaction->take(LOC_INVENTORY, ItemWorkNo, ItemStacks) || !transaction->commit())
+            if (!transaction->take(xi::Container::Inventory, ItemWorkNo, ItemStacks) || !transaction->commit())
             {
                 ShowErrorFmt("DBOX: {} kept item {} after it was written to the box, taking the row back", PChar->getName(), ItemWorkNo);
 
@@ -684,7 +684,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
     {
         CItem* PItem = PChar->UContainer->GetItem(PostWorkNo);
 
-        if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
+        if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() == 0)
         {
             PChar->pushPacket<GP_SERV_COMMAND_PBX_RESULT>(GP_CLI_COMMAND_PBX_COMMAND::Get, BoxNo, PItem, PostWorkNo, PChar->UContainer->GetItemsCount(), 0xB9);
             return;
@@ -718,7 +718,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
+                    if (transaction->give(xi::Container::Inventory, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }
@@ -730,7 +730,7 @@ void dboxutils::TakeItemFromCell(CCharEntity* PChar, GP_CLI_COMMAND_PBX_BOXNO Bo
                                                                                    PChar->id, PostWorkNo, BoxNo);
                 if (rset && rset->rowsAffected())
                 {
-                    if (transaction->give(LOC_INVENTORY, xi::items::clone(*PItem), Silence::Yes))
+                    if (transaction->give(xi::Container::Inventory, xi::items::clone(*PItem), Silence::Yes))
                     {
                         return;
                     }

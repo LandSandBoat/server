@@ -28,50 +28,28 @@
 
 #include <common/types/maybe.h>
 
+#include "data/enums/container.h"
 #include "items/item.h"
 
 #include <array>
 #include <memory>
 
-// TODO: Enum class
-enum CONTAINER_ID : uint8
-{
-    LOC_INVENTORY    = 0,
-    LOC_MOGSAFE      = 1,
-    LOC_STORAGE      = 2,
-    LOC_TEMPITEMS    = 3,
-    LOC_MOGLOCKER    = 4,
-    LOC_MOGSATCHEL   = 5,
-    LOC_MOGSACK      = 6,
-    LOC_MOGCASE      = 7,
-    LOC_WARDROBE     = 8,
-    LOC_MOGSAFE2     = 9,
-    LOC_WARDROBE2    = 10,
-    LOC_WARDROBE3    = 11,
-    LOC_WARDROBE4    = 12,
-    LOC_WARDROBE5    = 13,
-    LOC_WARDROBE6    = 14,
-    LOC_WARDROBE7    = 15,
-    LOC_WARDROBE8    = 16,
-    LOC_RECYCLEBIN   = 17,
-    MAX_CONTAINER_ID = 18,
-};
+inline constexpr auto MAX_CONTAINER_ID = static_cast<uint8>(xi::data::EnumTraits<xi::Container>::kEntries.size());
 
 #define MAX_CONTAINER_SIZE 120
 #define ERROR_SLOTID       255
-DECLARE_FORMAT_AS_UNDERLYING(CONTAINER_ID);
 
 class CCharEntity;
 
 class CItemContainer
 {
 public:
-    CItemContainer(uint16 LocationID, const CCharEntity* owner = nullptr);
+    CItemContainer(xi::Container LocationID, const CCharEntity* owner = nullptr);
     ~CItemContainer();
 
     DISALLOW_COPY_AND_MOVE(CItemContainer);
 
-    auto GetID() const -> uint16;
+    auto GetID() const -> xi::Container;
     auto GetBuff() const -> uint16; // get storage size (unlimited size)
     auto GetSize() const -> uint8;  // get container size
     auto GetFreeSlotsCount() const -> uint8;
@@ -121,10 +99,10 @@ public:
     }
 
 private:
-    uint16 m_id;
-    uint16 m_buff; // This appears to be the "usable" amount of your storage. You can have a locker size of 30, but a "buff" of 0 when it is out of use.
-    uint8  m_size;
-    uint8  m_count;
+    xi::Container m_id;
+    uint16        m_buff; // This appears to be the "usable" amount of your storage. You can have a locker size of 30, but a "buff" of 0 when it is out of use.
+    uint8         m_size;
+    uint8         m_count;
 
     const CCharEntity* owner_;
 

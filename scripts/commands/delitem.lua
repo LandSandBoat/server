@@ -36,14 +36,14 @@ commandObj.onTrigger = function(player, itemId, target)
     end
 
     -- search target inventory for item, and delete if found
-    for i = xi.inv.INVENTORY, xi.inv.WARDROBE8 do -- inventory locations enums
+    for i = xi.inv.INVENTORY, xi.inv.WARDROBE_8 do -- inventory locations enums
         if targ:hasItem(itemId, i) then
             targ:delItem(itemId, 1, i)
             player:printToPlayer(string.format('Item %i was deleted from %s.', itemId, targ:getName()))
             break
         end
 
-        if i == xi.inv.WARDROBE8 then -- Wardrobe 8 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
+        if i == xi.inv.WARDROBE_8 then -- Wardrobe 8 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
             player:printToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
         end
     end

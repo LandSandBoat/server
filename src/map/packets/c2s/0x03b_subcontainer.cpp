@@ -41,7 +41,7 @@ const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slo
         return;
     }
 
-    auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+    auto* PItem = PChar->getStorage(xi::Container::Storage)->GetItem(slot);
     if (PItem == nullptr)
     {
         return;
@@ -50,16 +50,16 @@ const auto setStatusOfStorageItemAtSlot = [](CCharEntity* PChar, const uint8 slo
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, status);
 };
 
-const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<xi::Container>
 {
     std::set allowedContainers = {
-        LOC_MOGSAFE
+        xi::Container::MogSafe
     };
 
     // Bitflag indicating if Mog 2F is unlocked
     if ((PChar->profile.mhflag & 0x20) && settings::get<bool>("main.ENABLE_MOG_HOUSE_2F"))
     {
-        allowedContainers.insert(LOC_MOGSAFE2);
+        allowedContainers.insert(xi::Container::MogSafe2);
     }
 
     return allowedContainers;
@@ -74,12 +74,12 @@ auto GP_CLI_COMMAND_SUBCONTAINER::validate(MapSession* PSession, const CCharEnti
         .mustEqual(PChar->m_moghouseID, PChar->id, "Character not in their mog house")
         .oneOf<GP_CLI_COMMAND_SUBCONTAINER_KIND>(this->Kind)
         .oneOf<GP_CLI_COMMAND_SUBCONTAINER_CONTAINERINDEX>(this->ContainerIndex)
-        .oneOf("Category1", static_cast<CONTAINER_ID>(this->Category1), validContainers(PChar));
+        .oneOf("Category1", static_cast<xi::Container>(this->Category1), validContainers(PChar));
 }
 
 void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    auto* PItem = PChar->getStorage(this->Category1)->GetItem(this->ItemIndex1);
+    auto* PItem = PChar->getStorage(static_cast<xi::Container>(this->Category1))->GetItem(this->ItemIndex1);
     if (PItem == nullptr || !PItem->isMannequin())
     {
         ShowWarning("GP_CLI_COMMAND_SUBCONTAINER: Unable to load mannequin from slot %u in location %u by %s", this->ItemIndex1, this->Category1, PChar->getName());
@@ -118,7 +118,7 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
     {
         case GP_CLI_COMMAND_SUBCONTAINER_KIND::Equip:
         {
-            if (this->Category2 != LOC_STORAGE) // Only valid for direct equip/unequip
+            if (this->Category2 != static_cast<uint8>(xi::Container::Storage)) // Only valid for direct equip/unequip
             {
                 ShowWarning("GP_CLI_COMMAND_SUBCONTAINER: Invalid item location passed to Mannequin Equip packet %u by %s", this->Category2, PChar->getName());
                 return;
@@ -169,8 +169,8 @@ void GP_CLI_COMMAND_SUBCONTAINER::process(MapSession* PSession, CCharEntity* PCh
                                        PChar->id);
     if (rset)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PFurnishing, static_cast<CONTAINER_ID>(this->Category1), this->ItemIndex1);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(PChar, static_cast<CONTAINER_ID>(this->Category1), this->ItemIndex1, mannequin);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PFurnishing, static_cast<xi::Container>(this->Category1), this->ItemIndex1);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(PChar, static_cast<xi::Container>(this->Category1), this->ItemIndex1, mannequin);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
     else

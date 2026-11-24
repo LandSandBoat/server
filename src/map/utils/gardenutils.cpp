@@ -97,7 +97,7 @@ void UpdateGardening(CCharEntity* PChar, SendPacket sendPacket)
     TracyZoneScoped;
 
     uint32 vanatime = earth_time::vanadiel_timestamp();
-    for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    for (auto containerID : { xi::Container::MogSafe, xi::Container::MogSafe2 })
     {
         auto* PContainer = PChar->getStorage(containerID);
         PContainer->ForEachItem(
@@ -258,7 +258,7 @@ auto CalculateResults(CCharEntity* PChar, CItemFlowerpot* PItem) -> std::tuple<u
     {
         // Add up all of the installed furniture auras
         std::array<uint16, 8> auras = { 0 };
-        for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+        for (auto containerID : { xi::Container::MogSafe, xi::Container::MogSafe2 })
         {
             auto* PContainer = PChar->getStorage(containerID);
             PContainer->ForEachItem(

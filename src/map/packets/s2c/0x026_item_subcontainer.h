@@ -22,11 +22,11 @@
 #pragma once
 
 #include "base.h"
+#include "data/enums/container.h"
 
 #include "items/exdata.h"
 
 class CCharEntity;
-enum CONTAINER_ID : uint8;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0026
 // This packet is sent by the server to inform the player of an items sub-container information.
@@ -35,9 +35,9 @@ class GP_SERV_COMMAND_ITEM_SUBCONTAINER final : public GP_SERV_PACKET<PacketS2C:
 public:
     struct PacketData
     {
-        uint8_t      is_used;
-        CONTAINER_ID container;
-        uint8_t      index;
+        uint8_t       is_used;
+        xi::Container container;
+        uint8_t       index;
         // Anything below is specific to Mannequins
         uint8_t  unknown00;
         uint8_t  unknown01[2];
@@ -54,7 +54,7 @@ public:
         uint8_t  pose;
     };
 
-    GP_SERV_COMMAND_ITEM_SUBCONTAINER(CONTAINER_ID locationId, uint8_t slotId);
-    GP_SERV_COMMAND_ITEM_SUBCONTAINER(CONTAINER_ID locationId, uint8_t slotId, uint16_t headId, uint16_t bodyId, uint16_t handsId, uint16_t legId, uint16_t feetId, uint16_t mainId, uint16_t subId, uint16_t rangeId);
-    GP_SERV_COMMAND_ITEM_SUBCONTAINER(CCharEntity* PChar, CONTAINER_ID locationId, uint8_t slotId, const Exdata::Mannequin& mannequin);
+    GP_SERV_COMMAND_ITEM_SUBCONTAINER(xi::Container locationId, uint8_t slotId);
+    GP_SERV_COMMAND_ITEM_SUBCONTAINER(xi::Container locationId, uint8_t slotId, uint16_t headId, uint16_t bodyId, uint16_t handsId, uint16_t legId, uint16_t feetId, uint16_t mainId, uint16_t subId, uint16_t rangeId);
+    GP_SERV_COMMAND_ITEM_SUBCONTAINER(CCharEntity* PChar, xi::Container locationId, uint8_t slotId, const Exdata::Mannequin& mannequin);
 };

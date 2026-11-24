@@ -38,7 +38,7 @@ describe('Recycle bin', function()
 
         player.actions:dropItem(xi.inv.INVENTORY, slot, 1)
 
-        local binItem = player:getStorageItem(xi.inv.RECYCLEBIN, 1, 255)
+        local binItem = player:getStorageItem(xi.inv.RECYCLE_BIN, 1, 255)
         assert(binItem and binItem:getID() == xi.item.BRONZE_SWORD,
             'item should be in recycle bin slot 1')
     end)
@@ -51,7 +51,7 @@ describe('Recycle bin', function()
             player.actions:dropItem(xi.inv.INVENTORY, slot, 1)
         end
 
-        local firstBefore = player:getStorageItem(xi.inv.RECYCLEBIN, 1, 255)
+        local firstBefore = player:getStorageItem(xi.inv.RECYCLE_BIN, 1, 255)
         assert(firstBefore and firstBefore:getID() == xi.item.BRONZE_AXE)
 
         player:addItem(xi.item.BRONZE_SWORD)
@@ -59,7 +59,7 @@ describe('Recycle bin', function()
         assert(swordSlot)
         player.actions:dropItem(xi.inv.INVENTORY, swordSlot, 1)
 
-        local newest = player:getStorageItem(xi.inv.RECYCLEBIN, 10, 255)
+        local newest = player:getStorageItem(xi.inv.RECYCLE_BIN, 10, 255)
         assert(newest and newest:getID() == xi.item.BRONZE_SWORD,
             'newest drop should be in slot 10')
     end)

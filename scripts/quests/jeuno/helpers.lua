@@ -94,8 +94,8 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                         if quest:complete(player) then
                             player:changeContainerSize(xi.inv.INVENTORY, bagIncrease)
 
-                            if player:getContainerSize(xi.inv.MOGSATCHEL) > 0 then
-                                player:changeContainerSize(xi.inv.MOGSATCHEL, bagIncrease)
+                            if player:getContainerSize(xi.inv.MOG_SATCHEL) > 0 then
+                                player:changeContainerSize(xi.inv.MOG_SATCHEL, bagIncrease)
                             end
 
                             player:messageSpecial(params.message)

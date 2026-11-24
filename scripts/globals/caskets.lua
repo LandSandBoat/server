@@ -485,7 +485,7 @@ local function giveTempItem(player, npc, tempNum, subOption)
         player:messageSpecial(ID.text.UNABLE_TO_OBTAIN_ITEM)
         return
     else
-        if player:hasItem(tempID, xi.inventoryLocation.TEMPITEMS) then
+        if player:hasItem(tempID, xi.inv.TEMP_ITEMS) then
             return player:messageSpecial(ID.text.ALREADY_POSSESS_TEMP)
         else
             if player:addTempItem(tempID) then

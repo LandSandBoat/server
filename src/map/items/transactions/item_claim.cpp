@@ -48,24 +48,24 @@ auto ItemClaimTransaction::start(CCharEntity* player) -> std::unique_ptr<ItemCla
     return std::unique_ptr<ItemClaimTransaction>(new ItemClaimTransaction(xi::Badge<ItemClaimTransaction>{}, player));
 }
 
-auto ItemClaimTransaction::claimSlot(const uint8 location, const uint8 slot) -> CItem*
+auto ItemClaimTransaction::claimSlot(const xi::Container location, const uint8 slot) -> CItem*
 {
     CItem* PItem = this->player_->getStorage(location)->GetItem(slot);
 
     return Transaction::claim(this->player_, PItem).isSet() ? PItem : nullptr;
 }
 
-auto ItemClaimTransaction::give(const uint8 location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
+auto ItemClaimTransaction::give(const xi::Container location, const uint16 itemId, const uint32 quantity, const Silence silence) -> std::optional<uint8>
 {
     return Transaction::give(this->player_, location, itemId, quantity, silence);
 }
 
-auto ItemClaimTransaction::give(const uint8 location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
+auto ItemClaimTransaction::give(const xi::Container location, std::unique_ptr<CItem> item, const Silence silence) -> std::optional<uint8>
 {
     return Transaction::give(this->player_, location, std::move(item), silence);
 }
 
-auto ItemClaimTransaction::take(const uint8 location, const uint8 slot, const uint32 quantity) -> bool
+auto ItemClaimTransaction::take(const xi::Container location, const uint8 slot, const uint32 quantity) -> bool
 {
     return Transaction::take(this->player_, location, slot, quantity);
 }
@@ -80,7 +80,7 @@ auto ItemClaimTransaction::earn(const uint32 gil) -> bool
     return Transaction::earn(this->player_, gil);
 }
 
-auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint32 quantity) -> bool
+auto ItemClaimTransaction::split(const xi::Container fromLocation, const uint8 fromSlot, const xi::Container toLocation, const uint32 quantity) -> bool
 {
     const CItem* PItem = this->player_->getStorage(fromLocation)->GetItem(fromSlot);
     if (!PItem)
@@ -94,7 +94,7 @@ auto ItemClaimTransaction::split(const uint8 fromLocation, const uint8 fromSlot,
     return this->take(fromLocation, fromSlot, quantity) && this->give(toLocation, itemId, quantity).has_value();
 }
 
-auto ItemClaimTransaction::moveBetween(const uint8 fromLocation, const uint8 fromSlot, const uint8 toLocation, const uint8 toSlot, const uint32 quantity) -> bool
+auto ItemClaimTransaction::moveBetween(const xi::Container fromLocation, const uint8 fromSlot, const xi::Container toLocation, const uint8 toSlot, const uint32 quantity) -> bool
 {
     // take first: merging first would count the quantity twice if the take then failed
     if (!this->take(fromLocation, fromSlot, quantity))

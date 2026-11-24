@@ -41,7 +41,7 @@
 namespace
 {
 
-const std::set<uint8_t> validContainers = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+const std::set<xi::Container> validContainers = { xi::Container::MogSafe, xi::Container::MogSafe2 };
 
 }
 
@@ -52,12 +52,12 @@ auto GP_CLI_COMMAND_MYROOM_BANKIN::validate(MapSession* PSession, const CCharEnt
         .isInMogHouse(xi::MogHouse::Own)
         .mustEqual(PChar->moghouse().isOpen(), false, "Mog House is open to visitors")
         .mustNotEqual(this->MyroomItemNo, 0, "MyroomItemNo must not equal 0")
-        .oneOf("MyroomCategory", this->MyroomCategory, validContainers);
+        .oneOf("MyroomCategory", static_cast<xi::Container>(this->MyroomCategory), validContainers);
 }
 
 void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    const CItemContainer* PItemContainer = PChar->getStorage(this->MyroomCategory);
+    const CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomCategory));
     if (this->MyroomItemIndex > PItemContainer->GetSize())
     {
         ShowErrorFmt("Invalid slot requested: {}", PChar->getName());
@@ -84,7 +84,7 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
         return;
     }
 
-    PItemContainer          = PChar->getStorage(LOC_STORAGE);
+    PItemContainer          = PChar->getStorage(xi::Container::Storage);
     const uint8 RemovedSize = PItemContainer->GetSize() - std::min<uint8>(PItemContainer->GetSize(), PItemContainer->GetBuff() - PFurnishing->getStorage());
     if (PItemContainer->GetFreeSlotsCount() < RemovedSize)
     {
@@ -113,14 +113,14 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
     // If this furniture is a mannequin, clear its appearance and unlock all items that were on it!
     if (PFurnishing->isMannequin())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<CONTAINER_ID>(this->MyroomCategory), this->MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_SUBCONTAINER>(static_cast<xi::Container>(this->MyroomCategory), this->MyroomItemIndex, 0, 0, 0, 0, 0, 0, 0, 0);
         auto&    mannequin = PFurnishing->exdata<Exdata::Mannequin>();
         uint8_t* slots[]   = { &mannequin.EquipMain, &mannequin.EquipSub, &mannequin.EquipRanged, &mannequin.EquipHead, &mannequin.EquipBody, &mannequin.EquipHands, &mannequin.EquipLegs, &mannequin.EquipFeet };
         for (auto* slot : slots)
         {
             if (*slot > 0)
             {
-                auto* PEquippedItem = PChar->getStorage(LOC_STORAGE)->GetItem(*slot);
+                auto* PEquippedItem = PChar->getStorage(xi::Container::Storage)->GetItem(*slot);
                 if (PEquippedItem != nullptr)
                 {
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PEquippedItem, ItemLockFlg::Normal);
@@ -147,14 +147,14 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
         {
             if (PItemContainer->GetItem(SlotID) != nullptr)
             {
-                charutils::MoveItem(PChar, LOC_STORAGE, SlotID, ERROR_SLOTID);
+                charutils::MoveItem(PChar, xi::Container::Storage, SlotID, ERROR_SLOTID);
             }
         }
 
         // Storage mods only apply on the 1st floor
         if (!PFurnishing->getOn2ndFloor())
         {
-            PChar->getStorage(LOC_STORAGE)->AddBuff(-(int8)PFurnishing->getStorage());
+            PChar->getStorage(xi::Container::Storage)->AddBuff(-(int8)PFurnishing->getStorage());
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
@@ -163,6 +163,6 @@ void GP_CLI_COMMAND_MYROOM_BANKIN::process(MapSession* PSession, CCharEntity* PC
 
         PChar->loc.zone->SpawnConditionalNPCs(PChar);
     }
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PFurnishing, static_cast<CONTAINER_ID>(this->MyroomCategory), PFurnishing->getSlotID());
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PFurnishing, static_cast<xi::Container>(this->MyroomCategory), PFurnishing->getSlotID());
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
 }

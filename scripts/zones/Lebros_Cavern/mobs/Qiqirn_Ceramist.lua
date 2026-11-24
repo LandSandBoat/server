@@ -23,7 +23,7 @@ entity.onMobDeath = function(mob, player, optParams)
             return
         end
 
-        if player:hasItem(xi.item.QIQIRN_MINE, xi.inv.TEMPITEMS) then
+        if player:hasItem(xi.item.QIQIRN_MINE, xi.inv.TEMP_ITEMS) then
             return
         end
 

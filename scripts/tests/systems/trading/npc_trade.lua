@@ -64,7 +64,7 @@ describe('NpcTradeTransaction', function()
                 { itemId = xi.item.RED_OVEN_MITT, quantity = 1 },
             })
 
-        local mitt = player:findItem(xi.item.RED_OVEN_MITT, xi.inventoryLocation.INVENTORY)
+        local mitt = player:findItem(xi.item.RED_OVEN_MITT, xi.inv.INVENTORY)
         assert(mitt, 'the mitt was taken without the trade being accepted')
         assert(mitt:state() == xi.itemState.FREE, 'state: ' .. tostring(mitt:state()))
     end)
@@ -73,7 +73,7 @@ describe('NpcTradeTransaction', function()
         player:setCharVar('TOO_MANY_CHEFS', 3)
         player:addItem(xi.item.RED_OVEN_MITT)
 
-        local mitt = player:findItem(xi.item.RED_OVEN_MITT, xi.inventoryLocation.INVENTORY)
+        local mitt = player:findItem(xi.item.RED_OVEN_MITT, xi.inv.INVENTORY)
 
         assert(mitt, 'the mitt was not added')
         assert(mitt:state() == xi.itemState.FREE, 'state before the offer: ' .. tostring(mitt:state()))

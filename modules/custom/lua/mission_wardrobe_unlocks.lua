@@ -10,30 +10,30 @@ local unlocks =
 {
     [xi.mission.log_id.ZILART] =
     {
-        [xi.mission.id.zilart.ARK_ANGELS] = { xi.inv.WARDROBE3, 5 },
+        [xi.mission.id.zilart.ARK_ANGELS] = { xi.inv.WARDROBE_3, 5 },
     },
 }
 
 local bagNames =
 {
-    [xi.inv.INVENTORY]  = 'Inventory',
-    [xi.inv.MOGSAFE]    = 'Mog Safe',
-    [xi.inv.STORAGE]    = 'Storage',
-    [xi.inv.TEMPITEMS]  = 'Temp. Items',
-    [xi.inv.MOGLOCKER]  = 'Mog Locker',
-    [xi.inv.MOGSATCHEL] = 'Mog Satchel',
-    [xi.inv.MOGSACK]    = 'Mog Sack',
-    [xi.inv.MOGCASE]    = 'Mog Case',
-    [xi.inv.WARDROBE]   = 'Mog Wardrobe 1',
-    [xi.inv.MOGSAFE2]   = 'Mog Safe 2',
-    [xi.inv.WARDROBE2]  = 'Mog Wardrobe 2',
-    [xi.inv.WARDROBE3]  = 'Mog Wardrobe 3',
-    [xi.inv.WARDROBE4]  = 'Mog Wardrobe 4',
-    [xi.inv.WARDROBE5]  = 'Mog Wardrobe 5',
-    [xi.inv.WARDROBE6]  = 'Mog Wardrobe 6',
-    [xi.inv.WARDROBE7]  = 'Mog Wardrobe 7',
-    [xi.inv.WARDROBE8]  = 'Mog Wardrobe 8',
-    [xi.inv.RECYCLEBIN] = 'Recycle Bin',
+    [xi.inv.INVENTORY]   = 'Inventory',
+    [xi.inv.MOG_SAFE]    = 'Mog Safe',
+    [xi.inv.STORAGE]     = 'Storage',
+    [xi.inv.TEMP_ITEMS]  = 'Temp. Items',
+    [xi.inv.MOG_LOCKER]  = 'Mog Locker',
+    [xi.inv.MOG_SATCHEL] = 'Mog Satchel',
+    [xi.inv.MOG_SACK]    = 'Mog Sack',
+    [xi.inv.MOG_CASE]    = 'Mog Case',
+    [xi.inv.WARDROBE]    = 'Mog Wardrobe 1',
+    [xi.inv.MOG_SAFE_2]  = 'Mog Safe 2',
+    [xi.inv.WARDROBE_2]  = 'Mog Wardrobe 2',
+    [xi.inv.WARDROBE_3]  = 'Mog Wardrobe 3',
+    [xi.inv.WARDROBE_4]  = 'Mog Wardrobe 4',
+    [xi.inv.WARDROBE_5]  = 'Mog Wardrobe 5',
+    [xi.inv.WARDROBE_6]  = 'Mog Wardrobe 6',
+    [xi.inv.WARDROBE_7]  = 'Mog Wardrobe 7',
+    [xi.inv.WARDROBE_8]  = 'Mog Wardrobe 8',
+    [xi.inv.RECYCLE_BIN] = 'Recycle Bin',
 }
 
 m:addOverride('xi.player.charCreate', function(player)
@@ -42,13 +42,13 @@ m:addOverride('xi.player.charCreate', function(player)
     -- NOTE: These will all be clamped between 0-80,
     --     : so using -80 is fine
     player:changeContainerSize(xi.inv.WARDROBE,  -80)
-    player:changeContainerSize(xi.inv.WARDROBE2, -80)
-    player:changeContainerSize(xi.inv.WARDROBE3, -80)
-    player:changeContainerSize(xi.inv.WARDROBE4, -80)
-    player:changeContainerSize(xi.inv.WARDROBE5, -80)
-    player:changeContainerSize(xi.inv.WARDROBE6, -80)
-    player:changeContainerSize(xi.inv.WARDROBE7, -80)
-    player:changeContainerSize(xi.inv.WARDROBE8, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_2, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_3, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_4, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_5, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_6, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_7, -80)
+    player:changeContainerSize(xi.inv.WARDROBE_8, -80)
 end)
 
 m:addOverride('npcUtil.completeMission', function(player, logId, missionId, params)

@@ -72,7 +72,7 @@ auto ItemId::resolve() const -> CItem*
         return nullptr;
     }
 
-    const auto* PContainer = POwner->getStorage(this->location);
+    const auto* PContainer = POwner->getStorage(static_cast<xi::Container>(this->location));
     if (!PContainer)
     {
         return nullptr;

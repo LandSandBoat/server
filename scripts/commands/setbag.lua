@@ -53,7 +53,7 @@ commandObj.onTrigger = function(player, bagsize)
     player:printToPlayer(string.format('Old Bag Size: %u', currentBagSize))
     player:printToPlayer(string.format('New Bag Size: %u', bagsize))
     player:changeContainerSize(xi.inv.INVENTORY, adjustment)
-    player:changeContainerSize(xi.inv.MOGSATCHEL, adjustment)
+    player:changeContainerSize(xi.inv.MOG_SATCHEL, adjustment)
 end
 
 return commandObj

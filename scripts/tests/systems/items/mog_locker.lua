@@ -5,7 +5,7 @@ describe('Mog Locker lease', function()
     local function moveCrystalToLocker()
         local slot = player:getItemInvSlot(xi.item.WIND_CRYSTAL, 1)
         assert(slot, 'wind crystal not in inventory')
-        player.actions:moveItem(xi.inv.INVENTORY, slot, xi.inv.MOGLOCKER, 1)
+        player.actions:moveItem(xi.inv.INVENTORY, slot, xi.inv.MOG_LOCKER, 1)
     end
 
     before_each(function()
@@ -20,7 +20,7 @@ describe('Mog Locker lease', function()
         end
 
         -- the locker has no slots until it is rented
-        player:changeContainerSize(xi.inv.MOGLOCKER, 30)
+        player:changeContainerSize(xi.inv.MOG_LOCKER, 30)
         player:setCharVar('mog-locker-access-type', 1)
         player:addItem(xi.item.WIND_CRYSTAL)
     end)
@@ -30,7 +30,7 @@ describe('Mog Locker lease', function()
 
         moveCrystalToLocker()
 
-        assert(player:findItem(xi.item.WIND_CRYSTAL, xi.inv.MOGLOCKER), 'locker refused with a running lease')
+        assert(player:findItem(xi.item.WIND_CRYSTAL, xi.inv.MOG_LOCKER), 'locker refused with a running lease')
     end)
 
     it('refuses the locker once the lease has lapsed', function()
@@ -38,7 +38,7 @@ describe('Mog Locker lease', function()
 
         moveCrystalToLocker()
 
-        assert(not player:findItem(xi.item.WIND_CRYSTAL, xi.inv.MOGLOCKER), 'locker accepted an item after the lease lapsed')
+        assert(not player:findItem(xi.item.WIND_CRYSTAL, xi.inv.MOG_LOCKER), 'locker accepted an item after the lease lapsed')
         assert(player:findItem(xi.item.WIND_CRYSTAL, xi.inv.INVENTORY), 'item left the inventory')
     end)
 end)

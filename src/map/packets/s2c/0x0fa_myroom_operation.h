@@ -24,8 +24,8 @@
 #include "common/cbasetypes.h"
 
 #include "base.h"
+#include "data/enums/container.h"
 
-enum CONTAINER_ID : uint8;
 class CItem;
 
 enum class GP_SERV_COMMAND_MYROOM_OPERATION_RESULT : uint8_t
@@ -51,9 +51,9 @@ public:
         GP_SERV_COMMAND_MYROOM_OPERATION_RESULT Result;          // PS2: Result
         uint16_t                                unknown00;       // PS2: (New; did not exist.)
         uint8_t                                 MyroomItemIndex; // PS2: ItemIndex
-        CONTAINER_ID                            MyroomCategory;  // PS2: (New; did not exist.)
+        xi::Container                           MyroomCategory;  // PS2: (New; did not exist.)
         uint16_t                                unknown01;       // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_MYROOM_OPERATION(const CItem* PItem, CONTAINER_ID locationId, uint8 slotId);
+    GP_SERV_COMMAND_MYROOM_OPERATION(const CItem* PItem, xi::Container locationId, uint8 slotId);
 };

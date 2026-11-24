@@ -25,6 +25,7 @@
 #include "common/macros.h"
 #include "common/types/flag.h"
 
+#include "data/enums/container.h"
 #include "items/item_id.h"
 
 #include <functional>
@@ -77,7 +78,7 @@ public:
     auto holds(const CItem* item) const -> bool;
 
     // free slots of the location this transaction keeps counted as used
-    virtual auto heldSlots(uint8 location) const -> uint8;
+    virtual auto heldSlots(xi::Container location) const -> uint8;
 
     [[nodiscard]] auto commit() -> bool;
     void               rollback();
@@ -99,14 +100,14 @@ protected:
     auto claims() const -> const std::vector<ItemId>&;
 
     // Give specified item (new slot index)
-    [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
-    [[nodiscard]] auto give(CCharEntity* PChar, uint8 location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto give(CCharEntity* PChar, xi::Container location, uint16 itemId, uint32 quantity, Silence silence = Silence::No) -> std::optional<uint8>;
+    [[nodiscard]] auto give(CCharEntity* PChar, xi::Container location, std::unique_ptr<CItem> item, Silence silence = Silence::No) -> std::optional<uint8>;
 
     // Like give, but it grows the stack at the given slot index
-    [[nodiscard]] auto mergeInto(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
+    [[nodiscard]] auto mergeInto(CCharEntity* PChar, xi::Container location, uint8 slot, uint32 quantity) -> bool;
 
     // Claim given item object and tentatively substract given quantity
-    [[nodiscard]] auto take(CCharEntity* PChar, uint8 location, uint8 slot, uint32 quantity) -> bool;
+    [[nodiscard]] auto take(CCharEntity* PChar, xi::Container location, uint8 slot, uint32 quantity) -> bool;
 
     // Tentatively grant/subtract the given sum of gil
     [[nodiscard]] auto pay(CCharEntity* PChar, uint32 gil) -> bool;
@@ -120,9 +121,9 @@ protected:
 
 private:
     // quantity change. Refused for a busy item this transaction does not hold
-    [[nodiscard]] auto updateItem(CCharEntity* PChar, uint8 locationId, uint8 slotId, int32 quantity) const -> ItemMutation;
+    [[nodiscard]] auto updateItem(CCharEntity* PChar, xi::Container locationId, uint8 slotId, int32 quantity) const -> ItemMutation;
 
-    [[nodiscard]] auto recordGive(CCharEntity* PChar, uint8 location, uint8 slot, int32 applied) -> std::optional<uint8>;
+    [[nodiscard]] auto recordGive(CCharEntity* PChar, xi::Container location, uint8 slot, int32 applied) -> std::optional<uint8>;
 
     void runUndos();
     void releaseAll();

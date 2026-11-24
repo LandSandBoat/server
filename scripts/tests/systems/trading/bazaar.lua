@@ -8,7 +8,7 @@ describe('BazaarPurchaseTransaction', function()
     local price = 100
 
     local function findItem(player, itemId)
-        local item = player:findItem(itemId, xi.inventoryLocation.INVENTORY)
+        local item = player:findItem(itemId, xi.inv.INVENTORY)
         assert(item, 'item ' .. tostring(itemId) .. ' not in inventory')
 
         return item
@@ -89,7 +89,7 @@ describe('BazaarPurchaseTransaction', function()
 
         seller.actions:bazaarPrice(0, 50)
 
-        local gil = seller:findItem(xi.item.GIL, xi.inventoryLocation.INVENTORY)
+        local gil = seller:findItem(xi.item.GIL, xi.inv.INVENTORY)
         assert(gil, 'gil is missing entirely')
         assert(gil:state() == xi.itemState.FREE, 'gil was claimed by the bazaar: ' .. tostring(gil:state()))
         assert(seller:getGil() == 1000, 'gil changed: ' .. tostring(seller:getGil()))

@@ -21,17 +21,17 @@ describe('Moving items between containers', function()
     end)
 
     it('a full stack can be moved to another container', function()
-        player:changeContainerSize(xi.inv.MOGSATCHEL, 30)
+        player:changeContainerSize(xi.inv.MOG_SATCHEL, 30)
         player:addItem(xi.item.FIRE_ARROW, 50)
 
         local srcSlot = findItemSlot(player, xi.inv.INVENTORY, xi.item.FIRE_ARROW)
         assert(srcSlot, 'could not find fire arrows')
 
-        player.actions:moveItem(xi.inv.INVENTORY, srcSlot, xi.inv.MOGSATCHEL, 50)
+        player.actions:moveItem(xi.inv.INVENTORY, srcSlot, xi.inv.MOG_SATCHEL, 50)
 
         assert(findItemSlot(player, xi.inv.INVENTORY, xi.item.FIRE_ARROW) == nil,
             'item should no longer be in inventory')
-        assert(findItemSlot(player, xi.inv.MOGSATCHEL, xi.item.FIRE_ARROW),
+        assert(findItemSlot(player, xi.inv.MOG_SATCHEL, xi.item.FIRE_ARROW),
             'item should be in satchel')
     end)
 

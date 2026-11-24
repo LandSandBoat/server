@@ -30,27 +30,27 @@
 namespace
 {
 
-const auto validContainers = [](const CCharEntity* PChar) -> std::set<CONTAINER_ID>
+const auto validContainers = [](const CCharEntity* PChar) -> std::set<xi::Container>
 {
     // These are always available in both LSB and retail.
     std::set allowedContainers = {
-        LOC_INVENTORY,
-        LOC_WARDROBE,
-        LOC_WARDROBE2,
+        xi::Container::Inventory,
+        xi::Container::Wardrobe,
+        xi::Container::Wardrobe2,
     };
 
     // Global containers optionally unlockable
     const std::set unlockableContainers = {
-        LOC_WARDROBE3, // Always available in LSB but paid feature on retail.
-        LOC_WARDROBE4,
-        LOC_WARDROBE5,
-        LOC_WARDROBE6,
-        LOC_WARDROBE7,
-        LOC_WARDROBE8,
+        xi::Container::Wardrobe3, // Always available in LSB but paid feature on retail.
+        xi::Container::Wardrobe4,
+        xi::Container::Wardrobe5,
+        xi::Container::Wardrobe6,
+        xi::Container::Wardrobe7,
+        xi::Container::Wardrobe8,
     };
 
     const std::set additionalContainers = {
-        LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE
+        xi::Container::MogSatchel, xi::Container::MogSack, xi::Container::MogCase
     };
 
     for (const auto containerId : unlockableContainers)
@@ -82,7 +82,7 @@ auto GP_CLI_COMMAND_EQUIP_SET::validate(MapSession* PSession, const CCharEntity*
     return PacketValidator(PChar)
         .blockedBy({ BlockedState::InEvent, BlockedState::AbnormalStatus, BlockedState::Fishing })
         .oneOf<SLOTTYPE>(this->EquipKind)
-        .oneOf("Category", static_cast<CONTAINER_ID>(this->Category), validContainers(PChar));
+        .oneOf("Category", static_cast<xi::Container>(this->Category), validContainers(PChar));
 }
 
 void GP_CLI_COMMAND_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar) const
@@ -94,7 +94,7 @@ void GP_CLI_COMMAND_EQUIP_SET::process(MapSession* PSession, CCharEntity* PChar)
     }
 
     const auto* PBefore = PChar->getEquip(static_cast<SLOTTYPE>(this->EquipKind));
-    charutils::EquipItem(PChar, this->PropertyItemIndex, this->EquipKind, this->Category);
+    charutils::EquipItem(PChar, this->PropertyItemIndex, this->EquipKind, static_cast<xi::Container>(this->Category));
     if (PChar->getEquip(static_cast<SLOTTYPE>(this->EquipKind)) != PBefore)
     {
         monstrosity::HandleGladiatorGearChange(PChar);

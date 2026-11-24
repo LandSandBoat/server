@@ -103,14 +103,14 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc)
         end
 
         -- Ethereal droplet.
-        if player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMPITEMS) then
+        if player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMP_ITEMS) then
             lockValue = lockValue + 2
         end
 
     -- Escha Ru'Aun only.
     elseif zoneId == xi.zone.ESCHA_RUAUN then
         -- Eschan droplet.
-        if player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMPITEMS) then
+        if player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMP_ITEMS) then
             lockValue = lockValue + 2
 
         -- Default message.
@@ -160,18 +160,18 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     if
         zoneId == xi.zone.REISENJIMA and
         option == 3 and
-        player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMPITEMS)
+        player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMP_ITEMS)
     then
-        player:delItem(xi.item.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
+        player:delItem(xi.item.ETHEREAL_DROPLET, 1, xi.inv.TEMP_ITEMS)
         player:messageSpecial(zones[zoneId].text.YOU_HAVE_USED, xi.item.ETHEREAL_DROPLET)
 
     -- Escha Ru'Aun: Eschan Droplet usage.
     elseif
         zoneId == xi.zone.ESCHA_RUAUN and
         (option == 2 or option == 3) and
-        player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMPITEMS)
+        player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMP_ITEMS)
     then
-        player:delItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, 1, xi.inv.TEMPITEMS)
+        player:delItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, 1, xi.inv.TEMP_ITEMS)
         player:messageSpecial(zones[zoneId].text.YOU_HAVE_USED, xi.item.CLUMP_OF_ESCHAN_DROPLETS)
 
     -- Consume Escha Silt currency.

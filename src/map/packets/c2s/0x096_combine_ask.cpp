@@ -102,7 +102,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
         return;
     }
 
-    const auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(this->CrystalIdx);
+    const auto* PItem = PChar->getStorage(xi::Container::Inventory)->GetItem(this->CrystalIdx);
     if (!PItem ||
         this->Crystal != PItem->getID() ||
         PItem->getQuantity() == 0)
@@ -132,7 +132,7 @@ void GP_CLI_COMMAND_COMBINE_ASK::process(MapSession* PSession, CCharEntity* PCha
 
         slotQty[invSlotId]++;
 
-        const auto* PSlotItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotId);
+        const auto* PSlotItem = PChar->getStorage(xi::Container::Inventory)->GetItem(invSlotId);
 
         if (!PSlotItem || PSlotItem->getID() != itemId)
         {

@@ -131,25 +131,25 @@ describe('Mog House visits', function()
 
     it('locks the layout while open', function()
         setMogHouseOpen(true)
-        assert(not placeFurniture(xi.item.ARMOR_BOX, xi.inv.MOGSAFE, 0):isInstalled(), 'furniture placed while open')
+        assert(not placeFurniture(xi.item.ARMOR_BOX, xi.inv.MOG_SAFE, 0):isInstalled(), 'furniture placed while open')
 
         setMogHouseOpen(false)
-        host.actions:placeFurniture(xi.inv.MOGSAFE, host:findItem(xi.item.ARMOR_BOX, xi.inv.MOGSAFE):getSlotID(), 0, 0)
+        host.actions:placeFurniture(xi.inv.MOG_SAFE, host:findItem(xi.item.ARMOR_BOX, xi.inv.MOG_SAFE):getSlotID(), 0, 0)
         host.actions:finishFurnishing()
-        assert(host:findItem(xi.item.ARMOR_BOX, xi.inv.MOGSAFE):isInstalled(), 'furniture not placed after close')
+        assert(host:findItem(xi.item.ARMOR_BOX, xi.inv.MOG_SAFE):isInstalled(), 'furniture not placed after close')
     end)
 
     it('sends the host furniture from both safes', function()
         -- Safe 2 needs 2F unlocked
         host:setMoghouseFlag(0x20)
-        host:changeContainerSize(xi.inv.MOGSAFE2, 10)
+        host:changeContainerSize(xi.inv.MOG_SAFE_2, 10)
 
         -- Unplaced item in safe slot 1, so the visitor slots are compacted
         host:addItem(xi.item.BRONZE_SWORD)
-        host.actions:moveItem(xi.inv.INVENTORY, host:findItem(xi.item.BRONZE_SWORD, xi.inv.INVENTORY):getSlotID(), xi.inv.MOGSAFE, 1)
-        assert(placeFurniture(xi.item.ARMOR_BOX, xi.inv.MOGSAFE, 0):isInstalled(), 'safe furniture not placed')
-        assert(placeFurniture(xi.item.HUME_M_MANNEQUIN, xi.inv.MOGSAFE, 14):isInstalled(), 'mannequin not placed')
-        assert(placeFurniture(xi.item.WATER_CASK, xi.inv.MOGSAFE2, 3):isInstalled(), 'safe 2 furniture not placed')
+        host.actions:moveItem(xi.inv.INVENTORY, host:findItem(xi.item.BRONZE_SWORD, xi.inv.INVENTORY):getSlotID(), xi.inv.MOG_SAFE, 1)
+        assert(placeFurniture(xi.item.ARMOR_BOX, xi.inv.MOG_SAFE, 0):isInstalled(), 'safe furniture not placed')
+        assert(placeFurniture(xi.item.HUME_M_MANNEQUIN, xi.inv.MOG_SAFE, 14):isInstalled(), 'mannequin not placed')
+        assert(placeFurniture(xi.item.WATER_CASK, xi.inv.MOG_SAFE_2, 3):isInstalled(), 'safe 2 furniture not placed')
         setMogHouseOpen(true)
 
         visitor.packets:clear()
@@ -159,7 +159,7 @@ describe('Mog House visits', function()
         local mannequinSent = false
         for _, packet in ipairs(visitor.packets:getIncoming()) do
             if packet.type == 0x026 and packet.data[4] == 1 then
-                assert(packet.data[5] == xi.inv.MOGSAFE and packet.data[6] == 2, 'mannequin sent at the wrong slot')
+                assert(packet.data[5] == xi.inv.MOG_SAFE and packet.data[6] == 2, 'mannequin sent at the wrong slot')
                 mannequinSent = true
             end
         end
@@ -179,8 +179,8 @@ describe('Mog House visits', function()
             end
         end
 
-        assert(itemAt[xi.inv.MOGSAFE * 256 + 1] == xi.item.ARMOR_BOX, 'safe furniture missing')
-        assert(itemAt[xi.inv.MOGSAFE * 256 + 2] == xi.item.HUME_M_MANNEQUIN, 'mannequin missing')
-        assert(itemAt[xi.inv.MOGSAFE2 * 256 + 1] == xi.item.WATER_CASK, 'safe 2 furniture missing')
+        assert(itemAt[xi.inv.MOG_SAFE * 256 + 1] == xi.item.ARMOR_BOX, 'safe furniture missing')
+        assert(itemAt[xi.inv.MOG_SAFE * 256 + 2] == xi.item.HUME_M_MANNEQUIN, 'mannequin missing')
+        assert(itemAt[xi.inv.MOG_SAFE_2 * 256 + 1] == xi.item.WATER_CASK, 'safe 2 furniture missing')
     end)
 end)

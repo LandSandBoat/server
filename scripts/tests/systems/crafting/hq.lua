@@ -17,7 +17,7 @@ describe('HQ', function()
         end
 
         p:setMod(primarySpeedMod, 17000)
-        p:changeContainerSize(xi.inventoryLocation.INVENTORY, 80)
+        p:changeContainerSize(xi.inv.INVENTORY, 80)
 
         local nqTotal = 0
         local hqTotal = 0

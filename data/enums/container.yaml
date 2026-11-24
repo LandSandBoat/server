@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+meta:
+  cpp:
+    underlying: uint8_t
+  lua:
+    table: xi.inv
+
+values:
+  inventory:    0
+  mog_safe:     1
+  storage:      2
+  temp_items:   3
+  mog_locker:   4
+  mog_satchel:  5
+  mog_sack:     6
+  mog_case:     7
+  wardrobe:     8
+  mog_safe_2:   9
+  wardrobe_2:  10
+  wardrobe_3:  11
+  wardrobe_4:  12
+  wardrobe_5:  13
+  wardrobe_6:  14
+  wardrobe_7:  15
+  wardrobe_8:  16
+  recycle_bin: 17

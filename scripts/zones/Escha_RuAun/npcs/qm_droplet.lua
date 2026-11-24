@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMPITEMS) then
+    if not player:hasItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS, xi.inv.TEMP_ITEMS) then
         player:addTempItem(xi.item.CLUMP_OF_ESCHAN_DROPLETS)
     else
         player:messageSpecial(zones[xi.zone.ESCHA_RUAUN].text.NOTHING_OUT_OF_ORDINARY)

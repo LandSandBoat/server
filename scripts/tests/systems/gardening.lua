@@ -1,5 +1,5 @@
 local function mogItem(player, itemId)
-    local item = player:findItem(itemId, xi.inv.MOGSAFE)
+    local item = player:findItem(itemId, xi.inv.MOG_SAFE)
     assert(item, string.format('expected item %d in mog safe', itemId))
 
     return item
@@ -12,7 +12,7 @@ local function stockSafe(player, itemId)
     local item = player:findItem(itemId, xi.inv.INVENTORY)
     assert(item, string.format('expected item %d in inventory', itemId))
 
-    player.actions:moveItem(xi.inv.INVENTORY, item:getSlotID(), xi.inv.MOGSAFE, 1)
+    player.actions:moveItem(xi.inv.INVENTORY, item:getSlotID(), xi.inv.MOG_SAFE, 1)
 end
 
 -- Sow a seed into the pot; returns the pot handle.
@@ -20,7 +20,7 @@ local function plant(player, seedId)
     stockSafe(player, seedId)
 
     local pot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
-    player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, mogItem(player, seedId):getSlotID())
+    player.actions:plantAdd(xi.inv.MOG_SAFE, pot:getSlotID(), xi.inv.MOG_SAFE, mogItem(player, seedId):getSlotID())
 
     return pot
 end
@@ -30,7 +30,7 @@ local function feed(player, crystalId)
     stockSafe(player, crystalId)
 
     local pot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
-    player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, mogItem(player, crystalId):getSlotID())
+    player.actions:plantAdd(xi.inv.MOG_SAFE, pot:getSlotID(), xi.inv.MOG_SAFE, mogItem(player, crystalId):getSlotID())
 end
 
 -- Check the plant (resets wilt), pass a stage's worth of days, then tick to grow until targetStep.
@@ -41,7 +41,7 @@ local function growUntil(player, pot, targetStep)
             return
         end
 
-        player.actions:plantCheck(xi.inv.MOGSAFE, pot:getSlotID())
+        player.actions:plantCheck(xi.inv.MOG_SAFE, pot:getSlotID())
         xi.test.world:skipVanaDays(120)
         xi.test.world:tickEntity(player)
     end
@@ -81,7 +81,7 @@ describe('Gardening', function()
         stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
 
         local pot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
-        player.actions:placeFurniture(xi.inv.MOGSAFE, pot:getSlotID(), 0, 0)
+        player.actions:placeFurniture(xi.inv.MOG_SAFE, pot:getSlotID(), 0, 0)
         player.actions:finishFurnishing()
     end)
 
@@ -91,9 +91,9 @@ describe('Gardening', function()
         local wasKind  = pot:getExData().kind
 
         -- a real seed id, but the slot points back at the pot
-        player.actions:plantAdd(xi.inv.MOGSAFE, potSlot, xi.inv.MOGSAFE, potSlot, xi.item.BAG_OF_HERB_SEEDS)
+        player.actions:plantAdd(xi.inv.MOG_SAFE, potSlot, xi.inv.MOG_SAFE, potSlot, xi.item.BAG_OF_HERB_SEEDS)
 
-        local stillThere = player:findItem(xi.item.EARTHEN_FLOWERPOT, xi.inv.MOGSAFE)
+        local stillThere = player:findItem(xi.item.EARTHEN_FLOWERPOT, xi.inv.MOG_SAFE)
         assert(stillThere, 'the pot consumed itself')
         assert(stillThere:getExData().kind == wasKind, 'the pot planted itself')
     end)
@@ -105,9 +105,9 @@ describe('Gardening', function()
         local crystal = mogItem(player, xi.item.FIRE_CRYSTAL)
 
         -- names a seed in the packet but points at a crystal slot
-        player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, crystal:getSlotID(), xi.item.BAG_OF_HERB_SEEDS)
+        player.actions:plantAdd(xi.inv.MOG_SAFE, pot:getSlotID(), xi.inv.MOG_SAFE, crystal:getSlotID(), xi.item.BAG_OF_HERB_SEEDS)
 
-        assert(player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOGSAFE), 'the crystal was spent as a seed')
+        assert(player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOG_SAFE), 'the crystal was spent as a seed')
         assert(mogItem(player, xi.item.EARTHEN_FLOWERPOT):getExData().kind == pot:getExData().kind, 'a seed was planted from a crystal')
     end)
 
@@ -118,9 +118,9 @@ describe('Gardening', function()
         local crystal = mogItem(player, xi.item.FIRE_CRYSTAL)
 
         -- nothing planted, so there is no sprout to feed
-        player.actions:plantAdd(xi.inv.MOGSAFE, pot:getSlotID(), xi.inv.MOGSAFE, crystal:getSlotID())
+        player.actions:plantAdd(xi.inv.MOG_SAFE, pot:getSlotID(), xi.inv.MOG_SAFE, crystal:getSlotID())
 
-        local kept = player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOGSAFE)
+        local kept = player:findItem(xi.item.FIRE_CRYSTAL, xi.inv.MOG_SAFE)
         assert(kept, 'the crystal was eaten by a pot that had no use for it')
         assert(kept:state() == xi.itemState.FREE, 'state: ' .. tostring(kept:state()))
     end)
@@ -143,7 +143,7 @@ describe('Gardening', function()
         growUntil(player, pot, xi.gardening.stage.MATURE_PLANT)
         assert(pot:getExData().step == xi.gardening.stage.MATURE_PLANT)
 
-        player.actions:plantHarvest(xi.inv.MOGSAFE, pot:getSlotID())
+        player.actions:plantHarvest(xi.inv.MOG_SAFE, pot:getSlotID())
 
         -- Pot is emptied after harvest.
         assert(pot:getExData().step == xi.gardening.stage.EMPTY, 'expected pot to be empty after harvest')
@@ -152,7 +152,7 @@ describe('Gardening', function()
         -- One of the herb crops lands in the mog safe.
         local gotCrop = false
         for _, cropId in ipairs(herbCrops) do
-            if player:findItem(cropId, xi.inv.MOGSAFE) then
+            if player:findItem(cropId, xi.inv.MOG_SAFE) then
                 gotCrop = true
                 break
             end
@@ -200,11 +200,11 @@ describe('Gardening', function()
         growUntil(player, pot, xi.gardening.stage.SECOND_SPROUTS_2)
         local driedStage = pot:getExData().step
 
-        player.actions:plantDry(xi.inv.MOGSAFE, pot:getSlotID())
+        player.actions:plantDry(xi.inv.MOG_SAFE, pot:getSlotID())
         assert(pot:getExData().dried, 'expected plant to be marked dried')
 
         -- Dried plants no longer grow or wilt.
-        player.actions:plantCheck(xi.inv.MOGSAFE, pot:getSlotID())
+        player.actions:plantCheck(xi.inv.MOG_SAFE, pot:getSlotID())
         xi.test.world:skipVanaDays(200)
         xi.test.world:tickEntity(player)
 
@@ -226,18 +226,18 @@ describe('Gardening', function()
                     feed(player, feedEntry.crystal)
 
                     growUntil(player, pot, xi.gardening.stage.MATURE_PLANT)
-                    player.actions:plantHarvest(xi.inv.MOGSAFE, pot:getSlotID())
+                    player.actions:plantHarvest(xi.inv.MOG_SAFE, pot:getSlotID())
 
-                    if player:findItem(feedEntry.ore, xi.inv.MOGSAFE) then
+                    if player:findItem(feedEntry.ore, xi.inv.MOG_SAFE) then
                         gotOre = true
                         break
                     end
 
                     -- A full mog safe blocks the next sowing.
-                    player:delContainerItems(xi.inv.MOGSAFE)
+                    player:delContainerItems(xi.inv.MOG_SAFE)
                     stockSafe(player, xi.item.EARTHEN_FLOWERPOT)
                     local nextPot = mogItem(player, xi.item.EARTHEN_FLOWERPOT)
-                    player.actions:placeFurniture(xi.inv.MOGSAFE, nextPot:getSlotID(), 0, 0)
+                    player.actions:placeFurniture(xi.inv.MOG_SAFE, nextPot:getSlotID(), 0, 0)
                     player.actions:finishFurnishing()
                 end
 

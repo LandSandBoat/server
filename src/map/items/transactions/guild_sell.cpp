@@ -51,7 +51,7 @@ auto GuildSellTransaction::start(CCharEntity* player, const uint16 itemId, const
         return nullptr;
     }
 
-    const auto* container = player->getStorage(LOC_INVENTORY);
+    const auto* container = player->getStorage(xi::Container::Inventory);
     if (!container)
     {
         ShowWarningFmt("GuildSellTransaction::start: {} has no inventory", player->getName());
@@ -136,7 +136,7 @@ auto GuildSellTransaction::doCommit() -> bool
         const uint8 take = std::min(lot.quantity, remaining);
         remaining -= take;
 
-        if (!lot.stack.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, lot.stack.slot, take))
+        if (!lot.stack.resolve() || !Transaction::take(this->player_, xi::Container::Inventory, lot.stack.slot, take))
         {
             ShowErrorFmt("GuildSellTransaction: {} kept {} of the goods in slot {}", this->player_->getName(), take, lot.stack.slot);
             return false;

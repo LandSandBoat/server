@@ -71,7 +71,7 @@ GP_SERV_COMMAND_EQUIPSET_VALID::GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity
         equipSetDisabled[i] = slotDisabled;
     }
 
-    auto* newItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(newItemBag)->GetItem(newItemBagIndex));
+    auto* newItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(static_cast<xi::Container>(newItemBag))->GetItem(newItemBagIndex));
     // check for bad packet
     if (newItem && ((newItem->getEquipSlotId() & (1 << equippedIndex)) == 0 || newItemID != newItem->getID()))
     {

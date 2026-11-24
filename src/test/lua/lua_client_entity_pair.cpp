@@ -207,7 +207,7 @@ auto CLuaClientEntityPair::getLinkshellId(const uint8 lsNum) const -> uint32
  *  Function: getItemInvSlot()
  *  Purpose : Searches slot matching item ID and quantity
  *  Example : player:getItemInvSlot(xi.item.RIDILL, 1)
- *  Notes   : Only for LOC_INVENTORY, player-specific
+ *  Notes   : Only for xi::Container::Inventory, player-specific
  ************************************************************************/
 
 auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint8 quantity) const -> Maybe<uint16>
@@ -223,7 +223,7 @@ auto CLuaClientEntityPair::getItemInvSlot(const uint16 itemId, const uint8 quant
         }
     };
 
-    PChar->getStorage(LOC_INVENTORY)->ForEachItem(itemFn);
+    PChar->getStorage(xi::Container::Inventory)->ForEachItem(itemFn);
 
     if (slotId != 0)
     {

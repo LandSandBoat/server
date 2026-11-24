@@ -22,9 +22,9 @@
 #pragma once
 
 #include "base.h"
+#include "data/enums/container.h"
 
 enum SLOTTYPE : uint8;
-enum CONTAINER_ID : uint8;
 struct ItemLocation;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0050
@@ -34,12 +34,12 @@ class GP_SERV_COMMAND_EQUIP_LIST final : public GP_SERV_PACKET<PacketS2C::GP_SER
 public:
     struct PacketData
     {
-        uint8_t      PropertyItemIndex; // PS2: PropertyItemIndex
-        SLOTTYPE     EquipKind;         // PS2: EquipKind
-        CONTAINER_ID Category;          // PS2: Category
-        uint8_t      padding00;         // PS2: (New; did not exist.)
+        uint8_t       PropertyItemIndex; // PS2: PropertyItemIndex
+        SLOTTYPE      EquipKind;         // PS2: EquipKind
+        xi::Container Category;          // PS2: Category
+        uint8_t       padding00;         // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_EQUIP_LIST(uint8_t slotId, SLOTTYPE equipSlot, CONTAINER_ID containerId);
+    GP_SERV_COMMAND_EQUIP_LIST(uint8_t slotId, SLOTTYPE equipSlot, xi::Container containerId);
     GP_SERV_COMMAND_EQUIP_LIST(const ItemLocation& loc, SLOTTYPE equipSlot);
 };

@@ -21,7 +21,7 @@
 
 #include "0x01e_item_num.h"
 
-GP_SERV_COMMAND_ITEM_NUM::GP_SERV_COMMAND_ITEM_NUM(const CONTAINER_ID locationId, const uint8_t slotId, const uint32_t quantity)
+GP_SERV_COMMAND_ITEM_NUM::GP_SERV_COMMAND_ITEM_NUM(const xi::Container locationId, const uint8_t slotId, const uint32_t quantity)
 {
     auto& packet = this->data();
 

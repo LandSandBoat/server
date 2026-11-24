@@ -64,7 +64,7 @@ void auctionutils::SellingItems(CCharEntity* PChar, GP_AUC_PARAM_ASKCOMMIT param
                      param.ItemNo,
                      param.ItemStacks);
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(param.ItemWorkIndex);
+    CItem* PItem = PChar->getStorage(xi::Container::Inventory)->GetItem(param.ItemWorkIndex);
     if (!PItem)
     {
         return;
@@ -147,7 +147,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         return;
     }
 
-    CItem* PItem = transaction->claimSlot(LOC_INVENTORY, param.ItemWorkIndex);
+    CItem* PItem = transaction->claimSlot(xi::Container::Inventory, param.ItemWorkIndex);
 
     if (PItem && !PItem->hasFlag(xi::ItemFlag::NoAuction) && PItem->getQuantity() >= param.ItemStacks)
     {
@@ -205,7 +205,7 @@ void auctionutils::ProofOfPurchase(CCharEntity* PChar, GP_AUC_PARAM_LOT param)
         const auto listedItemId   = PItem->getID();
         const auto listedItemName = PItem->getName();
 
-        if (!transaction->take(LOC_INVENTORY, param.ItemWorkIndex, listedQuantity))
+        if (!transaction->take(xi::Container::Inventory, param.ItemWorkIndex, listedQuantity))
         {
             ShowErrorFmt("AH: Cannot take item {} from {} to list it", listedItemName, PChar->getName());
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotIn, 197, 0, 0, 0, 0); // failed to place up
@@ -247,7 +247,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                      param.ItemNo,
                      param.ItemStacks);
 
-    if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
+    if (PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() == 0)
     {
         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
     }
@@ -259,9 +259,9 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
         {
             if (PItem->hasFlag(xi::ItemFlag::Rare))
             {
-                for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
+                for (uint8 LocID = 0; LocID < MAX_CONTAINER_ID; ++LocID)
                 {
-                    if (PChar->getStorage(LocID)->SearchItem(param.ItemNo) != ERROR_SLOTID)
+                    if (PChar->getStorage(static_cast<xi::Container>(LocID))->SearchItem(param.ItemNo) != ERROR_SLOTID)
                     {
                         PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xE5, 0, 0, 0, 0);
                         return false;
@@ -269,7 +269,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                 }
             }
 
-            const CItem* PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+            const CItem* PGil = PChar->getStorage(xi::Container::Inventory)->GetItem(0);
             if (!PGil || PGil->getQuantity() < param.BidPrice)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Bid, 0xC5, param.ItemNo, param.BidPrice, param.ItemStacks, PItem->getStackSize());
@@ -317,7 +317,7 @@ auto auctionutils::PurchasingItems(CCharEntity* PChar, GP_AUC_PARAM_BID param) -
                         throw std::runtime_error(fmt::format("AH: {} ({}) bought item {} for {} gil but cannot pay for it", PChar->getName(), PChar->id, param.ItemNo, param.BidPrice));
                     }
 
-                    if (!transaction->give(LOC_INVENTORY, param.ItemNo, boughtQuantity))
+                    if (!transaction->give(xi::Container::Inventory, param.ItemNo, boughtQuantity))
                     {
                         throw std::runtime_error(fmt::format("AH: {} ({}) bought item {} x{} but it could not be added to their inventory", PChar->getName(), PChar->id, param.ItemNo, boughtQuantity));
                     }
@@ -359,7 +359,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
 
         const CItem* PListedItem = xi::items::lookup(canceledItem.itemid);
         const bool   isRareHeld  = PListedItem && PListedItem->hasFlag(xi::ItemFlag::Rare) && charutils::HasItem(PChar, canceledItem.itemid);
-        if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0 || isRareHeld)
+        if (PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() == 0 || isRareHeld)
         {
             PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::LotCancel, 0xE5, PChar, static_cast<uint8_t>(AucWorkIndex), true);
             return;
@@ -401,7 +401,7 @@ void auctionutils::CancelSale(CCharEntity* PChar, int8_t AucWorkIndex)
                 }
 
                 const auto returnedQuantity = canceledItem.stack != 0 ? PDelItem->getStackSize() : 1;
-                if (!transaction->give(LOC_INVENTORY, canceledItem.itemid, returnedQuantity, Silence::Yes))
+                if (!transaction->give(xi::Container::Inventory, canceledItem.itemid, returnedQuantity, Silence::Yes))
                 {
                     throw std::runtime_error(fmt::format("AH: {} ({}) cancelled item {} x{} but it could not be returned to their inventory", PChar->getName(), PChar->id, canceledItem.itemid, returnedQuantity));
                 }

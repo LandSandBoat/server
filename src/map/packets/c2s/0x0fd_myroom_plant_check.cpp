@@ -31,7 +31,7 @@
 namespace
 {
 
-const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+const std::set<xi::Container> validPlantCategories = { xi::Container::MogSafe, xi::Container::MogSafe2 };
 
 }
 
@@ -41,12 +41,12 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_CHECK::validate(MapSession* PSession, const CCh
         .blockedBy({ BlockedState::InEvent })
         .isInMogHouse(xi::MogHouse::Own)
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories);
+        .oneOf("MyroomPlantCategory", static_cast<xi::Container>(this->MyroomPlantCategory), validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomPlantCategory));
     auto*           PItem          = PItemContainer->GetItem(this->MyroomPlantItemIndex);
     auto*           PPotItem       = dynamic_cast<CItemFlowerpot*>(PItem);
 
@@ -117,5 +117,5 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         }
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+    PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PPotItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
 }

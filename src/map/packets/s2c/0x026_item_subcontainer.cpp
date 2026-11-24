@@ -25,7 +25,7 @@
 #include "item_container.h"
 #include "items/item_equipment.h"
 
-GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const CONTAINER_ID locationId, const uint8_t slotId)
+GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const xi::Container locationId, const uint8_t slotId)
 {
     auto& packet = this->data();
 
@@ -33,7 +33,7 @@ GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const CONTA
     packet.index     = slotId;
 }
 
-GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const CONTAINER_ID locationId, const uint8_t slotId, const uint16_t headId, const uint16_t bodyId, const uint16_t handsId, const uint16_t legId, const uint16_t feetId, const uint16_t mainId, const uint16_t subId, const uint16_t rangeId)
+GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const xi::Container locationId, const uint8_t slotId, const uint16_t headId, const uint16_t bodyId, const uint16_t handsId, const uint16_t legId, const uint16_t feetId, const uint16_t mainId, const uint16_t subId, const uint16_t rangeId)
 {
     auto& packet = this->data();
 
@@ -52,7 +52,7 @@ GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(const CONTA
     packet.model_id_range     = rangeId + 0x8000;
 }
 
-GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(CCharEntity* PChar, const CONTAINER_ID locationId, const uint8_t slotId, const Exdata::Mannequin& mannequin)
+GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(CCharEntity* PChar, const xi::Container locationId, const uint8_t slotId, const Exdata::Mannequin& mannequin)
 {
     const auto getModelId = [PChar](uint8 slot) -> uint16
     {
@@ -61,7 +61,7 @@ GP_SERV_COMMAND_ITEM_SUBCONTAINER::GP_SERV_COMMAND_ITEM_SUBCONTAINER(CCharEntity
             return 0;
         }
 
-        auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+        auto* PItem = PChar->getStorage(xi::Container::Storage)->GetItem(slot);
         if (PItem == nullptr)
         {
             return 0;

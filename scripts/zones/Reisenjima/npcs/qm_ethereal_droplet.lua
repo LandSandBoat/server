@@ -9,7 +9,7 @@ local ID = zones[xi.zone.REISENJIMA]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMPITEMS) then
+    if player:hasItem(xi.item.ETHEREAL_DROPLET, xi.inv.TEMP_ITEMS) then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     else
         player:addTempItem(xi.item.ETHEREAL_DROPLET, 1)

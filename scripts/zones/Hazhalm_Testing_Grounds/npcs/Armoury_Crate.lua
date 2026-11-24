@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local quantity = bit.rshift(crateItem, 16)
         local itemId = bit.band(crateItem, 0xFFFF)
 
-        if player:hasItem(itemId, xi.inv.TEMPITEMS) then
+        if player:hasItem(itemId, xi.inv.TEMP_ITEMS) then
             return player:messageSpecial(ID.text.ALREADY_POSSESS_TEMP)
         else
             if player:addTempItem(itemId) then

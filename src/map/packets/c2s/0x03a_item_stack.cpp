@@ -35,7 +35,7 @@ auto GP_CLI_COMMAND_ITEM_STACK::validate(MapSession* PSession, const CCharEntity
 
 void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(this->Category);
+    CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->Category));
 
     const uint8 size = PItemContainer->GetSize();
 
@@ -96,13 +96,13 @@ void GP_CLI_COMMAND_ITEM_STACK::process(MapSession* PSession, CCharEntity* PChar
             // one transaction per pair, so a stack merged away is released before the next pass
             auto transaction = ItemClaimTransaction::start(PChar);
             if (!transaction ||
-                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotId) ||
-                !transaction->claimSlot(static_cast<uint8>(PItemContainer->GetID()), slotID2))
+                !transaction->claimSlot(PItemContainer->GetID(), slotId) ||
+                !transaction->claimSlot(PItemContainer->GetID(), slotID2))
             {
                 continue;
             }
 
-            const auto containerId = static_cast<uint8>(PItemContainer->GetID());
+            const auto containerId = PItemContainer->GetID();
             if (!transaction->moveBetween(containerId, slotID2, containerId, slotId, moveQty) || !transaction->commit())
             {
                 ShowErrorFmt("GP_CLI_COMMAND_ITEM_STACK: {} could not merge stacks", PChar->getName());

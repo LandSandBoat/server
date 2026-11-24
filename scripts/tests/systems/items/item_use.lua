@@ -35,7 +35,7 @@ describe('Item use', function()
         assert(kabob)
         assert(kabob:state() == xi.itemState.FREE)
 
-        player.actions:useItem(player, kabob:getSlotID(), xi.inventoryLocation.INVENTORY)
+        player.actions:useItem(player, kabob:getSlotID(), xi.inv.INVENTORY)
 
         local midUse = player:findItem(xi.item.MEAT_MITHKABOB)
         assert(midUse, 'item should still be in inventory mid-cast')
@@ -60,7 +60,7 @@ describe('Item use', function()
         player:equipItem(xi.item.WARP_RING, nil, xi.slot.RING1)
         assert(player:getEquippedItem(xi.slot.RING1))
 
-        player.actions:useItem(player, ring:getSlotID(), xi.inventoryLocation.INVENTORY)
+        player.actions:useItem(player, ring:getSlotID(), xi.inv.INVENTORY)
 
         local midUse = player:findItem(xi.item.WARP_RING)
         assert(midUse)

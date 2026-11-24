@@ -110,7 +110,7 @@ void GP_CLI_COMMAND_ITEM_TRANSFER::process(MapSession* PSession, CCharEntity* PC
             return;
         }
 
-        CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotId);
+        CItem* PItem = PChar->getStorage(xi::Container::Inventory)->GetItem(invSlotId);
 
         if (!PItem)
         {

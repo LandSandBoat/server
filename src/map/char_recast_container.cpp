@@ -181,10 +181,10 @@ void CCharRecastContainer::Check()
                 {
                     auto   id          = static_cast<uint16_t>(recast->ID);
                     uint8  slotID      = (id >> 8) & 0xFF;
-                    uint8  containerID = id & 0xFF;
+                    auto   containerID = static_cast<xi::Container>(id & 0xFF);
                     CItem* PItem       = m_PChar->getStorage(containerID)->GetItem(slotID);
 
-                    m_PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
+                    m_PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, containerID, slotID);
                     m_PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(m_PChar);
                 }
                 if (type == xi::RecastType::Item || type == xi::RecastType::Magic || type == xi::RecastType::Loot)

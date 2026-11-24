@@ -409,7 +409,7 @@ describe('Chocobo digging', function()
             ridePersonal(chocobo({ discernment = 255 }))
             percentRoll = 6 * personal.keepGreensPerRank
             player:addItem({ id = xi.item.BUNCH_OF_GYSAHL_GREENS, quantity = 1 })
-            player:changeContainerSize(xi.inventoryLocation.INVENTORY, -player:getFreeSlotsCount())
+            player:changeContainerSize(xi.inv.INVENTORY, -player:getFreeSlotsCount())
             dig()
 
             assertFinds({ [regularItem] = true })

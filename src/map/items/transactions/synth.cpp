@@ -68,7 +68,7 @@ auto SynthTransaction::start(CCharEntity* player, const SynthOffer& offer) -> st
         return nullptr;
     }
 
-    const auto* container = player->getStorage(LOC_INVENTORY);
+    const auto* container = player->getStorage(xi::Container::Inventory);
     if (!container || offer.crystal.invSlot == 0xFF)
     {
         ShowWarningFmt("SynthTransaction::start: {} has no inventory or invalid crystal slot ({})",
@@ -159,7 +159,7 @@ void SynthTransaction::consumeCrystal()
 
     const auto crystalSlot = slot.claimed.slot;
 
-    if (!slot.claimed.resolve() || !Transaction::take(this->player_, LOC_INVENTORY, crystalSlot, 1))
+    if (!slot.claimed.resolve() || !Transaction::take(this->player_, xi::Container::Inventory, crystalSlot, 1))
     {
         ShowErrorFmt("SynthTransaction: {} kept the crystal in slot {}", this->player_->getName(), crystalSlot);
     }
@@ -182,9 +182,9 @@ void SynthTransaction::setResultDelivery(const CCraftState::Result result)
     pendingResult_ = result;
 }
 
-auto SynthTransaction::heldSlots(const uint8 location) const -> uint8
+auto SynthTransaction::heldSlots(const xi::Container location) const -> uint8
 {
-    if (location != LOC_INVENTORY || this->delivering_)
+    if (location != xi::Container::Inventory || this->delivering_)
     {
         return 0;
     }
@@ -215,7 +215,7 @@ auto SynthTransaction::doCommit() -> bool
             continue;
         }
 
-        if (!Transaction::take(this->player_, LOC_INVENTORY, static_cast<uint8>(s), toConsume))
+        if (!Transaction::take(this->player_, xi::Container::Inventory, static_cast<uint8>(s), toConsume))
         {
             ShowErrorFmt("SynthTransaction: {} kept {} of the ingredient in slot {}", this->player_->getName(), toConsume, s);
         }
@@ -226,14 +226,14 @@ auto SynthTransaction::doCommit() -> bool
     if (pendingResult_)
     {
         const auto result     = *pendingResult_;
-        const auto resultSlot = this->give(this->player_, LOC_INVENTORY, result.itemId, result.qty);
+        const auto resultSlot = this->give(this->player_, xi::Container::Inventory, result.itemId, result.qty);
         if (!resultSlot)
         {
             ShowErrorFmt("SynthTransaction: {} had no room for result {}, the ingredients are already spent", this->player_->getName(), result.itemId);
         }
         else
         {
-            CItem* PItem = this->player_->getStorage(LOC_INVENTORY)->GetItem(*resultSlot);
+            CItem* PItem = this->player_->getStorage(xi::Container::Inventory)->GetItem(*resultSlot);
             if (PItem && PItem->hasFlag(xi::ItemFlag::Inscribable) && this->slots_[0].itemId > 0x1080)
             {
                 PItem->setSignature(this->player_->name);
@@ -242,7 +242,7 @@ auto SynthTransaction::doCommit() -> bool
                                  this->player_->id,
                                  *resultSlot);
             }
-            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, LOC_INVENTORY, *resultSlot);
+            this->player_->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, xi::Container::Inventory, *resultSlot);
         }
 
         this->player_->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(this->player_);

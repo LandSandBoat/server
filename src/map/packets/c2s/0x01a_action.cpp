@@ -440,14 +440,14 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            const uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(GYSAHL_GREENS);
+            const uint8 slotID = PChar->getStorage(xi::Container::Inventory)->SearchItem(GYSAHL_GREENS);
             if (slotID == ERROR_SLOTID)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
                 return;
             }
 
-            const auto* PGysahl = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+            const auto* PGysahl = PChar->getStorage(xi::Container::Inventory)->GetItem(slotID);
             if (!PGysahl)
             {
                 PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
@@ -465,7 +465,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             const auto greensStayInSlot = PGysahl->getQuantity() > 1;
 
             auto transaction = ItemClaimTransaction::start(PChar);
-            if (!transaction || !transaction->take(LOC_INVENTORY, slotID, 1))
+            if (!transaction || !transaction->take(xi::Container::Inventory, slotID, 1))
             {
                 ShowWarningFmt("GP_CLI_COMMAND_ACTION: {} could not spend gysahl greens in slot {}", PChar->getName(), slotID);
                 PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(GYSAHL_GREENS, 0, MsgStd::YouDontHaveAny);
@@ -479,7 +479,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                 return;
             }
 
-            const auto returnsGreens = dig.keepGreens && (greensStayInSlot || PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() > 0);
+            const auto returnsGreens = dig.keepGreens && (greensStayInSlot || PChar->getStorage(xi::Container::Inventory)->GetFreeSlotsCount() > 0);
             if (returnsGreens)
             {
                 transaction->rollback();

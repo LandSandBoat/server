@@ -32,7 +32,7 @@
 namespace
 {
 
-const std::set<uint8_t> validPlantCategories = { LOC_MOGSAFE, LOC_MOGSAFE2 };
+const std::set<xi::Container> validPlantCategories = { xi::Container::MogSafe, xi::Container::MogSafe2 };
 
 }
 
@@ -42,12 +42,12 @@ auto GP_CLI_COMMAND_MYROOM_PLANT_STOP::validate(MapSession* PSession, const CCha
         .blockedBy({ BlockedState::InEvent })
         .isInMogHouse(xi::MogHouse::Own)
         .mustNotEqual(this->MyroomPlantItemNo, 0, "MyroomPlantItemNo must not be 0")
-        .oneOf("MyroomPlantCategory", this->MyroomPlantCategory, validPlantCategories);
+        .oneOf("MyroomPlantCategory", static_cast<xi::Container>(this->MyroomPlantCategory), validPlantCategories);
 }
 
 void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    CItemContainer* PItemContainer = PChar->getStorage(this->MyroomPlantCategory);
+    CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(this->MyroomPlantCategory));
     CItemFlowerpot* PItem          = dynamic_cast<CItemFlowerpot*>(PItemContainer->GetItem(this->MyroomPlantItemIndex));
 
     if (PItem != nullptr && !PItem->isInstalled())
@@ -59,7 +59,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
     if (PItem != nullptr && PItem->isPlanted() && PItem->getStage() > FLOWERPOT_STAGE_INITIAL && PItem->getStage() < FLOWERPOT_STAGE_WILTED && !PItem->isDried())
     {
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(this->MyroomPlantItemNo, MsgStd::MoogleDriesPlant);
-        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_MYROOM_OPERATION>(PItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PItem->setDried(true);
 
         db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
@@ -68,7 +68,7 @@ void GP_CLI_COMMAND_MYROOM_PLANT_STOP::process(MapSession* PSession, CCharEntity
                          PItem->getLocationID(),
                          PItem->getSlotID());
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<xi::Container>(this->MyroomPlantCategory), this->MyroomPlantItemIndex);
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(PChar);
     }
 }

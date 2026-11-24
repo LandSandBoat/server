@@ -512,27 +512,27 @@ auto LoadFromCharStorageSQL(CCharEntity* PChar) -> void
                                        PChar->id);
     if (rset && rset->rowsCount() && rset->next())
     {
-        PChar->getStorage(LOC_INVENTORY)->AddBuff(rset->get<uint8>("inventory"));
-        PChar->getStorage(LOC_MOGSAFE)->AddBuff(rset->get<uint8>("safe"));
-        PChar->getStorage(LOC_MOGSAFE2)->AddBuff(rset->get<uint8>("safe"));
-        PChar->getStorage(LOC_TEMPITEMS)->AddBuff(50);
-        PChar->getStorage(LOC_MOGLOCKER)->AddBuff(rset->get<uint8>("locker"));
-        PChar->getStorage(LOC_MOGSATCHEL)->AddBuff(rset->get<uint8>("satchel"));
-        PChar->getStorage(LOC_MOGSACK)->AddBuff(rset->get<uint8>("sack"));
-        PChar->getStorage(LOC_MOGCASE)->AddBuff(rset->get<uint8>("case"));
+        PChar->getStorage(xi::Container::Inventory)->AddBuff(rset->get<uint8>("inventory"));
+        PChar->getStorage(xi::Container::MogSafe)->AddBuff(rset->get<uint8>("safe"));
+        PChar->getStorage(xi::Container::MogSafe2)->AddBuff(rset->get<uint8>("safe"));
+        PChar->getStorage(xi::Container::TempItems)->AddBuff(50);
+        PChar->getStorage(xi::Container::MogLocker)->AddBuff(rset->get<uint8>("locker"));
+        PChar->getStorage(xi::Container::MogSatchel)->AddBuff(rset->get<uint8>("satchel"));
+        PChar->getStorage(xi::Container::MogSack)->AddBuff(rset->get<uint8>("sack"));
+        PChar->getStorage(xi::Container::MogCase)->AddBuff(rset->get<uint8>("case"));
 
-        PChar->getStorage(LOC_WARDROBE)->AddBuff(rset->get<uint8>("wardrobe"));
-        PChar->getStorage(LOC_WARDROBE2)->AddBuff(rset->get<uint8>("wardrobe2"));
-        PChar->getStorage(LOC_WARDROBE3)->AddBuff(rset->get<uint8>("wardrobe3"));
-        PChar->getStorage(LOC_WARDROBE4)->AddBuff(rset->get<uint8>("wardrobe4"));
+        PChar->getStorage(xi::Container::Wardrobe)->AddBuff(rset->get<uint8>("wardrobe"));
+        PChar->getStorage(xi::Container::Wardrobe2)->AddBuff(rset->get<uint8>("wardrobe2"));
+        PChar->getStorage(xi::Container::Wardrobe3)->AddBuff(rset->get<uint8>("wardrobe3"));
+        PChar->getStorage(xi::Container::Wardrobe4)->AddBuff(rset->get<uint8>("wardrobe4"));
 
-        PChar->getStorage(LOC_WARDROBE5)->AddBuff(rset->get<uint8>("wardrobe5"));
-        PChar->getStorage(LOC_WARDROBE6)->AddBuff(rset->get<uint8>("wardrobe6"));
-        PChar->getStorage(LOC_WARDROBE7)->AddBuff(rset->get<uint8>("wardrobe7"));
-        PChar->getStorage(LOC_WARDROBE8)->AddBuff(rset->get<uint8>("wardrobe8"));
+        PChar->getStorage(xi::Container::Wardrobe5)->AddBuff(rset->get<uint8>("wardrobe5"));
+        PChar->getStorage(xi::Container::Wardrobe6)->AddBuff(rset->get<uint8>("wardrobe6"));
+        PChar->getStorage(xi::Container::Wardrobe7)->AddBuff(rset->get<uint8>("wardrobe7"));
+        PChar->getStorage(xi::Container::Wardrobe8)->AddBuff(rset->get<uint8>("wardrobe8"));
 
         // NOTE: Not from the db, hard-coded to 10!
-        PChar->getStorage(LOC_RECYCLEBIN)->AddBuff(10);
+        PChar->getStorage(xi::Container::RecycleBin)->AddBuff(10);
     }
 }
 
@@ -1064,14 +1064,14 @@ void LoadInventory(CCharEntity* PChar)
                     }
                 }
 
-                if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == LOC_MOGSAFE || PItem->getLocationID() == LOC_MOGSAFE2))
+                if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == static_cast<uint8>(xi::Container::MogSafe) || PItem->getLocationID() == static_cast<uint8>(xi::Container::MogSafe2)))
                 {
                     auto* PFurnishing = static_cast<CItemFurnishing*>(PItem.get());
                     if (PFurnishing->isInstalled())
                     {
                         if (xi::items::mark(PFurnishing, xi::ItemState::PlacedFurniture))
                         {
-                            PChar->getStorage(LOC_STORAGE)->AddBuff(PFurnishing->getStorage());
+                            PChar->getStorage(xi::Container::Storage)->AddBuff(PFurnishing->getStorage());
                         }
                         else
                         {
@@ -1082,16 +1082,16 @@ void LoadInventory(CCharEntity* PChar)
                 }
                 const uint8 locID  = PItem->getLocationID();
                 const uint8 slotID = PItem->getSlotID();
-                PChar->getStorage(locID)->InsertItem(std::move(PItem), slotID);
+                PChar->getStorage(static_cast<xi::Container>(locID))->InsertItem(std::move(PItem), slotID);
             }
         }
     }
 
     // apply augments
     // loop over each container
-    for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
+    for (uint8 i = 0; i < MAX_CONTAINER_ID; ++i)
     {
-        CItemContainer* PItemContainer = PChar->getStorage(i);
+        CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(i));
 
         if (PItemContainer != nullptr)
         {
@@ -1132,15 +1132,15 @@ void LoadEquip(CCharEntity* PChar)
     if (rset)
     {
         // equipSlotData[equipSlotId] = { slotId, containerId }
-        std::map<uint8, std::pair<uint8, uint8>> equipSlotData;
+        std::map<uint8, std::pair<uint8, xi::Container>> equipSlotData;
 
         // NOTE: This data is stored in the above map since if the item has an augment, another db
         // query will occur, which will destroy the current query results.
         while (rset->next())
         {
-            uint8 equipSlotId          = rset->get<uint8>("equipslotid");
-            uint8 slotId               = rset->get<uint8>("slotid");
-            uint8 containerId          = rset->get<uint8>("containerid");
+            uint8      equipSlotId     = rset->get<uint8>("equipslotid");
+            uint8      slotId          = rset->get<uint8>("slotid");
+            const auto containerId     = static_cast<xi::Container>(rset->get<uint8>("containerid"));
             equipSlotData[equipSlotId] = { slotId, containerId };
         }
 
@@ -1499,7 +1499,7 @@ void SendInventory(CCharEntity* PChar)
 
     auto pushContainer = [&](auto LocationID)
     {
-        if (PVisitedOwner && (LocationID == LOC_MOGSAFE || LocationID == LOC_MOGSAFE2))
+        if (PVisitedOwner && (LocationID == xi::Container::MogSafe || LocationID == xi::Container::MogSafe2))
         {
             pushVisitedFurniture(LocationID);
             return;
@@ -1530,7 +1530,7 @@ void SendInventory(CCharEntity* PChar)
     // Note: it's possible that non-essential inventory items are sent in response to another packet
 
     // Container order based on retail capture
-    for (auto&& containerID : { LOC_INVENTORY, LOC_MOGSAFE, LOC_MOGSAFE2, LOC_STORAGE, LOC_RECYCLEBIN, LOC_WARDROBE, LOC_WARDROBE2, LOC_WARDROBE3, LOC_WARDROBE4, LOC_WARDROBE5, LOC_WARDROBE6, LOC_WARDROBE7, LOC_WARDROBE8, LOC_TEMPITEMS, LOC_MOGLOCKER, LOC_MOGSATCHEL, LOC_MOGSACK, LOC_MOGCASE })
+    for (auto&& containerID : { xi::Container::Inventory, xi::Container::MogSafe, xi::Container::MogSafe2, xi::Container::Storage, xi::Container::RecycleBin, xi::Container::Wardrobe, xi::Container::Wardrobe2, xi::Container::Wardrobe3, xi::Container::Wardrobe4, xi::Container::Wardrobe5, xi::Container::Wardrobe6, xi::Container::Wardrobe7, xi::Container::Wardrobe8, xi::Container::TempItems, xi::Container::MogLocker, xi::Container::MogSatchel, xi::Container::MogSack, xi::Container::MogCase })
     {
         pushContainer(containerID);
     }
@@ -1706,14 +1706,14 @@ auto HasItem(CCharEntity* PChar, uint16 ItemID, IncludeRecycleBin includeRecycle
     {
         return false;
     }
-    for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
+    for (uint8 LocID = 0; LocID < MAX_CONTAINER_ID; ++LocID)
     {
-        if (!includeRecycleBin && LocID == LOC_RECYCLEBIN)
+        if (!includeRecycleBin && LocID == static_cast<uint8>(xi::Container::RecycleBin))
         {
             continue;
         }
 
-        if (PChar->getStorage(LocID)->SearchItem(ItemID) != ERROR_SLOTID)
+        if (PChar->getStorage(static_cast<xi::Container>(LocID))->SearchItem(ItemID) != ERROR_SLOTID)
         {
             return true;
         }
@@ -1729,9 +1729,9 @@ auto getItemCount(CCharEntity* PChar, uint16 ItemID) -> uint32
     }
 
     uint32 itemCount = 0;
-    for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
+    for (uint8 LocID = 0; LocID < MAX_CONTAINER_ID; ++LocID)
     {
-        CItemContainer* PItemContainer = PChar->getStorage(LocID);
+        CItemContainer* PItemContainer = PChar->getStorage(static_cast<xi::Container>(LocID));
         // clang-format off
             PItemContainer->ForEachItem([&ItemID, &itemCount](CItem* PItem)
             {
@@ -1783,7 +1783,7 @@ void UpdateSubJob(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-auto MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8
+auto MoveItem(CCharEntity* PChar, xi::Container LocationID, uint8 SlotID, uint8 NewSlotID) -> uint8
 {
     CItemContainer* PItemContainer = PChar->getStorage(LocationID);
 
@@ -1831,12 +1831,12 @@ auto MoveItem(CCharEntity* PChar, uint8 LocationID, uint8 SlotID, uint8 NewSlotI
         return ERROR_SLOTID;
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(LocationID), SlotID, PItemContainer->GetItem(NewSlotID));
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemContainer->GetItem(NewSlotID), static_cast<CONTAINER_ID>(LocationID), NewSlotID);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, LocationID, SlotID, PItemContainer->GetItem(NewSlotID));
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemContainer->GetItem(NewSlotID), LocationID, NewSlotID);
     return NewSlotID;
 }
 
-void DropItem(CCharEntity* PChar, uint8 container, uint8 slotID, int32 quantity, uint16 ItemID)
+void DropItem(CCharEntity* PChar, xi::Container container, uint8 slotID, int32 quantity, uint16 ItemID)
 {
     auto transaction = ItemClaimTransaction::start(PChar);
     if (!transaction || !transaction->take(container, slotID, static_cast<uint32>(quantity)) || !transaction->commit())
@@ -2036,7 +2036,7 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
 
         luautils::OnItemUnequip(PChar, PItem);
 
-        PChar->inventorySyncState().queueEquipChange(LOC_INVENTORY, 0, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::No);
+        PChar->inventorySyncState().queueEquipChange(xi::Container::Inventory, 0, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::No);
 
         PChar->setPersist(CharPersist::Equip | CharPersist::Look);
 
@@ -2078,7 +2078,7 @@ void RemoveSub(CCharEntity* PChar)
  *                                                                       *
  ************************************************************************/
 
-auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID) -> bool
+auto EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Container containerID) -> bool
 {
     CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
@@ -2684,8 +2684,8 @@ void UpdateRemovedSlotsLook(CCharEntity* PChar)
 
 void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity)
 {
-    auto* RecycleBin     = PChar->getStorage(LOC_RECYCLEBIN);
-    auto* OtherContainer = PChar->getStorage(container);
+    auto* RecycleBin     = PChar->getStorage(xi::Container::RecycleBin);
+    auto* OtherContainer = PChar->getStorage(static_cast<xi::Container>(container));
 
     auto* PSrcItem = OtherContainer->GetItem(slotID);
     if (PSrcItem == nullptr)
@@ -2714,7 +2714,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
         }
 
         const auto rset = db::preparedStmt("UPDATE char_inventory SET location = ?, slot = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                           LOC_RECYCLEBIN,
+                                           xi::Container::RecycleBin,
                                            NewSlotID,
                                            PChar->id,
                                            container,
@@ -2726,8 +2726,8 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
         }
 
         auto* PInserted = RecycleBin->GetItem(NewSlotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, LOC_RECYCLEBIN, NewSlotID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<xi::Container>(container), slotID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PInserted, xi::Container::RecycleBin, NewSlotID);
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, itemID, quantity, MsgStd::ThrowAway);
         luautils::OnItemDrop(PChar, PInserted, IsRecycleBin::Yes);
     }
@@ -2737,7 +2737,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
         auto PEvictedItem = RecycleBin->RemoveItem(1);
         db::preparedStmt("DELETE FROM char_inventory WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
                          PChar->id,
-                         LOC_RECYCLEBIN,
+                         xi::Container::RecycleBin,
                          1);
 
         if (PEvictedItem)
@@ -2754,7 +2754,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
             }
             RecycleBin->MoveItemTo(i, *RecycleBin, i - 1);
 
-            const auto rset = db::preparedStmt("UPDATE char_inventory SET location = ?, slot = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1", LOC_RECYCLEBIN, i - 1, PChar->id, LOC_RECYCLEBIN, i);
+            const auto rset = db::preparedStmt("UPDATE char_inventory SET location = ?, slot = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1", xi::Container::RecycleBin, i - 1, PChar->id, xi::Container::RecycleBin, i);
             if (!rset || !rset->rowsAffected())
             {
                 ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), itemName);
@@ -2766,7 +2766,7 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
         auto* PInserted = RecycleBin->GetItem(10);
 
         const auto rset = db::preparedStmt("UPDATE char_inventory SET location = ?, slot = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",
-                                           LOC_RECYCLEBIN,
+                                           xi::Container::RecycleBin,
                                            10,
                                            PChar->id,
                                            container,
@@ -2776,11 +2776,11 @@ void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uin
             ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), itemName);
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<CONTAINER_ID>(container), slotID);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(nullptr, static_cast<xi::Container>(container), slotID);
         for (int i = 1; i <= 10; ++i)
         {
             CItem* PUpdatedItem = RecycleBin->GetItem(i);
-            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PUpdatedItem, LOC_RECYCLEBIN, i);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PUpdatedItem, xi::Container::RecycleBin, i);
         }
         PChar->pushPacket<GP_SERV_COMMAND_MESSAGE>(nullptr, itemID, quantity, MsgStd::ThrowAway);
         luautils::OnItemDrop(PChar, PInserted, IsRecycleBin::Yes);
@@ -2792,7 +2792,7 @@ void EmptyRecycleBin(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
+    CItemContainer* recycleBin = PChar->getStorage(xi::Container::RecycleBin);
 
     recycleBin->ForEachItem(
         [&](CItem* PItem)
@@ -2904,7 +2904,7 @@ void LoadJobChangeGear(CCharEntity* PChar)
                                        PChar->GetMJob());
     FOR_DB_SINGLE_RESULT(rset)
     {
-        const std::vector<uint8> validContainers = { LOC_INVENTORY, LOC_WARDROBE, LOC_WARDROBE2, LOC_WARDROBE3, LOC_WARDROBE4, LOC_WARDROBE5, LOC_WARDROBE6, LOC_WARDROBE7, LOC_WARDROBE8 };
+        const std::vector<xi::Container> validContainers = { xi::Container::Inventory, xi::Container::Wardrobe, xi::Container::Wardrobe2, xi::Container::Wardrobe3, xi::Container::Wardrobe4, xi::Container::Wardrobe5, xi::Container::Wardrobe6, xi::Container::Wardrobe7, xi::Container::Wardrobe8 };
 
         for (uint8 equipSlot = SLOT_MAIN; equipSlot <= SLOT_BACK; equipSlot++)
         {
@@ -2940,7 +2940,7 @@ void LoadJobChangeGear(CCharEntity* PChar)
 
                     if (PEquip)
                     {
-                        charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
+                        charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, container);
                         break;
                     }
                 }
@@ -2949,7 +2949,7 @@ void LoadJobChangeGear(CCharEntity* PChar)
     }
 }
 
-void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
+void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Container containerID)
 {
     if (PChar == nullptr || PChar->getStorage(containerID) == nullptr)
     {
@@ -3112,11 +3112,11 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
                 {
                     PItem->setAssignTime(timer::now());
                     // add recast timer to Recast List from any bag
-                    PChar->PRecastContainer->Add(xi::RecastType::Item, static_cast<xi::Recast>(slotID << 8 | containerID), PItem->getReuseTime());
+                    PChar->PRecastContainer->Add(xi::RecastType::Item, static_cast<xi::Recast>(slotID << 8 | static_cast<uint8>(containerID)), PItem->getReuseTime());
 
                     // Do not forget to update the timer when equipping the subject
 
-                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(containerID), slotID);
+                    PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, containerID, slotID);
                 }
 
                 if (equipSlotID == SLOT_SUB)
@@ -3139,7 +3139,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
                 // queue look update on valid equip
                 if (PItem != nullptr && PItem->isType(ITEM_EQUIPMENT))
                 {
-                    PChar->inventorySyncState().queueEquipChange(static_cast<CONTAINER_ID>(containerID), slotID, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::Yes);
+                    PChar->inventorySyncState().queueEquipChange(containerID, slotID, static_cast<SLOTTYPE>(equipSlotID), PItem, Equipping::Yes);
                 }
             }
         }
@@ -5517,20 +5517,20 @@ void SaveCharInventoryCapacity(CCharEntity* PChar)
                      "wardrobe7 = ?, "
                      "wardrobe8 = ? "
                      "WHERE charid = ?",
-                     PChar->getStorage(LOC_INVENTORY)->GetSize(),
-                     PChar->getStorage(LOC_MOGSAFE)->GetSize(),
-                     PChar->getStorage(LOC_MOGLOCKER)->GetSize(),
-                     PChar->getStorage(LOC_MOGSATCHEL)->GetSize(),
-                     PChar->getStorage(LOC_MOGSACK)->GetSize(),
-                     PChar->getStorage(LOC_MOGCASE)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE2)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE3)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE4)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE5)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE6)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE7)->GetSize(),
-                     PChar->getStorage(LOC_WARDROBE8)->GetSize(),
+                     PChar->getStorage(xi::Container::Inventory)->GetSize(),
+                     PChar->getStorage(xi::Container::MogSafe)->GetSize(),
+                     PChar->getStorage(xi::Container::MogLocker)->GetSize(),
+                     PChar->getStorage(xi::Container::MogSatchel)->GetSize(),
+                     PChar->getStorage(xi::Container::MogSack)->GetSize(),
+                     PChar->getStorage(xi::Container::MogCase)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe2)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe3)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe4)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe5)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe6)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe7)->GetSize(),
+                     PChar->getStorage(xi::Container::Wardrobe8)->GetSize(),
                      PChar->id);
 }
 
@@ -6516,7 +6516,7 @@ void ClearTempItems(CCharEntity* PChar)
 {
     TracyZoneScoped;
 
-    CItemContainer* Temp = PChar->getStorage(LOC_TEMPITEMS);
+    CItemContainer* Temp = PChar->getStorage(xi::Container::TempItems);
 
     db::preparedStmt("DELETE FROM char_inventory WHERE charid = ? AND location = 3", PChar->id);
     Temp->Clear();
@@ -7748,7 +7748,7 @@ auto IsHomeNation(const xi::Nation nation, const xi::Region region) -> bool
 
 auto isOrchestrionPlaced(CCharEntity* PChar) -> bool
 {
-    for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    for (auto safeContainerId : { xi::Container::MogSafe, xi::Container::MogSafe2 })
     {
         auto* PContainer = PChar->getStorage(safeContainerId);
 
@@ -7775,7 +7775,7 @@ void updateMannequins(CCharEntity* PChar)
         return;
     }
 
-    for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+    for (auto safeContainerId : { xi::Container::MogSafe, xi::Container::MogSafe2 })
     {
         // Visitors have the owner's installed furniture at slots 1..N, see SendInventory
         uint8 visitorSlotID = 1;

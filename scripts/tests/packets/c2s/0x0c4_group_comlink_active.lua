@@ -7,7 +7,7 @@ describe('Linkshell equip', function()
     local pearlSlot
 
     local function linkSlotItemId(slot)
-        local item = player:getStorageItem(xi.inventoryLocation.INVENTORY, 0, slot)
+        local item = player:getStorageItem(xi.inv.INVENTORY, 0, slot)
         return item and item:getID() or 0
     end
 
@@ -17,7 +17,7 @@ describe('Linkshell equip', function()
         player:addItem(xi.item.NEW_LINKSHELL)
         shellSlot = assert(player:getItemInvSlot(xi.item.NEW_LINKSHELL, 1))
         player.actions:linkshellActive(shellSlot, 1, true, lsName)
-        assert(player:getStorageItem(xi.inventoryLocation.INVENTORY, shellSlot, 255):getID() == xi.item.LINKSHELL, 'linkshell was not created')
+        assert(player:getStorageItem(xi.inv.INVENTORY, shellSlot, 255):getID() == xi.item.LINKSHELL, 'linkshell was not created')
 
         assert(player:addLinkpearl(lsName, false), 'linkpearl was not added')
         pearlSlot = assert(player:getItemInvSlot(xi.item.LINKPEARL, 1))
@@ -29,7 +29,7 @@ describe('Linkshell equip', function()
     end)
 
     after_each(function()
-        player.actions:dropItem(xi.inventoryLocation.INVENTORY, shellSlot, 1)
+        player.actions:dropItem(xi.inv.INVENTORY, shellSlot, 1)
     end)
 
     it('keeps membership when an equipped pearl is equipped again', function()
@@ -55,7 +55,7 @@ describe('Linkshell equip', function()
     end)
 
     it('drops equipped members when the linkshell is thrown away', function()
-        player.actions:dropItem(xi.inventoryLocation.INVENTORY, shellSlot, 1)
+        player.actions:dropItem(xi.inv.INVENTORY, shellSlot, 1)
 
         assert(player:getLinkshellId(1) == 0, 'still in the linkshell')
         assert(linkSlotItemId(xi.slot.LINK1) == 0, 'linkpearl still equipped')

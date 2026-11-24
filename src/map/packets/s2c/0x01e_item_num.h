@@ -22,9 +22,9 @@
 #pragma once
 
 #include "base.h"
+#include "data/enums/container.h"
 
 enum class ItemLockFlg : uint8_t;
-enum CONTAINER_ID : uint8;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x001E
 // This packet is sent by the server to inform the client that an item change has happened within a container.
@@ -33,12 +33,12 @@ class GP_SERV_COMMAND_ITEM_NUM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_
 public:
     struct PacketData
     {
-        uint32_t     ItemNum;   // PS2: ItemNum
-        CONTAINER_ID Category;  // PS2: Category
-        uint8_t      ItemIndex; // PS2: ItemIndex
-        ItemLockFlg  LockFlg;   // PS2: LockFlg
-        uint8_t      padding00; // Undocumented padding? 0x00 or 0xFF seen.
+        uint32_t      ItemNum;   // PS2: ItemNum
+        xi::Container Category;  // PS2: Category
+        uint8_t       ItemIndex; // PS2: ItemIndex
+        ItemLockFlg   LockFlg;   // PS2: LockFlg
+        uint8_t       padding00; // Undocumented padding? 0x00 or 0xFF seen.
     };
 
-    GP_SERV_COMMAND_ITEM_NUM(CONTAINER_ID locationId, uint8_t slotId, uint32_t quantity);
+    GP_SERV_COMMAND_ITEM_NUM(xi::Container locationId, uint8_t slotId, uint32_t quantity);
 };

@@ -22,9 +22,9 @@
 #pragma once
 
 #include "base.h"
+#include "data/enums/container.h"
 
 enum class ItemLockFlg : uint8_t;
-enum CONTAINER_ID : uint8;
 class CItem;
 struct ItemLocation;
 
@@ -35,18 +35,18 @@ class GP_SERV_COMMAND_ITEM_ATTR final : public GP_SERV_PACKET<PacketS2C::GP_SERV
 public:
     struct PacketData
     {
-        uint32_t     ItemNum;   // PS2: ItemNum
-        uint32_t     Price;     // PS2: Price
-        uint16_t     ItemNo;    // PS2: ItemNo
-        CONTAINER_ID Category;  // PS2: Category
-        uint8_t      ItemIndex; // PS2: ItemIndex
-        ItemLockFlg  LockFlg;   // PS2: LockFlg
-        uint8_t      Attr[24];  // PS2: Attr TODO: Make structs for each possible exdata
+        uint32_t      ItemNum;   // PS2: ItemNum
+        uint32_t      Price;     // PS2: Price
+        uint16_t      ItemNo;    // PS2: ItemNo
+        xi::Container Category;  // PS2: Category
+        uint8_t       ItemIndex; // PS2: ItemIndex
+        ItemLockFlg   LockFlg;   // PS2: LockFlg
+        uint8_t       Attr[24];  // PS2: Attr TODO: Make structs for each possible exdata
     };
 
     // On retail, when you move an item out of the original slot to a different bag, it first sends "move old item to new slot"
     // It then sends a "set old slot to empty" and when it does so, it leaks the old extdata
     // We emulate this here with a non-null `staleItem` pointer to the old item
-    GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, CONTAINER_ID locationId, uint8_t slotId, CItem* staleItem = nullptr);
+    GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, xi::Container locationId, uint8_t slotId, CItem* staleItem = nullptr);
     GP_SERV_COMMAND_ITEM_ATTR(CItem* PItem, const ItemLocation& loc, CItem* staleItem = nullptr);
 };

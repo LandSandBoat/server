@@ -52,7 +52,7 @@ void GP_CLI_COMMAND_BAZAAR_LIST::process(MapSession* PSession, CCharEntity* PCha
 
         PTarget->BazaarCustomers.emplace_back(EntityID);
 
-        auto* PContainer = PTarget->getStorage(LOC_INVENTORY);
+        auto* PContainer = PTarget->getStorage(xi::Container::Inventory);
         PContainer->ForEachItem(
             [&](CItem* PItem)
             {
