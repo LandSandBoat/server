@@ -91,7 +91,7 @@ mission.sections =
                     elseif missionStatus == 1 then
                         return mission:progressEvent(23)
                     elseif missionStatus == 2 then
-                        return mission:progressEvent(24)
+                        return mission:progressEvent(24, { [0] = xi.keyItem.DREAMROSE })
                     elseif missionStatus == 3 then
                         return mission:progressEvent(22)
                     end
@@ -102,7 +102,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 1 then
-                        return mission:progressEvent(87)
+                        return mission:progressEvent(87, { [7] = xi.keyItem.DREAMROSE })
                     end
                 end,
             },
@@ -114,7 +114,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 4 and
                         player:hasKeyItem(xi.keyItem.DREAMROSE)
                     then
-                        return mission:progressEvent(111)
+                        return mission:progressEvent(111, { [0] = xi.keyItem.DREAMROSE })
                     end
                 end,
             },
