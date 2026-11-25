@@ -187,7 +187,7 @@ mission.sections =
                         player:getMissionStatus(mission.areaId) == 3 and
                         not player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK)
                     then
-                        return mission:progressEvent(8)
+                        return mission:progressEvent(8, { [7] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                     elseif player:hasKeyItem(xi.keyItem.ANCIENT_SAN_DORIAN_BOOK) then
                         return mission:messageSpecial(krtID.text.FINAL_RESTING_PLACE)
                     end
@@ -229,9 +229,9 @@ mission.sections =
                         return mission:progressEvent(1036)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
-                            return mission:progressEvent(1038)
+                            return mission:progressEvent(1038, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         else
-                            return mission:progressEvent(1040)
+                            return mission:progressEvent(1040, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         end
                     elseif missionStatus == 7 then
                         return mission:progressEvent(1034)
@@ -248,9 +248,9 @@ mission.sections =
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
-                            return mission:progressEvent(1037)
+                            return mission:progressEvent(1037, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         else
-                            return mission:progressEvent(1039)
+                            return mission:progressEvent(1039, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         end
                     elseif missionStatus == 7 then
                         return mission:progressEvent(1033)
@@ -301,9 +301,9 @@ mission.sections =
                         return mission:progressEvent(1035)
                     elseif missionStatus == 4 then
                         if player:getLocalVar('Mission[0][17]requiredToZone') == 1 then
-                            return mission:progressEvent(1037)
+                            return mission:progressEvent(1037, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         else
-                            return mission:progressEvent(1039)
+                            return mission:progressEvent(1039, { [0] = xi.keyItem.ANCIENT_SAN_DORIAN_BOOK })
                         end
                     elseif missionStatus == 7 then
                         return mission:progressEvent(1033)
