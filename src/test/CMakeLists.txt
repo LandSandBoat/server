@@ -59,6 +59,7 @@ xi_add_executable(xi_test testserver.rc
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/ecosystems_tree_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/experience_dataset_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/merits_dataset_tests.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/msg_basic_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/skills_dataset_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/weapon_skills_dataset_tests.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/zones/mobs_tests.cpp
