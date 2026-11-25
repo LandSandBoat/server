@@ -22,6 +22,7 @@
 #include "battle_entity.h"
 
 #include <algorithm>
+#include <set>
 
 #include "enums/four_cc.h"
 
@@ -1902,9 +1903,13 @@ void CBattleEntity::addEquipModifiers(CItemEquipment* PItem)
 {
     TracyZoneScoped;
 
-    for (auto& i : PItem->modList)
+    std::set<xi::Mod> appliedMods;
+    for (const auto& modifier : PItem->modList)
     {
-        m_modStat[i.getModID()] += battleutils::GetScaledItemModifier(this, PItem, i.getModID());
+        if (appliedMods.insert(modifier.getModID()).second)
+        {
+            m_modStat[modifier.getModID()] += battleutils::GetScaledItemModifier(this, PItem, modifier.getModID());
+        }
     }
 }
 
@@ -2028,9 +2033,13 @@ void CBattleEntity::delEquipModifiers(CItemEquipment* PItem, bool isDelevel /* =
 {
     TracyZoneScoped;
 
-    for (auto& i : PItem->modList)
+    std::set<xi::Mod> removedMods;
+    for (const auto& modifier : PItem->modList)
     {
-        m_modStat[i.getModID()] -= battleutils::GetScaledItemModifier(this, PItem, i.getModID(), isDelevel);
+        if (removedMods.insert(modifier.getModID()).second)
+        {
+            m_modStat[modifier.getModID()] -= battleutils::GetScaledItemModifier(this, PItem, modifier.getModID(), isDelevel);
+        }
     }
 }
 

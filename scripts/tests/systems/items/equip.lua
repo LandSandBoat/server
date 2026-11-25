@@ -228,4 +228,40 @@ describe('Equipment', function()
                 string.format('slot %d has wrong item: %d', piece.slot, equipped:getID()))
         end
     end)
+
+    describe('augment repeating a base mod', function()
+        -- She-Slime Earring is HP+2, the augment adds HP+5
+        local addAugmentedEarring = function()
+            local earring = player:addItem(xi.item.SHE_SLIME_EARRING)
+            assert(earring)
+            earring:setExData(
+                {
+                    augmentKind    = xi.augment.kind.HAS_AUGMENTS,
+                    augmentSubKind = xi.augment.subKind.STANDARD,
+                    augments       =
+                    {
+                        { id = 1, value = 4 },
+                    },
+                })
+        end
+
+        it('adds the item total once on equip', function()
+            addAugmentedEarring()
+            local baseHP = player:getMod(xi.mod.HP)
+
+            player:equipItem(xi.item.SHE_SLIME_EARRING, nil, xi.slot.EAR1)
+
+            player.assert:hasModifier(xi.mod.HP, baseHP + 7)
+        end)
+
+        it('removes exactly what it added on unequip', function()
+            addAugmentedEarring()
+            local baseHP = player:getMod(xi.mod.HP)
+
+            player:equipItem(xi.item.SHE_SLIME_EARRING, nil, xi.slot.EAR1)
+            player:unequipItem(xi.slot.EAR1)
+
+            player.assert:hasModifier(xi.mod.HP, baseHP)
+        end)
+    end)
 end)
