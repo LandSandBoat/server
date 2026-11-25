@@ -4017,9 +4017,6 @@ INSERT INTO `mob_skills` VALUES (3972,34,'water_meeble_warble',1,0.0,7.0,2000,15
 INSERT INTO `mob_skills` VALUES (3973,34,'aero_meeble_warble',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3974,35,'thrashing_assault',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3975,36,'drill_claw',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3976,1156,'abrasive_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3977,462,'deafening_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3978,463,'bugle_call',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3979,464,'bugle_call',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3980,465,'grating_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3981,466,'stifling_tantara',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
