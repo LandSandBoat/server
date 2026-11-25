@@ -206,10 +206,10 @@ local function resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipa
     if hitsLanded == 0 and hitsYaegasumi then
         -- Yaegasumi
         -- TODO: Get captures of Yaegasumi ability and confirm.
-        skill:setMsg(xi.msg.basic.EVADES)
+        skill:setMsg(xi.msg.basic.TARGET_EVADES)
     elseif hitsLanded == 0 and hitsAnticipated then
         -- Third Eye
-        skill:setMsg(xi.msg.basic.ANTICIPATE)
+        skill:setMsg(xi.msg.basic.TARGET_ANTICIPATES)
     elseif hitsLanded == 0 and hitsAbsorbed > 0 then
         -- Utsusemi and Blink
         skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
@@ -218,7 +218,7 @@ local function resolveMissMessage(skill, hitsLanded, hitsYaegasumi, hitsAnticipa
         if primaryMessage == xi.msg.basic.RANGED_ATTACK_HIT then
             skill:setMsg(xi.msg.basic.RANGED_ATTACK_MISS)
         elseif primaryMessage == xi.msg.basic.HIT_DMG then
-            skill:setMsg(xi.msg.basic.HIT_MISS)
+            skill:setMsg(xi.msg.basic.ATTACK_MISSES)
         elseif primaryMessage == xi.msg.basic.USES_JA_TAKE_DAMAGE then
             skill:setMsg(xi.msg.basic.JA_MISS_2)
         else
@@ -1526,7 +1526,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
         if not target:isUndead() then
             mob:addHP(drain)
 
-            return xi.msg.basic.SKILL_DRAIN_HP
+            return xi.msg.basic.USES_SKILL_HP_DRAINED
         end
 
         return xi.msg.basic.DAMAGE
@@ -1544,7 +1544,7 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
         target:delTP(drain)
         mob:addTP(drain)
 
-        return xi.msg.basic.SKILL_DRAIN_TP
+        return xi.msg.basic.USES_SKILL_TP_DRAINED
     end
 
     return xi.msg.basic.SKILL_NO_EFFECT
@@ -1687,7 +1687,7 @@ local function validateHealSkillParameters(fedData)
     params.chr_wSC        = fedData.chr_wSC or 0
     params.fTP            = fedData.fTP or { { tp = 1000, modifier = 1.0 }, { tp = 2000, modifier = 1.0 }, { tp = 3000, modifier = 1.0 } }
     params.fTPBonus       = fedData.fTPBonus or 0
-    params.primaryMessage = fedData.primaryMessage or xi.msg.basic.SELF_HEAL
+    params.primaryMessage = fedData.primaryMessage or xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT
     params.messageBypass  = fedData.messageBypass or false
 
     return params

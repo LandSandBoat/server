@@ -24,13 +24,13 @@
 namespace messageutils
 {
 
-auto GetAoEVariant(const MsgBasic primary) -> MsgBasic
+auto GetAoEVariant(const xi::MsgBasic primary) -> xi::MsgBasic
 {
     const auto it = aoeVariants.find(primary);
     return it != aoeVariants.end() ? it->second : primary;
 }
 
-auto GetAbsorbVariant(const MsgBasic primary) -> MsgBasic
+auto GetAbsorbVariant(const xi::MsgBasic primary) -> xi::MsgBasic
 {
     const auto it = absorbVariants.find(primary);
     return it != absorbVariants.end() ? it->second : primary;

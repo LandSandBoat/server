@@ -16,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     if target:addStatusEffect(xi.effect.STONESKIN, { power = amount, duration = 900, origin = pet, tier = 3 }) then
         if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
         else
             petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         end

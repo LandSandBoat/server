@@ -263,7 +263,7 @@ xi.job_utils.ranger.useShadowbind = function(player, target, ability, action)
         not target:hasStatusEffect(xi.effect.BIND)
     then
         target:addStatusEffect(xi.effect.BIND, { duration = duration, origin = player })
-        ability:setMsg(xi.msg.basic.IS_EFFECT) -- Target is bound.
+        ability:setMsg(xi.msg.basic.TARGET_STATUS) -- Target is bound.
     else
         ability:setMsg(xi.msg.basic.JA_MISS) -- Player uses Shadowbind, but misses.
     end

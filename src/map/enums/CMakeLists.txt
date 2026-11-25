@@ -16,7 +16,6 @@ target_sources(xi_map_battle PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/item_lockflg.h
     ${CMAKE_CURRENT_SOURCE_DIR}/loot_recast.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/msg_basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/msg_std.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_c2s.h
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_s2c.h

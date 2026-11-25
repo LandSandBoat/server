@@ -30,9 +30,9 @@
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "packets/entity_set_name.h"
 #include "packets/s2c/0x0df_group_attr.h"
@@ -292,7 +292,7 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
             }
             else // Self-targetting WS restoring MP
             {
-                actionResult.messageID  = primary ? MsgBasic::UsesSkillRecoversMP : MsgBasic::TargetRecoversMP;
+                actionResult.messageID  = primary ? xi::MsgBasic::SkillRecoversMp : xi::MsgBasic::TargetRecoversMp;
                 actionResult.resolution = ActionResolution::Hit;
                 damage                  = std::max(damage, 0);
                 actionResult.param      = addMP(damage);

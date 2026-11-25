@@ -46,7 +46,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     end)
 
     if target:getID() == action:getPrimaryTargetID() then
-        skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+        skill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
     else
         skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
     end

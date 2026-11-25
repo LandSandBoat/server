@@ -25,13 +25,13 @@
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
+#include "data/enums/msg_basic.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "enums/action/category.h"
 #include "enums/four_cc.h"
-#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "mobskill.h"
 #include "monstrosity.h"
@@ -117,7 +117,7 @@ auto CMobSkillState::init() -> StateErrorOr<void>
                     .results = {
                         {
                             .param     = m_PSkill->getID(),
-                            .messageID = m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG ? MsgBasic::None : MsgBasic::ReadiesWeaponskill,
+                            .messageID = m_PSkill->getFlag() & SKILLFLAG_NO_START_MSG ? xi::MsgBasic::None : xi::MsgBasic::ReadiesWs,
                         },
                     },
                 },
@@ -216,7 +216,7 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
                 // Meikyo Shisui wore off during the ready and the TP no longer covers the cost.
                 if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseWeaponskill);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseWeaponskill);
                 }
 
                 return true;
@@ -236,7 +236,7 @@ auto CMobSkillState::Update(const timer::time_point tick) -> bool
             action.ForEachResult(
                 [&](action_result_t& result)
                 {
-                    result.messageID = MsgBasic::None;
+                    result.messageID = xi::MsgBasic::None;
                 });
         }
 

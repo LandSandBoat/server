@@ -950,7 +950,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             if primaryMsg then
                 action:messageID(defender:getID(), xi.msg.basic.DAMAGE)
             else
-                action:messageID(defender:getID(), xi.msg.basic.DAMAGE_SECONDARY)
+                action:messageID(defender:getID(), xi.msg.basic.TARGET_TAKES_DAMAGE)
             end
 
             if finaldmg > 0 then
@@ -962,7 +962,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             end
         else
             if primaryMsg then
-                action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL)
+                action:messageID(defender:getID(), xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT)
             else
                 action:messageID(defender:getID(), xi.msg.basic.SELF_HEAL_SECONDARY)
             end
@@ -975,7 +975,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         if primaryMsg then
             action:messageID(defender:getID(), xi.msg.basic.SKILL_MISS)
         else
-            action:messageID(defender:getID(), xi.msg.basic.EVADES)
+            action:messageID(defender:getID(), xi.msg.basic.TARGET_EVADES)
         end
 
         action:resolution(defender:getID(), xi.action.resolution.MISS)

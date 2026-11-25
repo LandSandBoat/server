@@ -820,7 +820,7 @@ public:
     void OnEngage(CAttackState&) override;
     void OnDisengage(CAttackState&) override;
     void OnCastFinished(CMagicState&, action_t&) override;
-    void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
+    void OnCastInterrupted(CMagicState&, action_t&, xi::MsgBasic msg, bool blockedCast) override;
     void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     void OnAbility(CAbilityState&, action_t&) override;
     void OnDeathTimer() override;

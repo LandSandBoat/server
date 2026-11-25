@@ -29,7 +29,7 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
@@ -375,7 +375,7 @@ auto AddEminenceRecord(CCharEntity* PChar, uint16 recordID) -> bool
             PChar->m_eminenceCache.activemap.set(recordID);
 
             PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROEStart);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, xi::MsgBasic::RoeStart);
             charutils::SaveEminenceData(PChar);
             return true;
         }
@@ -605,7 +605,7 @@ void AddActiveTimedRecord(CCharEntity* PChar)
 
     if (timedRecordID)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, timedRecordID, 0, MsgBasic::ROETimed);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, timedRecordID, 0, xi::MsgBasic::RoeTimed);
         SetEminenceRecordCompletion(PChar, timedRecordID, false);
     }
 }

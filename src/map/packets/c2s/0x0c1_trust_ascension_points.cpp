@@ -52,7 +52,7 @@ void GP_CLI_COMMAND_TRUST_ASCENSION_POINTS::process(MapSession* PSession, CCharE
     // 3) Save upgrade to DB
     // 4) Substract spent alter_ego_points
     // 5) Emit BATTLE_MESSAGE message 828 with Data set to CategoryIndex and Data2 set to upgrade level
-    // PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->CategoryIndex, 1, MsgBasic::AlterEgoUpgrade);
+    // PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->CategoryIndex, 1, xi::MsgBasic::AlterEgoUpgrade);
     // 6) Send updated array to PC
     PChar->pushPacket<GP_SERV_COMMAND_TRUST_ASCENSION_POINTS>(PChar);
 }

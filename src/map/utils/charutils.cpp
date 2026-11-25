@@ -124,8 +124,8 @@
 #include "zoneutils.h"
 
 #include "data/enums/key_item.h"
+#include "data/enums/msg_basic.h"
 #include "enums/mission_log.h"
-#include "enums/msg_basic.h"
 #include "enums/quest_log.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
@@ -1440,7 +1440,7 @@ void SendRecordsOfEminenceLog(CCharEntity* PChar)
         if (PChar->m_eminenceCache.notifyTimedRecord)
         {
             PChar->m_eminenceCache.notifyTimedRecord = false;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, roeutils::GetActiveTimedRecord(), 0, MsgBasic::ROETimed);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, roeutils::GetActiveTimedRecord(), 0, xi::MsgBasic::RoeTimed);
         }
 
         // 4-part Eminence Completion bitmap
@@ -3053,7 +3053,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Containe
 
         if (PItemWeapon && PItemWeapon->getSkillType() == xi::SkillType::None && (!PMainItem || !PMainItem->isTwoHanded()))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::Requires2HForGrip);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::Requires2HForGrip);
             return;
         }
 
@@ -3062,7 +3062,7 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, xi::Containe
             // Don't attempt to equip item in equip menu if you don't have dual wield trait (client sees BLU, THF, DNC, NIN, /DNC or /NIN etc as able to equip sub weapons even if sub is too low or no trait on BLU)
             if (!PChar->hasTrait(TRAIT_DUAL_WIELD))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PItemWeapon->getID(), 0, MsgBasic::NeedDualWield);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PItemWeapon->getID(), 0, xi::MsgBasic::NeedDualWield);
                 return;
             }
 
@@ -3941,7 +3941,7 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
             }
 
             PChar->RealSkills.skill[rawSkillID] += SkillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, rawSkillID, SkillAmount, MsgBasic::SkillGain);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, rawSkillID, SkillAmount, xi::MsgBasic::SkillGain);
 
             if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
             {
@@ -3960,7 +3960,7 @@ void TrySkillUP(CCharEntity* PChar, xi::SkillType SkillID, uint8 lvl, bool force
                     PChar->WorkingSkills.skill[rawSkillID] += 1;
                 }
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, rawSkillID, (CurSkill + SkillAmount) / 10, MsgBasic::SkillLevelUp);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, rawSkillID, (CurSkill + SkillAmount) / 10, xi::MsgBasic::SkillLevelUp);
 
                 CheckWeaponSkill(PChar, rawSkillID);
                 /* ignoring this for now
@@ -4003,7 +4003,7 @@ void CheckWeaponSkill(CCharEntity* PChar, uint8 skill)
         if (curSkill == PSkill->getSkillLevel() && (battleutils::CanUseWeaponskill(PChar, PSkill)))
         {
             addWeaponSkill(PChar, PSkill->getID());
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PSkill->getID(), PSkill->getID(), MsgBasic::LearnsAbility);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PSkill->getID(), PSkill->getID(), xi::MsgBasic::LearnsAbility);
             PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         }
     }
@@ -4563,7 +4563,7 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
                     continue;
                 }
 
-                PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, gilPerPerson, 0, MsgBasic::Obtains);
+                PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, gilPerPerson, 0, xi::MsgBasic::Obtains);
             }
         }
     }
@@ -4576,7 +4576,7 @@ void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
             return;
         }
 
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<int32>(gil), 0, MsgBasic::Obtains);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<int32>(gil), 0, xi::MsgBasic::Obtains);
     }
 }
 
@@ -4626,7 +4626,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
                         {
                             if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(PMember))
                             {
-                                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LevelSyncNoExp);
+                                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::LevelSyncNoExp);
                             }
                         }
                     });
@@ -4686,7 +4686,7 @@ void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob)
 
             if (distance(PMember->loc.p, PMob->loc.p) > 100)
             {
-                PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, 0, 0, MsgBasic::TooFarForExp);
+                PMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PMember, PMember, 0, 0, xi::MsgBasic::TooFarForExp);
                 return;
             }
 
@@ -4888,23 +4888,23 @@ void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoi
         {
             if (PChar->capacityChain.chainNumber != 0)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, MsgBasic::CapacityChain);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, xi::MsgBasic::CapacityChain);
             }
             else
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, MsgBasic::CapacityPointsGained);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, xi::MsgBasic::CapacityPointsGained);
             }
             PChar->capacityChain.chainNumber++;
         }
         else
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, MsgBasic::CapacityPointsGained);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, xi::MsgBasic::CapacityPointsGained);
         }
 
         // Add capacity points
         if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, MsgBasic::JobPointGained));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, xi::MsgBasic::JobPointGained));
         }
         PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 
@@ -5024,7 +5024,7 @@ void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedX
                 PChar->PParty->ReloadParty();
             }
 
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())], 0, MsgBasic::LevelDown));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())], 0, xi::MsgBasic::LevelDown));
             luautils::OnPlayerLevelDown(PChar);
             PChar->updatemask |= UPDATE_HP;
         }
@@ -5094,22 +5094,22 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
             {
                 if (onLimitMode)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, MsgBasic::LimitChain);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, xi::MsgBasic::LimitChain);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, MsgBasic::ExpChain);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, xi::MsgBasic::ExpChain);
                 }
             }
             else
             {
                 if (onLimitMode)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, MsgBasic::LimitPointsGained);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, xi::MsgBasic::LimitPointsGained);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, MsgBasic::ExperiencePointsGained);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, xi::MsgBasic::ExperiencePointsGained);
                 }
             }
             PChar->expChain.chainNumber++;
@@ -5118,11 +5118,11 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         {
             if (onLimitMode)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, MsgBasic::LimitPointsGained);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, xi::MsgBasic::LimitPointsGained);
             }
             else
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, MsgBasic::ExperiencePointsGained);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, xi::MsgBasic::ExperiencePointsGained);
             }
         }
     }
@@ -5132,7 +5132,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
         // add limit points
         if (PChar->PMeritPoints->AddLimitPoints(exp))
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, MsgBasic::MeritPointGained));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, xi::MsgBasic::MeritPointGained));
         }
     }
     else
@@ -5255,7 +5255,7 @@ void AddExperiencePoints(bool expFromRaise, bool awardRegionPoints, bool fromScr
             if (!expFromRaise)
             {
                 // Level up animation and message
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())], 0, MsgBasic::LevelUp));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())], 0, xi::MsgBasic::LevelUp));
                 // Set HP and MP to max range
                 PChar->health.hp = PChar->GetMaxHP();
                 PChar->health.mp = PChar->GetMaxMP();
@@ -6614,7 +6614,7 @@ void ReloadParty(CCharEntity* PChar)
             PSyncTarget->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::LevelSync) &&
             PSyncTarget->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::LevelSync)->GetDuration() == 0s)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, PSyncTarget->GetMLevel(), MsgBasic::LevelSyncActivated);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, PSyncTarget->GetMLevel(), xi::MsgBasic::LevelSyncActivated);
             PChar->StatusEffectContainer->DelStatusEffectsByFlag(xi::StatusEffectFlag::Dispelable);
             PChar->health.tp = 0;
             PChar->updatemask |= UPDATE_HP;

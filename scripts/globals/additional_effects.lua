@@ -130,10 +130,10 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.DAMAGE] = functio
     local msgParam  = 0
 
     local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
-    msgID  = xi.msg.basic.ADD_EFFECT_DMG
+    msgID  = xi.msg.basic.ADD_EFFECT_DAMAGE
 
     if damage < 0 then
-        msgID = xi.msg.basic.ADD_EFFECT_HEAL
+        msgID = xi.msg.basic.ADD_EFFECT_RECOVERS_HP
 
         damage = damage * -1
 
@@ -483,7 +483,7 @@ xi.additionalEffect.procFunctions[xi.additionalEffect.procType.NM_SPECIFIC] = fu
     then
         -- Calculate damage
         local damage = xi.additionalEffect.calcDamage(attacker, params.element, defender, params.damage)
-        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        msgID = xi.msg.basic.ADD_EFFECT_DAMAGE
         msgParam = damage
 
         -- Execute special action if configured

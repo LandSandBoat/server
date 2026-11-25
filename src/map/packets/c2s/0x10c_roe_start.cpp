@@ -21,8 +21,8 @@
 
 #include "0x10c_roe_start.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x110_unity.h"
@@ -49,6 +49,6 @@ void GP_CLI_COMMAND_ROE_START::process(MapSession* PSession, CCharEntity* PChar)
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->ObjectiveId, 0, MsgBasic::ROEUnable);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->ObjectiveId, 0, xi::MsgBasic::RoeUnable);
     }
 }

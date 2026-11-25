@@ -25,11 +25,11 @@
 #include "action/action.h"
 #include "ai/ai_container.h"
 #include "common/utils.h"
+#include "data/enums/msg_basic.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
-#include "enums/msg_basic.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -70,7 +70,7 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
 
         if (distance(PPet->loc.p, PTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PTarget->modelHitboxSize)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TargetOutOfRange);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::TargetOutOfRange);
             return false;
         }
     }
@@ -81,7 +81,7 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
         // 2 - Pet must be within skill range + hitboxes from enemy (if skill targets enemy)
         if (distance(PChar->loc.p, PPet->loc.p) > 4.0f + PChar->modelHitboxSize + PPet->modelHitboxSize)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::TargetOutOfRange);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::TargetOutOfRange);
             return false;
         }
 
@@ -89,7 +89,7 @@ auto PetSkillDistanceCheck(CCharEntity* PChar, CBaseEntity* PTarget, const CAbil
         {
             if (auto* PPetTarget = PPet->GetBattleTarget(); PPetTarget && distance(PPet->loc.p, PPetTarget->loc.p) > PPetSkill->getDistance() + PPet->modelHitboxSize + PPetTarget->modelHitboxSize)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PPetTarget, 0, 0, MsgBasic::TargetOutOfRange);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PPetTarget, 0, 0, xi::MsgBasic::TargetOutOfRange);
                 return false;
             }
         }
@@ -114,7 +114,7 @@ auto CAbilityState::init() -> StateErrorOr<void>
 
     if (!PAbility)
     {
-        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::UnableToUseJobAbility) };
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, xi::MsgBasic::UnableToUseJa) };
     }
     auto* PTarget = m_PEntity->IsValidTarget(target(), PAbility->getValidTarget(), m_errorMsg);
 
@@ -137,7 +137,7 @@ auto CAbilityState::init() -> StateErrorOr<void>
                         {
                             .animation = ActionAnimation::SkillStart,
                             .param     = PAbility->getID(),
-                            .messageID = MsgBasic::ReadiesSkill,
+                            .messageID = xi::MsgBasic::ReadiesSkill2,
                         },
                     },
                 },
@@ -256,7 +256,7 @@ auto CAbilityState::CanUseAbility() const -> bool
 
         if (PChar->PRecastContainer->HasRecast(xi::RecastType::Ability, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::WaitLonger);
             return false;
         }
 
@@ -265,7 +265,7 @@ auto CAbilityState::CanUseAbility() const -> bool
             ((!PAbility->isPetAbility() || isLuopanAbility) && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa2);
             return false;
         }
 
@@ -282,13 +282,13 @@ auto CAbilityState::CanUseAbility() const -> bool
             }
             else if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange() + PChar->modelHitboxSize + PTarget->modelHitboxSize)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TooFarAway);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::TooFarAway);
                 return false;
             }
 
             if (m_PEntity->loc.zone->CanUseMisc(xi::ZoneMisc::LosPlayerBlock) && !m_PEntity->CanSeeTarget(PTarget))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::UnableToSeeTarget);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::UnableToSeeTarget);
                 return false;
             }
 
@@ -296,7 +296,7 @@ auto CAbilityState::CanUseAbility() const -> bool
             int32        errNo      = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
             if (errNo != 0)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), static_cast<MsgBasic>(errNo));
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), static_cast<xi::MsgBasic>(errNo));
                 return false;
             }
             return true;

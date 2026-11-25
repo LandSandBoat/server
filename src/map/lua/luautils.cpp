@@ -90,8 +90,8 @@
 #include "data/datasets/zones/mobs/dataset.h"
 #include "data/datasets/zones/npcs/dataset.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "data/loader.h"
-#include "enums/msg_basic.h"
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"
@@ -3113,7 +3113,7 @@ void OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, acti
     }
 
     Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::None;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<xi::MsgBasic>(1) : xi::MsgBasic::None;
     Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
@@ -3140,7 +3140,7 @@ void OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_r
     }
 
     Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
-    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::None;
+    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<xi::MsgBasic>(1) : xi::MsgBasic::None;
     Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
@@ -3169,7 +3169,7 @@ auto additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, 
     }
 
     Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::None;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<xi::MsgBasic>(1) : xi::MsgBasic::None;
     Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
     return 0;
@@ -3198,7 +3198,7 @@ auto OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, 
     }
 
     Action->additionalEffect = result.get_type(0) == sol::type::number ? result.get<ActionProcAddEffect>(0) : ActionProcAddEffect::None;
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::None;
+    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<xi::MsgBasic>(1) : xi::MsgBasic::None;
     Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
     return 0;
@@ -3225,7 +3225,7 @@ void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, 
     }
 
     Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
-    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MsgBasic>(1) : MsgBasic::None;
+    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<xi::MsgBasic>(1) : xi::MsgBasic::None;
     Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 

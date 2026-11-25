@@ -21,8 +21,8 @@
 
 #include "0x0fd_myroom_plant_check.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "items/item_flowerpot.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -78,18 +78,18 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
 
     if (PPotItem->isPlanted())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getSeedID(PPotItem->getPlant()), 0, MsgBasic::GardeningSeedSown);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getSeedID(PPotItem->getPlant()), 0, xi::MsgBasic::GardeningSeedSown);
         if (PPotItem->isTree())
         {
             if (PPotItem->getStage() > FLOWERPOT_STAGE_FIRST_SPROUTS_CRYSTAL)
             {
                 if (PPotItem->getExtraCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PPotItem->getExtraCrystalFeed()), 0, MsgBasic::GardeningCrystalUsed);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PPotItem->getExtraCrystalFeed()), 0, xi::MsgBasic::GardeningCrystalUsed);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::GardeningCrystalNone);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::GardeningCrystalNone);
                 }
             }
         }
@@ -97,11 +97,11 @@ void GP_CLI_COMMAND_MYROOM_PLANT_CHECK::process(MapSession* PSession, CCharEntit
         {
             if (PPotItem->getCommonCrystalFeed() != FLOWERPOT_ELEMENT_NONE)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PPotItem->getCommonCrystalFeed()), 0, MsgBasic::GardeningCrystalUsed);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, CItemFlowerpot::getItemFromElement(PPotItem->getCommonCrystalFeed()), 0, xi::MsgBasic::GardeningCrystalUsed);
             }
             else
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::GardeningCrystalNone);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::GardeningCrystalNone);
             }
         }
 

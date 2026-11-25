@@ -31,7 +31,7 @@
 #include "common/logging.h"
 #include "common/xirand.h"
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 
 #include "entities/char_entity.h"
 
@@ -390,7 +390,7 @@ void gainInfamy(CCharEntity* PChar, const int32 infamy)
     // Crossing into a higher rank announces it.
     if (PChar->m_PMonstrosity->Rank > previousRank)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NewfoundPuissance);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::NewfoundPuissance);
     }
 }
 
@@ -1076,7 +1076,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
     const auto* species = findSpecies(PChar->m_PMonstrosity->Species);
     if (species == nullptr)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa2);
         return;
     }
 
@@ -1091,7 +1091,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
 
     if (skill == skills.end())
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa2);
         return;
     }
 
@@ -1099,7 +1099,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, const GP_CL
     const auto meikyo = PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::MeikyoShisui);
     if (PChar->health.tp < skill->tpCost && !meikyo)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa2);
         return;
     }
 
@@ -1591,7 +1591,7 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
     // TODO: What does retail's 32 mean?
     for (auto count = grantLevelUnlocks(*PChar->m_PMonstrosity); count > 0; --count)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 32, 0, MsgBasic::PossessNewMonster);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 32, 0, xi::MsgBasic::PossessNewMonster);
     }
 
     // The client shows its lightbulb on this message. Retail sends it for moves we have yet to enable too.
@@ -1601,7 +1601,7 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
         {
             if (skill.unlockLevel == mLvl)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skill.mobSkillId, 0, MsgBasic::LearnsAbility);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, skill.mobSkillId, 0, xi::MsgBasic::LearnsAbility);
             }
         }
     }
@@ -1610,7 +1610,7 @@ void monstrosity::HandleLevelUp(CCharEntity* PChar)
     if (mLvl % kLevelsPerInstinct == 0 && mLvl <= kLevelsPerInstinct * kLevelInstincts)
     {
         applyLevelInstincts(*PChar->m_PMonstrosity);
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnedNewInstinct);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::LearnedNewInstinct);
     }
 
     WriteMonstrosityData(PChar);

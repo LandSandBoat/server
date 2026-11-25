@@ -21,8 +21,8 @@
 
 #include "mobskill.h"
 
+#include "data/enums/msg_basic.h"
 #include "enums/action/knockback.h"
-#include "enums/msg_basic.h"
 
 CMobSkill::CMobSkill(uint16 id)
 : m_ID(id)
@@ -37,7 +37,7 @@ CMobSkill::CMobSkill(uint16 id)
 , m_ValidTarget(xi::TargetType::None)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
-, m_Message(MsgBasic::None)
+, m_Message(xi::MsgBasic::None)
 , m_TP(0)
 , m_HP(0)
 , m_HPP(0)
@@ -50,12 +50,12 @@ CMobSkill::CMobSkill(uint16 id)
 
 auto CMobSkill::hasMissMsg() const -> bool
 {
-    return m_Message == MsgBasic::AbilityMisses ||
-           m_Message == MsgBasic::UsesSkillMisses ||
-           m_Message == MsgBasic::UsesSkillNoEffect ||
-           m_Message == MsgBasic::ShadowAbsorb ||
-           m_Message == MsgBasic::TargetAnticipates ||
-           m_Message == MsgBasic::RangedAttackMiss;
+    return m_Message == xi::MsgBasic::JaMiss ||
+           m_Message == xi::MsgBasic::SkillMiss ||
+           m_Message == xi::MsgBasic::SkillNoEffect ||
+           m_Message == xi::MsgBasic::ShadowAbsorb ||
+           m_Message == xi::MsgBasic::TargetAnticipates ||
+           m_Message == xi::MsgBasic::RangedAttackMiss;
 }
 
 auto CMobSkill::isAoE() const -> bool
@@ -106,7 +106,7 @@ void CMobSkill::setID(uint16 id)
     m_ID = id;
 }
 
-void CMobSkill::setMsg(MsgBasic msg)
+void CMobSkill::setMsg(xi::MsgBasic msg)
 {
     m_Message = msg;
 }
@@ -245,7 +245,7 @@ auto CMobSkill::getFinalAnimationSub() -> Maybe<uint8>
     return m_FinalAnimationSub;
 }
 
-auto CMobSkill::getMsg() const -> MsgBasic
+auto CMobSkill::getMsg() const -> xi::MsgBasic
 {
     return m_Message;
 }
@@ -300,13 +300,13 @@ auto CMobSkill::getKnockback() const -> Knockback
 
 auto CMobSkill::isDamageMsg() const -> bool
 {
-    return m_Message == MsgBasic::UsesAbilityTakesDamage ||
-           m_Message == MsgBasic::UsesSkillTakesDamage ||
-           m_Message == MsgBasic::UsesSkillHPDrained ||
-           m_Message == MsgBasic::UsesAbilityResistsDamage ||
-           m_Message == MsgBasic::UsesSkillMPDrained ||
-           m_Message == MsgBasic::UsesSkillTPDrained ||
-           m_Message == MsgBasic::TargetTakesDamage;
+    return m_Message == xi::MsgBasic::JaDamage ||
+           m_Message == xi::MsgBasic::Damage ||
+           m_Message == xi::MsgBasic::UsesSkillHpDrained ||
+           m_Message == xi::MsgBasic::UsesAbilityResistsDamage ||
+           m_Message == xi::MsgBasic::SkillDrainMp ||
+           m_Message == xi::MsgBasic::UsesSkillTpDrained ||
+           m_Message == xi::MsgBasic::TargetTakesDamage;
 }
 
 void CMobSkill::setParam(int16 value)

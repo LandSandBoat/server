@@ -31,10 +31,10 @@
 #include "monstrosity.h"
 #include "spell.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "enums/four_cc.h"
-#include "enums/msg_basic.h"
 #include "status_effect_container.h"
 #include "utils/blueutils.h"
 
@@ -166,7 +166,7 @@ void CSpell::setStatusEffectTier(const uint8 tier)
 
 auto CSpell::tookEffect() const -> bool
 {
-    return !(m_message == MsgBasic::MagicNoEffect || m_message == MsgBasic::MagicResistedTarget || m_message == MsgBasic::TargetNoEffect || m_message == MsgBasic::MagicResisted || m_message == MsgBasic::MagicCompleteResist || m_message == MsgBasic::MagicFail);
+    return !(m_message == xi::MsgBasic::MagicNoEffect || m_message == xi::MsgBasic::MagicResistedTarget || m_message == xi::MsgBasic::NoEffect || m_message == xi::MsgBasic::MagicResist || m_message == xi::MsgBasic::MagicCompleteResist || m_message == xi::MsgBasic::MagicFail);
 }
 
 auto CSpell::hasMPCost() -> bool
@@ -215,7 +215,7 @@ auto CSpell::canHitShadow() -> bool
 auto CSpell::dealsDamage() const -> bool
 {
     // damage or drain hp
-    return m_message == MsgBasic::MagicDamage || m_message == MsgBasic::MagicDrainsHP || m_message == MsgBasic::MagicBurstDamage || m_message == MsgBasic::MagicBurstDrainsHP;
+    return m_message == xi::MsgBasic::MagicDmg || m_message == xi::MsgBasic::MagicDrainsHp || m_message == xi::MsgBasic::MagicBurstDamage || m_message == xi::MsgBasic::MagicBurstDrainsHp;
 }
 
 auto CSpell::getRadius() const -> float
@@ -308,22 +308,22 @@ void CSpell::setMultiplier(float multiplier)
     m_multiplier = multiplier;
 }
 
-auto CSpell::getMessage() const -> MsgBasic
+auto CSpell::getMessage() const -> xi::MsgBasic
 {
     return m_message;
 }
 
-void CSpell::setMessage(const MsgBasic message)
+void CSpell::setMessage(const xi::MsgBasic message)
 {
     m_message = message;
 }
 
-auto CSpell::getMagicBurstMessage() const -> MsgBasic
+auto CSpell::getMagicBurstMessage() const -> xi::MsgBasic
 {
     return m_MagicBurstMessage;
 }
 
-void CSpell::setMagicBurstMessage(const MsgBasic message)
+void CSpell::setMagicBurstMessage(const xi::MsgBasic message)
 {
     m_MagicBurstMessage = message;
 }
@@ -526,8 +526,8 @@ void LoadSpellList()
         PSpell->setElement(rset->get<uint16>("element"));
         PSpell->setZoneMisc(rset->get<xi::ZoneMisc>("zonemisc"));
         PSpell->setMultiplier(rset->get<float>("multiplier"));
-        PSpell->setMessage(rset->get<MsgBasic>("message"));
-        PSpell->setMagicBurstMessage(rset->get<MsgBasic>("magicBurstMessage"));
+        PSpell->setMessage(rset->get<xi::MsgBasic>("message"));
+        PSpell->setMagicBurstMessage(rset->get<xi::MsgBasic>("magicBurstMessage"));
         PSpell->setCE(rset->get<int32>("CE"));
         PSpell->setVE(rset->get<int32>("VE"));
         PSpell->setRequirements(rset->get<uint8>("requirements"));

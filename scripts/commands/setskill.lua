@@ -66,7 +66,7 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
     end
 
     targ:setSkillLevel(skillID, skillLV * 10)
-    targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
+    targ:messageBasic(xi.msg.basic.SKILL_LEVEL_UP, skillID, skillLV)
 
     if targ ~= player then
         player:printToPlayer(string.format('%s\'s new skillID \'%s\' Skill: %s', targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..'.0'))

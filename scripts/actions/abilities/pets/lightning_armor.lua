@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     -- TODO: Does power scale?
     if target:addStatusEffect(xi.effect.SHOCK_SPIKES, { power = 15, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
         else
             petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         end

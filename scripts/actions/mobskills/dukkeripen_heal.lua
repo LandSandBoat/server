@@ -17,7 +17,7 @@ end
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
-    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.primaryMessage = xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT
     params.baseHeal       = math.randomInt(350, 500) -- TODO: Capture HP power
     params.fTP =
     {

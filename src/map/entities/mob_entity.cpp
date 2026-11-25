@@ -33,12 +33,12 @@
 #include "conquest_system.h"
 #include "data/enums/detects.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "data/enums/weather.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "enums/loot_recast.h"
-#include "enums/msg_basic.h"
 #include "items.h"
 #include "lua/lua_base_entity.h"
 #include "lua/luautils.h"
@@ -1318,7 +1318,7 @@ auto CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>
         auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
         if (PChar && !PChar->IsMobOwner(PTarget))
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, MsgBasic::AlreadyClaimed);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, PTarget, 0, 0, xi::MsgBasic::AlreadyClaimed);
             PAI->Disengage();
             return false;
         }
@@ -1483,11 +1483,11 @@ void CMobEntity::Die()
         {
             if (auto* PLastAttacker = lastAttackerId_.resolve())
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, MsgBasic::DefeatsTarget));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PLastAttacker, this, 0, 0, xi::MsgBasic::DefeatsTarget));
             }
             else
             {
-                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, MsgBasic::FallsToGround));
+                loc.zone->PushPacket(this, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, this, 0, 0, xi::MsgBasic::FallToGround));
             }
 
             DistributeRewards();
@@ -1541,7 +1541,7 @@ void CMobEntity::OnCastFinished(CMagicState& state, action_t& action)
     TapDeaggroTime();
 }
 
-void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, MsgBasic msg, bool blockedCast)
+void CMobEntity::OnCastInterrupted(CMagicState& state, action_t& action, xi::MsgBasic msg, bool blockedCast)
 {
     TracyZoneScopedN("CMobEntity::OnCastInterrupted");
 

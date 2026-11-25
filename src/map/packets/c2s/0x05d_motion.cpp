@@ -21,8 +21,8 @@
 
 #include "0x05d_motion.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "items.h"
 #include "items/item_equipment.h"
 #include "lua/luautils.h"
@@ -56,7 +56,7 @@ void GP_CLI_COMMAND_MOTION::process(MapSession* PSession, CCharEntity* PChar) co
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CantBeUsedInArea);
         return;
     }
 

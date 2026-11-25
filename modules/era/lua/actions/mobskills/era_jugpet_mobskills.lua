@@ -1290,7 +1290,7 @@ m:addOverrideByEra('xi.actions.mobskills.wild_carrot_jugpet.onMobWeaponSkill', {
     [xi.expansion.SOA] = function(mob, target, skill, action)
         local params = {}
 
-        params.primaryMessage = xi.msg.basic.SELF_HEAL
+        params.primaryMessage = xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT
         params.baseHeal       = mob:getMaxHP()
         params.fTP =
         {

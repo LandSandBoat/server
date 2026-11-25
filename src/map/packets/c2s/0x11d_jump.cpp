@@ -21,8 +21,8 @@
 
 #include "0x11d_jump.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x11e_jump.h"
@@ -41,7 +41,7 @@ void GP_CLI_COMMAND_JUMP::process(MapSession* PSession, CCharEntity* PChar) cons
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CantBeUsedInArea);
         return;
     }
 

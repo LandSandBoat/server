@@ -816,21 +816,21 @@ xi.job_utils.corsair.applyRoll = function(caster, target, inAbility, total, isDo
     -- Handle messages: Bust.
     elseif total > 11 then
         if caster:getID() == target:getID() then
-            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
+            currentAbility:setMsg(xi.msg.basic.DOUBLE_UP_BUST)     -- bust message for the COR rolling
         else
-            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll
+            currentAbility:setMsg(xi.msg.basic.DOUBLE_UP_BUST_SUB) -- bust message for the target getting the roll
         end
 
     -- Handle messages: Success
     else
         if caster:getID() == target:getID() then
             if isDoubleup then
-                currentAbility:setMsg(xi.msg.basic.DOUBLEUP)      -- success on doubleup for COR has different message than from just using Phantom Roll
+                currentAbility:setMsg(xi.msg.basic.DOUBLE_UP)      -- success on doubleup for COR has different message than from just using Phantom Roll
             else
                 currentAbility:setMsg(xi.msg.basic.ROLL_MAIN)     -- success message for the COR rolling the first time
             end
         else
-            currentAbility:setMsg(xi.msg.basic.ROLL_SUB)          -- message for the target getting the roll. Always the same, even if it's the COR's first roll.
+            currentAbility:setMsg(xi.msg.basic.RECEIVES_EFFECT_ABILITY)          -- message for the target getting the roll. Always the same, even if it's the COR's first roll.
         end
     end
 
@@ -926,7 +926,7 @@ xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     local total = caster:getLocalVar('corsairRollTotal')
 
     caster:doWildCard(target, total)
-    ability:setMsg(xi.msg.basic.WILD_CARD_BASE + math.floor((total - 1) / 2) * 2)
+    ability:setMsg(xi.msg.basic.USES_ABILITY_RECHARGE + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + total - 1)
 
     return total

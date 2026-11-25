@@ -94,7 +94,7 @@ void CLuaAction::param(const uint32 actionTargetId, const int32 param) const
     }
 }
 
-void CLuaAction::messageId(const uint32 actionTargetId, const MsgBasic messageId) const
+void CLuaAction::messageId(const uint32 actionTargetId, const xi::MsgBasic messageId) const
 {
     for (auto&& actionTarget : m_PLuaAction->targets)
     {
@@ -106,7 +106,7 @@ void CLuaAction::messageId(const uint32 actionTargetId, const MsgBasic messageId
     }
 }
 
-auto CLuaAction::getMsg(const uint32 actionTargetId) const -> Maybe<MsgBasic>
+auto CLuaAction::getMsg(const uint32 actionTargetId) const -> Maybe<xi::MsgBasic>
 {
     if (const auto it = std::ranges::find(m_PLuaAction->targets, actionTargetId, &action_target_t::actorId); it != m_PLuaAction->targets.end())
     {
@@ -253,7 +253,7 @@ void CLuaAction::addEffectParam(const uint32 actionTargetId, const int32 addEffe
     }
 }
 
-void CLuaAction::addEffectMessage(const uint32 actionTargetId, const MsgBasic addEffectMessage) const
+void CLuaAction::addEffectMessage(const uint32 actionTargetId, const xi::MsgBasic addEffectMessage) const
 {
     for (auto&& actionTarget : m_PLuaAction->targets)
     {

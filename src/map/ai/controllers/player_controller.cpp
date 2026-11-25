@@ -23,8 +23,8 @@
 
 #include "ability.h"
 #include "ai/ai_container.h"
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "items/item_weapon.h"
 #include "latent_effect_container.h"
 #include "packets/s2c/0x029_battle_message.h"
@@ -60,7 +60,7 @@ auto CPlayerController::Cast(const EntityId target, SpellID spellid) -> bool
         return CController::Cast(target, spellid);
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToCast);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToCast);
     return false;
 }
 
@@ -86,12 +86,12 @@ auto CPlayerController::Engage(const EntityId& target) -> bool
             }
             else
             {
-                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::WaitLonger);
+                errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::WaitLonger);
             }
         }
         else
         {
-            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::TooFarAway);
+            errMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::TooFarAway);
         }
     }
     if (errMsg)
@@ -121,25 +121,25 @@ auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 
         if (PWeaponSkill == nullptr)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseWeaponskill);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CannotUseWeaponskill);
             return false;
         }
 
         if (!charutils::hasWeaponSkill(PChar, PWeaponSkill->getID()) || !charutils::canUseWeaponSkill(PChar, wsid))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseWeaponskill);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CannotUseWeaponskill);
             return false;
         }
 
         if (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Amnesia) || (PChar->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Impairment) && (PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Impairment)->GetPower() == 0x02 || PChar->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Impairment)->GetPower() == 0x03)))
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseAnyWeaponskill);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CannotUseAnyWeaponskill);
             return false;
         }
 
         if (PChar->health.tp < 1000)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NotEnoughTP);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::NotEnoughTp);
             return false;
         }
 
@@ -152,7 +152,7 @@ auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
             // before allowing ranged weapon skill...
             if (PItem == nullptr || !weapon || !weapon->isRanged() || !ammo || !ammo->isRanged() || !PChar->getEquip(SLOT_AMMO))
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::NoRangedWeapon);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::NoRangedWeapon);
                 return false;
             }
         }
@@ -169,7 +169,7 @@ auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
 
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, MsgBasic::CannotSee);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PTarget, 0, 0, xi::MsgBasic::CannotSee);
                 return false;
             }
 
@@ -184,7 +184,7 @@ auto CPlayerController::WeaponSkill(EntityId target, uint16 wsid) -> bool
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseWeaponskill);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseWeaponskill);
     }
     return false;
 }
@@ -197,7 +197,7 @@ auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
         CAbility* PAbility = ability::GetAbility(abilityid);
         if (!PAbility)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa);
             return false;
         }
         if (PChar->PRecastContainer->HasRecast(xi::RecastType::Ability, PAbility->getRecastId(), PAbility->getRecastTime()))
@@ -213,8 +213,8 @@ auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
             }
 
             currentRecast = std::chrono::ceil<std::chrono::seconds>(currentRecast);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility2);
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, MsgBasic::TimeLeft);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa2);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint32>(std::max<int64>(timer::count_seconds(currentRecast), 0)), 0, xi::MsgBasic::TimeLeft);
             return false;
         }
 
@@ -226,7 +226,7 @@ auto CPlayerController::Ability(EntityId target, const uint16 abilityid) -> bool
         return PChar->PAI->Internal_Ability(target, abilityid);
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseJobAbility);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::UnableToUseJa);
     return false;
 }
 
@@ -243,7 +243,7 @@ auto CPlayerController::RangedAttack(const EntityId target) -> bool
         return PChar->PAI->Internal_RangedAttack(target);
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::WaitLonger);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::WaitLonger);
     return false;
 }
 

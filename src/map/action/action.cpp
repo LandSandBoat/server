@@ -30,12 +30,12 @@ void action_result_t::recordSkillchain(const ActionProcSkillChain effect, const 
     {
         // Absorbs damage
         this->addEffectParam   = -dmg;
-        this->addEffectMessage = static_cast<MsgBasic>(384 + static_cast<uint8_t>(effect));
+        this->addEffectMessage = static_cast<xi::MsgBasic>(384 + static_cast<uint8_t>(effect));
     }
     else
     {
         this->addEffectParam   = dmg;
-        this->addEffectMessage = static_cast<MsgBasic>(287 + static_cast<uint8_t>(effect));
+        this->addEffectMessage = static_cast<xi::MsgBasic>(287 + static_cast<uint8_t>(effect));
     }
 
     this->additionalEffect = effect;

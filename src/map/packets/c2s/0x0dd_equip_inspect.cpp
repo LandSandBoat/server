@@ -22,9 +22,9 @@
 #include "0x0dd_equip_inspect.h"
 
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
-#include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "items/item_weapon.h"
 #include "packets/c2s/validation.h"
@@ -47,7 +47,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CantBeUsedInArea);
         return;
     }
 
@@ -90,7 +90,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                 // /check on a mob
                 if (PMobTarget && ((PMobTarget->m_Type & xi::MobType::Notorious) != xi::MobType::Normal || (PMobTarget->m_Type & xi::MobType::Battlefield) != xi::MobType::Normal || PMobTarget->getMobMod(xi::MobMod::CheckAsNm) > 0))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, MsgBasic::CheckImpossibleToGauge);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMobTarget, 0, 0, xi::MsgBasic::CheckImpossibleToGauge);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                     const uint16 mobDef  = PMonsterTarget->DEF();
 
                     // Calculate +/- message
-                    auto MessageID = static_cast<uint16_t>(MsgBasic::CheckDefault);
+                    auto MessageID = static_cast<uint16_t>(xi::MsgBasic::CheckDefault);
 
                     // Offsetting the message ID by a certain amount for each stat gives us the correct message
                     // Defense is +/- 1
@@ -130,7 +130,7 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
                         MessageID += 3;
                     }
 
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMonsterTarget, mobLvl, MessageValue, static_cast<MsgBasic>(MessageID));
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PMonsterTarget, mobLvl, MessageValue, static_cast<xi::MsgBasic>(MessageID));
                 }
             }
             else if (PCharTarget)
@@ -162,57 +162,57 @@ void GP_CLI_COMMAND_EQUIP_INSPECT::process(MapSession* PSession, CCharEntity* PC
             {
                 // /checkparam on self
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamName);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamIlvl);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(SLOT_MAIN), MsgBasic::CheckparamPrimary);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CheckparamName);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CheckparamIlvl);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(SLOT_MAIN), xi::MsgBasic::CheckparamPrimary);
 
                 if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(SLOT_SUB), MsgBasic::CheckparamAuxiliary);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(SLOT_SUB), xi::MsgBasic::CheckparamAuxiliary);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamAuxiliary);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CheckparamAuxiliary);
                 }
 
                 const bool hasRangedWeapon = PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON);
                 const bool hasAmmoWeapon   = PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON);
                 if (hasRangedWeapon || hasAmmoWeapon)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), MsgBasic::CheckparamRange);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->RACC(), PChar->RATT(), xi::MsgBasic::CheckparamRange);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CheckparamRange);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CheckparamRange);
                 }
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->EVA(), PChar->DEF(), MsgBasic::CheckparamDefense);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, PChar->EVA(), PChar->DEF(), xi::MsgBasic::CheckparamDefense);
             }
             else if (PChar->PPet && PChar->PPet->id == this->UniqueNo)
             {
                 // /checkparam on pet
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamName);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CheckparamPrimary);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, xi::MsgBasic::CheckparamName);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(SLOT_MAIN), xi::MsgBasic::CheckparamPrimary);
                 if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(SLOT_MAIN), MsgBasic::CheckparamAuxiliary);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(SLOT_MAIN), xi::MsgBasic::CheckparamAuxiliary);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamAuxiliary);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, xi::MsgBasic::CheckparamAuxiliary);
                 }
                 auto* PPetRanged = dynamic_cast<CItemWeapon*>(PChar->PPet->m_Weapons[SLOT_RANGED]);
                 if (PPetRanged && PPetRanged->getSkillType() != xi::SkillType::None)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(), MsgBasic::CheckparamRange);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->RACC(), PChar->PPet->RATT(), xi::MsgBasic::CheckparamRange);
                 }
                 else
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, MsgBasic::CheckparamRange);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, 0, 0, xi::MsgBasic::CheckparamRange);
                 }
 
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->EVA(), PChar->PPet->DEF(), MsgBasic::CheckparamDefense);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar->PPet, PChar->PPet->EVA(), PChar->PPet->DEF(), xi::MsgBasic::CheckparamDefense);
             }
 
             break;

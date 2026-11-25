@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     target:addMP(mpAmount)
 
-    skill:setMsg(xi.msg.basic.RECOVERS_MP_SECONDARY)
+    skill:setMsg(xi.msg.basic.TARGET_RECOVERS_MP)
 
     return mpAmount
 end

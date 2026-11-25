@@ -23,9 +23,15 @@
 
 #include "base.h"
 
-enum class MsgBasic : uint16_t;
 enum class MsgStd : uint16_t;
 class CBaseEntity;
+
+namespace xi
+{
+
+enum class MsgBasic : uint16_t;
+
+} // namespace xi
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0029
 // This packet is sent by the server to display combat related messages to the client.
@@ -45,11 +51,11 @@ public:
         uint8_t  padding1B;   // PS2: dammy3
     };
 
-    inline auto getMessageId() const -> MsgBasic
+    inline auto getMessageId() const -> xi::MsgBasic
     {
-        return static_cast<MsgBasic>(this->data().MessageNum);
+        return static_cast<xi::MsgBasic>(this->data().MessageNum);
     }
 
     GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MsgStd messageId);
-    GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, MsgBasic messageId);
+    GP_SERV_COMMAND_BATTLE_MESSAGE(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param, int32 value, xi::MsgBasic messageId);
 };

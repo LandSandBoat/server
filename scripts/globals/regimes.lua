@@ -1477,7 +1477,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     then
         -- gil
         player:addGil(reward)
-        player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)
+        player:messageBasic(xi.msg.basic.OBTAINS, reward)
 
         -- tabs
         local tabs = math.floor(reward / 10) * xi.settings.main.TABS_RATE

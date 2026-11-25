@@ -26,13 +26,13 @@
 #include <sol/forward.hpp>
 
 enum class Knockback : uint8_t;
-enum class MsgBasic : uint16_t;
 class CMobSkill;
 
 namespace xi
 {
 
 enum class AttackType : uint8_t;
+enum class MsgBasic : uint16_t;
 
 } // namespace xi
 
@@ -59,8 +59,8 @@ public:
     auto isConal() -> bool;
     auto isSingle() -> bool;
     auto hasMissMsg() -> bool;
-    void setMsg(MsgBasic message);
-    auto getMsg() -> MsgBasic;
+    void setMsg(xi::MsgBasic message);
+    auto getMsg() -> xi::MsgBasic;
     auto getTargets() -> sol::table;
     auto getTotalTargets() -> uint16;
     auto getPrimaryTargetID() -> uint32;

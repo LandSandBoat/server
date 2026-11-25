@@ -32,7 +32,7 @@
 #include "blue_spell.h"
 #include "blue_trait.h"
 #include "charutils.h"
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 #include "job_points.h"
 #include "merit.h"
 #include "modifier.h"
@@ -172,7 +172,7 @@ void TryLearningSpells(CCharEntity* PChar, CMobEntity* PMob)
                 {
                     if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                     {
-                        PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MsgBasic::LearnsSpell);
+                        PBlueMage->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, xi::MsgBasic::LearnsSpell);
                         charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
                         PBlueMage->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PBlueMage);
                     }

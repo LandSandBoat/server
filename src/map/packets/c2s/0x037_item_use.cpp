@@ -22,8 +22,8 @@
 #include "0x037_item_use.h"
 
 #include "ai/ai_container.h"
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "universal_container.h"
@@ -67,7 +67,7 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     // TODO: Test more items
     if (distance(PChar->loc.p, PEntity->loc.p) > 12.0f)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PEntity, 0, 0, MsgBasic::TooFarAway);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PEntity, 0, 0, xi::MsgBasic::TooFarAway);
         return;
     }
 
@@ -108,6 +108,6 @@ void GP_CLI_COMMAND_ITEM_USE::process(MapSession* PSession, CCharEntity* PChar) 
     }
     else
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::UnableToUseItem);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::ItemUnableToUse2);
     }
 }

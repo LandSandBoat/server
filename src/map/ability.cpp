@@ -23,7 +23,7 @@
 
 #include "data/enums/recast.h"
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 #include "lua/luautils.h"
 
 #include <map>
@@ -37,7 +37,7 @@ CAbility::CAbility(uint16 id)
 , m_aoe(0)
 , m_validTarget(xi::TargetType::None)
 , m_addType(0)
-, m_message(MsgBasic::None)
+, m_message(xi::MsgBasic::None)
 , m_recastTime(0s)
 , m_recastId(xi::Recast::Special)
 , m_CE(0)
@@ -258,12 +258,12 @@ auto CAbility::getVE() const -> int32
  *                                                                       *
  ************************************************************************/
 
-auto CAbility::getMessage() const -> MsgBasic
+auto CAbility::getMessage() const -> xi::MsgBasic
 {
     return m_message;
 }
 
-void CAbility::setMessage(MsgBasic message)
+void CAbility::setMessage(xi::MsgBasic message)
 {
     m_message = message;
 }
@@ -343,7 +343,7 @@ void LoadAbilitiesList()
             PAbility->setLevel(rset->get<uint8>("level"));
             PAbility->setValidTarget(rset->get<xi::TargetType>("validTarget"));
             PAbility->setRecastTime(std::chrono::seconds(rset->get<uint16>("recastTime")));
-            PAbility->setMessage(rset->get<MsgBasic>("message1"));
+            PAbility->setMessage(rset->get<xi::MsgBasic>("message1"));
             // Unused - message2
             PAbility->setAnimationID(rset->get<uint16>("animation"));
             PAbility->setAnimationTime(std::chrono::milliseconds(rset->get<uint16>("animationTime")));

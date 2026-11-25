@@ -23,8 +23,14 @@
 
 #include "base.h"
 
-enum class MsgBasic : uint16_t;
 class CBaseEntity;
+
+namespace xi
+{
+
+enum class MsgBasic : uint16_t;
+
+} // namespace xi
 
 enum MESSAGE_COMBAT : uint16
 {
@@ -40,16 +46,16 @@ class GP_SERV_COMMAND_BATTLE_MESSAGE2 final : public GP_SERV_PACKET<PacketS2C::G
 public:
     struct PacketData
     {
-        uint32_t UniqueNoCas; // PS2: UniqueNoCas
-        uint32_t UniqueNoTar; // PS2: UniqueNoTar
-        uint16_t ActIndexCas; // PS2: ActIndexCas
-        uint16_t ActIndexTar; // PS2: ActIndexTar
-        uint32_t Data;        // PS2: Data
-        uint32_t Data2;       // PS2: Data2
-        MsgBasic MessageNum;  // PS2: MessageNum
-        uint8_t  Type;        // PS2: Type
-        uint8_t  padding1B;   // PS2: dummy
+        uint32_t     UniqueNoCas; // PS2: UniqueNoCas
+        uint32_t     UniqueNoTar; // PS2: UniqueNoTar
+        uint16_t     ActIndexCas; // PS2: ActIndexCas
+        uint16_t     ActIndexTar; // PS2: ActIndexTar
+        uint32_t     Data;        // PS2: Data
+        uint32_t     Data2;       // PS2: Data2
+        xi::MsgBasic MessageNum;  // PS2: MessageNum
+        uint8_t      Type;        // PS2: Type
+        uint8_t      padding1B;   // PS2: dummy
     };
 
-    GP_SERV_COMMAND_BATTLE_MESSAGE2(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param0, int32 param1, MsgBasic messageID);
+    GP_SERV_COMMAND_BATTLE_MESSAGE2(const CBaseEntity* PSender, const CBaseEntity* PTarget, int32 param0, int32 param1, xi::MsgBasic messageID);
 };

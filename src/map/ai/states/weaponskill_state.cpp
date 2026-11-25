@@ -25,9 +25,9 @@
 
 #include "action/action.h"
 #include "ai/ai_container.h"
+#include "data/enums/msg_basic.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
@@ -49,7 +49,7 @@ auto CWeaponSkillState::init() -> StateErrorOr<void>
     auto* skill = battleutils::GetWeaponSkill(m_wsid);
     if (!skill)
     {
-        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MsgBasic::CannotUseWeaponskill) };
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, xi::MsgBasic::CannotUseWeaponskill) };
     }
 
     const auto targetFlags = battleutils::isValidSelfTargetWeaponskill(m_wsid) ? xi::TargetType::Self : xi::TargetType::Enemy;
@@ -62,7 +62,7 @@ auto CWeaponSkillState::init() -> StateErrorOr<void>
 
     if (!m_PEntity->CanSeeTarget(PTarget))
     {
-        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, MsgBasic::CannotPerformAction) };
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, 0, 0, xi::MsgBasic::CannotPerform) };
     }
 
     m_PSkill = std::make_unique<CWeaponSkill>(*skill);
@@ -77,7 +77,7 @@ auto CWeaponSkillState::init() -> StateErrorOr<void>
                 .results = {
                     {
                         .param     = m_PSkill->getID(),
-                        .messageID = MsgBasic::ReadiesWeaponskill,
+                        .messageID = xi::MsgBasic::ReadiesWs,
                     },
                 },
             },

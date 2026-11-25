@@ -49,7 +49,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
             returnParam = xi.effect.KO
         else
-            petskill:setMsg(xi.msg.basic.EVADES)
+            petskill:setMsg(xi.msg.basic.TARGET_EVADES)
 
             returnParam = 0
         end

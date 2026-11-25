@@ -156,7 +156,7 @@
 #include "packets/s2c/0x0f9_res.h"
 #include "packets/s2c/0x119_abil_recast.h"
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 #include "lua/lua_base_entity.h"
 #include "utils/attackutils.h"
 #include "utils/battleutils.h"
@@ -480,12 +480,12 @@ void CLuaBaseEntity::messageBasic(uint16 messageID, const sol::object& p0, const
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MsgBasic>(messageID));
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<xi::MsgBasic>(messageID));
     }
     else if (m_PBaseEntity->loc.zone)
     {
         // Broadcast in range
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MsgBasic>(messageID)));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<xi::MsgBasic>(messageID)));
     }
 }
 
@@ -550,7 +550,7 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, const CLuaBaseEntity* PEnti
 
     if (PEntity != nullptr && m_PBaseEntity->loc.zone)
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PEntity->GetBaseEntity(), param0, param1, static_cast<MsgBasic>(messageID)));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PEntity->GetBaseEntity(), param0, param1, static_cast<xi::MsgBasic>(messageID)));
     }
 }
 
@@ -605,7 +605,7 @@ void CLuaBaseEntity::messageSystem(MsgStd messageID, const sol::object& p0, cons
  *  Example : master:messageCombat(mob, offset + id, 0, 711)
  *  Notes   :
  ************************************************************************/
-void CLuaBaseEntity::messageCombat(const sol::object& speaker, int32 p0, int32 p1, MsgBasic message) const
+void CLuaBaseEntity::messageCombat(const sol::object& speaker, int32 p0, int32 p1, xi::MsgBasic message) const
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -1035,7 +1035,7 @@ void CLuaBaseEntity::injectActionPacket(const uint32 inTargetID, uint16 inCatego
                         .animation  = static_cast<ActionAnimation>(inAnimationID),
                         .info       = info,
                         .param      = inParam,
-                        .messageID  = static_cast<MsgBasic>(inMessage),
+                        .messageID  = static_cast<xi::MsgBasic>(inMessage),
                     },
                 },
             },
@@ -7666,7 +7666,7 @@ auto CLuaBaseEntity::levelRestriction(const sol::object& level) -> uint8
                                 resetRecast(std::to_underlying(xi::RecastType::Ability), std::to_underlying(xi::Recast::Activate));
                             }
 
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::AutoExceedsCapacity);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::AutoExceedsCapacity);
                             petutils::DespawnPet(PChar);
                             return PChar->m_LevelRestriction;
                         }
@@ -8963,8 +8963,8 @@ auto CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, const
 
     if (total && progressNotify)
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MsgBasic::ROERecord);
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, progress, total, MsgBasic::ROEProgress);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, xi::MsgBasic::RoeRecord);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, progress, total, xi::MsgBasic::RoeProgress);
     }
 
     return result;
@@ -11430,7 +11430,7 @@ void CLuaBaseEntity::addLearnedAbility(uint16 abilityID)
         charutils::addAbility(PChar, abilityID);
         charutils::SaveLearnedAbilities(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnsNewAbility);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::LearnsNewAbility);
     }
 }
 
@@ -11552,7 +11552,7 @@ void CLuaBaseEntity::addSpell(uint16 spellID, const sol::optional<sol::table>& p
         // Send a chat update "Player learns a new spell!"
         if (!silentLog)
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::LearnsNewSpell);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::LearnsNewSpell);
         }
 
         if (saveToDB)
@@ -16333,7 +16333,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id) const
         PMaster->ForParty([&](CBattleEntity* PMember)
         {
             auto* PCharMember = static_cast<CCharEntity*>(PMember);
-            PCharMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PTrust, PMember, message_id, 0, MsgBasic::TrustPartyMessage);
+            PCharMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PTrust, PMember, message_id, 0, xi::MsgBasic::TrustPartyMessage);
         });
         // clang-format on
     }
@@ -19738,7 +19738,7 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
 
         ActionAnimation animationID  = ActionAnimation::None;
         int             messageParam = 0;
-        MsgBasic        messageID    = MsgBasic::None;
+        xi::MsgBasic    messageID    = xi::MsgBasic::None;
         int             addedHP      = 0;
         int             addedMP      = 0;
 
@@ -19751,12 +19751,12 @@ void CLuaBaseEntity::restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 res
             {
                 case 1:
                     messageParam = addedHP;
-                    messageID    = MsgBasic::TargetRegainsHP;
+                    messageID    = xi::MsgBasic::TargetRegainsHp;
                     animationID  = ActionAnimation::RegainHP;
                     break;
                 case 2:
                     messageParam = addedMP;
-                    messageID    = MsgBasic::TargetRegainsMP;
+                    messageID    = xi::MsgBasic::TargetRegainsMp;
                     animationID  = ActionAnimation::RegainMP;
                     break;
             }
