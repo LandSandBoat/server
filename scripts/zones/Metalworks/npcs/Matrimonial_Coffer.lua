@@ -1,12 +1,12 @@
 -----------------------------------
--- Area: Metalworks
+-- Area: Metalworks (237)
 --  NPC: Matrimonial Coffer
 -- !pos 90.079 -20.170 -12.937 237
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrigger = function(player, npc)
+entity.onTrigger = function(player)
     xi.matrimonialcoffer.startEvent(player)
 end
 

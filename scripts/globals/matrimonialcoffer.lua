@@ -1,71 +1,64 @@
 -----------------------------------
 -- Matrimonial Coffer NPCs
 -----------------------------------
-require('scripts/globals/npc_util')
------------------------------------
 xi = xi or {}
 xi.matrimonialcoffer = xi.matrimonialcoffer or {}
 
+local femaleStock =
+{
+    { price = 400000, items = { xi.item.BRIDAL_CORSAGE, xi.item.WEDDING_DRESS, xi.item.WEDDING_HOSE, xi.item.WEDDING_BOOTS } },
+    { price =  80000, items = { xi.item.MATRIMONY_RING } },
+}
+
+local maleStock =
+{
+    { price = 200000, items = { xi.item.BENEDIGHT_COAT, xi.item.BENEDIGHT_HOSE } },
+    { price = 100000, items = { xi.item.MATRIMONY_BAND } },
+}
+
 function xi.matrimonialcoffer.startEvent(player)
     local playerGender = player:getGender()
-    if playerGender == 1 then
-        player:startEvent(2000, playerGender, 200000, xi.item.MATRIMONY_BAND, 100000, player:getGil())   -- Male Dialog
-    else
-        player:startEvent(2000, playerGender, 400000, xi.item.MATRIMONY_RING, 80000, player:getGil())    -- Female Dialog
-    end
+    local stock = playerGender == 0 and femaleStock or maleStock
+
+    player:startEvent(2000, playerGender, stock[1].price, stock[2].items[1], stock[2].price, player:getGil())
 end
 
 function xi.matrimonialcoffer.finishEvent(player, csid, option, npc)
-    local zone = player:getZoneID()
-    local ID = zones[zone]
-    local playerGender = player:getGender()
+    if csid ~= 2000 then
+        return
+    end
 
-    if csid == 2000 then
-        if playerGender == 1 then
-            if option == 1 then
-                if
-                    player:getGil() >= 200000 and
-                    (not player:findItem(xi.item.BENEDIGHT_HOSE) or not player:findItem(xi.item.BENEDIGHT_COAT))
-                then
-                    if npcUtil.giveItem(player, { xi.item.BENEDIGHT_HOSE, xi.item.BENEDIGHT_COAT }) then
-                        player:delGil(200000)
-                    end
-                elseif player:getGil() < 200000 then
-                    player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
-                end
-            elseif option == 2 then
-                if player:getGil() >= 100000 then
-                    if npcUtil.giveItem(player, { xi.item.MATRIMONY_BAND }) then
-                        player:delGil(100000)
-                    end
-                else
-                    player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
-                end
-            end
-        elseif playerGender == 0 then
-            if option == 1 then
-                if
-                    player:getGil() >= 400000 and
-                    (not player:findItem(xi.item.BRIDAL_CORSAGE) or
-                    not player:findItem(xi.item.WEDDING_DRESS) or
-                    not player:findItem(xi.item.WEDDING_HOSE) or
-                    not player:findItem(xi.item.WEDDING_BOOTS))
-                then
-                    if npcUtil.giveItem(player, { xi.item.BRIDAL_CORSAGE, xi.item.WEDDING_DRESS, xi.item.WEDDING_HOSE, xi.item.WEDDING_BOOTS }) then
-                        player:delGil(400000)
-                    end
-                elseif player:getGil() < 400000 then
-                    player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
-                end
-            elseif option == 2 then
-                if player:getGil() >= 80000 then
-                    if npcUtil.giveItem(player, xi.item.MATRIMONY_RING) then
-                        player:delGil(80000)
-                    end
-                elseif player:getGil() < 80000 then
-                    player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
-                end
+    local stock = player:getGender() == 0 and femaleStock or maleStock
+    local purchase = stock[option]
+    if not purchase then
+        return
+    end
+
+    local ID = zones[player:getZoneID()]
+    if player:getGil() < purchase.price then
+        player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
+        return
+    end
+
+    local cannotObtain = bit.bor(ID.text.ITEM_CANNOT_BE_OBTAINED, 0x8000)
+
+    -- Check the whole Rare attire set before adding pieces to the player's inventory.
+    if option == 1 then
+        for _, itemId in ipairs(purchase.items) do
+            if player:hasItem(itemId) then
+                player:showText(npc, cannotObtain, itemId, 0, 0, 0, false, false, 6)
+                return
             end
         end
+    end
+
+    if not player:purchaseItems(purchase.items, purchase.price) then
+        player:showText(npc, cannotObtain, purchase.items[1], 0, 0, 0, false, false, 6)
+        return
+    end
+
+    local obtained = bit.bor(ID.text.ITEM_OBTAINED, 0x8000)
+    for _, itemId in ipairs(purchase.items) do
+        player:showText(npc, obtained, itemId, 0, 0, 0, false, false, 6)
     end
 end

@@ -1,12 +1,12 @@
 -----------------------------------
--- Area: Chateau d'Oraguille
+-- Area: Chateau d'Oraguille (233)
 --  NPC: Matrimonial Coffer
 -- !pos -7.777 0.000 3.013 233
 -----------------------------------
 ---@type TNpcEntity
 local entity = {}
 
-entity.onTrigger = function(player, npc)
+entity.onTrigger = function(player)
     xi.matrimonialcoffer.startEvent(player)
 end
 

@@ -28,6 +28,9 @@
 
 enum ITEMID : uint16
 {
+    SAN_DORIAN_MARRIAGE_CERT       = 345,
+    BASTOKAN_MARRIAGE_CERT         = 346,
+    WINDURSTIAN_MARRIAGE_CERT      = 347,
     NEW_LINKSHELL                  = 512,
     LINKSHELL                      = 513,
     PEARLSACK                      = 514,
@@ -149,6 +152,8 @@ enum ITEMID : uint16
     RED_RACING_SILKS               = 11326,
     WHITE_RACING_SILKS             = 11327,
     GREEN_RACING_SILKS             = 11328,
+    MATRIMONY_RING                 = 15847,
+    MATRIMONY_BAND                 = 15848,
     DREAM_BELL                     = 18863,
     DREAM_BELL_P1                  = 18864,
     LADY_BELL                      = 18868,

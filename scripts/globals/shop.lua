@@ -211,6 +211,7 @@ xi.shop.celebratory = function(player)
         { xi.item.OUKA_RANMAN,             30 },
         { xi.item.LITTLE_COMET,            30 },
         { xi.item.POPPER,                 650 },
+        { xi.item.POPPER_II,              650 },
         { xi.item.WEDDING_BELL,          1000 },
         { xi.item.SERENE_SERINETTE,      6000 },
         { xi.item.JOYOUS_SERINETTE,      6000 },

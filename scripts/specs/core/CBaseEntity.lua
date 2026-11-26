@@ -1011,6 +1011,18 @@ end
 function CBaseEntity:addItem(...)
 end
 
+---@param itemIds xi.item[]
+---@param price integer
+---@return boolean
+function CBaseEntity:purchaseItems(itemIds, price)
+end
+
+---@param nation integer # Issuing nation from wedding event 2001 (1-3).
+---@param partner CBaseEntity? # Pass nil for an original Wedding Ring holder's first solo claim.
+---@return boolean
+function CBaseEntity:issueWeddingCertificate(nation, partner)
+end
+
 ---@param itemID integer
 ---@param quantity integer
 ---@param containerID integer?
@@ -2513,6 +2525,12 @@ end
 ---@param arg0 integer?
 ---@return integer
 function CBaseEntity:getPartySize(arg0)
+end
+
+---@nodiscard
+---@param memberId integer
+---@return boolean # True when the two PCs form a party and are the only players in the full group, including those between zones.
+function CBaseEntity:isPartyOfTwoWith(memberId)
 end
 
 ---@nodiscard
