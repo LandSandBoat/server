@@ -9,6 +9,8 @@
 xi = xi or {}
 xi.enm = xi.enm or {}
 
+xi.enm.monarchBeardCooldownVar = '[ENM]MonarchBeard'
+
 local cutscenes =
 {
     ['Moritz' ] = { introduction = 10028, recurring = 10029, default = 10027 },
@@ -23,13 +25,21 @@ local enmOptionToEnablementCriteria =
     [  2] = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]antipathyTimer'   }, --Spire Of Dem
     [  3] = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]animusTimer'      }, --Spire Of Mea
     [  4] = { missionReq = xi.mission.id.cop.SLANDEROUS_UTTERINGS, cooldownPlayerVar = '[ENM]acrimonyTimer'    }, --Spire Of Vahzl
-    [  5] = { missionReq = xi.mission.id.cop.AN_ETERNAL_MELODY,    cooldownPlayerVar = '[ENM]MonarchBeard'     }, --Monarch Linn
+    [  5] = { missionReq = xi.mission.id.cop.AN_ETERNAL_MELODY,    cooldownPlayerVar = xi.enm.monarchBeardCooldownVar }, --Monarch Linn
     [  6] = { missionReq = xi.keyItem.PSOXJA_PASS,                 cooldownPlayerVar = '[ENM]AstralCovenant'   }, --The Shrouded Maw
     [  7] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]OperatingLever'   }, --Mine Shaft 2716 Lever
     [  8] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]ZephyrFan'        }, --Bearclaw Pinnacle
     [  9] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]MiasmaFilter'     }, --Boneyard Gully
     [100] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]GateDial'         }, --Mine Shaft 2716 Dial
 }
+
+-- The five-day cooldown starts on entry: https://www.playonline.com/updateus/050224hu5ol2.html
+-- Morangeart and the Monarch Beard: https://wiki.ffo.jp/html/4013.html
+xi.enm.startMonarchBeardCooldown = function(_, player, battlefield, firstEnmEntry)
+    if firstEnmEntry then
+        player:setCharVar(xi.enm.monarchBeardCooldownVar, VanadielTime() + xi.settings.main.ENM_COOLDOWN * 3600)
+    end
+end
 
 local function hasPlayerTriggeredEnmCoolDown(player)
     for _, v in pairs(enmOptionToEnablementCriteria) do

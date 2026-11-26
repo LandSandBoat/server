@@ -13,11 +13,15 @@ local content = Battlefield:new({
     maxPlayers       = 6,
     levelCap         = 60,
     timeLimit        = utils.minutes(15),
+    delayToExit      = 0,
     index            = 4,
     entryNpc         = '_0d0',
     exitNpcs         = { '_0d1', '_0d2', '_0d3' },
     requiredKeyItems = { xi.keyItem.SHAFT_GATE_OPERATING_DIAL, message = mineshaftID.text.SNAPS_IN_TWO, },
-    grantXP          = 2000,
+
+    grantXP            = 2000,
+    recommendedPlayers = 3,
+
     armouryCrates    =
     {
         mineshaftID.mob.HUME_AUTOMATON - 1,
@@ -116,7 +120,7 @@ local earringTable =
     [4] = { xi.item.ZEDOMAS_EARRING,     xi.item.GAYANJS_EARRING    }, -- Galka
 }
 
-local function getLootPool(battlefield)
+content.crateLoot = function(battlefield)
     -- Get earrings based on race.
     local key      = raceOffsets[battlefield:getLocalVar('initiatorRace')]
     local earring1 = earringTable[key][1]
@@ -140,19 +144,7 @@ local function getLootPool(battlefield)
         },
     }
 
-    return lootTable or content.loot
-end
-
-function content:handleOpenArmouryCrate(player, npc)
-    npcUtil.openCrate(npc, function()
-        local battlefield = player:getBattlefield()
-        local lootPool    = getLootPool(battlefield)
-
-        self:handleLootRolls(battlefield, lootPool, npc, player:getMod(xi.mod.MOGHANCEMENT_GIL_BONUS_P))
-        battlefield:setStatus(xi.battlefield.status.WON)
-
-        return true
-    end)
+    return lootTable
 end
 
 return content:register()

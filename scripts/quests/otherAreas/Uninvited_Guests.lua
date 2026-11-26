@@ -140,6 +140,7 @@ local giveReward = function(player)
     end
 
     if quest:complete(player) then
+        player:delCurrentQuest(quest.areaId, quest.questId)
         quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
         player:setCharVar(var.QUEST_REWARD, 0)
     end
@@ -148,6 +149,124 @@ end
 quest.reward =
 {
     title = xi.title.MONARCH_LINN_PATROL_GUARD,
+}
+
+local justinius =
+{
+    ['Justinius'] =
+    {
+        onTrigger = function(player, npc)
+            local questProgress        = quest:getVar(player, var.PROGRESS)
+            local conquestWaitFinished = quest:getVar(player, var.CONQUEST_WAIT) < NextConquestTally()
+
+            if questProgress == phase.WAITING_IN_VICTORY then
+                local completed = player:hasCompletedQuest(quest.areaId, quest.questId)
+
+                -- Recover an accepted patrol whose progress variable is missing.
+                if
+                    not completed and
+                    player:hasKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
+                then
+                    quest:setVar(player, var.PROGRESS, phase.GO_TO_MONARCH_LINN)
+                    return quest:event(571)
+                elseif not conquestWaitFinished then
+                    return
+                elseif completed then
+                    return quest:progressEvent(573)
+                end
+
+                return quest:progressEvent(570)
+            end
+
+            -- Player tried the battle and either lost or warped out.
+            if
+                questProgress == phase.GO_TO_MONARCH_LINN and
+                not player:hasKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
+            then
+                questProgress = phase.RETURNING_IN_DEFEAT
+                quest:setVar(player, var.PROGRESS, questProgress)
+            end
+
+            -- Go to Monarch Linn.
+            if questProgress == phase.GO_TO_MONARCH_LINN then
+                return quest:event(571)
+
+            -- Victory. Give reward.
+            elseif questProgress == phase.RETURNING_IN_VICTORY then
+                return quest:progressEvent(572)
+
+            -- Reissue key item after failure. Player has waited for conquest tally.
+            elseif
+                questProgress == phase.WAITING_IN_DEFEAT and
+                conquestWaitFinished
+            then
+                return quest:progressEvent(574)
+
+            -- Report the defeat and start the wait.
+            elseif questProgress == phase.RETURNING_IN_DEFEAT then
+                return quest:progressEvent(575)
+
+            -- Remind the player to wait for the next tally.
+            elseif questProgress == phase.WAITING_IN_DEFEAT then
+                return quest:event(575)
+            end
+        end,
+    },
+
+    onEventFinish =
+    {
+        [570] = function(player, csid, option, npc)
+            if
+                option == 1 and
+                player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED and
+                quest:getVar(player, var.PROGRESS) == phase.WAITING_IN_VICTORY and
+                quest:getVar(player, var.CONQUEST_WAIT) < NextConquestTally() and
+                not player:hasKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
+            then
+                startQuest(player)
+            end
+        end,
+
+        -- Victory; Wait gets set with Reward.
+        [572] = function(player, csid, option, npc)
+            if
+                option == 0 and
+                quest:getVar(player, var.PROGRESS) == phase.RETURNING_IN_VICTORY
+            then
+                giveReward(player)
+            end
+        end,
+
+        -- Repeat quest
+        [573] = function(player, csid, option, npc)
+            if
+                option == 1 and
+                player:hasCompletedQuest(quest.areaId, quest.questId) and
+                quest:getVar(player, var.PROGRESS) == phase.WAITING_IN_VICTORY and
+                quest:getVar(player, var.CONQUEST_WAIT) < NextConquestTally()
+            then
+                startQuest(player)
+            end
+        end,
+
+        -- Repeat quest after failure (and waiting until next conquest).
+        [574] = function(player, csid, option, npc)
+            if
+                quest:getVar(player, var.PROGRESS) == phase.WAITING_IN_DEFEAT and
+                quest:getVar(player, var.CONQUEST_WAIT) < NextConquestTally()
+            then
+                startQuest(player)
+            end
+        end,
+
+        -- Player has failed and must wait until conquest to retry.
+        [575] = function(player, csid, option, npc)
+            if quest:getVar(player, var.PROGRESS) == phase.RETURNING_IN_DEFEAT then
+                quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
+                quest:setVar(player, var.PROGRESS, phase.WAITING_IN_DEFEAT)
+            end
+        end,
+    },
 }
 
 quest.sections =
@@ -174,101 +293,18 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return (status == xi.questStatus.QUEST_ACCEPTED) or (status == xi.questStatus.QUEST_COMPLETED)
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
-        [xi.zone.MONARCH_LINN] =
-        {
-            -- Battlefield Win
-            onEventFinish =
-            {
-                [32001] = function(player, csid, option, npc)
-                    quest:setVar(player, var.PROGRESS, phase.RETURNING_IN_VICTORY)
-                end,
-            },
-        },
+        [xi.zone.TAVNAZIAN_SAFEHOLD] = justinius,
+    },
 
-        [xi.zone.TAVNAZIAN_SAFEHOLD] =
-        {
-            ['Justinius'] =
-            {
-                onTrigger = function(player, npc)
-                    local questProgress        = quest:getVar(player, var.PROGRESS)
-                    local conquestWaitFinished = quest:getVar(player, var.CONQUEST_WAIT) < NextConquestTally()
-                    local rewardID             = player:getCharVar(var.QUEST_REWARD)
+    {
+        check = function(player, status, vars)
+            return status == xi.questStatus.QUEST_COMPLETED
+        end,
 
-                    -- Player tried the battle and either lost or warped out.
-                    if
-                        questProgress == 1 and
-                        not player:hasKeyItem(xi.keyItem.MONARCH_LINN_PATROL_PERMIT)
-                    then
-                        questProgress = phase.RETURNING_IN_DEFEAT
-                        quest:setVar(player, var.PROGRESS, questProgress)
-                    end
-
-                    -- Go to Monarch Linn.
-                    if questProgress == phase.GO_TO_MONARCH_LINN then
-                        return quest:event(571)
-
-                    -- Victory. Give reward.
-                    elseif
-                        questProgress == phase.RETURNING_IN_VICTORY or
-                        rewardID > 0
-                    then
-                        return quest:progressEvent(572)
-
-                    -- Reissue key item after victory. Player has waited for conquest tally.
-                    elseif
-                        questProgress == phase.WAITING_IN_VICTORY and
-                        conquestWaitFinished
-                    then
-                        return quest:progressEvent(573)
-
-                    -- Reissue key item after failure. Player has waited for conquest tally.
-                    elseif
-                        questProgress == phase.WAITING_IN_DEFEAT and
-                        conquestWaitFinished
-                    then
-                        return quest:progressEvent(574)
-
-                    -- Failure. Player must wait until next conquest tally.
-                    elseif
-                        questProgress == phase.RETURNING_IN_DEFEAT or
-                        questProgress == phase.WAITING_IN_DEFEAT
-                    then
-                        return quest:progressEvent(575)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                -- Victory; Wait gets set with Reward.
-                [572] = function(player, csid, option, npc)
-                    giveReward(player)
-                end,
-
-                -- Repeat quest
-                [573] = function(player, csid, option, npc)
-                    if option == 1 then
-                        startQuest(player)
-                    end
-                end,
-
-                -- Repeat quest after failure (and waiting until next conquest).
-                [574] = function(player, csid, option, npc)
-                    startQuest(player)
-                end,
-
-                -- Player has failed and must wait until conquest to retry.
-                [575] = function(player, csid, option, npc)
-                    if quest:getVar(player, var.PROGRESS) == phase.RETURNING_IN_DEFEAT then
-                        quest:setVar(player, var.CONQUEST_WAIT, NextConquestTally())
-                        quest:setVar(player, var.PROGRESS, phase.WAITING_IN_DEFEAT)
-                    end
-                end,
-            },
-        },
+        [xi.zone.TAVNAZIAN_SAFEHOLD] = justinius,
     },
 }
 

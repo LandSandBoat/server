@@ -77,7 +77,7 @@ auto CLuaBattlefield::getRemainingTime() -> uint32
 
 auto CLuaBattlefield::getWipeTime() -> uint32
 {
-    return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetWipeTime() - timer::start_time));
+    return static_cast<uint32>(timer::count_seconds(m_PLuaBattlefield->GetWipeTime()));
 }
 
 auto CLuaBattlefield::getMaxParticipants() -> uint32
@@ -234,7 +234,7 @@ void CLuaBattlefield::setTimeLimit(uint32 seconds)
 
 void CLuaBattlefield::setWipeTime(uint32 seconds)
 {
-    m_PLuaBattlefield->SetWipeTime(timer::start_time + std::chrono::seconds(seconds));
+    m_PLuaBattlefield->SetWipeTime(std::chrono::seconds(seconds));
 }
 
 void CLuaBattlefield::setRecord(const std::string& name, uint32 seconds)
@@ -242,9 +242,9 @@ void CLuaBattlefield::setRecord(const std::string& name, uint32 seconds)
     m_PLuaBattlefield->SetRecord(name, std::chrono::seconds(seconds), m_PLuaBattlefield->GetPlayerCount());
 }
 
-void CLuaBattlefield::setStatus(uint8 status)
+auto CLuaBattlefield::setStatus(uint8 status) -> bool
 {
-    m_PLuaBattlefield->SetStatus(status);
+    return m_PLuaBattlefield->SetStatus(status);
 }
 
 auto CLuaBattlefield::insertEntity(uint16 targid, bool ally, bool inBattlefield) -> CBaseEntity*
@@ -271,14 +271,18 @@ auto CLuaBattlefield::cleanup(bool cleanup) -> bool
 
 void CLuaBattlefield::win()
 {
-    m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_WON));
-    m_PLuaBattlefield->CanCleanup(true);
+    if (m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_WON)))
+    {
+        m_PLuaBattlefield->CanCleanup(true);
+    }
 }
 
 void CLuaBattlefield::lose()
 {
-    m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_LOST));
-    m_PLuaBattlefield->CanCleanup(true);
+    if (m_PLuaBattlefield->SetStatus(static_cast<uint8>(BATTLEFIELD_STATUS_LOST)))
+    {
+        m_PLuaBattlefield->CanCleanup(true);
+    }
 }
 
 void CLuaBattlefield::addGroups(const sol::table& groups, bool hasMultipleArenas)

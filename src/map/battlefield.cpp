@@ -140,7 +140,7 @@ auto CBattlefield::GetTimeLimit() const -> timer::duration
     return m_TimeLimit;
 }
 
-auto CBattlefield::GetWipeTime() const -> timer::time_point
+auto CBattlefield::GetWipeTime() const -> timer::duration
 {
     return m_WipeTime;
 }
@@ -210,7 +210,7 @@ void CBattlefield::SetTimeLimit(timer::duration time)
     }
 }
 
-void CBattlefield::SetWipeTime(timer::time_point time)
+void CBattlefield::SetWipeTime(timer::duration time)
 {
     m_WipeTime = time;
 }
@@ -227,10 +227,16 @@ void CBattlefield::SetRecord(const std::string& name, timer::duration time, size
     m_Record.partySize = partySize;
 }
 
-void CBattlefield::SetStatus(uint8 status)
+auto CBattlefield::SetStatus(uint8 status) -> bool
 {
+    if (m_Cleanup || m_Status >= BATTLEFIELD_STATUS_WON)
+    {
+        return false;
+    }
+
     m_Status = status;
     luautils::OnBattlefieldStatusChange(this);
+    return true;
 }
 
 void CBattlefield::SetRuleMask(uint16 rulemask)

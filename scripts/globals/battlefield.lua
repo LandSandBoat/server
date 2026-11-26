@@ -405,7 +405,7 @@ end
 --  - exitNpcs: The names of the NPC used for exiting (optional)
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
---  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
+--  - canLoseExp: Determines if a character loses EXP on death. Defaults to true outside ENMs. (optional)
 --  - cleanupDebuffs: Removes negative status effects from players upon victory. Defaults to false. (optional)
 --  - showTimer: Show the time remaining in the battlefield in the UI for the player. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
@@ -416,6 +416,11 @@ end
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
 --  - grantXPLockout: If true, players can only receive the grantXP once per day, resetting at JST midnight. (optional)
+--  - lootFromOpener: Add crate items to the opener's treasure pool. Defaults to the first battlefield player's pool. (optional)
+--  - recommendedPlayers: Enables ENM rules. Each eligible player receives the full grantXP at the crate up to this party size. (optional)
+--           ENM death and EXP reward rules: https://www.playonline.com/updateus/050224hu5ol2.html
+--           Recommended sizes and the cut for exceeding them: https://www.playonline.com/update/050421er1gb1.html
+--           Base EXP by ENM: https://wiki.ffo.jp/html/958.html
 --  - lossEventParams: Parameters given to the loss event (32002). Defaults to none. (optional)
 ---@diagnostic disable-next-line: duplicate-set-field
 function Battlefield:new(data)
@@ -442,15 +447,18 @@ function Battlefield:new(data)
         obj.exitNpcs = { data.exitNpc }
     end
 
-    obj.title            = data.title
-    obj.grantXP          = data.grantXP
-    obj.grantXPLockout   = data.grantXPLockout
+    obj.title              = data.title
+    obj.grantXP            = data.grantXP
+    obj.recommendedPlayers = data.recommendedPlayers
+    obj.grantXPLockout     = data.grantXPLockout
+    obj.lootFromOpener     = data.lootFromOpener or false
+
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.allowTrusts      = data.allowTrusts or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
     obj.isMission        = data.isMission or false
-    obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.canLoseExp       = utils.defaultIfNil(data.canLoseExp, not data.recommendedPlayers)
     obj.cleanupDebuffs   = data.cleanupDebuffs or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
@@ -821,6 +829,32 @@ function Battlefield.redirectEventUpdate(player, csid, option, npc)
     end
 end
 
+-- Clearance and requirements can change while the client has the menu open.
+local function canRegisterFromEntryMenu(content, player, npc)
+    local clearance = player:getStatusEffect(xi.effect.BATTLEFIELD)
+    if clearance then
+        return clearance:getPower() == content.battlefieldId and content:checkRequirements(player, npc, false, nil)
+    end
+
+    if player:getLocalVar('[BCNM]EnterExisting') ~= 0 then
+        return true
+    end
+
+    local trade = nil
+    if #content.tradeItems > 0 then
+        trade = player:getTrade()
+    end
+
+    if
+        player:getGMLevel() > 0 and
+        player:getVisibleGMLevel() >= 3
+    then
+        return true
+    end
+
+    return content:checkRequirements(player, npc, true, trade)
+end
+
 -- The entry event asks for the zone's arenas in order.
 -- Bits 0 to 3 of the option hold the arena the client wants to move into and bits 4 to 8 the menu index.
 -- The client tries the next arena on WAIT (or no reply) then restarts from the first arena on INCREMENT_REQUEST.
@@ -848,6 +882,12 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         not self.allowedAreas[area]
     then
         player:updateEvent(xi.battlefield.returnCode.WAIT)
+        player:setLocalVar('noPosUpdate', 1)
+        return 0
+    end
+
+    if not canRegisterFromEntryMenu(self, player, npc) then
+        player:updateEvent(xi.battlefield.returnCode.REQS_NOT_MET)
         player:setLocalVar('noPosUpdate', 1)
         return 0
     end
@@ -954,7 +994,7 @@ function Battlefield:onEventFinishWin(player, csid, option, npc)
         player:addTitle(self.title)
     end
 
-    if self.grantXP then
+    if self.grantXP and not self.recommendedPlayers then
         if self.grantXPLockout then
             if self:getVar(player, 'XP') > GetSystemTime() then
                 return
@@ -1019,43 +1059,40 @@ function Battlefield:onBattlefieldInitialize(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
-    local status        = battlefield:getStatus()
-    local cutsceneTimer = battlefield:getLocalVar('cutsceneTimer')
-    local isExiting     = status == xi.battlefield.status.LOST or status == xi.battlefield.status.WON
-
-    if isExiting then
-        battlefield:setLocalVar('cutsceneTimer', cutsceneTimer - 1)
-    end
-
-    -- Check that players haven't all died or that their dead time is over.
+    local status  = battlefield:getStatus()
     local players = battlefield:getPlayers()
-    self:handleWipe(battlefield, players)
 
-    local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
+    if status < xi.battlefield.status.WON then
+        self:handleWipe(battlefield, players)
 
-    if not hasTimeRemaining then
-        for _, player in pairs(players) do
-            player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
-        end
+        if not xi.battlefield.SendTimePrompts(battlefield, players) then
+            for _, player in pairs(players) do
+                player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
+            end
 
-        battlefield:setStatus(xi.battlefield.status.LOST)
-        isExiting = true
-    end
-
-    if isExiting then
-        -- Remaining in battlefield for an extended time
-        if cutsceneTimer > 0 then
+            battlefield:setStatus(xi.battlefield.status.LOST)
+            battlefield:cleanup(true)
             return
         end
 
-        if status == xi.battlefield.status.LOST then
-            for _, player in pairs(players) do
-                player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
-            end
-        end
-
-        battlefield:cleanup(true)
+        status = battlefield:getStatus()
     end
+
+    if status == xi.battlefield.status.WON then
+        local cutsceneTimer = battlefield:getLocalVar('cutsceneTimer')
+        if cutsceneTimer > 0 then
+            battlefield:setLocalVar('cutsceneTimer', cutsceneTimer - 1)
+            return
+        end
+    elseif status == xi.battlefield.status.LOST then
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
+        end
+    else
+        return
+    end
+
+    battlefield:cleanup(true)
 end
 
 function Battlefield:onBattlefieldRegister(player, battlefield)
@@ -1086,7 +1123,7 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field
-function Battlefield:battlefieldEntry(player, battlefield)
+function Battlefield:battlefieldEntry(player, battlefield, firstEnmEntry)
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -1200,7 +1237,19 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
         player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
     end
 
-    self:battlefieldEntry(player, battlefield)
+    local firstEnmEntry = false
+    -- Count each entrant once: https://wikiwiki.jp/ffxi/ENM
+    -- Retail treatment of players who leave early has not been verified.
+    if self.recommendedPlayers then
+        local entrantVar = 'enmXPEntrant' .. player:getID()
+        firstEnmEntry = battlefield:getLocalVar(entrantVar) == 0
+        if firstEnmEntry then
+            battlefield:setLocalVar(entrantVar, 1)
+            battlefield:setLocalVar('enmXPEntrants', battlefield:getLocalVar('enmXPEntrants') + 1)
+        end
+    end
+
+    self:battlefieldEntry(player, battlefield, firstEnmEntry)
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -1240,10 +1289,9 @@ end
 
 function Battlefield:handleWipe(battlefield, players)
     local wipeTime = battlefield:getWipeTime()
-    local elapsed  = battlefield:getTimeInside()
 
     -- If party has not yet wiped.
-    if wipeTime <= 0 then
+    if wipeTime == 0 then
         -- Return if any players are still alive
         for _, player in pairs(players) do
             if player:isAlive() then
@@ -1255,7 +1303,7 @@ function Battlefield:handleWipe(battlefield, players)
 
     -- Party has already wiped.
     else
-        if (elapsed - wipeTime) > utils.minutes(3) then
+        if battlefield:getTimeInside() - wipeTime > utils.minutes(3) then
             battlefield:setStatus(xi.battlefield.status.LOST)
         else
             -- Cancel the wipe timer if any players are alive once again
@@ -1316,30 +1364,67 @@ function Battlefield:handleAllMonstersDefeated(battlefield, mob)
 end
 
 function Battlefield:handleOpenArmouryCrate(player, npc)
+    local battlefield = player:getBattlefield()
+    if
+        not battlefield or
+        battlefield:getID() ~= self.battlefieldId or
+        npc:getBattlefield() ~= battlefield or
+        npc:getLocalVar('opened') ~= 0 or
+        not battlefield:setStatus(xi.battlefield.status.WON)
+    then
+        return
+    end
+
+    battlefield:setLocalVar('cutsceneTimer', self.delayToExit)
     npcUtil.openCrate(npc, function()
-        local battlefield = player:getBattlefield()
-        self:handleLootRolls(battlefield, self.loot, npc, player:getMod(xi.mod.MOGHANCEMENT_GIL_BONUS_P))
-        battlefield:setStatus(xi.battlefield.status.WON)
-        battlefield:setLocalVar('cutsceneTimer', self.delayToExit)
+        local players = battlefield:getPlayers()
+        local loot    = self.crateLoot and self.crateLoot(battlefield) or self.loot
+        self:handleLootRolls(battlefield, loot, npc, player:getMod(xi.mod.MOGHANCEMENT_GIL_BONUS_P), player, players)
+
+        if self.grantXP and self.recommendedPlayers then
+            local entrants = math.max(#players, battlefield:getLocalVar('enmXPEntrants'))
+            local amount   = self.grantXP
+            -- Above the recommended size, round down before multiplying: https://wiki.ffo.jp/html/958.html
+            if entrants > self.recommendedPlayers then
+                amount = math.floor(amount / entrants) * self.recommendedPlayers
+            end
+
+            local alliance = {}
+            for _, member in ipairs(player:getAlliance()) do
+                alliance[member:getID()] = true
+            end
+
+            -- Use LSB's usual EXP range. The official ENM rules do not give a distance.
+            for _, member in ipairs(players) do
+                if
+                    alliance[member:getID()] and
+                    member:isAlive() and
+                    member:checkDistance(npc) <= 100
+                then
+                    member:addExp(amount)
+                end
+            end
+        end
 
         return true
     end)
 end
 
-function Battlefield:handleLootRolls(battlefield, lootTable, npc, gilBonusMod)
-    local players = battlefield:getPlayers()
-    local firstPlayer = players[1]
+function Battlefield:handleLootRolls(battlefield, lootTable, npc, gilBonusMod, opener, players)
+    players = players or battlefield:getPlayers()
+    if #players == 0 then
+        return
+    end
 
-    local selectedLoot = utils.selectFromLootGroups(firstPlayer, lootTable)
-    for _, entry in ipairs(selectedLoot) do
+    local lootOwner = self.lootFromOpener and opener or players[1]
+    for _, entry in ipairs(utils.selectFromLootGroups(lootOwner, lootTable)) do
         if entry.itemId ~= xi.item.GIL then
-            firstPlayer:addTreasure(entry.itemId, npc)
+            lootOwner:addTreasure(entry.itemId, npc)
         else
-            local gilBonusPct  = (100 + gilBonusMod) / 100
+            local gilBonusPct  = (100 + (gilBonusMod or 0)) / 100
             local gilPerPlayer = entry.amount * gilBonusPct / #players
-
-            for _, player in ipairs(players) do
-                npcUtil.giveCurrency(player, 'gil', gilPerPlayer, true)
+            for _, member in ipairs(players) do
+                npcUtil.giveCurrency(member, 'gil', gilPerPlayer, true)
             end
         end
     end
@@ -1491,7 +1576,11 @@ function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
     end
 
     -- Only grant mission XP once per JP midnight
-    if self.grantXP and self:getVar(player, 'XP') <= GetSystemTime() then
+    if
+        self.grantXP and
+        not self.recommendedPlayers and
+        self:getVar(player, 'XP') <= GetSystemTime()
+    then
         self:setVar(player, 'XP', JstMidnight())
         player:addExp(self.grantXP)
     end

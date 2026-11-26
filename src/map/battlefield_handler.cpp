@@ -269,6 +269,11 @@ auto CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const Battlefi
     // Registered battlefields are only found through the Battlefield Status Effect that names them
     if (PBattlefield)
     {
+        if (PBattlefield->GetID() != registration.id)
+        {
+            return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
+        }
+
         RemoveOtherRegistrations(PChar, PBattlefield);
 
         // Reset their progress var to 0 and proceed to attempt to enter them into the BCNM

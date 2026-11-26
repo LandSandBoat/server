@@ -126,7 +126,7 @@ function CBattlefield:setRecord(name, seconds)
 end
 
 ---@param status integer
----@return nil
+---@return boolean
 function CBattlefield:setStatus(status)
 end
 

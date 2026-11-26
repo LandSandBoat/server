@@ -3,6 +3,7 @@
 -- Level 40 ENM
 -- !addkeyitem 674
 -----------------------------------
+require('scripts/globals/enm')
 local monarchLinnID = zones[xi.zone.MONARCH_LINN]
 -----------------------------------
 
@@ -16,8 +17,13 @@ local content = Battlefield:new({
     entryNpc         = 'SD_Entrance',
     exitNpcs         = { 'SD_BCNM_Exit_1', 'SD_BCNM_Exit_2', 'SD_BCNM_Exit_3' },
     requiredKeyItems = { xi.keyItem.MONARCH_BEARD, message = monarchLinnID.text.TORN_FROM_YOUR_HANDS },
-    grantXP = 2500,
+    lootFromOpener   = true,
+
+    grantXP            = 2500,
+    recommendedPlayers = 3,
 })
+
+content.battlefieldEntry = xi.enm.startMonarchBeardCooldown
 
 content.groups =
 {

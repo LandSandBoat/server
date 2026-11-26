@@ -17,7 +17,10 @@ local content = Battlefield:new({
     entryNpc         = '_0n0',
     exitNpcs         = { '_0n1', '_0n2', '_0n3' },
     requiredKeyItems = { xi.keyItem.CENSER_OF_ACRIMONY, message = spireOfVahzlID.text.FADES_INTO_NOTHINGNESS },
-    grantXP          = 3000,
+
+    grantXP            = 3000,
+    recommendedPlayers = 6,
+
     armouryCrates    =
     {
         spireOfVahzlID.mob.MEMORY_RECEPTACLE_RED + 9,

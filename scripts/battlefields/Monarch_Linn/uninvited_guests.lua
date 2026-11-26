@@ -4,6 +4,7 @@
 -- !addkeyitem 720
 -- TODO: Get key item usage message.
 -----------------------------------
+require('scripts/globals/interaction/quest')
 local monarchLinnID = zones[xi.zone.MONARCH_LINN]
 -----------------------------------
 
@@ -18,9 +19,21 @@ local content = BattlefieldQuest:new({
     requiredKeyItems = { xi.keyItem.MONARCH_LINN_PATROL_PERMIT },
     questArea        = xi.questLog.OTHER_AREAS,
     quest            = xi.quest.id.otherAreas.UNINVITED_GUESTS,
-    requiredVar      = 'Quest[4][81]Prog',
-    requiredValue    = 1,
 })
+
+local progressVar = Quest.getVarPrefix(content.questArea, content.quest) .. 'Prog'
+
+function content:entryRequirement(player, npc, isRegistrant, trade)
+    return player:getCharVar(progressVar) == 1
+end
+
+function content:onBattlefieldWin(player, battlefield)
+    if player:getCharVar(progressVar) == 1 then
+        player:setCharVar(progressVar, 2)
+    end
+
+    BattlefieldQuest.onBattlefieldWin(self, player, battlefield)
+end
 
 content.groups =
 {
