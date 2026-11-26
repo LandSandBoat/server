@@ -407,7 +407,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             -- Valiance is being used on them, and they have Vallation already up or they have liement
             ability:setMsg(xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
         else
-            ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY)
+            ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY_MEMBER)
             return xi.effect.VALLATION
         end
 

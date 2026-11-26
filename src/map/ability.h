@@ -714,7 +714,7 @@ public:
     auto getRadius() const -> uint8;
     auto getValidTarget() const -> xi::TargetType;
     auto getAddType() const -> uint16;
-    auto getMessage() const -> MsgBasic;
+    auto getMessage() const -> xi::MsgBasic;
     auto getRecastTime() const -> timer::duration;
     auto getRecastId() const -> xi::Recast;
     auto getCE() const -> int32;
@@ -734,7 +734,7 @@ public:
     void setRadius(uint8 radius);
     void setValidTarget(xi::TargetType validTarget);
     void setAddType(uint16 addtype);
-    void setMessage(MsgBasic message);
+    void setMessage(xi::MsgBasic message);
     void setRecastTime(timer::duration recastTime);
     void setRecastId(xi::Recast recastId);
     void setCE(int32 CE);
@@ -758,7 +758,7 @@ private:
     uint8            m_radius{ 0 };
     xi::TargetType   m_validTarget;
     uint16           m_addType;
-    MsgBasic         m_message;
+    xi::MsgBasic     m_message;
     timer::duration  m_recastTime{};
     xi::Recast       m_recastId;
     int32            m_CE;

@@ -23,8 +23,8 @@
 
 #include "common/ipc_structs.h"
 #include "common/settings.h"
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "ipc_client.h"
 #include "lua/luautils.h"
 #include "map_session.h"
@@ -67,7 +67,7 @@ void GP_CLI_COMMAND_CHAT_NAME::process(MapSession* PSession, CCharEntity* PChar)
 {
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CantBeUsedInArea);
         return;
     }
 

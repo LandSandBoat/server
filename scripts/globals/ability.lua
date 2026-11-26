@@ -58,7 +58,7 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         skilltype == xi.attackType.RANGED) and
         xi.combat.physicalHitRate.checkAnticipated(attacker, target)
     then
-        skill:setMsg(xi.msg.basic.ANTICIPATE)
+        skill:setMsg(xi.msg.basic.TARGET_ANTICIPATES)
 
         return 0
     end

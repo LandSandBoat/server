@@ -17,7 +17,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     target:addHP(maxHeal)
     target:wakeUp()
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT)
 
     return maxHeal
 end

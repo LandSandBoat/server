@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     target:addMP(target:getMaxMP() - target:getMP())
     target:addTP(3000 - target:getTP())
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT)
     return hp
 end
 

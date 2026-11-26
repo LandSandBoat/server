@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 
 #include <common/types/hash_map.h>
 
@@ -29,59 +29,59 @@ namespace messageutils
 {
 
 // Maps the main message used by skills for their subtarget variant
-const HashMap<MsgBasic, MsgBasic> aoeVariants = {
-    { MsgBasic::MagicRecoversHP, MsgBasic::TargetRecoversHP },
-    { MsgBasic::MagicTeleport, MsgBasic::TargetTeleport },
-    { MsgBasic::MagicResisted, MsgBasic::MagicResistedTarget },
-    { MsgBasic::MagicGainsEffect, MsgBasic::TargetGainsEffect },
-    { MsgBasic::MagicStatus, MsgBasic::TargetStatus },
-    { MsgBasic::MagicReceivesEffect, MsgBasic::TargetReceivesEffect },
-    { MsgBasic::MagicDamage, MsgBasic::TargetTakesDamage },
-    { MsgBasic::UsesSkillTakesDamage, MsgBasic::TargetTakesDamage },
-    { MsgBasic::UsesSkillGainsEffect, MsgBasic::TargetGainsEffect },
-    { MsgBasic::UsesSkillHPDrained, MsgBasic::TargetHPDrained },
-    { MsgBasic::UsesSkillMisses, MsgBasic::TargetEvades },
-    { MsgBasic::UsesSkillNoEffect, MsgBasic::TargetNoEffect },
-    { MsgBasic::UsesSkillMPDrained, MsgBasic::TargetMPDrained },
-    { MsgBasic::UsesSkillStatus, MsgBasic::TargetStatus },
-    { MsgBasic::UsesSkillReceivesEffect, MsgBasic::TargetReceivesEffect },
-    { MsgBasic::UsesSkillEffectDrained, MsgBasic::TargetEffectDrained },
-    { MsgBasic::UsesSkillTPReduced, MsgBasic::TargetTPReduced },
-    { MsgBasic::UsesSkillRecoversMP, MsgBasic::TargetRecoversMP },
-    { MsgBasic::UsesRecoversHP, MsgBasic::TargetRecoversHP2 },
-    { MsgBasic::SkillRecoversHP, MsgBasic::TargetRecoversHPSimple },
-    { MsgBasic::UsesSkillRecoversHPAreaOfEffect, MsgBasic::TargetRecoversHP },
-    { MsgBasic::UsesItemRecoversHPAreaOfEffect, MsgBasic::TargetRecoversHPSimple },
-    { MsgBasic::UsesItemRecoversHPAreaOfEffect2, MsgBasic::TargetRecoversHP2 },
-    { MsgBasic::UsesButMisses, MsgBasic::TargetEvades },
-    { MsgBasic::AbilityMisses, MsgBasic::TargetEvades },
-    { MsgBasic::UsesAbilityDispel, MsgBasic::TargetEffectDisappears },
-    { MsgBasic::UsesJobAbilityTakeDamage, MsgBasic::TargetTakesDamage },
-    { MsgBasic::UsesAbilityFortifiedUndead, MsgBasic::TargetFortifiedUndead },
-    { MsgBasic::UsesAbilityFortifiedArcana, MsgBasic::TargetFortifiedArcana },
-    { MsgBasic::UsesAbilityFortifiedDemons, MsgBasic::TargetFortifiedDemons },
-    { MsgBasic::UsesAbilityFortifiedDragons, MsgBasic::TargetFortifiedDragons },
-    { MsgBasic::UsesAbilityGainsEffect, MsgBasic::TargetGainsEffect },
-    { MsgBasic::UsesAbilityReceivesEffect, MsgBasic::TargetReceivesEffectAbility },
-    { MsgBasic::UsesAbilityNoEffect, MsgBasic::TargetNoEffect },
-    { MsgBasic::UsesAbilityEffect, MsgBasic::ReceivesEffectAbility },
-    { MsgBasic::UsesAbilityRecharge, MsgBasic::TargetAbilitiesRecharged },
-    { MsgBasic::UsesAbilityRechargeTP, MsgBasic::TargetRechargedTP },
-    { MsgBasic::UsesAbilityRechargeMP, MsgBasic::TargetRechargedMP },
-    { MsgBasic::VallationGain, MsgBasic::ValianceGainPartyMember },
-    { MsgBasic::RollMain, MsgBasic::ReceivesEffectAbility },
-    { MsgBasic::DoubleUp, MsgBasic::ReceivesEffectAbility },
-    { MsgBasic::RollMainFail, MsgBasic::RollSubFail },
-    { MsgBasic::DoubleUpFail, MsgBasic::RollSubFail },
-    { MsgBasic::DoubleUpBust, MsgBasic::DoubleUpBustSub },
+const HashMap<xi::MsgBasic, xi::MsgBasic> aoeVariants = {
+    { xi::MsgBasic::MagicRecoversHp, xi::MsgBasic::TargetRecoversHp },
+    { xi::MsgBasic::MagicTeleport, xi::MsgBasic::TargetTeleport },
+    { xi::MsgBasic::MagicResist, xi::MsgBasic::MagicResistedTarget },
+    { xi::MsgBasic::MagicGainEffect, xi::MsgBasic::JaGainEffect },
+    { xi::MsgBasic::MagicEnfeebIs, xi::MsgBasic::TargetStatus },
+    { xi::MsgBasic::MagicEnfeeb, xi::MsgBasic::TargetReceivesEffect },
+    { xi::MsgBasic::MagicDmg, xi::MsgBasic::TargetTakesDamage },
+    { xi::MsgBasic::Damage, xi::MsgBasic::TargetTakesDamage },
+    { xi::MsgBasic::SkillGainEffect, xi::MsgBasic::JaGainEffect },
+    { xi::MsgBasic::UsesSkillHpDrained, xi::MsgBasic::TargetHpDrained },
+    { xi::MsgBasic::SkillMiss, xi::MsgBasic::TargetEvades },
+    { xi::MsgBasic::SkillNoEffect, xi::MsgBasic::NoEffect },
+    { xi::MsgBasic::SkillDrainMp, xi::MsgBasic::TargetMpDrained },
+    { xi::MsgBasic::SkillEnfeebIs, xi::MsgBasic::TargetStatus },
+    { xi::MsgBasic::SkillEnfeeb, xi::MsgBasic::TargetReceivesEffect },
+    { xi::MsgBasic::EffectDrained, xi::MsgBasic::TargetEffectDrained },
+    { xi::MsgBasic::TpReduced, xi::MsgBasic::TargetTpReduced },
+    { xi::MsgBasic::SkillRecoversMp, xi::MsgBasic::TargetRecoversMp },
+    { xi::MsgBasic::JaRecoversHp, xi::MsgBasic::SelfHealSecondary },
+    { xi::MsgBasic::SkillRecoversHp, xi::MsgBasic::RecoversHp },
+    { xi::MsgBasic::UsesSkillRecoversHpAreaOfEffect, xi::MsgBasic::TargetRecoversHp },
+    { xi::MsgBasic::UsesItemRecoversHpAreaOfEffect, xi::MsgBasic::RecoversHp },
+    { xi::MsgBasic::JaRecoversHp2, xi::MsgBasic::SelfHealSecondary },
+    { xi::MsgBasic::JaMiss2, xi::MsgBasic::TargetEvades },
+    { xi::MsgBasic::JaMiss, xi::MsgBasic::TargetEvades },
+    { xi::MsgBasic::ItemEffectDisappears, xi::MsgBasic::TargetEffectDisappears },
+    { xi::MsgBasic::UsesJaTakeDamage, xi::MsgBasic::TargetTakesDamage },
+    { xi::MsgBasic::UsesAbilityFortifiedUndead, xi::MsgBasic::TargetFortifiedUndead },
+    { xi::MsgBasic::UsesAbilityFortifiedArcana, xi::MsgBasic::TargetFortifiedArcana },
+    { xi::MsgBasic::UsesAbilityFortifiedDemons, xi::MsgBasic::TargetFortifiedDemons },
+    { xi::MsgBasic::UsesAbilityFortifiedDragons, xi::MsgBasic::TargetFortifiedDragons },
+    { xi::MsgBasic::UsesAbilityGainsEffect, xi::MsgBasic::JaGainEffect },
+    { xi::MsgBasic::JaReceivesEffect2, xi::MsgBasic::JaReceivesEffect },
+    { xi::MsgBasic::JaNoEffect2, xi::MsgBasic::NoEffect },
+    { xi::MsgBasic::UsesAbilityEffect, xi::MsgBasic::ReceivesEffectAbility },
+    { xi::MsgBasic::UsesAbilityRecharge, xi::MsgBasic::TargetAbilitiesRecharged },
+    { xi::MsgBasic::UsesAbilityRechargeTp, xi::MsgBasic::TargetRechargedTp },
+    { xi::MsgBasic::UsesAbilityRechargeMp, xi::MsgBasic::TargetRechargedMp },
+    { xi::MsgBasic::VallationGain, xi::MsgBasic::ValianceGainPartyMember },
+    { xi::MsgBasic::RollMain, xi::MsgBasic::ReceivesEffectAbility },
+    { xi::MsgBasic::DoubleUp, xi::MsgBasic::ReceivesEffectAbility },
+    { xi::MsgBasic::RollMainFail, xi::MsgBasic::RollSubFail },
+    { xi::MsgBasic::DoubleUpFail, xi::MsgBasic::RollSubFail },
+    { xi::MsgBasic::DoubleUpBust, xi::MsgBasic::DoubleUpBustSub },
 };
 
-const HashMap<MsgBasic, MsgBasic> absorbVariants = {
-    { MsgBasic::UsesAbilityTakesDamage, MsgBasic::UsesRecoversHP },
-    { MsgBasic::TargetTakesDamage, MsgBasic::TargetRecoversHP2 },
+const HashMap<xi::MsgBasic, xi::MsgBasic> absorbVariants = {
+    { xi::MsgBasic::JaDamage, xi::MsgBasic::JaRecoversHp },
+    { xi::MsgBasic::TargetTakesDamage, xi::MsgBasic::SelfHealSecondary },
 };
 
-auto GetAoEVariant(MsgBasic primary) -> MsgBasic;
-auto GetAbsorbVariant(MsgBasic primary) -> MsgBasic;
+auto GetAoEVariant(xi::MsgBasic primary) -> xi::MsgBasic;
+auto GetAbsorbVariant(xi::MsgBasic primary) -> xi::MsgBasic;
 
 } // namespace messageutils

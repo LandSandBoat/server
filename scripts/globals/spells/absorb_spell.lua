@@ -232,7 +232,7 @@ xi.spells.absorb.doDrainingSpell = function(caster, target, spell)
 
     if magicBurst > 1 then
         if modAbsorbed == xi.mod.HP then
-            spell:setMsg(xi.msg.basic.MAGIC_BURST_HP_DRAIN)
+            spell:setMsg(xi.msg.basic.MAGIC_BURST_DRAINS_HP)
         else
             spell:setMsg(xi.msg.basic.MAGIC_BURST_MP_DRAIN)
         end

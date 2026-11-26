@@ -1,0 +1,827 @@
+# yaml-language-server: $schema=../schemas/enums/_enum.schema.json
+
+# Ids and comment text come from the client's battle messages (ROM/27/72.DAT).
+# Names that predate this file keep their LSB name.
+# Names for new ids are generated from the message text:
+# - take the text as one line
+# - keep placeholders as words (actor, target, number, spell, ...) and drop possessives
+# - drop the filler words: the, a, an, that, are, of, to, is, you, from, and, have, your
+# - slug it and keep the first 10 words
+# - a name that repeats, or matches an existing name, gets _<id>
+
+meta:
+  cpp:
+    underlying: uint16_t
+  lua:
+    table: xi.msg.basic
+
+values:
+  none:                                                                               0 # dummy
+  hit_dmg:                                                                            1 # <actor> hits <target> for <number> points of damage.
+  magic_dmg:                                                                          2 # <actor> casts <spell>. <target> takes <number> points of damage.
+  starts_casting_self:                                                                3 # <actor> starts casting <spell>.
+  target_out_of_range:                                                                4 # <target> is out of range.
+  unable_to_see_target:                                                               5 # Unable to see <target>.
+  defeats_target:                                                                     6 # <actor> defeats <target>.
+  magic_recovers_hp:                                                                  7 # <actor> casts <spell>. <target> recovers <number> HP.
+  experience_points_gained:                                                           8 # <actor> gains <number> experience points.
+  level_up:                                                                           9 # <actor> attains level <number>!
+  actor_loses_number_experience_points:                                              10 # <actor> loses <number> experience points.
+  level_down:                                                                        11 # <actor> falls to level <number>.
+  already_claimed:                                                                   12 # Cannot attack. Your target is already claimed.
+  debug_message_actor_target_now_invincible:                                         13 # Debug Message: <actor>: <target> is now invincible.
+  counter_abs_by_shadow:                                                             14 # <actor>'s attack is countered by <target>. <number> of <actor>'s shadows absorb the damage and disappear.
+  attack_misses:                                                                     15 # <actor> misses <target>.
+  is_interrupted:                                                                    16 # <actor>'s casting is interrupted.
+  magic_unable_to_cast:                                                              17 # Unable to cast spells at this time.
+  unable_to_cast:                                                                    18 # Unable to cast spells at this time.
+  call_for_help:                                                                     19 # <actor> calls for help!
+  fall_to_ground:                                                                    20 # <target> falls to the ground.
+  no_experience_points_gained:                                                       21 # No experience points gained.
+  cannot_call_for_help:                                                              22 # You cannot call for help at this time.
+  learns_new_spell:                                                                  23 # <actor> learns a new spell!
+  recovers_hp:                                                                       24 # <target> recovers <number> HP.
+  recovers_mp:                                                                       25 # <target> recovers <number> MP.
+  recovers_hp_and_mp:                                                                26 # <target> recovers HP and MP.
+  debug_message_cannot_execute_command_no_btcalc_command_in_atel:                    27 # Debug Message: Cannot execute command. No (BTCALC) command in ATEL source.
+  item_uses:                                                                         28 # <actor> uses <item>.
+  is_paralyzed:                                                                      29 # <actor> is paralyzed.
+  target_anticipates:                                                                30 # <target> anticipates the attack.
+  shadow_absorb:                                                                     31 # <number> of <target>'s shadows absorb the damage and disappear.
+  target_dodges:                                                                     32 # <target> dodges the attack.
+  attack_countered_damage:                                                           33 # <actor>'s attack is countered by <target>. <actor> takes <number> points of damage.
+  not_enough_mp:                                                                     34 # <actor> does not have enough MP to cast <spell>.
+  no_ninja_tools:                                                                    35 # <actor> lacks the ninja tools to cast <spell>.
+  lose_sight:                                                                        36 # You lose sight of <target>.
+  too_far_for_exp:                                                                   37 # You are too far from the battle to gain experience.
+  skill_gain:                                                                        38 # <target>'s <skill> skill rises <tenths> points.
+  need_dual_wield:                                                                   39 # You need the Dual Wield ability to equip the <item> as a sub-weapon.
+  cannot_in_this_area:                                                               40 # You cannot use <spell> in this area.
+  actor_status_ailment_check_number_cannot_rest_at_this_time:                        41 # <actor>: Status ailment check (<number>Cannot rest at this time.
+  actor_casts_spell_on_target:                                                       42 # <actor> casts <spell> on <target>.
+  readies_ws:                                                                        43 # <actor> readies <weapon_skill>.
+  spikes_effect_dmg:                                                                 44 # <target>'s spikes deal <number> points of damage to <actor>.
+  learns_ability:                                                                    45 # <actor> learns "<weapon_skill>"!
+  debug_message_current_pop_number_number:                                           46 # Debug Message: Current POP number: (<number>)
+  cannot_cast_spell:                                                                 47 # <actor> cannot cast <spell>.
+  magic_cannot_be_cast:                                                              48 # <spell> cannot be cast on <target>.
+  unable_to_cast_spells:                                                             49 # <actor> is unable to cast spells.
+  merit_point_gained:                                                                50 # <actor> earns a merit point! (Total: <number>)
+  out_sight:                                                                         51 # --Out of sight--
+  target_gives_up_chasing_actor_find_path_error:                                     52 # <target> gives up chasing <actor>. ---Find Path Error---
+  skill_level_up:                                                                    53 # <target>'s <skill> skill reaches level <number>.
+  actor_gains_number_besieged_points:                                                54 # <actor> gains <number> Besieged points.
+  item_unable_to_use:                                                                55 # Unable to use item.
+  item_unable_to_use_2:                                                              56 # Unable to use item.
+  job_changed:                                                                       57 # Job changed.
+  invalid_job_number:                                                                58 # Invalid job number.
+  do_not_access_specified_job_yet:                                                   59 # You do not have access to specified job yet.
+  do_not_access_support_jobs_yet:                                                    60 # You do not have access to support jobs yet.
+  cannot_same_job_as_both_main_support_jobs:                                         61 # You cannot have the same job as both main and support jobs.
+  item_fails_to_activate:                                                            62 # The <item> fails to activate.
+  actor_misses_target:                                                               63 # <actor> misses <target>.
+  target_no_longer_status_64:                                                        64 # <target> is no longer <status>.
+  item_no_petras:                                                                    65 # You are not carrying any Petras. You cannot use the <item>.
+  debug_resisted_spell:                                                              66 # Debug: Resisted spell!
+  attack_crit:                                                                       67 # <actor> scores a critical hit! <target> takes <number> points of damage.
+  debug_casting_interrupted:                                                         68 # Debug: Casting interrupted!
+  target_blocks_actor_attack_with_his_her_shield:                                    69 # <target> blocks <actor>'s attack with his/her shield.
+  target_parries:                                                                    70 # <target> parries <actor>'s attack with his/her weapon.
+  cannot_perform:                                                                    71 # <actor> cannot perform that action.
+  cannot_perform_targ:                                                               72 # That action cannot be performed on <target>.
+  debug_target_status_now_status:                                                    73 # Debug: <target>'s status is now <status>.
+  debug_target_recovers_status:                                                      74 # Debug: <target> recovers from <status>.
+  magic_no_effect:                                                                   75 # <actor>'s <spell> has no effect on <target>.
+  no_target_in_area_of_effect:                                                       76 # No valid target within area of effect.
+  uses_sange_takes_damage:                                                           77 # <actor> uses Sange. <target> takes <number> points of damage.
+  too_far_away:                                                                      78 # <target> is too far away.
+  debug_double_attack_proc:                                                          79 # Debug: <target> uses Double Attack(<number>).
+  debug_triple_attack_proc:                                                          80 # Debug: <target> uses Triple Attack(<number>).
+  debug_battle_debug_no_number_used_on_target:                                       81 # Debug: Battle Debug No. (<number>) used on <target>.
+  actor_casts_spell_target_status:                                                   82 # <actor> casts <spell>. <target> is <status>!
+  magic_remove_effect:                                                               83 # <actor> casts <spell>. <actor> successfully removes <target>'s <status>.
+  is_paralyzed_2:                                                                    84 # <actor> is paralyzed.
+  magic_resist:                                                                      85 # <actor> casts <spell>. <target> resists the spell.
+  actor_casts_spell_but_target_outside_area_effect:                                  86 # <actor> casts <spell>, but <target> is outside the area of effect.
+  unable_to_use_ja:                                                                  87 # Unable to use job ability.
+  unable_to_use_ja2:                                                                 88 # Unable to use job ability.
+  unable_to_use_weaponskill:                                                         89 # Unable to use weapon skill.
+  unable_use_weapon_skill:                                                           90 # Unable to use weapon skill.
+  item_does_not_have:                                                                91 # <actor> does not have any <item>.
+  item_cannot_use_on:                                                                92 # Cannot use the <item> on <target>.
+  magic_teleport:                                                                    93 # <actor> casts <spell>. <target> vanishes.
+  wait_longer:                                                                       94 # You must wait longer to perform that action.
+  cannot_learn_spell_do_not_meet_job_or_level_requirements:                          95 # You cannot learn <spell>. You do not meet the job or level requirements.
+  already_know_spell:                                                                96 # You already know <spell>.
+  player_defeated_by:                                                                97 # <target> was defeated by <actor>.
+  item_you_obtain_from:                                                              98 # You obtain <item> from <target>.
+  actor_target_number_number:                                                        99 # <actor>><target>: <number>, <number>
+  uses_ja:                                                                          100 # <actor> uses <ability>.
+  uses:                                                                             101 # <actor> uses <weapon_skill>.
+  ja_recovers_hp:                                                                   102 # <actor> uses <ability>. <target> recovers <number> HP.
+  skill_recovers_hp:                                                                103 # <actor> uses <weapon_skill>. <target> recovers <number> HP.
+  item_no_use_level:                                                                104 # Unable to use item. You do not meet the level requirement.
+  item_exp_gained:                                                                  105 # <actor> gains <number> experience points.
+  is_intimidated:                                                                   106 # <actor> is intimidated by <target>'s presence.
+  unable_to_access_sj:                                                              107 # <target> is temporarily unable to access support job abilities.
+  familiar_pc:                                                                      108 # <actor> uses <ability>. Pet's powers increase!
+  familiar_mob:                                                                     109 # <actor> uses <weapon_skill>. Pet's powers increase!
+  ja_damage:                                                                        110 # <actor> uses <ability>. <target> takes <number> points of damage.
+  item_no_use_medicated:                                                            111 # You cannot use <item> while medicated.
+  doom_counter:                                                                     112 # <target>'s doom counter is now down to <number>.
+  actor_casts_spell_target_falls_ground:                                            113 # <actor> casts <spell>. <target> falls to the ground.
+  magic_fail:                                                                       114 # <actor> casts <spell> on <target>, but the spell fails to take effect.
+  actor_uses_ability_attacks_enhanced_but_defense_weakens:                          115 # <actor> uses <ability>. Attacks are enhanced but defense weakens.
+  actor_uses_ability_target_attacks_enhanced:                                       116 # <actor> uses <ability>. <target>'s attacks are enhanced.
+  actor_uses_ability_defense_enhanced_but_attacks_weaken:                           117 # <actor> uses <ability>. Defense is enhanced but attacks weaken.
+  actor_uses_ability_accuracy_enhanced_but_evasion_impaired:                        118 # <actor> uses <ability>. Accuracy is enhanced but evasion is impaired.
+  use_ja_on:                                                                        119 # <actor> uses <ability> on <target>.
+  actor_uses_ability_target_accuracy_enhanced:                                      120 # <actor> uses <ability>. <target>'s accuracy is enhanced.
+  actor_uses_ability_target_evasion_enhanced:                                       121 # <actor> uses <ability>. <target>'s evasion is enhanced.
+  actor_uses_ability_actor_recovers_number_hp:                                      122 # <actor> uses <ability>. <actor> recovers <number> HP.
+  ja_remove_effect:                                                                 123 # <actor> uses <ability>. <actor> successfully removes <target>'s <status>.
+  actor_achieves_gate_breach_status:                                                124 # <actor> achieves Gate Breach status!
+  steal_success:                                                                    125 # <actor> uses <ability>. <actor> steals <item> from <target>.
+  chocobo_jig:                                                                      126 # <actor> uses <ability>. <target>'s movement speed increases.
+  ja_enfeeb_is:                                                                     127 # <actor> uses <ability>. <target> is <status>.
+  target_status_cannot_perform_action:                                              128 # <target> is <status> and cannot perform that action.
+  mug_success:                                                                      129 # <actor> uses <ability>. <actor> mugs <gil> from <target>.
+  target_status_for_making_equipment_change:                                        130 # <target> is <status> for making an equipment change.
+  uses_ability_fortified_undead:                                                    131 # <actor> uses <ability>. <target> is fortified against undead.
+  spikes_effect_hp_drain:                                                           132 # <target>'s spikes drain <number> HP from <actor>.
+  actor_uses_ability_actor_steals_number_petras_target:                             133 # <actor> uses <ability>. <actor> steals <number> Petras from <target>.
+  uses_ability_fortified_arcana:                                                    134 # <actor> uses <ability>. <target> is fortified against arcana.
+  actor_uses_weapon_skill_on_target:                                                135 # <actor> uses <weapon_skill> on <target>.
+  charm_success:                                                                    136 # <actor> uses <ability>. <target> is now under <actor>'s control.
+  charm_fail:                                                                       137 # <actor> uses <ability>. <actor> fails to charm <target>.
+  actor_uses_ability_target_seems_friendlier:                                       138 # <actor> uses <ability>. <target> seems friendlier.
+  scavenge_find_nothing:                                                            139 # <actor> uses <ability>, but finds nothing.
+  scavenge_find_item:                                                               140 # <actor> uses <ability>, and finds <item>.
+  actor_uses_ability_target_status_141:                                             141 # <actor> uses <ability>. <target> is <status>.
+  skill_enfeeb_2:                                                                   142 # <actor> uses <weapon_skill>. <target> receives the effect of Accuracy Down and Evasion Down.
+  actor_uses_ability_ranged_attacks_become_more_accurate:                           143 # <actor> uses <ability>. Ranged attacks become more accurate.
+  acc_eva_down:                                                                     144 # <actor> uses <ability>. <target> receives the effect of Accuracy Down and Evasion Down.
+  target_receives_effect_accuracy_down_evasion_down:                                145 # <target> receives the effect of Accuracy Down and Evasion Down.
+  acc_eva_boost:                                                                    146 # <actor> uses <ability>. <target> receives the effect of Accuracy Boost and Evasion Boost.
+  acc_eva_boost_2:                                                                  147 # <target> receives the effect of Accuracy Boost and Evasion Boost.
+  uses_ability_fortified_demons:                                                    148 # <actor> uses <ability>. <target> is fortified against demons.
+  target_fortified_demons:                                                          149 # <target> is fortified against demons.
+  uses_ability_fortified_dragons:                                                   150 # <actor> uses <ability>. <target> is fortified against dragons.
+  target_fortified_dragons:                                                         151 # <target> is fortified against dragons.
+  add_effect_mp_heal:                                                               152 # Additional effect: <actor> recovers <number> MP.
+  steal_fail:                                                                       153 # <actor> uses <ability>. <actor> fails to steal from <target>.
+  targ_out_of_range_2:                                                              154 # <target> is out of range.
+  cannot_on_that_targ:                                                              155 # You cannot perform that action on the specified target.
+  ja_no_effect:                                                                     156 # <actor> uses <ability>. No effect on <target>.
+  uses_barrage_takes_damage:                                                        157 # <actor> uses Barrage. <target> takes <number> points of damage.
+  ja_miss:                                                                          158 # <actor> uses <ability>, but misses.
+  skill_erase:                                                                      159 # <actor> uses <weapon_skill>. <target>'s <status> effect disappears!
+  add_effect_status:                                                                160 # Additional effect: <status>.
+  add_effect_hp_drain:                                                              161 # Additional effect: <number> HP drained from <target>.
+  add_effect_mp_drain:                                                              162 # Additional effect: <number> MP drained from <target>.
+  add_effect_damage:                                                                163 # Additional effect: <number> points of damage.
+  add_effect_status_2:                                                              164 # Additional effect: <status>.
+  add_effect_tp_drain:                                                              165 # Additional effect: <number> TP drained from <target>.
+  add_effect_selfbuff:                                                              166 # Additional effect: <actor> gains the effect of <status>.
+  add_effect_hp_heal:                                                               167 # Additional effect: <actor> recovers <number> HP.
+  add_effect_dispel:                                                                168 # Additional effect: <target>'s <status> effect disappears!
+  add_effect_warp:                                                                  169 # Additional effect: Warp!
+  target_seems_skill_it_seems_high_evasion_defense:                                 170 # <target> seems <skill>. It seems to have high evasion and defense.
+  target_seems_skill_it_seems_high_evasion:                                         171 # <target> seems <skill>. It seems to have high evasion.
+  target_seems_skill_it_seems_high_evasion_but_low_defense:                         172 # <target> seems <skill>. It seems to have high evasion but low defense.
+  target_seems_skill_it_seems_high_defense:                                         173 # <target> seems <skill>. It seems to have high defense.
+  check_default:                                                                    174 # <target> seems <skill>.
+  target_seems_skill_it_seems_low_defense:                                          175 # <target> seems <skill>. It seems to have low defense.
+  target_seems_skill_it_seems_low_evasion_but_high_defense:                         176 # <target> seems <skill>. It seems to have low evasion but high defense.
+  target_seems_skill_it_seems_low_evasion:                                          177 # <target> seems <skill>. It seems to have low evasion.
+  target_seems_skill_it_seems_low_evasion_defense:                                  178 # <target> seems <skill>. It seems to have low evasion and defense.
+  target_hit_eva_number_number:                                                     179 # <target>: hit-eva(<number>) => <number>%
+  str_vit_number_dmg_adj_number:                                                    180 # str-vit(<number>) dmg-adj(<number>)
+  atk_def_number_ofs_adj_number:                                                    181 # atk-def(<number>) ofs-adj%(<number>)
+  target_monno_number_lev_number:                                                   182 # <target>: MonNo(<number>)-Lev(<number>)
+  hit_eva_number_atk_def_number:                                                    183 # HIT-EVA(<number>) ATK-DEF(<number>)
+  actor_alliance_sum_number_lev_number:                                             184 # <actor>:ALLIANCE SUM=<number>/LEV=<number>
+  damage:                                                                           185 # <actor> uses <weapon_skill>. <target> takes <number> points of damage.
+  skill_gain_effect:                                                                186 # <actor> uses <weapon_skill>. <target> gains the effect of <status>.
+  uses_skill_hp_drained:                                                            187 # <actor> uses <weapon_skill>. <number> HP drained from <target>.
+  skill_miss:                                                                       188 # <actor> uses <weapon_skill>, but misses <target>.
+  skill_no_effect:                                                                  189 # <actor> uses <weapon_skill>. No effect on <target>.
+  cannot_use_weaponskill:                                                           190 # <actor> cannot use that weapon ability.
+  cannot_use_any_weaponskill:                                                       191 # <actor> is unable to use weapon skills.
+  not_enough_tp:                                                                    192 # <actor> does not have enough TP.
+  weapon_skill_cannot_be_used_against_target:                                       193 # <weapon_skill> cannot be used against that target.
+  actor_uses_weapon_skill_target_gains_effect_status:                               194 # <actor> uses <weapon_skill>. <target> gains the effect of <status>.
+  target_total_alliance_sum_number_lev_number:                                      195 # <target>: TOTAL ALLIANCE SUM=<number>/LEV=<number>
+  skillchain_target_takes_number_points_damage:                                     196 # Skillchain! <target> takes <number> points of damage.
+  uses_ability_resists_damage:                                                      197 # <actor> uses <weapon_skill>, but <target> resists. <target> takes <number> points of damage.
+  target_too_far_away:                                                              198 # <target> is too far away.
+  requires_shield:                                                                  199 # That action requires a shield.
+  time_left_until_next_use_time:                                                    200 # Time left until next use: (<time>)
+  current_time_time:                                                                201 # Current time: (<time>)
+  time_left:                                                                        202 # Time left: (<time>)
+  is_status:                                                                        203 # <target> is <status>.
+  is_no_longer_status:                                                              204 # <target> is no longer <status>.
+  gains_effect_of_status:                                                           205 # <target> gains the effect of <status>.
+  status_wears_off:                                                                 206 # <target>'s <status> effect wears off.
+  hp_hpmax_number_number:                                                           207 # HP / HPMax:<number>/<number>
+  mp_mpmax_number_number:                                                           208 # MP / MPMax:<number>/<number>
+  tp_number:                                                                        209 # TP:<number>%
+  cannot_charm:                                                                     210 # <actor> cannot charm <target>!
+  very_difficult_charm:                                                             211 # It would be very difficult for <actor> to charm <target>.
+  difficult_to_charm:                                                               212 # It would be difficult for <actor> to charm <target>.
+  might_be_able_charm:                                                              213 # <actor> might be able to charm <target>.
+  should_be_able_charm:                                                             214 # <actor> should be able to charm <target>.
+  requires_a_pet:                                                                   215 # That action requires a pet.
+  no_ranged_weapon:                                                                 216 # You do not have an appropriate ranged weapon equipped.
+  cannot_see:                                                                       217 # You cannot see <target>.
+  move_and_interrupt:                                                               218 # You move and interrupt your aim.
+  cannot_see_target:                                                                219 # You cannot see <target>.
+  move_interrupt_aim:                                                               220 # You move and interrupt your aim.
+  actor_uses_weapon_skill_target_pet_released:                                      221 # <actor> uses <weapon_skill>. <target>'s pet is released.
+  target_isnt_selling_anything:                                                     222 # <target> isn't selling anything.
+  skillchain_number_points_damage:                                                  223 # Skillchain: <number> points of damage.
+  skill_recovers_mp:                                                                224 # <actor> uses <weapon_skill>. <target> recovers <number> MP.
+  skill_drain_mp:                                                                   225 # <actor> uses <weapon_skill>. <number> MP drained from <target>.
+  uses_skill_tp_drained:                                                            226 # <actor> uses <weapon_skill>. <number> TP drained from <target>.
+  magic_drains_hp:                                                                  227 # <actor> casts <spell>. <number> HP drained from <target>.
+  magic_drain_mp:                                                                   228 # <actor> casts <spell>. <number> MP drained from <target>.
+  add_effect_additional_damage:                                                     229 # Additional effect: <target> takes <number> additional points of damage.
+  magic_gain_effect:                                                                230 # <actor> casts <spell>. <target> gains the effect of <status>.
+  disappear_num:                                                                    231 # <actor> uses <weapon_skill>. <number> of <target>'s effects disappear!
+  drawn_in:                                                                         232 # <target> is drawn in!
+  ineligible_attack_target:                                                         233 # You are ineligible to attack that target.
+  auto_targeting:                                                                   234 # Auto-targeting <target>.
+  that_someones_pet:                                                                235 # That is someone's pet.
+  magic_enfeeb_is:                                                                  236 # <actor> casts <spell>. <target> is <status>.
+  magic_enfeeb:                                                                     237 # <actor> casts <spell>. <target> receives the effect of <status>.
+  uses_skill_recovers_hp_area_of_effect:                                            238 # <actor> uses <weapon_skill>. <target> recovers <number> HP.
+  size_number:                                                                      239 # Size: <number>
+  actor_tries_hide_but_spotted_by_target:                                           240 # <actor> tries to hide, but is spotted by <target>.
+  actor_hides:                                                                      241 # <actor> hides!
+  skill_enfeeb_is:                                                                  242 # <actor> uses <weapon_skill>. <target> is <status>.
+  skill_enfeeb:                                                                     243 # <actor> uses <weapon_skill>. <target> receives the effect of <status>.
+  mug_fail:                                                                         244 # <actor> fails to mug <target>.
+  actor_uses_eagle_eye_shot_but_misses_target:                                      245 # <actor> uses Eagle Eye Shot, but misses <target>.
+  is_full:                                                                          246 # <target> is full.
+  cannot_eat:                                                                       247 # <actor> can't eat the <item>.
+  actor_attack_has_no_effect_on_target:                                             248 # <actor>'s attack has no effect on <target>.
+  check_impossible_to_gauge:                                                        249 # <target>'s strength is impossible to gauge!
+  reraise_takes_effect:                                                             250 # Reraise takes effect!
+  about_to_wear_off:                                                                251 # The effect of <status> is about to wear off.
+  magic_burst_damage:                                                               252 # <actor> casts <spell>. Magic Burst! <target> takes <number> points of damage.
+  exp_chain:                                                                        253 # EXP chain #<number>! <actor> gains <number> experience points.
+  current_enmity_number:                                                            254 # Current enmity: <number>
+  debug_success_chance:                                                             255 # DEBUG: <target>><number>% chance of success.
+  gardening_seed_sown:                                                              256 # In this flower pot: Seeds sown: <item>
+  gardening_crystal_none:                                                           257 # Crystal used: none
+  gardening_crystal_used:                                                           258 # Crystal used: <item>
+  first_crystal_used_item_second_crystal_used_item:                                 259 # First crystal used: <item> Second crystal used: <item>
+  first_crystal_used_none_second_crystal_used_item:                                 260 # First crystal used: none Second crystal used: <item>
+  first_crystal_used_item_second_crystal_used_none:                                 261 # First crystal used: <item> Second crystal used: none
+  first_crystal_used_none_second_crystal_used_none:                                 262 # First crystal used: none Second crystal used: none
+  self_heal_secondary:                                                              263 # <target> recovers <number> HP.
+  target_takes_damage:                                                              264 # <target> takes <number> points of damage.
+  magic_burst_target_takes_number_points_damage:                                    265 # Magic Burst! <target> takes <number> points of damage.
+  ja_gain_effect:                                                                   266 # <target> gains the effect of <status>.
+  ja_receives_effect:                                                               267 # <target> receives the effect of <status>.
+  magic_burst_enfeeb:                                                               268 # <actor> casts <spell>. Magic Burst! <target> receives the effect of <status>.
+  magic_burst_target_receives_effect_status:                                        269 # Magic Burst! <target> receives the effect of <status>.
+  target_status_270:                                                                270 # <target> is <status>.
+  magic_burst_enfeeb_is:                                                            271 # <actor> casts <spell>. Magic Burst! <target> is <status>.
+  magic_burst_target_status:                                                        272 # Magic Burst! <target> is <status>.
+  target_teleport:                                                                  273 # <target> vanishes!
+  magic_burst_drains_hp:                                                            274 # <actor> casts <spell>. Magic Burst! <number> HP drained from <target>.
+  magic_burst_mp_drain:                                                             275 # <actor> casts <spell>. Magic Burst! <number> MP drained from <target>.
+  target_recovers_mp:                                                               276 # <target> recovers <number> MP.
+  target_status:                                                                    277 # <target> is <status>.
+  target_receives_effect:                                                           278 # <target> receives the effect of <status>.
+  target_status_279:                                                                279 # <target> is <status>.
+  target_gains_effect_status:                                                       280 # <target> gains the effect of <status>.
+  target_hp_drained:                                                                281 # <number> HP drained from <target>.
+  target_evades:                                                                    282 # <target> evades.
+  no_effect:                                                                        283 # No effect on <target>.
+  magic_resisted_target:                                                            284 # <target> resists the effects of the spell!
+  ja_atk_enhanced:                                                                  285 # <target>'s attacks are enhanced.
+  target_fortified_undead:                                                          286 # <target> is fortified against undead.
+  target_fortified_arcana:                                                          287 # <target> is fortified against arcana.
+  skillchain_light_target_takes_number_points_damage:                               288 # Skillchain: Light. <target> takes <number> points of damage.
+  skillchain_darkness_target_takes_number_points_damage:                            289 # Skillchain: Darkness. <target> takes <number> points of damage.
+  skillchain_gravitation_target_takes_number_points_damage:                         290 # Skillchain: Gravitation. <target> takes <number> points of damage.
+  skillchain_fragmentation_target_takes_number_points_damage:                       291 # Skillchain: Fragmentation. <target> takes <number> points of damage.
+  skillchain_distortion_target_takes_number_points_damage:                          292 # Skillchain: Distortion. <target> takes <number> points of damage.
+  skillchain_fusion_target_takes_number_points_damage:                              293 # Skillchain: Fusion. <target> takes <number> points of damage.
+  skillchain_compression_target_takes_number_points_damage:                         294 # Skillchain: Compression. <target> takes <number> points of damage.
+  skillchain_liquefaction_target_takes_number_points_damage:                        295 # Skillchain: Liquefaction. <target> takes <number> points of damage.
+  skillchain_induration_target_takes_number_points_damage:                          296 # Skillchain: Induration. <target> takes <number> points of damage.
+  skillchain_reverberation_target_takes_number_points_damage:                       297 # Skillchain: Reverberation. <target> takes <number> points of damage.
+  skillchain_transfixion_target_takes_number_points_damage:                         298 # Skillchain: Transfixion. <target> takes <number> points of damage.
+  skillchain_scission_target_takes_number_points_damage:                            299 # Skillchain: Scission. <target> takes <number> points of damage.
+  skillchain_detonation_target_takes_number_points_damage:                          300 # Skillchain: Detonation. <target> takes <number> points of damage.
+  skillchain_impaction_target_takes_number_points_damage:                           301 # Skillchain: Impaction. <target> takes <number> points of damage.
+  skillchain_cosmic_elucidation:                                                    302 # Skillchain: Cosmic Elucidation. <target> takes <number> points of damage.
+  actor_uses_divine_seal:                                                           303 # <actor> uses Divine Seal.
+  actor_uses_elemental_seal:                                                        304 # <actor> uses Elemental Seal.
+  actor_uses_trick_attack:                                                          305 # <actor> uses Trick Attack.
+  uses_item_recovers_hp_area_of_effect:                                             306 # <actor> uses <ability>. <target> recovers <number> HP.
+  needs_2h_weapon:                                                                  307 # That action requires a two-handed weapon.
+  item_no_use_inventory:                                                            308 # Unable to use the <item>. <target>'s inventory is full.
+  magic_casts_on:                                                                   309 # <actor> casts <spell> on <target>.
+  skill_drop:                                                                       310 # <actor>'s <skill> skill drops 0.<number> points!
+  cover_success:                                                                    311 # <actor> covers <target>.
+  cover_failure:                                                                    312 # <actor>'s attempt to cover has no effect.
+  out_of_range_unable_cast:                                                         313 # <target> is out of range. Unable to cast <spell>.
+  level_is_restricted:                                                              314 # <target>'s level is currently restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly.
+  already_has_a_pet:                                                                315 # <actor> already has a pet.
+  cant_be_used_in_area:                                                             316 # That action cannot be used in this area.
+  uses_ja_take_damage:                                                              317 # <actor> uses <ability>. <target> takes <number> points of damage.
+  ja_recovers_hp_2:                                                                 318 # <actor> uses <ability>. <target> recovers <number> HP.
+  uses_ability_gains_effect:                                                        319 # <actor> uses <ability>. <target> gains the effect of <status>.
+  ja_receives_effect_2:                                                             320 # <actor> uses <ability>. <target> receives the effect of <status>.
+  ja_remove_effect_2:                                                               321 # <actor> uses <ability>. <target>'s <status> effect wears off.
+  actor_uses_ability_target_status_effect_wears_off:                                322 # <actor> uses <ability>. <target>'s <status> effect wears off.
+  ja_no_effect_2:                                                                   323 # <actor> uses <ability>. No effect on <target>.
+  ja_miss_2:                                                                        324 # <actor> uses <ability>, but misses <target>.
+  charmed_by_enemy_unable_act:                                                      325 # You are charmed by an enemy and unable to act.
+  readies_skill_2:                                                                  326 # <actor> readies <ability>.
+  magic_starts_casting_target:                                                      327 # <actor> starts casting <spell> on <target>.
+  too_far_away_2:                                                                   328 # <target> is too far away.
+  magic_absorb_str:                                                                 329 # <actor> casts <spell>. <target>'s STR is drained.
+  magic_absorb_dex:                                                                 330 # <actor> casts <spell>. <target>'s DEX is drained.
+  magic_absorb_vit:                                                                 331 # <actor> casts <spell>. <target>'s VIT is drained.
+  magic_absorb_agi:                                                                 332 # <actor> casts <spell>. <target>'s AGI is drained.
+  magic_absorb_int:                                                                 333 # <actor> casts <spell>. <target>'s INT is drained.
+  magic_absorb_mnd:                                                                 334 # <actor> casts <spell>. <target>'s MND is drained.
+  magic_absorb_chr:                                                                 335 # <actor> casts <spell>. <target>'s CHR is drained.
+  no_effect_on_pet:                                                                 336 # No effect on that pet.
+  no_jug_pet_item:                                                                  337 # You do not have the necessary item equipped to call a beast.
+  cannot_summon_avatars_here:                                                       338 # You cannot summon avatars here.
+  your_mount_refuses:                                                               339 # Your mount senses a hostile presence and refuses to come to your side.
+  must_equip_main_weapon_first_use_dual_wield:                                      340 # You must equip your main weapon first to use Dual Wield.
+  magic_erase:                                                                      341 # <actor> casts <spell>. <target>'s <status> effect disappears!
+  actor_casts_spell_target_status_effect_disappears:                                342 # <actor> casts <spell>. <target>'s <status> effect disappears!
+  target_effect_disappears:                                                         343 # <target>'s <status> effect disappears!
+  target_status_effect_disappears_344:                                              344 # <target>'s <status> effect disappears!
+  cant_heal_with_avatar:                                                            345 # You cannot heal while you have an avatar summoned.
+  must_summon_avatar_use_command:                                                   346 # You must summon an avatar to use that command.
+  must_have_food:                                                                   347 # You must have pet food equipped to use that command.
+  cannot_call_wyverns_here:                                                         348 # You cannot call wyverns here.
+  cannot_call_beasts_here:                                                          349 # You cannot call beasts here.
+  target_no_longer_status_350:                                                      350 # <target> is no longer <status>.
+  remedy_removes_target_status_ailments:                                            351 # The remedy removes <target>'s status ailments.
+  ranged_attack_hit:                                                                352 # <actor>'s ranged attack hits <target> for <number> points of damage.
+  ranged_attack_crit:                                                               353 # <actor>'s ranged attack scores a critical hit! <target> takes <number> points of damage.
+  ranged_attack_miss:                                                               354 # <actor>'s ranged attack misses.
+  ranged_attack_no_effect:                                                          355 # <actor>'s ranged attack has no effect on <target>.
+  full_inventory:                                                                   356 # Cannot execute command. Your inventory is full.
+  aoe_regain_hp:                                                                    357 # <target> regains <number> HP.
+  aoe_regain_mp:                                                                    358 # <target> regains <number> MP.
+  narrowly_escape:                                                                  359 # <target> narrowly escapes impending doom.
+  abilities_recharged:                                                              360 # <actor> uses <weapon_skill>. All of <target>'s abilities are recharged.
+  all_abilities_recharged:                                                          361 # All of <target>'s abilities are recharged.
+  tp_reduced:                                                                       362 # <actor> uses <weapon_skill>. <target>'s TP is reduced to <number>.
+  target_tp_reduced:                                                                363 # <target>'s TP is reduced to <number>.
+  status_boost:                                                                     364 # <actor> uses <ability>. All of <target>'s status parameters are boosted.
+  status_boost_2:                                                                   365 # All of <target>'s status parameters are boosted.
+  target_mp_drained:                                                                366 # <number> MP drained from <target>.
+  target_recovers_hp:                                                               367 # <target> recovers <number> HP.
+  actor_earns_merit_point_total_number:                                             368 # <actor> earns a merit point! (Total: <number>)
+  attr_drained:                                                                     369 # <actor> uses <weapon_skill>. <number> of <target>'s attributes are drained.
+  effect_drained:                                                                   370 # <actor> uses <weapon_skill>. <number> status effects are drained from <target>.
+  limit_points_gained:                                                              371 # <actor> gains <number> limit points.
+  limit_chain:                                                                      372 # Limit chain #<number>! <actor> gains <number> limit points.
+  spikes_effect_recover:                                                            373 # <actor> hits <target>. <target> recovers <number> hit points!
+  status_spikes:                                                                    374 # Striking <target>'s armor causes <actor> to become <status>.
+  item_receives_effect:                                                             375 # <actor> uses <item>. <target> receives the effect of <status>.
+  item_obtains_a:                                                                   376 # <actor> uses <item>. <target> obtains <item>.
+  item_obtains:                                                                     377 # <actor> uses <item>. <target> obtains <item>.
+  item_effect_disappears:                                                           378 # <actor> uses <item>. <target>'s <status> effect disappears!
+  ja_magic_burst:                                                                   379 # <actor> uses <ability>. Magic Burst! <target> takes <number> points of damage.
+  merit_increase:                                                                   380 # Your <value> modification has risen to level <number>.
+  merit_decrease:                                                                   381 # Your <value> modification has dropped to level <number>.
+  ranged_attack_absorbs:                                                            382 # <actor>'s ranged attack hits <target>. <target> recovers <number> hit points!
+  spikes_effect_heal:                                                               383 # <target>'s spikes restore <number> HP to <actor>.
+  add_effect_recovers_hp:                                                           384 # Additional effect: <target> recovers <number> HP.
+  skillchain_light_target_recovers_number_hit_points:                               385 # Skillchain: Light. <target> recovers <number> hit points!
+  skillchain_darkness_target_recovers_number_hit_points:                            386 # Skillchain: Darkness. <target> recovers <number> hit points!
+  skillchain_gravitation_target_recovers_number_hit_points:                         387 # Skillchain: Gravitation. <target> recovers <number> hit points!
+  skillchain_fragmentation_target_recovers_number_hit_points:                       388 # Skillchain: Fragmentation. <target> recovers <number> hit points!
+  skillchain_distortion_target_recovers_number_hit_points:                          389 # Skillchain: Distortion. <target> recovers <number> hit points!
+  skillchain_fusion_target_recovers_number_hit_points:                              390 # Skillchain: Fusion. <target> recovers <number> hit points!
+  skillchain_compression_target_recovers_number_hit_points:                         391 # Skillchain: Compression. <target> recovers <number> hit points!
+  skillchain_liquefaction_target_recovers_number_hit_points:                        392 # Skillchain: Liquefaction. <target> recovers <number> hit points!
+  skillchain_induration_target_recovers_number_hit_points:                          393 # Skillchain: Induration. <target> recovers <number> hit points!
+  skillchain_reverberation_target_recovers_number_hit_points:                       394 # Skillchain: Reverberation. <target> recovers <number> hit points!
+  skillchain_transfixion_target_recovers_number_hit_points:                         395 # Skillchain: Transfixion. <target> recovers <number> hit points!
+  skillchain_scission_target_recovers_number_hit_points:                            396 # Skillchain: Scission. <target> recovers <number> hit points!
+  skillchain_detonation_target_recovers_number_hit_points:                          397 # Skillchain: Detonation. <target> recovers <number> hit points!
+  skillchain_impaction_target_recovers_number_hit_points:                           398 # Skillchain: Impaction. <target> recovers <number> hit points!
+  item_petra_vanish:                                                                399 # <actor> uses <item>. All of <target>'s Petras vanish!
+  item_ailments_disappears:                                                         400 # <actor> uses <item>. <number> of <target>'s status ailments disappear!
+  item_effects_disappears:                                                          401 # <actor> uses <item>. <number> of <target>'s effects disappear!
+  actor_uses_weapon_skill_target_magic_defense_enhanced:                            402 # <actor> uses <weapon_skill>. <target>'s magic defense is enhanced.
+  number_target_attributes_drained:                                                 403 # <number> of <target>'s attributes are drained.
+  target_effect_drained:                                                            404 # <number> status effects are drained from <target>.
+  actor_uses_weapon_skill_number_target_effects_disappear:                          405 # <actor> uses <weapon_skill>. <number> of <target>'s effects disappear!
+  actor_uses_weapon_skill_target_falls_ground:                                      406 # <actor> uses <weapon_skill>. <target> falls to the ground.
+  actor_uses_item_target_tp_reduced:                                                407 # <actor> uses <item>. <target>'s TP is reduced.
+  item_no_effect:                                                                   408 # <actor> uses <item>. No effect on <target>.
+  tp_increase:                                                                      409 # <actor> uses <weapon_skill>. <target>'s TP is increased to <number>.
+  item_no_target:                                                                   410 # No target available. Unable to use item.
+  actor_attempts_use_item_but_lacks_required_number_ballista_points:                411 # <actor> attempts to use the <item>, but lacks the required number of Ballista Points. You currently have <number> Ballista Points.
+  actor_uses_item_target_receives_effect_status:                                    412 # <actor> uses <item>. <target> receives the effect of <status>.
+  actor_uses_item_target_takes_number_points_damage:                                413 # <actor> uses <item>. <target> takes <number> points of damage.
+  ja_receives_mab_mdb_2:                                                            414 # <actor> uses <ability>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+  ja_receives_mab_mdb:                                                              415 # <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+  skill_receives_mab_mdb:                                                           416 # <actor> uses <weapon_skill>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+  actor_uses_ability_number_target_attributes_drained:                              417 # <actor> uses <ability>. <number> of <target>'s attributes are drained.
+  provoke_switch:                                                                   418 # <actor> uses <weapon_skill> on <target>. <target>'s target switches to <actor>!
+  learns_spell:                                                                     419 # <target> learns <spell>!
+  roll_main:                                                                        420 # <actor> uses <ability>. The total comes to <number>! <target> receives the effect of <ability>.
+  receives_effect_ability:                                                          421 # <target> receives the effect of <ability>.
+  roll_main_fail:                                                                   422 # <actor> uses <ability>. The total comes to <number>! No effect on <target>.
+  roll_sub_fail:                                                                    423 # No effect on <target>.
+  double_up:                                                                        424 # <actor> uses Double-Up. The total for <ability> increases to <number>! <target> receives the effect of <ability>.
+  double_up_fail:                                                                   425 # <actor> uses Double-Up. The total for <ability> increases to <number>! No effect on <target>.
+  double_up_bust:                                                                   426 # <actor> uses Double-Up. Bust! <target> loses the effect of <ability>.
+  double_up_bust_sub:                                                               427 # <target> loses the effect of <ability>.
+  no_eligible_roll:                                                                 428 # There are no rolls eligible for Double-Up. Unable to use ability.
+  roll_already_active:                                                              429 # The same roll is already active on <actor>.
+  magic_steal:                                                                      430 # <actor> casts <spell>. 1 of <target>'s magic effects is drained.
+  magic_tp_reduce:                                                                  431 # <actor> casts <spell>. <target>'s TP is reduced.
+  actor_casts_spell_target_receives_effect_accuracy_boost_evasion_boost:            432 # <actor> casts <spell>. <target> receives the effect of Accuracy Boost and Evasion Boost.
+  actor_casts_spell_target_receives_effect_magic_attack_boost_magic:                433 # <actor> casts <spell>. <target> receives the effect of Magic Attack Boost and Magic Defense Boost.
+  cannot_customize_activated_automaton:                                             434 # You cannot customize an activated automaton.
+  uses_ability_recharge:                                                            435 # <actor> uses <ability>! <target>'s abilities are recharged.
+  target_abilities_recharged:                                                       436 # <target>'s abilities are recharged.
+  uses_ability_recharge_tp:                                                         437 # <actor> uses <ability>! <target>'s abilities are recharged. <target>'s TP is increased.
+  target_recharged_tp:                                                              438 # <target>'s abilities are recharged. <target>'s TP is increased.
+  uses_ability_recharge_mp:                                                         439 # <actor> uses <ability>! All of <target>'s abilities are recharged. <target> regains MP.
+  target_recharged_mp:                                                              440 # All of <target>'s abilities are recharged. <target> regains MP.
+  uses_ability_effect:                                                              441 # <actor> uses <ability>. <target> receives the effect of <ability>.
+  learns_new_ability:                                                               442 # <actor> learns a new ability!
+  cannot_learn_ability_do_not_meet_job_or_level_requirements:                       443 # You cannot learn <ability>. You do not meet the job or level requirements.
+  already_know_ability:                                                             444 # You already know <ability>.
+  cannot_use_items:                                                                 445 # You cannot use items at this time.
+  cannot_attack_target:                                                             446 # You cannot attack that target.
+  provoked_unable_change_target:                                                    447 # You are provoked and unable to change your target.
+  time_dynamis_extended:                                                            448 # Time allowed in Dynamis has been extended by <number> minutes.
+  time_dynamis_remaining:                                                           449 # ----== WARNING ==---- Time remaining in Dynamis: <number> minutes.
+  watch_number_target_number:                                                       450 # WATCH<number> <target>:<number>
+  ja_recovers_mp:                                                                   451 # <actor> uses <ability>. <target> regains <number> MP.
+  wild_flourish_tp:                                                                 452 # <actor> uses <ability>. <target> regains <number> TP.
+  steal_effect:                                                                     453 # <actor> uses <ability>. <actor> steals the effect of <status> from <target>.
+  magic_absorb_tp:                                                                  454 # <actor> casts <spell>. <number> TP drained from <target>.
+  debug_level_restriction_on_pettype_number_id_number:                              456 # Debug : Level Restriction on. PetType <number>/ID <number>
+  debug_level_restriction_off_pettype_number_id_number:                             457 # Debug : Level restriction off. PetType <number>/ID <number>
+  debug_dif_now_number_rate_number_1000:                                            458 # Debug : Dif - Now > <number> RATE <number>/1000
+  self_destruct_check_skipping_calculation_target_self_destruct_process_md:         459 # Self-destruct check: skipping calculation of <target>'s self-destruct process md_no<number>/cmd_arg<number>
+  exp_check_actor_target_xp_number_lvup_number:                                     460 # EXP Check: <actor> > <target> XP:<number>/LvUp<number>
+  target_str_number_number:                                                         461 # <target>:STR <number>/<number>
+  target_dex_number_number:                                                         462 # <target>:DEX <number>/<number>
+  target_vit_number_number:                                                         463 # <target>:VIT <number>/<number>
+  target_agi_number_number:                                                         464 # <target>:AGI <number>/<number>
+  target_int_number_number:                                                         465 # <target>:INT <number>/<number>
+  target_mnd_number_number:                                                         466 # <target>:MND <number>/<number>
+  target_chr_number_number:                                                         467 # <target>:CHR <number>/<number>
+  wyvern_joblv_number_tasklv_number:                                                468 # Wyvern: JobLv<<number>> TaskLv<<number>>
+  id_master_number_pet_number:                                                      469 # ID: Master<<number>> Pet<<number>>
+  wyvern_routine_type_master_number_pet_number:                                     470 # Wyvern routine type: Master<<number>> Pet<<number>>
+  avatar_type_master_number_pet_number:                                             471 # Avatar type: Master<<number>> Pet<<number>>
+  avatar_mp_master_number_pet_number:                                               472 # Avatar MP: Master<<number>> Pet<<number>>
+  avatar_hp_master_number_pet_number:                                               473 # Avatar HP: Master<<number>> Pet<<number>>
+  avatar_level_master_number_pet_number:                                            474 # Avatar level: Master<<number>> Pet<<number>>
+  avatar_no_master_number_pet_number:                                               475 # Avatar No.: Master<<number>> Pet<<number>>
+  probability_target_dropping_item_number_10000:                                    476 # Probability of <target> dropping <item>: <number>/10000
+  unable_target_target_not_received_level_cap_status:                               477 # Unable to target <target>. You have not received the level cap status.
+  height_differential_between_actor_target_number_mm:                               478 # Height differential between <actor> and <target>: <number>mm.
+  damage_taken:                                                                     479 # Damage taken.
+  number_targets_number_damage_number_480:                                          480 # Number of Targets (<number>) Damage (<number>)
+  overall_number_attacks_number_misses_number:                                      481 # Overall: Number of Attacks (<number>) Misses (<number>)
+  number_targets_number_damage_number_482:                                          482 # Number of Targets (<number>) Damage (<number>)
+  ranged_attack_number_attacks_number_misses_number:                                483 # Ranged Attack: Number of Attacks (<number>) Misses (<number>)
+  number_targets_number_damage_number_484:                                          484 # Number of Targets (<number>) Damage (<number>)
+  ja_number_attacks_number_misses_number:                                           485 # JA: Number of Attacks (<number>) Misses (<number>)
+  number_targets_number_damage_number_486:                                          486 # Number of Targets (<number>) Damage (<number>)
+  weapon_skill_number_attacks_number_misses_number:                                 487 # Weapon Skill: Number of Attacks (<number>) Misses (<number>)
+  number_targets_number_damage_number_488:                                          488 # Number of Targets (<number>) Damage(<number>)
+  spell_number_attacks_number_misses_number:                                        489 # Spell: Number of Attacks (<number>) Misses (<number>)
+  number_targets_number_damage_number_490:                                          490 # Number of Targets (<number>) Damage(<number>)
+  aa_number_attacks_number_misses_number:                                           491 # AA: Number of Attacks (<number>) Misses (<number>)
+  time_number:                                                                      492 # Time: <number>
+  actor_log:                                                                        493 # <actor>'s log
+  hate_actor_target_number_number:                                                  499 # Hate : <actor>><target> <number>/<number>
+  statusget_target_number_number:                                                   501 # StatusGet(<target>:<number>/<number>)
+  statusset_target_number_number:                                                   502 # StatusSet(<target>:<number>/<number>)
+  target_skillchain_element_number_number:                                          503 # <target>: Skillchain Element <number>(<number>)
+  target_number_number:                                                             509 # <target>:< <number>/<number> >
+  debug_target_skill_number:                                                        510 # DEBUG:<target>><skill> = <number>%
+  requires_2_h_for_grip:                                                            512 # You must have a two-handed weapon equipped in the main weapon slot in order to equip a grip.
+  grip_not_compatible:                                                              513 # This grip is not compatible with the two-handed weapon you currently have equipped.
+  item_no_items_equipped:                                                           514 # You do not have the proper items equipped to use the <item>.
+  soultrapper_success:                                                              515 # <actor> has successfully recorded the target's image onto <item>.
+  soultrapper_failed:                                                               516 # <actor> was unable to capture the target's image.
+  item_cannot_use_target:                                                           517 # The <item> cannot be used on that target.
+  item_no_use_sneak:                                                                518 # The <item> cannot be used while under the effect of Invisible or Sneak.
+  actor_uses_ability_target_afflicted_with_lethargic_daze_lv_number:                519 # <actor> uses <ability>. <target> is afflicted with Lethargic Daze (lv.<number>).
+  actor_uses_ability_target_afflicted_with_sluggish_daze_lv_number:                 520 # <actor> uses <ability>. <target> is afflicted with Sluggish Daze (lv.<number>).
+  actor_uses_ability_target_afflicted_with_weakened_daze_lv_number:                 521 # <actor> uses <ability>. <target> is afflicted with Weakened Daze (lv.<number>).
+  violent_flourish_stun:                                                            522 # <actor> uses <ability>. <target> takes <number> points of damage and is stunned.
+  effect_already_active:                                                            523 # The same effect is already active on <actor>.
+  no_finishingmoves:                                                                524 # You have not earned enough finishing moves to perform that action.
+  requires_combat:                                                                  525 # <ability> can only be performed during battle.
+  actor_uses_ability_enmity_stolen_target:                                          526 # <actor> uses <ability>. Enmity is stolen from <target>.
+  actor_uses_ability_ranged_attack_power_speed_increased_melee_attack:              527 # <actor> uses <ability>. Ranged attack power and speed are increased. Melee attack power and speed are reduced.
+  actor_uses_ability_enmity_transferred_actor_pet:                                  528 # <actor> uses <ability>. Enmity is transferred to <actor>'s pet.
+  actor_uses_ability_target_chainbound:                                             529 # <actor> uses <ability>. <target> is chainbound.
+  petrification_counter:                                                            530 # <target>'s petrification counter is now down to <number>.
+  target_no_longer_status_531:                                                      531 # <target> is no longer <status>.
+  spectral_jig:                                                                     532 # <actor> uses <ability>. <target> receives the effect of Sneak and Invisible.
+  magic_absorb_acc:                                                                 533 # <actor> casts <spell>. <target>'s Accuracy is drained.
+  actor_casts_spell_target_attack_drained:                                          534 # <actor> casts <spell>. <target>'s Attack is drained.
+  retaliate_shadow_absorbs:                                                         535 # <target> retaliates. <number> of <actor>'s shadows absorb the damage and disappear.
+  retaliate_damage:                                                                 536 # <target> retaliates. <actor> takes <number> points of damage.
+  target_tp_increased_number:                                                       537 # <target>'s TP is increased to <number>.
+  protective_energy_absorbs_malice_enemy:                                           538 # A protective energy absorbs the malice of your enemy!
+  self_heal_nohp:                                                                   539 # <actor> uses <weapon_skill>. <target> regains HP.
+  level_sync_activated:                                                             540 # Level Sync activated. Your level has been restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly. Experience points will become unavailable for all party members should the Level Sync designee stray too far from the enemy.
+  level_sync_could_not_be_activated_designated_player_below_level:                  541 # Level Sync could not be activated. The designated player is below level 10.
+  level_sync_could_not_be_activated_designated_player_in_different:                 542 # Level Sync could not be activated. The designated player is in a different area.
+  level_sync_could_not_be_activated_one_or_more_party:                              543 # Level Sync could not be activated. One or more party members are currently under the effect of a status which prevents synchronization.
+  level_synchronization_will_be_removed_in_number_seconds:                          544 # Level synchronization will be removed in <number> seconds.
+  level_sync_no_exp:                                                                545 # No experience points gained... The Level Sync designee is either too far from the enemy, or unconscious.
+  status_effect_duration_has_been_extended:                                         546 # Your <status> effect duration has been extended.
+  this_ability_can_only_be_used_on_targets_under_effect:                            547 # This ability can only be used on targets under the effect of a helix.
+  party_member_selected_incapable_receiving_experience_points_as_such_cannot:       548 # The party member you have selected is incapable of receiving experience points, and as such cannot be a Level Sync designee.
+  no_experience_points_gained_level_sync_designee_incapable_receiving_experience:   549 # No experience points gained... The Level Sync designee is incapable of receiving experience points.
+  level_sync_will_be_deactivated_in_number_seconds_one_or:                          550 # Level Sync will be deactivated in <number> seconds. One or more party members have received the effect of a status which prevents synchronization.
+  level_sync_will_be_deactivated_in_number_seconds_party_leader_551:                551 # Level Sync will be deactivated in <number> seconds. The party leader or the Level Sync designee has left the area.
+  level_sync_will_be_deactivated_in_number_seconds_less_than:                       552 # Level Sync will be deactivated in <number> seconds. Less than two party members fulfill the requirements for Level Sync.
+  level_sync_will_be_deactivated_in_number_seconds_party_leader_553:                553 # Level Sync will be deactivated in <number> seconds. The party leader has removed synchronization, or the Level Sync designee has left the party.
+  level_sync_will_be_deactivated_in_number_seconds_level_sync_554:                  554 # Level Sync will be deactivated in <number> seconds. The Level Sync designee has fallen below level 10.
+  level_sync_will_be_deactivated_in_number_seconds_party_member:                    555 # Level Sync will be deactivated in <number> seconds. A party member has undergone a job change.
+  level_sync_will_be_deactivated_in_number_seconds_level_sync_556:                  556 # Level Sync will be deactivated in <number> seconds. The Level Sync designee is incapable of receiving experience points.
+  target_receives_number_pieces_alexandrite:                                        557 # <target> receives <number> pieces of alexandrite.
+  fov_defeated_target:                                                              558 # You defeated a designated target. (Progress: <number>/<number>)
+  fov_completed_regime:                                                             559 # You have successfully completed the training regime.
+  actor_uses_ability_finishing_moves_now_number:                                    560 # <actor> uses <ability>. Finishing moves now <number>.
+  unable_perform_action_already_earned_maximum_number_finishing_moves:              561 # Unable to perform that action. Your have already earned the maximum number of finishing moves.
+  status_increased:                                                                 562 # The status parameters of <target> have increased.
+  actor_destroys_target:                                                            563 # <actor> destroys <target>.
+  target_were_destroyed:                                                            564 # <target> were destroyed.
+  obtains:                                                                          565 # <target> obtains <gil>.
+  fov_obtains_tabs:                                                                 566 # <target> obtains <number> tabs. (Total: <number>)
+  mmm_stowed_away:                                                                  567 # <actor> stowed away <item> in his/her tattered Maze Monger pouch.
+  tattered_maze_monger_pouch_already_contains_item_cannot_hold_another:             568 # Your tattered Maze Monger pouch already contains <item> and cannot hold another.
+  status_prevents:                                                                  569 # Your current status prevents you from using that ability.
+  actor_casts_spell_number_target_status_ailments_disappear:                        570 # <actor> casts <spell>. <number> of <target>'s status ailments disappear!
+  magic_remove_effect_2:                                                            571 # <number> of <target>'s status ailments disappear!
+  magic_absorb_ailment:                                                             572 # <actor> casts <spell>. <actor> absorbs <number> of <target>'s status ailments.
+  actor_or_alliance_member_participating_in_union_ineligible_obtain_treasure:       573 # <actor> or an alliance member is participating in a union. Ineligible to obtain treasure from this enemy.
+  pet_cannot_do_action:                                                             574 # <actor>'s pet is currently unable to perform that action.
+  pet_not_enough_tp:                                                                575 # <actor>'s pet does not have enough TP to perform that action.
+  ranged_attack_squarely:                                                           576 # <actor>'s ranged attack hits <target> squarely for <number> points of damage!
+  ranged_attack_pummels:                                                            577 # <actor>'s ranged attack strikes true, pummeling <target> for <number> points of damage!
+  hunt_objective_fulfilled_please_report_hunt_registry_collect_reward:              578 # Hunt objective fulfilled! Please report to a hunt registry to collect your reward.
+  unable_use_item_party_leaders_or_those_not_in_party:                              579 # Unable to use the <item>. Party leaders or those not in a party cannot use <item>.
+  item_unable_to_use_party_leader:                                                  580 # Unable to use the <item>. The party leader is in either an area beyond warping range or a place you have yet to visit.
+  magic_must_astral_flow:                                                           581 # Unable to cast <spell>. Astral Flow must be in effect to cast this spell.
+  actor_obtains_gil:                                                                582 # <actor> obtains <gil>.
+  trial_number_number_objectives_remain:                                            583 # Trial <number>: <number> objectives remain.
+  magian_trial_complete:                                                            584 # You have completed Trial <number>. Report your success to a Magian Moogle.
+  actor_uses_ability_target_enmity_towards_actor_number:                            585 # <actor> uses <ability>. <target>'s enmity towards <actor> is <number>%.
+  towards_target_number:                                                            586 # Towards <target> is <number>%.
+  target_regains_hp:                                                                587 # <target> regains <number> HP.
+  target_regains_mp:                                                                588 # <target> regains <number> MP.
+  target_been_healed_number_status_ailments:                                        589 # <target> have been healed of <number> status ailments.
+  can_now_perform_weapon_skill:                                                     590 # You can now perform <weapon_skill>.
+  actor_uses_ability_target_afflicted_with_bewildered_daze_lv_number:               591 # <actor> uses <ability>. <target> is afflicted with Bewildered Daze (lv.<number>).
+  perfect_counter_miss:                                                             592 # <target> attempts to counter <actor>'s attack, but misses.
+  despoil_att_down:                                                                 593 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Attack Down.
+  despoil_def_down:                                                                 594 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Defense Down.
+  despoil_matt_down:                                                                595 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Magic Atk. Down.
+  despoil_mdef_down:                                                                596 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Magic Def. Down.
+  despoil_eva_down:                                                                 597 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Evasion Down.
+  despoil_acc_down:                                                                 598 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Accuracy Down.
+  despoil_slow:                                                                     599 # <actor> uses <ability>. <actor> steals <item> from <target>. Additional effect: <target> is afflicted with Slow.
+  eats_finds_item:                                                                  600 # <actor> eats <item>. <actor> finds <item> inside!
+  objective_fulfilled_please_report_dominion_sergeant_collect_reward:               601 # Objective fulfilled! Please report to a Dominion Sergeant to collect your reward.
+  actor_uses_ability_target_receives_effect_ability:                                602 # <actor> uses <ability>. <target> receives the effect of <ability>.
+  treasure_hunter_up:                                                               603 # Additional effect: Treasure Hunter effectiveness against <target> increases to <number>.
+  eats_finds_nothing:                                                               604 # <actor> eats <item>, but finds nothing inside...
+  additional_effect_target_falls_ground:                                            605 # Additional effect: <target> falls to the ground.
+  counter_absorbed_dmg:                                                             606 # <actor>'s absorbs <target>'s counter. <actor> recovers <number> HP.
+  actor_uses_weapon_skill_number_target_status_ailments_disappear:                  607 # <actor> uses <weapon_skill>. <number> of <target>'s status ailments disappear!
+  ja_th_effectiveness:                                                              608 # <actor> uses <ability>. Treasure Hunter effectiveness against <target> increases to <number>.
+  prowess_attained_increased_treasure_casket_discovery:                             609 # Prowess attained: Increased treasure casket discovery.
+  prowess_attained_increased_combat_magic_skill_gain:                               610 # Prowess attained: Increased combat and magic skill gain.
+  prowess_attained_increased_crystal_yield:                                         611 # Prowess attained: Increased crystal yield.
+  prowess_attained_treasure_hunter_bonus:                                           612 # Prowess attained: Treasure Hunter bonus.
+  prowess_attained_increased_attack_speed:                                          613 # Prowess attained: Increased attack speed.
+  prowess_attained_increased_hp_mp:                                                 614 # Prowess attained: Increased HP and MP.
+  prowess_attained_enhanced_accuracy_ranged_accuracy:                               615 # Prowess attained: Enhanced accuracy and ranged accuracy.
+  prowess_attained_enhanced_attack_ranged_attack:                                   616 # Prowess attained: Enhanced attack and ranged attack.
+  prowess_attained_enhanced_magic_accuracy_magic_attack:                            617 # Prowess attained: Enhanced magic accuracy and magic attack.
+  prowess_attained_enhanced_cure_potency:                                           618 # Prowess attained: Enhanced "Cure" potency.
+  prowess_attained_increased_weapon_skill_damage:                                   619 # Prowess attained: Increased weapon skill damage.
+  prowess_attained_killer_effects_bonus:                                            620 # Prowess attained: "Killer" effects bonus.
+  prowess_boosted_increased_treasure_casket_discovery:                              625 # Prowess boosted: Increased treasure casket discovery.
+  prowess_boosted_increased_combat_magic_skill_gain:                                626 # Prowess boosted: Increased combat and magic skill gain.
+  prowess_boosted_increased_crystal_yield:                                          627 # Prowess boosted: Increased crystal yield.
+  prowess_boosted_treasure_hunter_bonus:                                            628 # Prowess boosted: Treasure Hunter bonus.
+  prowess_boosted_increased_attack_speed:                                           629 # Prowess boosted: Increased attack speed.
+  prowess_boosted_increased_hp_mp:                                                  630 # Prowess boosted: Increased HP and MP.
+  prowess_boosted_enhanced_accuracy_ranged_accuracy:                                631 # Prowess boosted: Enhanced accuracy and ranged accuracy.
+  prowess_boosted_enhanced_attack_ranged_attack:                                    632 # Prowess boosted: Enhanced attack and ranged attack.
+  prowess_boosted_enhanced_magic_accuracy_magic_attack:                             633 # Prowess boosted: Enhanced magic accuracy and magic attack.
+  prowess_boosted_enhanced_cure_potency:                                            634 # Prowess boosted: Enhanced "Cure" potency.
+  prowess_boosted_increased_weapon_skill_damage:                                    635 # Prowess boosted: Increased weapon skill damage.
+  prowess_boosted_killer_effects_bonus:                                             636 # Prowess boosted: "Killer" effects bonus.
+  additional_effect_1_target_attributes_drained:                                    641 # Additional effect: 1 of <target>'s attributes is drained.
+  actor_casts_spell_actor_absorbs_number_target_status_benefits:                    642 # <actor> casts <spell>. <actor> absorbs <number> of <target>'s status benefits.
+  fov_regime_begins_anew:                                                           643 # Your current training regime will begin anew!
+  actor_uses_ability_number_target_status_effects_removed:                          644 # <actor> uses <ability>. <number> of <target>'s status effects are removed.
+  actor_uses_ability_target_status_645:                                             645 # <actor> uses <ability>. <target> is <status>.
+  actor_uses_ability_target_falls_ground:                                           646 # <actor> uses <ability>. <target> falls to the ground.
+  actor_casts_ability_target_status_effect_disappears:                              647 # <actor> casts <ability>. <target>'s <status> effect disappears!
+  actor_leads_casting_spell_target_takes_number_points_damage:                      648 # <actor> leads the casting of <spell>. <target> takes <number> points of damage.
+  member_another_party_readying_spell_against_target_cannot_cast_same:              649 # A member of another party is readying <spell> against your target. You cannot cast the same spell at this time.
+  actor_leads_casting_spell_magic_burst_target_takes_number_points:                 650 # <actor> leads the casting of <spell>. Magic Burst! <target> takes <number> points of damage.
+  actor_leads_casting_spell_target_recovers_number_hit_points:                      651 # <actor> leads the casting of <spell>. <target> recovers <number> hit points!
+  additional_effect_target_loses_number_tp:                                         652 # Additional effect: <target> loses <number> TP.
+  actor_casts_spell_target_resists_spell_immunobreak:                               653 # <actor> casts <spell>. <target> resists the spell. Immunobreak!
+  target_resists_spell_immunobreak:                                                 654 # <target> resists the spell. Immunobreak!
+  magic_complete_resist:                                                            655 # <actor> casts <spell>. <target> completely resists the spell.
+  target_completely_resists_spell:                                                  656 # <target> completely resists the spell.
+  actor_uses_ability_all_enmity_transferred_target:                                 657 # <actor> uses <ability>. All enmity is transferred to <target>.
+  actor_uses_ability_but_misses_target:                                             658 # <actor> uses <ability>, but misses <target>.
+  no_effect_on_target:                                                              659 # No effect on <target>.
+  same_effect_luopan:                                                               660 # The same effect is already active on that luopan!
+  luopan_already_placed:                                                            661 # <actor> has already placed a luopan. Unable to use ability.
+  require_luopan:                                                                   662 # This action requires a luopan.
+  luopan_hp_rate_down:                                                              663 # <actor> uses <ability>. The luopan's HP consumption rate has been reduced.
+  luopan_hp_rate_up:                                                                664 # <actor> uses <ability>. The effects of the luopan and its HP consumption rate have increased.
+  has_luopan_no_use:                                                                665 # <actor> has a pet. Unable to use ability.
+  require_rune:                                                                     666 # This action requires the ability Rune Enchantment.
+  swordplay_gain:                                                                   667 # <actor> uses <ability>. Accuracy and evasion are enhanced.
+  vallation_gain:                                                                   668 # <actor> uses <ability>. <target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells.
+  valiance_gain_party_member:                                                       669 # Magic damage of a certain element is reduced for <target>.
+  liement_gain:                                                                     670 # <actor> uses <ability>. <target> can now absorb magic damage of a certain element.
+  pflug_gain:                                                                       671 # <actor> uses <ability>. <target> now has enhanced resistance.
+  gambit_gain:                                                                      672 # <actor> uses <ability>. <target> receives the effect of Gambit, reducing defense against magic of a certain element.
+  actor_obtains_number_corpuscles_mweya_plasm:                                      673 # <actor> obtains <number> corpuscles of mweya plasm.
+  scavenge_find_items:                                                              674 # <actor> uses <ability>, and finds <number> <item>.
+  actor_readies_weapon_skill:                                                       675 # <actor> readies <weapon_skill>.
+  target_movement_speed_increases:                                                  676 # <target>'s movement speed increases.
+  possess_new_monster:                                                              677 # You are now able to possess a new monster!
+  learned_new_instinct:                                                             678 # You have learned a new instinct!
+  feretory_countdown:                                                               679 # <actor> will be returned to the entrance in <number>.
+  newfound_puissance:                                                               680 # A newfound puissance courses through your veins.
+  muscles_ripple_with_immensely_powerful_invigorating_force:                        681 # Your muscles ripple with an immensely powerful and invigorating force.
+  puissance_withers_slightly:                                                       682 # Your puissance withers slightly.
+  claimed_target:                                                                   683 # You have claimed <target>!
+  target_has_been_claimed:                                                          684 # <target> has been claimed!
+  enemy_battling_will_no_longer_be_claimed_in_number:                               685 # The enemy you are battling will no longer be claimed in: <number>.
+  enemy_were_battling_no_longer_claimed:                                            686 # The enemy you were battling is no longer claimed.
+  actor_captured_target_687:                                                        687 # <actor> captured <target>.
+  actor_has_fled:                                                                   688 # <actor> has fled!
+  actor_captured_target_689:                                                        689 # <actor> captured <target>.
+  roe_complete:                                                                     690 # You have completed the following Records of Eminence objective: <table_65>.
+  roe_repeat_or_cancel:                                                             691 # This objective may be repeated, and can be cancelled from the menu.
+  roe_receive_sparks:                                                               692 # You receive <number> sparks of eminence, and now possess a total of <number>.
+  roe_bonus_item:                                                                   693 # As a special bonus for your valiant efforts, you have been awarded <item>!
+  roe_bonus_sparks:                                                                 694 # As a special bonus for your valiant efforts, you have been awarded <number> sparks of eminence!
+  roe_unable_bonus_item:                                                            695 # Unable to receive special bonus. Make room in your inventory and receive your reward from the Records of Eminence menu.
+  roe_yet_to_receive:                                                               696 # You have yet to receive certain special bonuses from objectives you have completed. Make room in your inventory and receive your rewards from the Records of Eminence menu.
+  roe_record:                                                                       697 # Records of Eminence: <table_65>.
+  roe_progress:                                                                     698 # Progress: <number>/<number>.
+  roe_new_objective:                                                                699 # A new objective has been added!
+  trust_no_cast_trust:                                                              700 # You are unable to use Trust magic at this time.
+  theres_no_time_do_now:                                                            701 # There's no time to do that now!
+  roe_start:                                                                        704 # You have undertaken <table_65>.
+  roe_timed:                                                                        705 # You have undertaken the limited-time Records of Eminence challenge <table_65>.
+  roe_obtained_key_item:                                                            706 # You have obtained <table_69> as a special reward!
+  roe_first_time_sparks:                                                            707 # As a first-time bonus, you receive <number> sparks of eminence for a total of <number>!
+  this_place_now_known_as_location_brings_memories_flooding_back:                   708 # This place is now known as a location that brings memories flooding back to <actor>.
+  roe_bonus_item_plural:                                                            709 # As a special bonus for your valiant efforts, you have been awarded the following: <item> x<number>!
+  roe_timed_clear:                                                                  710 # You are cleared to fulfill this objective once again.
+  trust_party_message:                                                              711 # (<actor>) <table_8>
+  checkparam_primary:                                                               712 # Primary Accuracy: <number> / Primary Attack: <number>.
+  checkparam_auxiliary:                                                             713 # Auxiliary Accuracy: <number> / Auxiliary Attack: <number>.
+  checkparam_range:                                                                 714 # Ranged Accuracy: <number> / Ranged Attack: <number>.
+  checkparam_defense:                                                               715 # Evasion: <number> / Defense: <number>.
+  actor_starts_casting_weapon_skill:                                                716 # <actor> starts casting <weapon_skill>.
+  trust_no_call_ae:                                                                 717 # You cannot call forth alter egos here.
+  capacity_points_gained:                                                           718 # <actor> gains <number> capacity points.
+  job_point_gained:                                                                 719 # <actor> earns a job point! (Total: <number>)
+  job_points_increase:                                                              720 # Your modification has risen to level <number>.
+  receive_bonus_number_fishing_guild_points:                                        721 # You receive a bonus of <number> fishing guild points!
+  receive_bonus_number_woodworking_guild_points:                                    722 # You receive a bonus of <number> woodworking guild points!
+  receive_bonus_number_smithing_guild_points:                                       723 # You receive a bonus of <number> smithing guild points!
+  receive_bonus_number_goldsmithing_guild_points:                                   724 # You receive a bonus of <number> goldsmithing guild points!
+  receive_bonus_number_clothcraft_guild_points:                                     725 # You receive a bonus of <number> clothcraft guild points!
+  receive_bonus_number_leathercraft_guild_points:                                   726 # You receive a bonus of <number> leathercraft guild points!
+  receive_bonus_number_bonecraft_guild_points:                                      727 # You receive a bonus of <number> bonecraft guild points!
+  receive_bonus_number_alchemy_guild_points:                                        728 # You receive a bonus of <number> alchemy guild points!
+  receive_bonus_number_cooking_guild_points:                                        729 # You receive a bonus of <number> cooking guild points!
+  actor_uses_ability_target_tp_reduced_number:                                      730 # <actor> uses <ability>. <target>'s TP is reduced to <number>.
+  checkparam_ilvl:                                                                  731 # Average item level: <number>.
+  skillchain_universal_enlightenment_target_takes_number_points_damage:             732 # Skillchain: Universal Enlightenment. <target> takes <number> points of damage.
+  checkparam_name:                                                                  733 # <target>:
+  actor_uses_ability_on_target:                                                     734 # <actor> uses <ability> on <target>.
+  capacity_chain:                                                                   735 # Capacity chain #<number>! <actor> gains <number> capacity points.
+  actor_uses_ability_number_hp_drained_target_736:                                  736 # <actor> uses <ability>. <number> HP drained from <target>.
+  magic_effect_drained:                                                             737 # <actor> uses <ability>. <number> of <target>'s magic effects is drained.
+  actor_uses_ability:                                                               738 # <actor> uses <ability>.
+  receive_magical_effect:                                                           739 # <target> receives <number> magical effects.
+  target_value_value:                                                               740 # <target>:< <value>/<value> >
+  roe_received_accolades:                                                           741 # You receive <number> Unity accolades for a total of <number>!
+  roe_unable:                                                                       742 # You are currently unable to undertake this objective.
+  ja_enmity_decrease:                                                               743 # <actor> uses <ability>. <target>'s enmity decreases.
+  auto_exceeds_capacity:                                                            745 # Your automaton exceeds one or more elemental capacity values and cannot be activated.
+  actor_uses_ability_number_tp_drained_target:                                      746 # <actor> uses <ability>. <number> TP drained from <target>.
+  pet_magic_burst:                                                                  747 # <actor> uses <weapon_skill>. Magic Burst! <target> takes <number> points of damage.
+  actor_uses_weapon_skill_magic_burst_number_hp_drained_target:                     748 # <actor> uses <weapon_skill>. Magic Burst! <number> HP drained from <target>.
+  magic_burst_number_hp_drained_target:                                             749 # Magic Burst! <number> HP drained from <target>.
+  actor_uses_weapon_skill_magic_burst_number_mp_drained_target:                     750 # <actor> uses <weapon_skill>. Magic Burst! <number> MP drained from <target>.
+  magic_burst_number_mp_drained_target:                                             751 # Magic Burst! <number> MP drained from <target>.
+  actor_uses_weapon_skill_magic_burst_number_tp_drained_target:                     752 # <actor> uses <weapon_skill>. Magic Burst! <number> TP drained from <target>.
+  magic_burst_number_tp_drained_target:                                             753 # Magic Burst! <number> TP drained from <target>.
+  actor_uses_weapon_skill_magic_burst_target_status:                                754 # <actor> uses <weapon_skill>. Magic Burst! <target> is <status>.
+  actor_uses_weapon_skill_magic_burst_target_receives_effect_status:                755 # <actor> uses <weapon_skill>. Magic Burst! <target> receives the effect of <status>.
+  target_spikes_cause_target_fall_ground:                                           756 # <target>'s spikes cause <target> to fall to the ground.
+  number_target_effects_disappear:                                                  757 # <number> of <target>'s effects disappear!
+  obtained_key_item:                                                                758 # <actor> uses <item>. Obtained key item: <keyitem>.
+  already_have_key_item:                                                            759 # You already have key item: <keyitem>.
+  only_able_possess_one_item_thus_unable_receive_just_reward:                       760 # You are only able to possess one <item> and thus are unable to receive your just reward. Clear out your inventory and receive the item from the Records of Eminence Menu.
+  were_unable_receive_just_reward_because_need_number_free_spaces:                  761 # You were unable to receive your just reward because you need <number> free spaces in your inventory. Clear out your bags and receive your items from the Records of Eminence Menu.
+  actor_uses_weapon_skill_all_target_status_parameters_boosted:                     762 # <actor> uses <weapon_skill>. All of <target>'s status parameters are boosted.
+  actor_uses_weapon_skill_target_has_grown_noticeably_bored:                        763 # <actor> uses <weapon_skill>. <target> has grown noticeably bored.
+  actor_uses_weapon_skill_target_feels_fever:                                       764 # <actor> uses <weapon_skill>. <target> feels the Fever!
+  use_obtain_escha_silt:                                                            765 # <actor> uses <item>. <target> obtains <number> escha silt.
+  use_obtain_escha_bead:                                                            766 # <actor> uses <item>. <target> obtains <number> escha beads.
+  skillchain_radiance_target_takes_number_points_damage:                            767 # Skillchain: Radiance. <target> takes <number> points of damage.
+  skillchain_umbra_target_takes_number_points_damage:                               768 # Skillchain: Umbra. <target> takes <number> points of damage.
+  skillchain_radiance_target_recovers_number_hit_points:                            769 # Skillchain: Radiance. <target> recovers <number> hit points!
+  skillchain_umbra_target_recovers_number_hit_points:                               770 # Skillchain: Umbra. <target> recovers <number> hit points!
+  congratulations_deeds_valor_will_ring_throughout_ages_providing_inspiration_for:  771 # Congratulations! Your deeds of valor will ring throughout the ages, providing inspiration for generations to come.
+  target_stands_resolute_thanks_power_bonds_tie:                                    772 # <target> stands resolute thanks to the power of the bonds that tie you!
+  mount_required_level:                                                             773 # You are unable to call forth your mount because your main job level is not at least <number>.
+  already_possess_item_unable_receive_just_reward:                                  774 # You already possess that item and are unable to receive your just reward!
+  new_objective_has_been_added_in_contents_content_ambuscade_records:               775 # A new objective has been added in the Contents > Content (Ambuscade) Records of Eminence category!
+  additional_effect_target_chainbound:                                              776 # Additional effect:<target> is chainbound.
+  cannot_mount:                                                                     777 # You cannot mount at this time.
+  actor_uses_weapon_skill_actor_copies_number_magical_effects_target:               778 # <actor> uses <weapon_skill>. <actor> copies <number> magical effects from <target>.
+  actor_uses_weapon_skill_barrier_begins_pulsate_around_target:                     779 # <actor> uses <weapon_skill>. A barrier begins to pulsate around <target>.
+  actor_uses_weapon_skill_actor_takes_aim_at_target:                                780 # <actor> uses <weapon_skill>. <actor> takes aim at <target>!
+  target_retaliates_absorbing_number_tp_actor:                                      781 # <target> retaliates, absorbing <number> TP from <actor>.
+  bonus_condition_for_increasing_craftsmanship_has_changed_table_10:                782 # The bonus condition for increasing the Craftsmanship has changed to <table_10>!
+  craftsmanship_bonus_conditions_disappeared:                                       783 # The Craftsmanship bonus conditions have disappeared!
+  craftsmanship_has_increased_by_number_number:                                     784 # Craftsmanship has increased by <number>.<number>%!
+  craftsmanship_has_increased_by_number_0_number:                                   785 # Craftsmanship has increased by <number>.0<number>%!
+  craftsmanship_has_increased_number:                                               786 # Craftsmanship has increased to <number>%!
+  target_has_had_fun_sucked_out_them:                                               787 # <target> has had the fun sucked out of them!
+  target_no_longer_recalls_what_fun:                                                788 # <target> no longer recalls what fun is...
+  dmgfix_number:                                                                    789 # dmgfix(<number>)
+  item_contains_gil:                                                                790 # The <item> contains <gil>.
+  mote_of_paradise:                                                                 791 # <actor> uses <weapon_skill>. <target> receives <number> motes of paradise.
+  actor_uses_spell_number_target_effects_disappear:                                 792 # <actor> uses <spell>. <number> of <target>'s effects disappear!
+  find_number_item_793:                                                             793 # You find <number> <item>.
+  find_number_item_794:                                                             794 # You find <number> <item>.
+  receive_number_deeds_heroism_for_total_number:                                    795 # You receive <number> deeds of heroism, for a total of <number>!
+  actor_gains_potpourri_for_total_number:                                           796 # <actor> gains potpourri for a total of <number>!
+  actor_attains_level_number:                                                       797 # <actor> attains level <number>!
+  auto_overload_chance:                                                             798 # <actor>'s <ability> overload chance is <number>%.
+  auto_overloaded:                                                                  799 # <actor>'s <ability> overload chance is <number>%. <actor> is overloaded!
+  spirit_bond:                                                                      800 # <status> activates. <target> takes <number> points of damage.
+  cannot_use_item_until_status_effect_expires:                                      801 # You cannot use the <item> until the <status> effect expires.
+  actor_uses_ability_number_hp_drained_target_802:                                  802 # <actor> uses <ability>. <number> HP drained from <target>.
+  actor_uses_ability_magic_burst_number_hp_drained_target:                          803 # <actor> uses <ability>. Magic Burst! <number> HP drained from <target>.
+  actor_uses_ability_magic_burst_target_receives_effect_status:                     804 # <actor> uses <ability>. Magic Burst! <target> receives the effect of <status>.
+  actor_uses_weapon_skill_target_status_effect_disappears:                          805 # <actor> uses <weapon_skill>. <target>'s <status> effect disappears!
+  target_status_effect_disappears_806:                                              806 # <target>'s <status> effect disappears!
+  target_receives_number_job_points:                                                807 # <target> receives <number> job points.
+  target_was_unable_use_because_they_cannot_hold_any_more:                          808 # <target> was unable to use that because they cannot hold any more.
+  exemplar_points_gained:                                                           809 # <actor> gains <number> exemplar points.
+  master_chain:                                                                     810 # Master chain #<number>! <actor> gains <number> exemplar points.
+  master_level_up:                                                                  811 # <actor> attains master level <number>!
+  master_level_info:                                                                812 # Master Level: <number> (<number> experience)
+  master_level_down:                                                                813 # <actor> falls to master level <number>.
+  level_sync_master_level:                                                          814 # Level Sync activated. Your master level has been restricted to <number>. Experience points will become unavailable for all party members should the Level Sync designee stray too far from the enemy.
+  actor_uses_weapon_skill_target_knocked_back_far_into_distance:                    815 # <actor> uses <weapon_skill>. <target> is knocked back far into the distance!
+  actor_uses_weapon_skill_target_will_expire_in_number:                             816 # <actor> uses <weapon_skill>. <target> will expire in <number>.
+  target_will_expire_in_number:                                                     817 # <target> will expire in <number>.
+  actor_uses_weapon_skill_countdown_complete_target_expires:                        818 # <actor> uses <weapon_skill>. Countdown complete. <target> expires.
+  countdown_complete_target_expires:                                                819 # Countdown complete. <target> expires.
+  actor_uses_weapon_skill_target_sacrifices_themselves_protect_bearer_prime:        820 # <actor> uses <weapon_skill>. <target> sacrifices themselves to protect the bearer of the Prime Weapon.
+  target_sacrifices_themselves_protect_bearer_prime_weapon:                         821 # <target> sacrifices themselves to protect the bearer of the Prime Weapon.
+  exemplar_points_gained_item:                                                      822 # <actor> gains <number> exemplar points.
+  actor_gains_number_plaudits:                                                      823 # <actor> gains <number> plaudits.
+  actor_gains_number_moogle_segments:                                               824 # <actor> gains <number> moogle segments.
+  exemplar_points_campaign_bonus:                                                   825 # <actor> gains <number> bonus exemplar points as part of the active campaign. <number> points remaining.
+  actor_uses_item_target_receives_number_deeds:                                     826 # <actor> uses <item>. <target> receives <number> deeds.
+  actor_uses_item_target_receives_number_alter_ego_points:                          827 # <actor> uses <item>. <target> receives <number> alter ego points.
+  alter_ego_upgrade:                                                                828 # <value> attribute increased to <number>.
+  accepted_records_eminence_growth_objective_table_65:                              829 # You have accepted the Records of Eminence growth objective <table_65>.
+  flower_viewing_time:                                                             1021 # Flower-viewing time!
+  actor_uses_weapon_skill_target_ready_for_flower_viewing:                         1022 # <actor> uses <weapon_skill>. <target> is ready for flower viewing!
+  actor_uses_weapon_skill_target_attacks_defenses_enhanced:                        1023 # <actor> uses <weapon_skill>. <target>'s attacks and defenses are enhanced.

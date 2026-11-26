@@ -21,8 +21,8 @@
 
 #include "0x0be_merits.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/c2s/validation.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -74,11 +74,11 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     {
                         case GP_CLI_COMMAND_MERITS_PARAM1::Lower:
                             PChar->PMeritPoints->LowerMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, MsgBasic::MeritDecrease);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, xi::MsgBasic::MeritDecrease);
                             break;
                         case GP_CLI_COMMAND_MERITS_PARAM1::Raise:
                             PChar->PMeritPoints->RaiseMerit(merit);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, MsgBasic::MeritIncrease);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Param2, PMerit->count, xi::MsgBasic::MeritIncrease);
                             break;
                     }
 

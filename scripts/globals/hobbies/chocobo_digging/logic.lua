@@ -189,7 +189,7 @@ local function checkDiggingCooldowns(player)
     local isAllowedZone = diggingZoneList[player:getZoneID()] or false
 
     if not isAllowedZone then
-        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED)
+        player:messageSystem(xi.msg.system.WAIT_LONGER)
 
         return false
     end
@@ -202,7 +202,7 @@ local function checkDiggingCooldowns(player)
     local cooldown     = math.max(zoneCooldown, digCooldown)
 
     if currentTime < cooldown then
-        player:messageSystem(xi.msg.basic.WAIT_LONGER_RED, math.max(cooldown - currentTime, 0), 0) -- Yes, SE sends the cooldown in this packet as of 2026.
+        player:messageSystem(xi.msg.system.WAIT_LONGER, math.max(cooldown - currentTime, 0), 0) -- Yes, SE sends the cooldown in this packet as of 2026.
 
         return false
     end

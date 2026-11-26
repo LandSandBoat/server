@@ -13,7 +13,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
 
     if target:addStatusEffect(xi.effect.CURING_CONDUIT, { power = 15, duration = 180, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
         else
             petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         end

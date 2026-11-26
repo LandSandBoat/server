@@ -30,7 +30,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.shining_ruby.onPetAbility', {
         target:addStatusEffect(xi.effect.SHINING_RUBY, { power = 10, subPower = 390, duration = duration, origin = pet })
 
         if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
         else
             petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         end
@@ -58,7 +58,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.hastega.onPetAbility', {
         -- Note from retail capture: WHM Haste spell and Garuda's Hastega will overwrite eachother.
         if target:addStatusEffect(xi.effect.HASTE, { power = 1494, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -81,7 +81,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.hastega.onPetAbility', {
 
         if target:addStatusEffect(xi.effect.HASTE, { power = 1494, duration = duration, origin = pet, tier = 1 }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -108,7 +108,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.crimson_howl.onPetAbility', {
 
         if target:addStatusEffect(xi.effect.WARCRY, { power = power, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -138,7 +138,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.frost_armor.onPetAbility', {
         -- TODO: Does power ever scale?
         if target:addStatusEffect(xi.effect.ICE_SPIKES, { power = 15, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -185,7 +185,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.glittering_ruby.onPetAbility', {
 
         if target:addStatusEffect(effectId, { power = effectPower, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -244,7 +244,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.lightning_armor.onPetAbility', {
 
         if target:addStatusEffect(xi.effect.SHOCK_SPIKES, { power = 15, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end
@@ -415,7 +415,7 @@ m:addOverrideByEra('xi.actions.abilities.pets.noctoshield.onPetAbility', {
 
         if target:addStatusEffect(xi.effect.PHALANX, { power = 13, duration = duration, origin = pet }) then
             if target:getID() == action:getPrimaryTargetID() then
-                petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+                petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
             else
                 petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
             end

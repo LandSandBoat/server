@@ -87,7 +87,7 @@ describe('Experience scrolls', function()
         for _, packet in ipairs(player.packets:getIncoming()) do
             if packet.type == 0x029 or packet.type == 0x02D then
                 local message = bit.band(packet.data[24] + packet.data[25] * 256, 0x7FFF)
-                assert(message ~= xi.msg.basic.EXP_GAINED and message ~= xi.msg.basic.LIMIT_POINTS_GAINED, 'unexpected separate EXP or LP message')
+                assert(message ~= xi.msg.basic.EXPERIENCE_POINTS_GAINED and message ~= xi.msg.basic.LIMIT_POINTS_GAINED, 'unexpected separate EXP or LP message')
             end
         end
 

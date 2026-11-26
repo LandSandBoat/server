@@ -514,7 +514,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     elseif spellEffect == xi.effect.EMBRAVA then
         -- If Tabula Rasa wears before spell goes off, no Embrava for you!
         if not caster:hasStatusEffect(xi.effect.TABULA_RASA) then
-            spell:setMsg(xi.msg.basic.MAGIC_CANNOT_CAST)
+            spell:setMsg(xi.msg.basic.CANNOT_CAST_SPELL)
             return 0
         end
 

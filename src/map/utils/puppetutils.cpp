@@ -24,9 +24,9 @@
 #include "charutils.h"
 #include "data/enums/automaton_frame.h"
 #include "data/enums/automaton_head.h"
+#include "data/enums/msg_basic.h"
 #include "entities/automaton_entity.h"
 #include "enums/automaton.h"
-#include "enums/msg_basic.h"
 #include "items/item_puppet.h"
 #include "itemutils.h"
 #include "lua/luautils.h"
@@ -630,7 +630,7 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
             }
 
             PChar->RealSkills.skill[static_cast<uint8>(SkillID)] += SkillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), SkillAmount, MsgBasic::SkillGain);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), SkillAmount, xi::MsgBasic::SkillGain);
 
             if ((CurSkill / 10) < (CurSkill + SkillAmount) / 10) // if gone up a level
             {
@@ -648,7 +648,7 @@ void TrySkillUP(CAutomatonEntity* PAutomaton, xi::SkillType SkillID, uint8 lvl)
                 }
 
                 charutils::SendExtendedJobPackets(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), (CurSkill + SkillAmount) / 10, MsgBasic::SkillLevelUp);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PAutomaton, PAutomaton, static_cast<uint8>(SkillID), (CurSkill + SkillAmount) / 10, xi::MsgBasic::SkillLevelUp);
             }
             charutils::SaveCharSkills(PChar, static_cast<uint8>(SkillID));
         }

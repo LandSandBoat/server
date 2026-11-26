@@ -175,7 +175,7 @@ void CAttackState::UpdateTarget(const EntityId& target)
                             auto PBattleTarget = static_cast<CBattleEntity*>(PPotentialTarget.second);
 
                             PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, PBattleTarget);
-                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PBattleTarget, 0, 0, MsgBasic::AutoTargeting);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PBattleTarget, 0, 0, xi::MsgBasic::AutoTargeting);
                             break;
                         }
                     }

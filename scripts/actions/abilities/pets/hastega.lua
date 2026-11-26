@@ -23,7 +23,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     -- Note from retail capture: WHM Haste spell and Garuda's Hastega will overwrite eachother.
     if target:addStatusEffect(xi.effect.HASTE, { power = 1494, duration = duration, origin = pet }) then
         if target:getID() == action:getPrimaryTargetID() then
-            petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+            petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
         else
             petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
         end

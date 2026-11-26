@@ -66,8 +66,8 @@ local function validateParameters(actor, target, fedData)
 
     -- Animations and messaging.
     params.animation       = fedData.animation or defaultsTable[params.magicalElement][1]
-    params.messageDamage   = fedData.messageDamage or xi.msg.basic.ADD_EFFECT_DMG
-    params.messageHeal     = fedData.messageHeal or xi.msg.basic.ADD_EFFECT_HEAL
+    params.messageDamage   = fedData.messageDamage or xi.msg.basic.ADD_EFFECT_DAMAGE
+    params.messageHeal     = fedData.messageHeal or xi.msg.basic.ADD_EFFECT_RECOVERS_HP
 
     return params
 end

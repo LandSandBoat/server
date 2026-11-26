@@ -29,7 +29,7 @@
 #include "enums/four_cc.h"
 #include "zone.h"
 
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "petskill.h"
 
@@ -53,7 +53,7 @@ void AvatarOutOfRange(CBattleEntity* PAvatar, const CPetSkill* PSkill, const CBa
                     {
                         .animation = ActionAnimation::SkillInterrupt,
                         .param     = PSkill->getMobSkillID() > 0 ? PSkill->getMobSkillID() : PSkill->getID(),
-                        .messageID = MsgBasic::TooFarAwayRed,
+                        .messageID = xi::MsgBasic::TooFarAway2,
                     },
                 },
             },
@@ -99,7 +99,7 @@ void WyvernOutOfRange(CBattleEntity* PWyvern, const CPetSkill* PSkill, const CBa
                         .resolution = ActionResolution::Miss,
                         .animation  = ActionAnimation::SkillInterrupt,
                         .param      = PSkill->getMobSkillID() > 0 ? PSkill->getMobSkillID() : PSkill->getID(),
-                        .messageID  = MsgBasic::TooFarAwayRed,
+                        .messageID  = xi::MsgBasic::TooFarAway2,
                     },
                 },
             },
@@ -201,7 +201,7 @@ void MobSkillNoTargetInRange(CBattleEntity* PEntity)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::NoTargetInAreaOfEffect,
+                        .messageID = xi::MsgBasic::NoTargetInAreaOfEffect,
                     },
                 },
             },
@@ -222,7 +222,7 @@ void MobSkillOutOfRange(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::TooFarAway,
+                        .messageID = xi::MsgBasic::TooFarAway,
                     },
                 },
             },
@@ -243,7 +243,7 @@ void WeaponSkillOutOfRange(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::TooFarAway,
+                        .messageID = xi::MsgBasic::TooFarAway,
                     },
                 },
             },
@@ -264,7 +264,7 @@ void RangedParalyzed(CBattleEntity* PEntity)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsParalyzed2,
+                        .messageID = xi::MsgBasic::IsParalyzed2,
                     },
                 },
             },
@@ -309,7 +309,7 @@ void MagicParalyzed(CBattleEntity* PEntity, CSpell* PSpell, const CBattleEntity*
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsParalyzed2,
+                        .messageID = xi::MsgBasic::IsParalyzed2,
                     },
                 },
             },
@@ -350,7 +350,7 @@ void MagicIntimidated(CBattleEntity* PEntity, CSpell* PSpell, const CBattleEntit
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsIntimidated,
+                        .messageID = xi::MsgBasic::IsIntimidated,
                     },
                 },
             },
@@ -390,7 +390,7 @@ void AttackParalyzed(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsParalyzed2,
+                        .messageID = xi::MsgBasic::IsParalyzed2,
                     },
                 },
             },
@@ -411,7 +411,7 @@ void AttackIntimidated(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsIntimidated,
+                        .messageID = xi::MsgBasic::IsIntimidated,
                     },
                 },
             },
@@ -432,7 +432,7 @@ void AbilityParalyzed(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsParalyzed2,
+                        .messageID = xi::MsgBasic::IsParalyzed2,
                     },
                 },
             },
@@ -475,7 +475,7 @@ void ItemParalyzed(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsParalyzed2,
+                        .messageID = xi::MsgBasic::IsParalyzed2,
                     },
                 },
             },
@@ -515,7 +515,7 @@ void ItemIntimidated(CBattleEntity* PEntity, const CBattleEntity* PTarget)
                 .results = {
                     {
                         .animation = ActionAnimation::SkillInterrupt,
-                        .messageID = MsgBasic::IsIntimidated,
+                        .messageID = xi::MsgBasic::IsIntimidated,
                     },
                 },
             },

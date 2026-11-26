@@ -23,7 +23,7 @@
 
 #include "entities/base_entity.h"
 
-GP_SERV_COMMAND_BATTLE_MESSAGE2::GP_SERV_COMMAND_BATTLE_MESSAGE2(const CBaseEntity* PSender, const CBaseEntity* PTarget, const int32 param0, const int32 param1, const MsgBasic messageID)
+GP_SERV_COMMAND_BATTLE_MESSAGE2::GP_SERV_COMMAND_BATTLE_MESSAGE2(const CBaseEntity* PSender, const CBaseEntity* PTarget, const int32 param0, const int32 param1, const xi::MsgBasic messageID)
 {
     auto& packet = this->data();
 

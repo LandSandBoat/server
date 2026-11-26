@@ -20,7 +20,7 @@
 */
 
 #include "petskill.h"
-#include "enums/msg_basic.h"
+#include "data/enums/msg_basic.h"
 
 #include "mobskill.h" // used for skillflags
 
@@ -33,7 +33,7 @@ CPetSkill::CPetSkill(uint16 id)
 , m_AnimationTime(0s)
 , m_ActivationTime(0s)
 , m_ValidTarget(xi::TargetType::None)
-, m_Message(MsgBasic::None)
+, m_Message(xi::MsgBasic::None)
 , m_Flag(0)
 , m_Param(0)
 , m_SkillFinishCategory(0)
@@ -51,12 +51,12 @@ CPetSkill::CPetSkill(uint16 id)
 
 auto CPetSkill::hasMissMsg() const -> bool
 {
-    return m_Message == MsgBasic::UsesButMisses ||
-           m_Message == MsgBasic::AbilityMisses ||
-           m_Message == MsgBasic::UsesSkillMisses ||
-           m_Message == MsgBasic::UsesSkillNoEffect ||
-           m_Message == MsgBasic::ShadowAbsorb ||
-           m_Message == MsgBasic::TargetAnticipates;
+    return m_Message == xi::MsgBasic::JaMiss2 ||
+           m_Message == xi::MsgBasic::JaMiss ||
+           m_Message == xi::MsgBasic::SkillMiss ||
+           m_Message == xi::MsgBasic::SkillNoEffect ||
+           m_Message == xi::MsgBasic::ShadowAbsorb ||
+           m_Message == xi::MsgBasic::TargetAnticipates;
 }
 
 auto CPetSkill::isAoE() const -> bool
@@ -102,7 +102,7 @@ void CPetSkill::setID(uint16 id)
     m_ID = id;
 }
 
-void CPetSkill::setMsg(MsgBasic msg)
+void CPetSkill::setMsg(xi::MsgBasic msg)
 {
     m_Message = msg;
 }
@@ -244,7 +244,7 @@ auto CPetSkill::getFinalAnimationSub() -> Maybe<uint8>
     return m_FinalAnimationSub;
 }
 
-auto CPetSkill::getMsg() const -> MsgBasic
+auto CPetSkill::getMsg() const -> xi::MsgBasic
 {
     return m_Message;
 }
@@ -291,14 +291,14 @@ auto CPetSkill::getKnockback() const -> Knockback
 
 auto CPetSkill::isDamageMsg() const -> bool
 {
-    return m_Message == MsgBasic::UsesAbilityTakesDamage ||
-           m_Message == MsgBasic::UsesSkillTakesDamage ||
-           m_Message == MsgBasic::UsesSkillHPDrained ||
-           m_Message == MsgBasic::UsesAbilityResistsDamage ||
-           m_Message == MsgBasic::UsesSkillMPDrained ||
-           m_Message == MsgBasic::UsesSkillTPDrained ||
-           m_Message == MsgBasic::TargetTakesDamage ||
-           m_Message == MsgBasic::UsesJobAbilityTakeDamage;
+    return m_Message == xi::MsgBasic::JaDamage ||
+           m_Message == xi::MsgBasic::Damage ||
+           m_Message == xi::MsgBasic::UsesSkillHpDrained ||
+           m_Message == xi::MsgBasic::UsesAbilityResistsDamage ||
+           m_Message == xi::MsgBasic::SkillDrainMp ||
+           m_Message == xi::MsgBasic::UsesSkillTpDrained ||
+           m_Message == xi::MsgBasic::TargetTakesDamage ||
+           m_Message == xi::MsgBasic::UsesJaTakeDamage;
 }
 
 void CPetSkill::setParam(int16 value)

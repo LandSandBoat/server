@@ -28,7 +28,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     target:addStatusEffect(xi.effect.SHINING_RUBY, { power = 10, subPower = 390, duration = duration, origin = pet })
 
     if target:getID() == action:getPrimaryTargetID() then
-        petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+        petskill:setMsg(xi.msg.basic.USES_ABILITY_GAINS_EFFECT)
     else
         petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
     end

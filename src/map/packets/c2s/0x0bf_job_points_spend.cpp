@@ -21,8 +21,8 @@
 
 #include "0x0bf_job_points_spend.h"
 
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "packets/c2s/validation.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x063_miscdata_job_points.h"
@@ -44,5 +44,5 @@ void GP_CLI_COMMAND_JOB_POINTS_SPEND::process(MapSession* PSession, CCharEntity*
 
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar, jpType);
-    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Index, newLevel, MsgBasic::JobPointsIncrease);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, this->Index, newLevel, xi::MsgBasic::JobPointsIncrease);
 }

@@ -27,13 +27,13 @@
 #include <sol/forward.hpp>
 
 enum class ActionModifier : uint32_t;
-enum class MsgBasic : uint16_t;
 class CSpell;
 
 namespace xi
 {
 
 enum class Job : uint8_t;
+enum class MsgBasic : uint16_t;
 
 } // namespace xi
 
@@ -51,7 +51,7 @@ public:
 
     friend auto operator<<(std::ostream& out, const CLuaSpell& spell) -> std::ostream&;
 
-    void setMsg(MsgBasic messageID);
+    void setMsg(xi::MsgBasic messageID);
     void setModifier(ActionModifier modifier) const;
     void setCritical(bool isCritical) const;
     void setAoE(uint8 aoe);
@@ -67,7 +67,7 @@ public:
     auto getRadius() -> float;
     auto tookEffect() -> bool;
     auto getTotalTargets() -> uint16;
-    auto getMagicBurstMessage() const -> MsgBasic;
+    auto getMagicBurstMessage() const -> xi::MsgBasic;
     auto getElement() -> uint16;
     auto getID() -> uint16;
     auto getMPCost() -> uint16;

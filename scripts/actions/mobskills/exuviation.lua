@@ -29,7 +29,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
 
     local params = {}
 
-    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.primaryMessage = xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT
     params.baseHeal       = 699 + (mob:getMainLvl() - 70) * 10 * effectCount
     params.fTP =
     {

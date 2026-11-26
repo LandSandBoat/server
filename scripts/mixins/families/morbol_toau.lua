@@ -93,7 +93,7 @@ g_mixins.families.morbol_toau = function(morbolToAUMob)
 
         if
             not isWithinArea(attacker) and
-            (actionMsg == xi.msg.basic.HIT_DMG or actionMsg == xi.msg.basic.HIT_CRIT)
+            (actionMsg == xi.msg.basic.HIT_DMG or actionMsg == xi.msg.basic.ATTACK_CRIT)
         then
             local drainVar     = attacker:getLocalVar('[morbolToAU]drainPercent') / 100
             local drainPercent = drainVar > 0 and drainVar or 0.01

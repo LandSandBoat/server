@@ -37,7 +37,12 @@
 #include "data/enums/spawn_type.h"
 #include "data/enums/title.h"
 
+namespace xi
+{
+
 enum class MsgBasic : uint16_t;
+
+} // namespace xi
 
 // forward declaration
 class CMobSpellContainer;
@@ -147,7 +152,7 @@ public:
     auto OnAttack(CBattleEntity* PTarget, action_t& action) -> bool override;
     auto CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) -> bool override;
     void OnCastFinished(CMagicState&, action_t&) override;
-    void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast) override;
+    void OnCastInterrupted(CMagicState&, action_t&, xi::MsgBasic msg, bool blockedCast) override;
 
     void OnDisengage(CAttackState&) override;
     void OnDeathTimer() override;

@@ -28,12 +28,12 @@
 #include <string>
 
 enum class ActionAnimation : uint16_t;
-enum class MsgBasic : uint16_t;
 class CAbility;
 
 namespace xi
 {
 
+enum class MsgBasic : uint16_t;
 enum class Recast : uint16_t;
 enum class StatusEffect : uint16_t;
 
@@ -54,7 +54,7 @@ public:
     friend auto operator<<(std::ostream& out, const CLuaAbility& ability) -> std::ostream&;
 
     auto getID() -> uint16;
-    auto getMsg() -> MsgBasic;
+    auto getMsg() -> xi::MsgBasic;
     auto getRecast() -> uint16;
     auto getRecastID() const -> xi::Recast;
     auto getRange() -> uint16;
@@ -64,7 +64,7 @@ public:
     auto getAnimation() -> ActionAnimation;
     auto getAddType() -> uint16; // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
-    void setMsg(MsgBasic messageID);
+    void setMsg(xi::MsgBasic messageID);
     void setAnimation(uint16 animationID);
     void setRecast(uint16 recastTime);
     auto getCE() -> int32;

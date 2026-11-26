@@ -24,11 +24,11 @@
 #include "action/action.h"
 #include "action/interrupts.h"
 #include "ai/ai_container.h"
+#include "data/enums/msg_basic.h"
 #include "enmity_container.h"
 #include "entities/char_entity.h"
 #include "entities/pet_entity.h"
 #include "enums/four_cc.h"
-#include "enums/msg_basic.h"
 #include "packets/s2c/0x028_battle2.h"
 #include "petskill.h"
 #include "status_effect_container.h"
@@ -88,7 +88,7 @@ auto CPetSkillState::init() -> StateErrorOr<void>
                     .results = {
                         {
                             .param     = m_PSkill->getMobSkillID() > 0 ? m_PSkill->getMobSkillID() : m_PSkill->getID(),
-                            .messageID = m_PSkill->getMobSkillID() > 0 ? MsgBasic::ReadiesWeaponskill : MsgBasic::ReadiesSkill,
+                            .messageID = m_PSkill->getMobSkillID() > 0 ? xi::MsgBasic::ReadiesWs : xi::MsgBasic::ReadiesSkill2,
                         },
                     },
                 },

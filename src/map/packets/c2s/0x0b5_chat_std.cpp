@@ -26,8 +26,8 @@
 #include "common/ipc_structs.h"
 #include "common/lua.h"
 #include "common/settings.h"
+#include "data/enums/msg_basic.h"
 #include "entities/char_entity.h"
-#include "enums/msg_basic.h"
 #include "ipc_client.h"
 #include "linkshell.h"
 #include "map_session.h"
@@ -159,7 +159,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
         }
         else
         {
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotInThisArea);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CannotInThisArea);
         }
 
         return;
@@ -265,7 +265,7 @@ void GP_CLI_COMMAND_CHAT_STD::process(MapSession* PSession, CCharEntity* PChar) 
             {
                 if (isYellBanned)
                 {
-                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MsgBasic::CannotUseInArea);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, xi::MsgBasic::CantBeUsedInArea);
                 }
                 else if (!isInYellCooldown)
                 {

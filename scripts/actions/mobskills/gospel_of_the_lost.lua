@@ -25,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     local params = {}
 
     -- Assuming its a 4-6% heal based on its max HP and numbers quoted on wiki.
-    params.primaryMessage = xi.msg.basic.SELF_HEAL
+    params.primaryMessage = xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT
     params.baseHeal       = mob:getMaxHP() * (math.randomInt(4, 6) * 0.01) -- TODO: Capture power
     params.fTP =
     {

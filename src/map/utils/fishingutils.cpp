@@ -53,10 +53,10 @@
 #include "data/enums/detects.h"
 #include "data/enums/key_item.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "data/enums/weather.h"
 #include "enums/chat_message_type.h"
 #include "enums/four_cc.h"
-#include "enums/msg_basic.h"
 #include "enums/msg_std.h"
 #include "item_container.h"
 #include "items.h"
@@ -2039,7 +2039,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
         if (skillAmount > 0)
         {
             PChar->RealSkills.skill[static_cast<uint8>(xi::SkillType::Fishing)] += skillAmount;
-            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), skillAmount, MsgBasic::SkillGain);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), skillAmount, xi::MsgBasic::SkillGain);
 
             if ((charSkill / 10) < (charSkill + skillAmount) / 10)
             {
@@ -2051,7 +2051,7 @@ void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
                 }
 
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), (charSkill + skillAmount) / 10, MsgBasic::SkillLevelUp);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, static_cast<uint8>(xi::SkillType::Fishing), (charSkill + skillAmount) / 10, xi::MsgBasic::SkillLevelUp);
             }
 
             charutils::SaveCharSkills(PChar, static_cast<uint8>(xi::SkillType::Fishing));

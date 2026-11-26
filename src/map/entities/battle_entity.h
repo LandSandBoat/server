@@ -123,7 +123,13 @@ class CRangeState;
 class CRecastContainer;
 class CNotorietyContainer;
 struct action_t;
+
+namespace xi
+{
+
 enum class MsgBasic : uint16_t;
+
+} // namespace xi
 
 class CBattleEntity : public CBaseEntity
 {
@@ -308,7 +314,7 @@ public:
     virtual void OnDisengage(CAttackState&);
     /* Casting */
     virtual void OnCastFinished(CMagicState&, action_t&);
-    virtual void OnCastInterrupted(CMagicState&, action_t&, MsgBasic msg, bool blockedCast);
+    virtual void OnCastInterrupted(CMagicState&, action_t&, xi::MsgBasic msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
     virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);

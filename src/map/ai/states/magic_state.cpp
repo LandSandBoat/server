@@ -28,12 +28,12 @@
 #include "ai/states/inactive_state.h"
 #include "common/utils.h"
 #include "data/enums/mob_mod.h"
+#include "data/enums/msg_basic.h"
 #include "enmity_container.h"
 #include "entities/battle_entity.h"
 #include "entities/char_entity.h"
 #include "entities/mob_entity.h"
 #include "entities/pet_entity.h"
-#include "enums/msg_basic.h"
 #include "job_points.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x028_battle2.h"
@@ -74,7 +74,7 @@ auto CMagicState::init() -> StateErrorOr<void>
     auto* PSpell = spell::GetSpell(m_spellId);
     if (PSpell == nullptr)
     {
-        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_spellId), 0, MsgBasic::CannotCastSpell) };
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_spellId), 0, xi::MsgBasic::CannotCastSpell) };
     }
 
     m_PSpell = PSpell->clone();
@@ -93,7 +93,7 @@ auto CMagicState::init() -> StateErrorOr<void>
     auto errorMsg = luautils::OnMagicCastingCheck(m_PEntity, PTarget, GetSpell());
     if (errorMsg)
     {
-        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, errorMsg == 1 ? MsgBasic::CannotCastSpell : static_cast<MsgBasic>(errorMsg)) };
+        return Error{ std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, errorMsg == 1 ? xi::MsgBasic::CannotCastSpell : static_cast<xi::MsgBasic>(errorMsg)) };
     }
 
     m_castTime = battleutils::CalculateSpellCastTime(m_PEntity, this);
@@ -122,7 +122,7 @@ auto CMagicState::init() -> StateErrorOr<void>
                 .results = {
                     {
                         .param     = static_cast<int32_t>(m_PSpell->getID()),
-                        .messageID = dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr ? MsgBasic::StartsCastingSelf : MsgBasic::StartsCastingTarget,
+                        .messageID = dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr ? xi::MsgBasic::StartsCastingSelf : xi::MsgBasic::MagicStartsCastingTarget,
                     },
                 },
             },
@@ -139,7 +139,7 @@ auto CMagicState::init() -> StateErrorOr<void>
         action.ForEachResult(
             [&](action_result_t& result)
             {
-                result.messageID = MsgBasic::None;
+                result.messageID = xi::MsgBasic::None;
             });
     }
 
@@ -152,7 +152,7 @@ auto CMagicState::Update(timer::time_point tick) -> bool
 {
     action_t   action;
     auto*      PTarget = m_PEntity->IsValidTarget(target(), m_PSpell->getValidTarget(), m_errorMsg);
-    const auto msg     = MsgBasic::IsInterrupted;
+    const auto msg     = xi::MsgBasic::IsInterrupted;
 
     // mobs, pets and trusts only print the interrupted message when a hit or status interrupted them
     const bool quiet = dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr;
@@ -225,7 +225,7 @@ auto CMagicState::Update(timer::time_point tick) -> bool
             {
                 if (!luautils::OnTrustSpellCastCheckBattlefieldTrusts(PChar))
                 {
-                    m_PEntity->OnCastInterrupted(*this, action, MsgBasic::TrustNoCastTrust, true);
+                    m_PEntity->OnCastInterrupted(*this, action, xi::MsgBasic::TrustNoCastTrust, true);
                     action.recast = 2s; // seems hardcoded to 2
 
                     Complete();
@@ -320,7 +320,7 @@ auto CMagicState::Update(timer::time_point tick) -> bool
             action.ForEachResult(
                 [&](action_result_t& result)
                 {
-                    result.messageID = MsgBasic::None;
+                    result.messageID = xi::MsgBasic::None;
                 });
         }
 
@@ -346,7 +346,7 @@ void CMagicState::Cleanup(timer::time_point tick)
     {
         action_t   action{};
         const bool quiet = dynamic_cast<const CCharEntity*>(m_PEntity) == nullptr;
-        m_PEntity->OnCastInterrupted(*this, action, MsgBasic::IsInterrupted, quiet);
+        m_PEntity->OnCastInterrupted(*this, action, xi::MsgBasic::IsInterrupted, quiet);
     }
 }
 
@@ -366,19 +366,19 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 
     if (!ret)
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::CannotCastSpell);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::CannotCastSpell);
         return ret;
     }
 
     if (!m_PEntity->loc.zone->CanUseMisc(m_PSpell->getZoneMisc()))
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::CannotInThisArea);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::CannotInThisArea);
         return false;
     }
 
     if (m_PEntity->StatusEffectContainer->HasStatusEffect({ xi::StatusEffect::Silence, xi::StatusEffect::Mute }))
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::UnableToCastSpells);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::UnableToCastSpells);
         return false;
     }
 
@@ -387,7 +387,7 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
         int16 power = m_PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Omerta)->GetPower();
         if ((1 << (m_PSpell->getSpellGroup() - 1)) & power)
         {
-            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::UnableToCastSpells);
+            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::UnableToCastSpells);
             return false;
         }
     }
@@ -399,7 +399,7 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 
     if (!PTarget)
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::CannotOnThatTarget);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::CannotOnThatTarg);
         return false;
     }
 
@@ -416,7 +416,7 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 
     if (distance(m_PEntity->loc.p, PTarget->loc.p) > 40)
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::TooFarAway);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::TooFarAway);
         return false;
     }
 
@@ -434,7 +434,7 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 
         if (distance(m_PEntity->loc.p, PTarget->loc.p) > spellRange)
         {
-            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::OutOfRangeUnableCast);
+            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::OutOfRangeUnableCast);
             return false;
         }
     }
@@ -449,7 +449,7 @@ auto CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast) -> bool
 
     if (!isEndOfCast && dynamic_cast<const CCharEntity*>(m_PEntity) != nullptr && m_PEntity->loc.zone->CanUseMisc(xi::ZoneMisc::LosPlayerBlock) && !m_PEntity->CanSeeTarget(PTarget))
     {
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::CannotPerformAction);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::CannotPerform);
         return false;
     }
 
@@ -462,7 +462,7 @@ auto CMagicState::HasCost() -> bool
     {
         if (dynamic_cast<const CCharEntity*>(m_PEntity) != nullptr && !(m_flags & MAGICFLAGS_IGNORE_TOOLS) && !battleutils::HasNinjaTool(m_PEntity, GetSpell(), false))
         {
-            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::NoNinjaTools);
+            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::NoNinjaTools);
             return false;
         }
     }
@@ -473,7 +473,7 @@ auto CMagicState::HasCost() -> bool
         {
             ShowWarning("CMagicState::ValidCast Mob (%u) tried to cast magic with no mp!", m_PEntity->id);
         }
-        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MsgBasic::NotEnoughMP);
+        m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, xi::MsgBasic::NotEnoughMp);
         return false;
     }
     return true;

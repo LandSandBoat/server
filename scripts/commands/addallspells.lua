@@ -47,7 +47,7 @@ addSpellsInBatches = function(player, targetName, validSpells, batchSize, learne
     learned = learned + batchSize
     if learned >= total then
         -- send player update "<player> learns a new spell"
-        player:messageBasic(xi.msg.basic.PLAYER_LEARNS_NEW_SPELL)
+        player:messageBasic(xi.msg.basic.LEARNS_NEW_SPELL)
         player:printToPlayer(fmt('{} now has all spells.', targ:getName()), xi.msg.channel.SYSTEM_3)
     else
         player:printToPlayer(fmt('{} now has learned {} of {} spells.', targ:getName(), learned, total), xi.msg.channel.SYSTEM_3)

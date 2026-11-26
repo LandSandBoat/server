@@ -49,7 +49,7 @@ public:
     auto getFlag() const -> uint8;
     auto getAnimationTime() const -> timer::duration;
     auto getActivationTime() const -> timer::duration;
-    auto getMsg() const -> MsgBasic;
+    auto getMsg() const -> xi::MsgBasic;
     auto getSkillFinishCategory() const -> ActionCategory;
     auto getValidTargets() const -> xi::TargetType;
     auto getTP() const -> int16;
@@ -79,7 +79,7 @@ public:
     void setFlag(uint8 flag);
     void setAnimationTime(timer::duration AnimationTime);
     void setActivationTime(timer::duration ActivationTime);
-    void setMsg(MsgBasic msg);
+    void setMsg(xi::MsgBasic msg);
     void setSkillFinishCategory(uint8 category);
     void setValidTargets(xi::TargetType targ);
     void setTP(int16 tp);
@@ -110,7 +110,7 @@ private:
     timer::duration m_AnimationTime;  // how long the tp animation lasts
     timer::duration m_ActivationTime; // how long the pet prepares the tp move for
     xi::TargetType  m_ValidTarget;
-    MsgBasic        m_Message; // message param, scripters can edit this depending on self/resist/etc.
+    xi::MsgBasic    m_Message; // message param, scripters can edit this depending on self/resist/etc.
     uint8           m_Flag;
     int16           m_Param;
     uint8           m_SkillFinishCategory;

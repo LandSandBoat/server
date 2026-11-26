@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
     target:eraseAllStatusEffect()
     target:addHP(maxHeal)
     target:wakeUp()
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.USES_SKILL_RECOVERS_HP_AREA_OF_EFFECT)
 
     return maxHeal
 end

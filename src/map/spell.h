@@ -1201,8 +1201,8 @@ public:
     auto getBase() const -> uint16;
     auto getElement() const -> uint16;
     auto getMultiplier() const -> float;
-    auto getMessage() const -> MsgBasic;
-    auto getMagicBurstMessage() const -> MsgBasic;
+    auto getMessage() const -> xi::MsgBasic;
+    auto getMagicBurstMessage() const -> xi::MsgBasic;
     auto getCE() const -> int32;
     auto getVE() const -> int32;
     auto getModifiedRecast() const -> timer::duration;
@@ -1242,8 +1242,8 @@ public:
     void setBase(uint16 base);
     void setElement(uint16 element);
     void setMultiplier(float multiplier);
-    void setMessage(MsgBasic message);
-    void setMagicBurstMessage(MsgBasic message);
+    void setMessage(xi::MsgBasic message);
+    void setMagicBurstMessage(xi::MsgBasic message);
     auto getModifier() const -> ActionModifier;
     void setModifier(ActionModifier modifier); // set Spell modifier message, MUST reset the modifier on use otherwise it will be stale
     auto isCritical() const -> bool;
@@ -1290,8 +1290,8 @@ private:
     uint16                         m_base{};                          // spell base damage
     float                          m_multiplier{};                    // multiplier for upper tier spells
     uint16                         m_element{};                       // element of spell
-    MsgBasic                       m_message{};                       // message id
-    MsgBasic                       m_MagicBurstMessage{};             // Message used for magic bursts.
+    xi::MsgBasic                   m_message{};                       // message id
+    xi::MsgBasic                   m_MagicBurstMessage{};             // Message used for magic bursts.
     ActionModifier                 m_MessageModifier{};               // Message modifier, "Cover!", "Resist!" or "Immunobreak!"
     bool                           critical_{};                       // transient critical hit flag for action packets
     int32                          m_CE{};                            // cumulative enmity of spell

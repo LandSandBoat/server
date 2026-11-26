@@ -22,6 +22,7 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/msg_basic.h"
 #include "entities/battle_entity.h"
 #include "enums/action/animation.h"
 #include "enums/action/category.h"
@@ -32,7 +33,6 @@
 #include "enums/action/proc_kind.h"
 #include "enums/action/react_kind.h"
 #include "enums/action/resolution.h"
-#include "enums/msg_basic.h"
 #include "spell.h"
 
 #include <vector>
@@ -49,23 +49,23 @@ struct attack_outcome_t
 
 struct action_result_t
 {
-    ActionResolution resolution{ ActionResolution::Hit };   // result.miss (3 bits)
-    uint8_t          kind{ 0 };                             // result.kind (2 bits)
-    ActionAnimation  animation{ ActionAnimation::None };    // result.sub_kind (12 bits)
-    ActionInfo       info{ ActionInfo::None };              // result.info (5 bits)
-    HitDistortion    hitDistortion{ HitDistortion::None };  // result.scale (2 bits) (shared with knockback)
-    Knockback        knockback{ Knockback::None };          // result.scale (3 bits) (shared with hitDistortion)
-    int32            param{ 0 };                            // result.value - 17 bits
-    MsgBasic         messageID{ MsgBasic::None };           // result.message - 10 bits
-    ActionModifier   modifier{ ActionModifier::None };      // result.bit - 31 bits
-    ActionProcKind   additionalEffect{};                    // result.has_proc (1 bit), result.proc_kind (6 bits)
-    uint8_t          addEffectInfo{ 0 };                    // result.proc_info (4 bits)
-    int32            addEffectParam{ 0 };                   // result.proc_value (17 bits)
-    MsgBasic         addEffectMessage{ MsgBasic::None };    // result.proc_message (10 bits)
-    ActionReactKind  spikesEffect{ ActionReactKind::None }; // result.has_react (1 bit), result.react_kind (6 bits)
-    uint8_t          spikesInfo{ 0 };                       // result.react_info (4 bits)
-    uint16           spikesParam{ 0 };                      // result.react_value (14 bits)
-    MsgBasic         spikesMessage{ MsgBasic::None };       // result.react_message (10 bits)
+    ActionResolution resolution{ ActionResolution::Hit };    // result.miss (3 bits)
+    uint8_t          kind{ 0 };                              // result.kind (2 bits)
+    ActionAnimation  animation{ ActionAnimation::None };     // result.sub_kind (12 bits)
+    ActionInfo       info{ ActionInfo::None };               // result.info (5 bits)
+    HitDistortion    hitDistortion{ HitDistortion::None };   // result.scale (2 bits) (shared with knockback)
+    Knockback        knockback{ Knockback::None };           // result.scale (3 bits) (shared with hitDistortion)
+    int32            param{ 0 };                             // result.value - 17 bits
+    xi::MsgBasic     messageID{ xi::MsgBasic::None };        // result.message - 10 bits
+    ActionModifier   modifier{ ActionModifier::None };       // result.bit - 31 bits
+    ActionProcKind   additionalEffect{};                     // result.has_proc (1 bit), result.proc_kind (6 bits)
+    uint8_t          addEffectInfo{ 0 };                     // result.proc_info (4 bits)
+    int32            addEffectParam{ 0 };                    // result.proc_value (17 bits)
+    xi::MsgBasic     addEffectMessage{ xi::MsgBasic::None }; // result.proc_message (10 bits)
+    ActionReactKind  spikesEffect{ ActionReactKind::None };  // result.has_react (1 bit), result.react_kind (6 bits)
+    uint8_t          spikesInfo{ 0 };                        // result.react_info (4 bits)
+    uint16           spikesParam{ 0 };                       // result.react_value (14 bits)
+    xi::MsgBasic     spikesMessage{ xi::MsgBasic::None };    // result.react_message (10 bits)
 
     void recordSkillchain(ActionProcSkillChain effect, int16_t dmg);
     auto recordDamage(const attack_outcome_t& outcome) -> action_result_t&;
