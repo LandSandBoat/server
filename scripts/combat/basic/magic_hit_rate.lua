@@ -204,7 +204,7 @@ local function magicAccuracyFromMerits(actor, params)
                 params.skillType == xi.skill.SINGING and
                 actor:hasStatusEffect(xi.effect.TROUBADOUR)
             then
-                magicAcc = 64 * (actor:getMerit(xi.merit.TROUBADOUR) / 25 - 1)
+                magicAcc = actor:getStatusEffect(xi.effect.TROUBADOUR):getPower()
             end
         end,
 

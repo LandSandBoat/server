@@ -30,19 +30,26 @@ xi.job_utils.bard.useSoulVoice = function(player, target, ability)
 end
 
 xi.job_utils.bard.usePianissimo = function(player, target, ability)
-    player:addStatusEffect(xi.effect.PIANISSIMO, { duration = 60, origin = player })
+    -- Power: song cast time reduction (%)
+    player:addStatusEffect(xi.effect.PIANISSIMO, { power = 50, duration = 60, origin = player })
 
     return xi.effect.PIANISSIMO
 end
 
-xi.job_utils.bard.useNightingale = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NIGHTINGALE, { duration = 60, origin = player })
+xi.job_utils.bard.useNightingale = function(player, target, ability, action)
+    -- Power: instant song cast chance (%)
+    local power = math.max(0, player:getMerit(xi.merit.NIGHTINGALE) - 25)
+
+    player:addStatusEffect(xi.effect.NIGHTINGALE, { power = power, duration = 60, origin = player })
 
     return xi.effect.NIGHTINGALE
 end
 
-xi.job_utils.bard.useTroubadour = function(player, target, ability)
-    player:addStatusEffect(xi.effect.TROUBADOUR, { duration = 60, origin = player })
+xi.job_utils.bard.useTroubadour = function(player, target, ability, action)
+    -- Power: song magic accuracy
+    local power = math.max(0, 64 * (player:getMerit(xi.merit.TROUBADOUR) / 25 - 1))
+
+    player:addStatusEffect(xi.effect.TROUBADOUR, { power = power, duration = 60, origin = player })
 
     return xi.effect.TROUBADOUR
 end

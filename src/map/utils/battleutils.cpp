@@ -5597,17 +5597,15 @@ auto CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMagicState) ->
     }
     else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
     {
-        if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Pianissimo))
+        // Effect power: cast time reduction (%)
+        if (auto* PPianissimo = PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Pianissimo); PPianissimo && PSpell->getAOE() == SPELLAOE_PIANISSIMO)
         {
-            if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
-            {
-                cast = base / 2;
-            }
+            cast = std::chrono::floor<std::chrono::milliseconds>(base * (1.0f - PPianissimo->GetPower() / 100.0f));
         }
-        if (PEntity->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::Nightingale))
+        // Effect power: instant cast chance (%)
+        if (auto* PNightingale = PEntity->StatusEffectContainer->GetStatusEffect(xi::StatusEffect::Nightingale))
         {
-            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity); PChar &&
-                                                                   xirand::GetRandomNumber(100) < PChar->PMeritPoints->GetMeritValue(xi::Merit::Nightingale, PChar) - 25)
+            if (xirand::GetRandomNumber(100) < PNightingale->GetPower())
             {
                 return 0s;
             }
