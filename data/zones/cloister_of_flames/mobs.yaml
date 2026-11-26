@@ -34,10 +34,11 @@ templates:
         hp: 3000
 
   Ifrit_Prime_ASA:
-    id:           7043
-    display_name: Ifrit_Prime
-    species:      ifrit
-    type:         [notorious, battlefield]
+    id:            7043
+    display_name:  Ifrit_Prime
+    species:       ifrit
+    type:          [notorious, battlefield]
+    skill_list_id: 322
     attributes:
       combat:
         skill: axe
@@ -58,7 +59,8 @@ templates:
       spawn:
         type: [scripted]
       stats:
-        hp: 4000
+        hp: 5300
+    content: asa
 
   Ifrit_Prime_TBF:
     id:            4645

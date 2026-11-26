@@ -83,6 +83,7 @@ zones[xi.zone.PORT_WINDURST] =
     npc =
     {
         EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
+        KUROIDO_MOIDO   = GetTableOfIDs('Kuroido-Moido'), -- The first copy only appears in cutscenes
     },
 }
 

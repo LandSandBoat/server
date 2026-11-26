@@ -2,7 +2,7 @@
 -- Area: Cloister of Storms
 -- BCNM: Sugar Coated Directive (ASA-4)
 -----------------------------------
-local cloisterOfStormsID = zones[xi.zone.CLOISTER_OF_STORMS]
+require('scripts/missions/asa/helpers')
 -----------------------------------
 
 local content = BattlefieldMission:new({
@@ -21,21 +21,25 @@ local content = BattlefieldMission:new({
     requiredKeyItems = { xi.keyItem.DOMINAS_VIOLET_SEAL, keep = true },
     missionArea      = xi.mission.log_id.ASA,
     mission          = xi.mission.id.asa.SUGAR_COATED_DIRECTIVE,
-    requiredVar      = 'Mission[11][3]Ramuh',
-    requiredValue    = 1,
 
     grantXP = 400,
 })
 
+-- The protocrystal must have refused the seal once this visit. The fight stays open after the mission.
+function content:checkRequirements(player, npc, isRegistrant, trade)
+    return Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) and
+        xi.asa.helpers.sugarCoatedEntry(player)
+end
+
+function content:onBattlefieldWin(player, battlefield)
+    BattlefieldMission.onBattlefieldWin(self, player, battlefield)
+    player:setCharVar(xi.asa.helpers.sugarCoated[xi.zone.CLOISTER_OF_STORMS].winVar, 1)
+end
+
 content.groups =
 {
     {
-        mobIds =
-        {
-            { cloisterOfStormsID.mob.RAMUH_PRIME_ASA     },
-            { cloisterOfStormsID.mob.RAMUH_PRIME_ASA + 1 },
-            { cloisterOfStormsID.mob.RAMUH_PRIME_ASA + 2 },
-        },
+        mobs = { 'Ramuh_Prime_ASA' },
 
         allDeath = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
