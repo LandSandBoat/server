@@ -22,6 +22,9 @@
 #pragma once
 
 #include "common/cbasetypes.h"
+#include "data/enums/job.h"
+#include "data/enums/merit.h"
+#include "data/enums/trait.h"
 #include "modifier.h"
 
 #include <sol/forward.hpp>
@@ -42,13 +45,13 @@ public:
 
     friend auto operator<<(std::ostream& out, const CLuaTrait& trait) -> std::ostream&;
 
-    auto getID() const -> uint16;
-    auto getJob() const -> uint8;
+    auto getID() const -> xi::Trait;
+    auto getJob() const -> xi::Job;
     auto getLevel() const -> uint8;
     auto getMod() const -> xi::Mod;
     auto getValue() const -> int16;
     auto getRank() const -> uint8;
-    auto getMeritID() const -> uint32;
+    auto getMeritID() const -> xi::Merit;
 
     auto operator==(const CLuaTrait& other) const -> bool
     {

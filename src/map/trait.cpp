@@ -19,11 +19,12 @@
 ===========================================================================
 */
 
-#include "lua/luautils.h"
+#include "trait.h"
 
 #include "blue_trait.h"
-#include "entities/battle_entity.h"
-#include "trait.h"
+#include "data/datasets/traits/dataset.h"
+#include "lua/luautils.h"
+#include "utils/dataset_loader.h"
 
 /************************************************************************
  *                                                                       *
@@ -31,7 +32,7 @@
  *                                                                       *
  ************************************************************************/
 CTrait::CTrait(const uint16 id)
-: m_id(id)
+: m_id(static_cast<xi::Trait>(id))
 {
 }
 
@@ -57,40 +58,37 @@ TraitList_t PTraitsList[MAX_JOBTYPE]; // Trait lists by job
  ************************************************************************/
 void LoadTraitsList()
 {
-    auto rset = db::preparedStmt("SELECT traitid, job, level, rank, modifier, value, content_tag, meritid "
-                                 "FROM traits "
-                                 "WHERE traitid < ? "
-                                 "ORDER BY job, traitid ASC, rank DESC",
-                                 MAX_TRAIT_ID);
-    FOR_DB_MULTIPLE_RESULTS(rset)
+    const auto records = xi::data::loadDataset<xi::data::datasets::traits::Dataset>();
+
+    for (const auto& entry : records)
     {
-        if (!luautils::IsContentEnabled(rset->getOrDefault<std::string>("content_tag", "")))
+        if (!luautils::IsContentEnabled(entry.Content))
         {
             continue;
         }
 
-        auto* PTrait = new CTrait(rset->get<uint16>("traitid"));
+        auto* PTrait = new CTrait(std::to_underlying(entry.Id));
 
-        PTrait->setJob(rset->get<int8>("job"));
-        PTrait->setLevel(rset->get<uint8>("level"));
-        PTrait->setRank(rset->get<uint8>("rank"));
-        PTrait->setMod(rset->get<xi::Mod>("modifier"));
-        PTrait->setValue(rset->get<int16>("value"));
-        PTrait->setMeritId(rset->get<uint32>("meritid"));
+        PTrait->setJob(entry.Job);
+        PTrait->setLevel(entry.Level);
+        PTrait->setRank(entry.Rank);
+        PTrait->setMod(entry.Mod);
+        PTrait->setValue(entry.Value);
+        PTrait->setMerit(entry.Merit);
 
-        PTraitsList[PTrait->getJob()].emplace_back(PTrait);
+        PTraitsList[std::to_underlying(entry.Job)].emplace_back(PTrait);
     }
 
-    rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value, tier, job_points_only "
-                            "FROM blue_traits "
-                            "WHERE traitid < ? "
-                            "ORDER BY tier ASC",
-                            MAX_TRAIT_ID);
+    auto rset = db::preparedStmt("SELECT trait_category, trait_points_needed, traitid, modifier, value, tier, job_points_only "
+                                 "FROM blue_traits "
+                                 "WHERE traitid < ? "
+                                 "ORDER BY tier ASC",
+                                 MAX_TRAIT_ID);
     FOR_DB_MULTIPLE_RESULTS(rset)
     {
         auto* PTrait = new CBlueTrait(rset->get<uint8>("trait_category"), rset->get<uint8>("traitid"), rset->get<bool>("job_points_only"));
 
-        PTrait->setJob(static_cast<int8>(xi::Job::BLU));
+        PTrait->setJob(xi::Job::BLU);
         PTrait->setRank(rset->get<uint8>("tier"));
         PTrait->setPoints(rset->get<uint8>("trait_points_needed"));
         PTrait->setMod(rset->get<xi::Mod>("modifier"));

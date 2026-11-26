@@ -281,7 +281,7 @@ public:
 
     virtual void addTrait(CTrait*);
     virtual void delTrait(CTrait*);
-    virtual auto hasTrait(uint16) -> bool;
+    virtual auto hasTrait(xi::Trait trait) -> bool;
 
     virtual auto ValidTarget(CBattleEntity* PInitiator, xi::TargetType targetFlags) -> bool;
     virtual auto CanUseSpell(CSpell*) -> bool;

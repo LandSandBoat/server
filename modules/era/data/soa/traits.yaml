@@ -1,0 +1,46 @@
+# Job traits as they were before the SoA updates.
+
+traits:
+  # Desperate Blows was a merit trait.
+  # https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
+  desperate_blows:
+    merit: desperate_blows
+    ranks:
+      1: {desperate_blows: 0}
+      2: {desperate_blows: 0}
+      3: {desperate_blows: 0}
+    jobs:
+      drk:
+        1: {level: 75}
+        2: {level: 75}
+        3: {level: 75}
+
+  # Recycle was a merit trait.
+  # https://www.bg-wiki.com/ffxi/Version_Update_(04/29/2013)
+  recycle:
+    merit: recycle
+    jobs:
+      rng:
+        1: {level: 75}
+        2: {level: 75}
+        3: {level: 75}
+      cor:
+        1: {level: 75}
+        2: {level: 75}
+        3: {level: 75}
+
+  # Strafe was a lv75 merit trait, not a level trait.
+  # https://forum.square-enix.com/ffxi/threads/44090-Sep-9-2014-%28JST%29-Version-Update
+  strafe:
+    merit: strafe_effect
+    ranks:
+      1: {wyvern_breath_macc: 0}
+      2: {wyvern_breath_macc: 0}
+      3: {wyvern_breath_macc: 0}
+      4: {wyvern_breath_macc: 0}
+    jobs:
+      drg:
+        1: {level: 75}
+        2: {level: 75}
+        3: {level: 75}
+        4: {level: 75}

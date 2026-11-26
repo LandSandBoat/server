@@ -1191,11 +1191,11 @@ void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
     // Stout Servant - Can't really tie it ot a real mod since it applies to the pet
     if (CCharEntity* PCharMaster = dynamic_cast<CCharEntity*>(PMaster))
     {
-        if (charutils::hasTrait(PCharMaster, TRAIT_STOUT_SERVANT))
+        if (charutils::hasTrait(PCharMaster, xi::Trait::StoutServant))
         {
             for (CTrait* trait : PCharMaster->TraitList)
             {
-                if (trait->getID() == TRAIT_STOUT_SERVANT)
+                if (trait->getID() == xi::Trait::StoutServant)
                 {
                     PPet->addModifier(xi::Mod::DMG, -(trait->getValue() * 100));
                     break;

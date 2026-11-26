@@ -33,12 +33,12 @@ CLuaTrait::CLuaTrait(CTrait* PTrait)
     }
 }
 
-auto CLuaTrait::getID() const -> uint16
+auto CLuaTrait::getID() const -> xi::Trait
 {
     return trait_->getID();
 }
 
-auto CLuaTrait::getJob() const -> uint8
+auto CLuaTrait::getJob() const -> xi::Job
 {
     return trait_->getJob();
 }
@@ -63,9 +63,9 @@ auto CLuaTrait::getRank() const -> uint8
     return trait_->getRank();
 }
 
-auto CLuaTrait::getMeritID() const -> uint32
+auto CLuaTrait::getMeritID() const -> xi::Merit
 {
-    return trait_->getMeritID();
+    return trait_->getMerit();
 }
 
 //==========================================================//
@@ -84,7 +84,7 @@ void CLuaTrait::Register()
 
 auto operator<<(std::ostream& os, const CLuaTrait& trait) -> std::ostream&
 {
-    const std::string id = trait.trait_ ? std::to_string(trait.trait_->getID()) : "nullptr";
+    const std::string id = trait.trait_ ? std::to_string(std::to_underlying(trait.trait_->getID())) : "nullptr";
     return os << "CLuaTrait(" << id << ")";
 }
 

@@ -1,0 +1,1748 @@
+# yaml-language-server: $schema=schemas/traits.schema.json
+
+meta:
+  enum:
+    - cpp:
+        class:      Trait
+        underlying: uint8_t
+        none:       true
+      lua:
+        table: xi.trait
+
+traits:
+  # Ids are offset by 1536 from ROM/181/72.dat.
+  # ranks holds what each rank grants. jobs holds the level each job gets each rank at.
+  accuracy_bonus:
+    id: 1
+    ranks:
+      1: {acc: 10, racc: 10}
+      2: {acc: 22, racc: 22}
+      3: {acc: 35, racc: 35}
+      4: {acc: 48, racc: 48}
+      5: {acc: 60, racc: 60}
+      6: {acc: 73, racc: 73}
+    jobs:
+      rng:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 86, content: abyssea}
+        6: {level: 96, content: abyssea}
+      drg:
+        1: 30
+        2: {level: 60, content: toau}
+        3: {level: 76, content: abyssea}
+      dnc:
+        1: {level: 30, content:    wotg}
+        2: {level: 60, content:    wotg}
+        3: {level: 76, content: abyssea}
+      run:
+        1: {level: 50, content: soa}
+        2: {level: 70, content: soa}
+        3: {level: 90, content: soa}
+
+  evasion_bonus:
+    id: 2
+    ranks:
+      1: {eva: 10}
+      2: {eva: 22}
+      3: {eva: 35}
+      4: {eva: 48}
+      5: {eva: 60}
+      6: {eva: 72}
+    jobs:
+      thf:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 76, content: abyssea}
+        6: {level: 88, content: abyssea}
+      pup:
+        1: {level: 20, content: toau}
+        2: {level: 40, content: toau}
+        3: {level: 60, content: toau}
+        4: {level: 76, content: toau}
+      dnc:
+        1: {level: 15, content:    wotg}
+        2: {level: 45, content:    wotg}
+        3: {level: 75, content:    wotg}
+        4: {level: 86, content: abyssea}
+
+  attack_bonus:
+    id: 3
+    ranks:
+      1: {att: 10, ratt: 10}
+      2: {att: 22, ratt: 22}
+      3: {att: 35, ratt: 35}
+      4: {att: 48, ratt: 48}
+      5: {att: 60, ratt: 60}
+      6: {att: 72, ratt: 72}
+      7: {att: 84, ratt: 84}
+      8: {att: 96, ratt: 96}
+    jobs:
+      war:
+        1: 30
+        2: {level: 65, content: rov}
+        3: {level: 90, content: abyssea}
+      drk:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 76, content: abyssea}
+        6: {level: 83, content: rov}
+        7: {level: 91, content: abyssea}
+        8: {level: 99, content: rov}
+      drg:
+        1: 10
+        2: {level: 91, content: abyssea}
+
+  defense_bonus:
+    id: 4
+    ranks:
+      1: {def: 10}
+      2: {def: 22}
+      3: {def: 35}
+      4: {def: 48}
+      5: {def: 60}
+      6: {def: 72}
+    jobs:
+      war:
+        1: 10
+        2: {level: 45, content: rov}
+        3: {level: 86, content: abyssea}
+      pld:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 76, content: abyssea}
+        6: {level: 91, content: abyssea}
+
+  magic_attack_bonus:
+    id: 5
+    ranks:
+      1: {matt: 20}
+      2: {matt: 24}
+      3: {matt: 28}
+      4: {matt: 32}
+      5: {matt: 36}
+      6: {matt: 40}
+    jobs:
+      blm:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 81, content: abyssea}
+        6: {level: 91, content: abyssea}
+      rdm:
+        1: 20
+        2: 40
+        3: {level: 86, content: abyssea}
+
+  magic_defense_bonus:
+    id: 6
+    ranks:
+      1: {mdef: 10}
+      2: {mdef: 12}
+      3: {mdef: 14}
+      4: {mdef: 16}
+      5: {mdef: 18}
+      6: {mdef: 20}
+      7: {mdef: 22}
+    jobs:
+      whm:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 81, content: abyssea}
+        6: {level: 91, content: abyssea}
+      rdm:
+        1: 25
+        2: 45
+        3: {level: 96, content: abyssea}
+      run:
+        1: {level: 10, content: soa}
+        2: {level: 30, content: soa}
+        3: {level: 50, content: soa}
+        4: {level: 70, content: soa}
+        5: {level: 76, content: soa}
+        6: {level: 91, content: soa}
+        7: {level: 99, content: soa}
+
+  max_hp_boost:
+    id: 7
+    ranks:
+      1: {base_hp:  30}
+      2: {base_hp:  60}
+      3: {base_hp: 120}
+      4: {base_hp: 180}
+      5: {base_hp: 240}
+      6: {base_hp: 280}
+    jobs:
+      war:
+        1: {level: 30, content: soa}
+        2: {level: 50, content: soa}
+        3: {level: 70, content: soa}
+        4: {level: 90, content: soa}
+      mnk:
+        1: 15
+        2: 25
+        3: 35
+        4: 45
+        5: {level: 55, content: abyssea}
+        6: {level: 65, content: abyssea}
+      pld:
+        1: {level: 45, content: soa}
+        2: {level: 85, content: soa}
+      nin:
+        1: {level: 20, content: soa}
+        2: {level: 40, content: soa}
+        3: {level: 60, content: soa}
+        4: {level: 80, content: soa}
+        5: {level: 99, content: soa}
+      run:
+        1: {level: 20, content: soa}
+        2: {level: 40, content: soa}
+        3: {level: 60, content: soa}
+        4: {level: 80, content: soa}
+        5: {level: 99, content: soa}
+
+  max_mp_boost:
+    id: 8
+    ranks:
+      1: {base_mp:  10}
+      2: {base_mp:  20}
+      3: {base_mp:  40}
+      4: {base_mp:  60}
+      5: {base_mp:  80}
+      6: {base_mp: 100}
+    jobs:
+      smn:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 76, content: abyssea}
+        6: {level: 96, content: abyssea}
+      sch:
+        1: {level: 30, content:    wotg}
+        2: {level: 88, content: abyssea}
+      geo:
+        1: {level: 30, content: soa}
+        2: {level: 60, content: soa}
+        3: {level: 90, content: soa}
+
+  auto_regen:
+    id: 9
+    ranks:
+      1: {regen: 1}
+      2: {regen: 2}
+      3: {regen: 3}
+    jobs:
+      whm:
+        1: 25
+        2: {level: 76, content: abyssea}
+      run:
+        1: {level: 35, content: soa}
+        2: {level: 65, content: soa}
+        3: {level: 95, content: soa}
+
+  auto_refresh:
+    id: 10
+    ranks:
+      1: {refresh: 1}
+      2: {refresh: 2}
+    jobs:
+      pld:
+        1: {level: 35, content: toau}
+      smn:
+        1: 25
+        2: {level: 90, content: abyssea}
+
+  rapid_shot:
+    id: 11
+    ranks:
+      1: {rapid_shot: 25}
+      2: {rapid_shot: 30}
+    jobs:
+      rng:
+        1: 15
+        2: {level: 71, content: soa}
+      cor:
+        1: {level: 15, content: toau}
+        2: {level: 91, content:  soa}
+
+  fast_cast:
+    id: 12
+    ranks:
+      1: {fastcast: 10}
+      2: {fastcast: 15}
+      3: {fastcast: 20}
+      4: {fastcast: 25}
+      5: {fastcast: 30}
+    jobs:
+      rdm:
+        1: 15
+        2: 35
+        3: 55
+        4: {level: 76, content: abyssea}
+        5: {level: 89, content: abyssea}
+
+  conserve_mp:
+    id: 13
+    ranks:
+      1: {conserve_mp: 25}
+      2: {conserve_mp: 28}
+      3: {conserve_mp: 31}
+      4: {conserve_mp: 34}
+      5: {conserve_mp: 37}
+      6: {conserve_mp: 40}
+      7: {conserve_mp: 43}
+    jobs:
+      blm:
+        1: 20
+        2: {level: 76, content: abyssea}
+        3: {level: 86, content: abyssea}
+      sch:
+        1: {level: 25, content: wotg}
+      geo:
+        1: {level: 10, content: soa}
+        2: {level: 25, content: soa}
+        3: {level: 40, content: soa}
+        4: {level: 55, content: soa}
+        5: {level: 70, content: soa}
+        6: {level: 85, content: soa}
+        7: {level: 99, content: soa}
+
+  store_tp:
+    id: 14
+    ranks:
+      1: {storetp: 10}
+      2: {storetp: 15}
+      3: {storetp: 20}
+      4: {storetp: 25}
+      5: {storetp: 30}
+    jobs:
+      sam:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 90, content: abyssea}
+
+  double_attack:
+    id: 15
+    ranks:
+      1: {double_attack: 10}
+      2: {double_attack: 12}
+      3: {double_attack: 14}
+      4: {double_attack: 16}
+      5: {double_attack: 18}
+    jobs:
+      war:
+        1: 25
+        2: {level: 50, content: rov}
+        3: {level: 75, content: abyssea} # lv76 before the 2015-05-14 update; tagged abyssea so 75-cap servers drop it
+        4: {level: 85, content: rov}
+        5: {level: 99, content: rov}
+
+  triple_attack:
+    id: 16
+    ranks:
+      1: {triple_attack: 5}
+      2: {triple_attack: 6}
+    jobs:
+      thf:
+        1: 55
+        2: {level: 95, content: abyssea}
+
+  counter:
+    id: 17
+    ranks:
+      1: {counter: 10}
+      2: {counter: 12}
+    jobs:
+      mnk:
+        1: 10
+        2: {level: 81, content: abyssea}
+
+  dual_wield:
+    id: 18
+    ranks:
+      1: {dual_wield: 10}
+      2: {dual_wield: 15}
+      3: {dual_wield: 25}
+      4: {dual_wield: 30}
+      5: {dual_wield: 35}
+    jobs:
+      thf:
+        1: {level: 83, content: abyssea}
+        2: {level: 90, content: abyssea}
+        3: {level: 98, content: abyssea}
+      nin:
+        1: 10
+        2: 25
+        3: 45
+        4: 65
+        5: {level: 85, content: abyssea}
+      dnc:
+        1: {level: 20, content: abyssea}
+        2: {level: 40, content: abyssea}
+        3: {level: 60, content: abyssea}
+        4: {level: 80, content: abyssea}
+
+  treasure_hunter:
+    id: 19
+    ranks:
+      1: {treasure_hunter: 1}
+    jobs:
+      thf:
+        1: 15
+
+  gilfinder:
+    id: 20
+    ranks:
+      1: {gilfinder: 1}
+      2: {gilfinder: 2}
+    jobs:
+      thf:
+        1:  5
+        2: 90 # https://wiki.ffo.jp/html/1677.html
+
+  # Alertness has no known effect.
+  alertness:
+    id: 21
+    jobs:
+      rng:
+        1: 5
+
+  # Stealth has no known effect.
+  stealth:
+    id: 22
+    jobs:
+      nin:
+        1: 5
+
+  martial_arts:
+    id: 23
+    ranks:
+      1: {martial_arts:  80}
+      2: {martial_arts: 100}
+      3: {martial_arts: 120}
+      4: {martial_arts: 140}
+      5: {martial_arts: 160}
+      6: {martial_arts: 180}
+      7: {martial_arts: 200}
+    jobs:
+      mnk:
+        1: 1
+        2: 16
+        3: 31
+        4: 46
+        5: 61
+        6: 75
+        7: {level: 82, content: abyssea}
+      pup:
+        1: {level: 25, content:    toau}
+        2: {level: 50, content:    toau}
+        3: {level: 75, content:    toau}
+        4: {level: 87, content: abyssea}
+        5: {level: 97, content: abyssea}
+
+  clear_mind:
+    id: 24
+    ranks:
+      1: {mpheal: 3}
+      2: {mpheal: 6}
+      3: {mpheal: 9, clear_mind: 1}
+      4: {mpheal: 12, clear_mind: 1}
+      5: {mpheal: 15, clear_mind: 2}
+      6: {mpheal: 18, clear_mind: 3}
+    jobs:
+      whm:
+        1: 20
+        2: 35
+        3: 50
+        4: 65
+        5: {level: 80, content: abyssea}
+        6: {level: 96, content: abyssea}
+      blm:
+        1: 15
+        2: 30
+        3: 45
+        4: 60
+        5: 75
+        6: {level: 96, content: abyssea}
+      rdm:
+        1: 31
+        2: 53
+        3: 75
+        4: {level: 91, content: abyssea}
+      smn:
+        1: 15
+        2: 30
+        3: 45
+        4: 60
+        5: 70
+        6: {level: 91, content: abyssea}
+      sch:
+        1: {level: 20, content:    wotg}
+        2: {level: 35, content:    wotg}
+        3: {level: 50, content:    wotg}
+        4: {level: 65, content:    wotg}
+        5: {level: 76, content: abyssea}
+        6: {level: 96, content: abyssea}
+      geo:
+        1: {level: 20, content: soa}
+        2: {level: 40, content: soa}
+        3: {level: 60, content: soa}
+        4: {level: 80, content: soa}
+        5: {level: 99, content: soa}
+
+  shield_mastery:
+    id: 25
+    ranks:
+      1: {shield_mastery_tp: 10}
+      2: {shield_mastery_tp: 20}
+      3: {shield_mastery_tp: 30}
+      4: {shield_mastery_tp: 40}
+    jobs:
+      war:
+        1: {level: 80, content: abyssea}
+        2: {level: 87, content: abyssea}
+        3: {level: 94, content: abyssea}
+      rdm:
+        1: {level: 87, content: abyssea}
+        2: {level: 97, content: abyssea}
+      pld:
+        1: {level: 25, content:    toau}
+        2: {level: 50, content:    toau}
+        3: {level: 75, content:    toau}
+        4: {level: 96, content: abyssea}
+
+  beast_killer:
+    id: 32
+    ranks:
+      1: {beast_killer:  8}
+      2: {beast_killer: 10}
+    jobs:
+      bst:
+        1: 70
+        2: {level: 94, content: abyssea}
+
+  plantoid_killer:
+    id: 33
+    ranks:
+      1: {plantoid_killer:  8}
+      2: {plantoid_killer: 10}
+    jobs:
+      bst:
+        1: 60
+        2: {level: 91, content: abyssea}
+
+  vermin_killer:
+    id: 34
+    ranks:
+      1: {vermin_killer:  8}
+      2: {vermin_killer: 10}
+    jobs:
+      bst:
+        1: 10
+        2: {level: 76, content: abyssea}
+
+  lizard_killer:
+    id: 35
+    ranks:
+      1: {lizard_killer:  8}
+      2: {lizard_killer: 10}
+    jobs:
+      bst:
+        1: 40
+        2: {level: 85, content: abyssea}
+
+  bird_killer:
+    id: 36
+    ranks:
+      1: {bird_killer:  8}
+      2: {bird_killer: 10}
+    jobs:
+      bst:
+        1: 20
+        2: {level: 79, content: abyssea}
+
+  amorph_killer:
+    id: 37
+    ranks:
+      1: {amorph_killer:  8}
+      2: {amorph_killer: 10}
+    jobs:
+      bst:
+        1: 30
+        2: {level: 82, content: abyssea}
+
+  aquan_killer:
+    id: 38
+    ranks:
+      1: {aquan_killer:  8}
+      2: {aquan_killer: 10}
+    jobs:
+      bst:
+        1: 50
+        2: {level: 88, content: abyssea}
+
+  undead_killer:
+    id: 39
+    ranks:
+      1: {undead_killer:  8}
+      2: {undead_killer: 10}
+    jobs:
+      pld:
+        1: 5
+        2: {level: 86, content: abyssea}
+
+  arcana_killer:
+    id: 41
+    ranks:
+      1: {arcana_killer:  8}
+      2: {arcana_killer: 10}
+    jobs:
+      drk:
+        1: 25
+        2: {level: 86, content: abyssea}
+
+  demon_killer:
+    id: 42
+    ranks:
+      1: {demon_killer:  8}
+      2: {demon_killer: 10}
+    jobs:
+      sam:
+        1: 40
+        2: {level: 86, content: abyssea}
+
+  dragon_killer:
+    id: 43
+    ranks:
+      1: {dragon_killer:  8}
+      2: {dragon_killer: 10}
+    jobs:
+      drg:
+        1: 25
+        2: {level: 86, content: abyssea}
+
+  resist_sleep:
+    id: 48
+    ranks:
+      1: {sleepres: 10}
+      2: {sleepres: 15}
+      3: {sleepres: 20}
+      4: {sleepres: 25}
+      5: {sleepres: 30}
+    jobs:
+      pld:
+        1: 20
+        2: 40
+        3: 60
+        4: 75
+        5: {level: 81, content: abyssea}
+
+  resist_poison:
+    id: 49
+    ranks:
+      1: {poisonres: 10}
+      2: {poisonres: 15}
+      3: {poisonres: 20}
+      4: {poisonres: 25}
+    jobs:
+      rng:
+        1: 20
+        2: 40
+        3: 60
+        4: 81
+
+  resist_paralyze:
+    id: 50
+    ranks:
+      1: {paralyzeres: 10}
+      2: {paralyzeres: 15}
+      3: {paralyzeres: 20}
+      4: {paralyzeres: 25}
+      5: {paralyzeres: 30}
+    jobs:
+      drk:
+        1: 20
+        2: 40
+        3: 60
+        4: 75
+        5: {level: 81, content: abyssea}
+      cor:
+        1: {level:  5, content:    toau}
+        2: {level: 25, content:    toau}
+        3: {level: 45, content:    toau}
+        4: {level: 65, content:    toau}
+        5: {level: 81, content: abyssea}
+
+  resist_blind:
+    id: 51
+    ranks:
+      1: {blindres: 10}
+      2: {blindres: 15}
+      3: {blindres: 20}
+      4: {blindres: 25}
+      5: {blindres: 30}
+    jobs:
+      sam:
+        1: 5
+        2: 25
+        3: 45
+        4: 65
+        5: {level: 81, content: abyssea}
+
+  resist_silence:
+    id: 52
+    ranks:
+      1: {silenceres: 10}
+      2: {silenceres: 15}
+      3: {silenceres: 20}
+      4: {silenceres: 25}
+      5: {silenceres: 30}
+    jobs:
+      brd:
+        1: 5
+        2: 25
+        3: 45
+        4: 65
+        5: {level: 81, content: abyssea}
+      sch:
+        1: {level: 10, content:    wotg}
+        2: {level: 40, content:    wotg}
+        3: {level: 70, content:    wotg}
+        4: {level: 81, content: abyssea}
+
+  resist_petrify:
+    id: 53
+    ranks:
+      1: {petrifyres: 10}
+      2: {petrifyres: 15}
+      3: {petrifyres: 20}
+      4: {petrifyres: 25}
+      5: {petrifyres: 30}
+    jobs:
+      rdm:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 81, content: abyssea}
+
+  resist_virus:
+    id: 54
+    ranks:
+      1: {virusres: 10}
+      2: {virusres: 15}
+      3: {virusres: 20}
+      4: {virusres: 25}
+      5: {virusres: 30}
+    jobs:
+      war:
+        1: 5
+        2: 35
+        3: 55
+        4: 70
+        5: {level: 81, content: abyssea}
+
+  resist_curse:
+    id: 55
+
+  resist_stun:
+    id: 56
+
+  resist_bind:
+    id: 57
+    ranks:
+      1: {bindres: 10}
+      2: {bindres: 15}
+      3: {bindres: 20}
+      4: {bindres: 25}
+      5: {bindres: 30}
+    jobs:
+      nin:
+        1: 10
+        2: 30
+        3: 50
+        4: 70
+        5: {level: 90, content: abyssea}
+
+  resist_gravity:
+    id: 58
+    ranks:
+      1: {gravityres: 10}
+      2: {gravityres: 15}
+      3: {gravityres: 20}
+      4: {gravityres: 25}
+      5: {gravityres: 30}
+    jobs:
+      thf:
+        1: 20
+        2: 40
+        3: 66
+        4: 75
+        5: {level: 81, content: abyssea}
+
+  resist_slow:
+    id: 59
+    ranks:
+      1: {slowres: 10}
+      2: {slowres: 15}
+      3: {slowres: 20}
+      4: {slowres: 25}
+      5: {slowres: 30}
+    jobs:
+      bst:
+        1: 15
+        2: 35
+        3: 55
+        4: 75
+        5: {level: 81, content: abyssea}
+      smn:
+        1: 20
+        2: 40
+        3: 60
+        4: {level: 81, content: abyssea}
+      pup:
+        1: {level: 10, content:    toau}
+        2: {level: 50, content:    toau}
+        3: {level: 70, content:    toau}
+        4: {level: 81, content: abyssea}
+      dnc:
+        1: {level: 20, content:    wotg}
+        2: {level: 55, content:    wotg}
+        3: {level: 81, content: abyssea}
+
+  resist_charm:
+    id: 60
+
+  resist_amnesia:
+    id: 63
+    ranks:
+      1: {amnesiares: 10}
+      2: {amnesiares: 15}
+      3: {amnesiares: 20}
+      4: {amnesiares: 25}
+      5: {amnesiares: 30}
+    jobs:
+      bst:
+        1: {level: 15, content: abyssea}
+        2: {level: 35, content: abyssea}
+        3: {level: 55, content: abyssea}
+        4: {level: 75, content: abyssea}
+        5: {level: 95, content: abyssea}
+      cor:
+        1: {level: 30, content: abyssea}
+        2: {level: 50, content: abyssea}
+        3: {level: 70, content: abyssea}
+        4: {level: 90, content: abyssea}
+      pup:
+        1: {level: 15, content: abyssea}
+        2: {level: 35, content: abyssea}
+        3: {level: 55, content: abyssea}
+        4: {level: 75, content: abyssea}
+        5: {level: 95, content: abyssea}
+
+  treasure_hunter_ii:
+    id: 64
+    ranks:
+      2: {treasure_hunter: 1}
+    jobs:
+      thf:
+        2: 45
+
+  treasure_hunter_iii:
+    id: 65
+    ranks:
+      3: {treasure_hunter: 1}
+    jobs:
+      thf:
+        3: {level: 90, content: abyssea}
+
+  kick_attacks:
+    id: 66
+    ranks:
+      1: {kick_attack_rate: 10}
+      2: {kick_attack_rate: 12}
+      3: {kick_attack_rate: 14}
+    jobs:
+      mnk:
+        1: {level: 51, content:    rotz}
+        2: {level: 71, content:    rotz}
+        3: {level: 76, content: abyssea}
+
+  subtle_blow:
+    id: 67
+    ranks:
+      1: {subtle_blow:  5}
+      2: {subtle_blow: 10}
+      3: {subtle_blow: 15}
+      4: {subtle_blow: 20}
+      5: {subtle_blow: 25}
+      6: {subtle_blow: 27}
+    jobs:
+      mnk:
+        1: {level:  5, content:    rotz}
+        2: {level: 25, content:    rotz}
+        3: {level: 40, content:    rotz}
+        4: {level: 65, content:    rotz}
+        5: {level: 91, content: abyssea}
+      nin:
+        1: {level: 15, content:    rotz}
+        2: {level: 30, content:    rotz}
+        3: {level: 45, content:    rotz}
+        4: {level: 60, content:    rotz}
+        5: {level: 75, content:    rotz}
+        6: {level: 91, content: abyssea}
+      dnc:
+        1: {level: 25, content:    wotg}
+        2: {level: 45, content:    wotg}
+        3: {level: 65, content:    wotg}
+        4: {level: 86, content: abyssea}
+
+  assassin:
+    id: 68
+    jobs:
+      thf:
+        1: {level: 60, content: cop}
+
+  divine_veil:
+    id: 69
+    jobs:
+      whm:
+        1: {level: 50, content: cop}
+
+  zanshin:
+    id: 70
+    ranks:
+      1: {zanshin: 15}
+      2: {zanshin: 25}
+      3: {zanshin: 35}
+      4: {zanshin: 45}
+      5: {zanshin: 50}
+    jobs:
+      sam:
+        1: {level: 20, content:     cop}
+        2: {level: 35, content:     cop}
+        3: {level: 50, content:     cop}
+        4: {level: 75, content:     cop}
+        5: {level: 95, content: abyssea}
+
+  savagery:
+    id:    71
+    merit: savagery
+    jobs:
+      war:
+        1: {level: 75, content: toau}
+
+  aggressive_aim:
+    id:    72
+    merit: aggressive_aim
+    jobs:
+      war:
+        1: {level: 75, content: toau}
+
+  invigorate:
+    id:    73
+    merit: invigorate
+    ranks:
+      1: {none: 24}
+    jobs:
+      mnk:
+        1: {level: 75, content: toau}
+
+  penance:
+    id:    74
+    merit: penance
+    jobs:
+      mnk:
+        1: {level: 75, content: toau}
+
+  aura_steal:
+    id:    75
+    merit: aura_steal
+    jobs:
+      thf:
+        1: {level: 75, content: toau}
+
+  ambush:
+    id:    76
+    merit: ambush
+    jobs:
+      thf:
+        1: {level: 75, content: toau}
+
+  iron_will:
+    id:    77
+    merit: iron_will
+    jobs:
+      pld:
+        1: {level: 75, content: toau}
+
+  guardian:
+    id:    78
+    merit: guardian
+    jobs:
+      pld:
+        1: {level: 75, content: toau}
+
+  muted_soul:
+    id:    79
+    merit: muted_soul
+    jobs:
+      drk:
+        1: {level: 75, content: toau}
+
+  desperate_blows:
+    id: 80
+    ranks:
+      1: {desperate_blows:  500}
+      2: {desperate_blows: 1000}
+      3: {desperate_blows: 1500}
+    jobs:
+      drk:
+        1: {level: 15, content: toau}
+        2: {level: 30, content:  soa}
+        3: {level: 45, content:  soa}
+
+  beast_affinity:
+    id:    81
+    merit: beast_affinity
+    jobs:
+      bst:
+        1: {level: 75, content: toau}
+
+  beast_healer:
+    id:    82
+    merit: beast_healer
+    jobs:
+      bst:
+        1: {level: 75, content: toau}
+
+  snapshot:
+    id:    83
+    merit: snapshot
+    jobs:
+      rng:
+        1: {level: 75, content: toau}
+
+  recycle:
+    id: 84
+    ranks:
+      1: {recycle: 10}
+      2: {recycle: 20}
+      3: {recycle: 30}
+    jobs:
+      rng:
+        1: {level: 20, content: soa}
+        2: {level: 35, content: soa}
+        3: {level: 50, content: soa}
+      cor:
+        1: {level: 35, content: soa}
+        2: {level: 65, content: soa}
+        3: {level: 95, content: soa}
+
+  ikishoten:
+    id:    85
+    merit: ikishoten
+    jobs:
+      sam:
+        1: {level: 75, content: toau}
+
+  overwhelm:
+    id:    86
+    merit: overwhelm
+    jobs:
+      sam:
+        1: {level: 75, content: toau}
+
+  ninja_tool_expertise:
+    id:    87
+    merit: ninja_tool_expertise
+    ranks:
+      1: {ninja_tool: 0}
+    jobs:
+      nin:
+        1: {level: 75, content: toau}
+
+  empathy:
+    id:    88
+    merit: empathy
+    jobs:
+      drg:
+        1: {level: 75, content: toau}
+
+  strafe:
+    id: 89
+    ranks:
+      1: {wyvern_breath_macc: 10}
+      2: {wyvern_breath_macc: 15}
+      3: {wyvern_breath_macc: 25}
+      4: {wyvern_breath_macc: 30}
+    jobs:
+      drg:
+        1: {level: 20, content: toau}
+        2: {level: 40, content:  soa}
+        3: {level: 60, content:  soa}
+        4: {level: 80, content:  soa}
+
+  enchainment:
+    id:    90
+    merit: enchainment
+    jobs:
+      blu:
+        1: {level: 75, content: toau}
+
+  assimilation:
+    id:    91
+    merit: assimilation
+    jobs:
+      blu:
+        1: {level: 75, content: toau}
+
+  winning_streak:
+    id:    92
+    merit: winning_streak
+    jobs:
+      cor:
+        1: {level: 75, content: toau}
+
+  loaded_deck:
+    id:    93
+    merit: loaded_deck
+    jobs:
+      cor:
+        1: {level: 75, content: toau}
+
+  fine_tuning:
+    id:    94
+    merit: fine_tuning
+    jobs:
+      pup:
+        1: {level: 75, content: toau}
+
+  optimization:
+    id:    95
+    merit: optimization
+    jobs:
+      pup:
+        1: {level: 75, content: toau}
+
+  closed_position:
+    id:    96
+    merit: closed_position
+    jobs:
+      dnc:
+        1: {level: 75, content: wotg}
+
+  stormsurge:
+    id:    97
+    merit: stormsurge
+    jobs:
+      sch:
+        1: {level: 75, content: wotg}
+
+  critical_attack_bonus:
+    id: 98
+    ranks:
+      1: {crit_dmg_increase:  5}
+      2: {crit_dmg_increase:  8}
+      3: {crit_dmg_increase: 11}
+      4: {crit_dmg_increase: 14}
+    jobs:
+      war:
+        1: {level: 78, content: abyssea}
+        2: {level: 86, content: abyssea}
+      thf:
+        1: {level: 78, content: abyssea}
+        2: {level: 84, content: abyssea}
+        3: {level: 91, content: abyssea}
+        4: {level: 97, content: abyssea}
+      drk:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      dnc:
+        1: {level: 80, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 99, content: abyssea}
+
+  critical_defense_bonus:
+    id: 99
+    ranks:
+      1: {crit_def_bonus:  5}
+      2: {crit_def_bonus:  8}
+      3: {crit_def_bonus: 11}
+      4: {crit_def_bonus: 14}
+    jobs:
+      pld:
+        1: {level: 79, content: abyssea}
+        2: {level: 85, content: abyssea}
+        3: {level: 91, content: abyssea}
+        4: {level: 96, content: abyssea}
+      brd:
+        1: {level: 80, content: abyssea}
+        2: {level: 91, content: abyssea}
+      drg:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      pup:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+
+  tactical_parry:
+    id: 100
+    ranks:
+      1: {tactical_parry: 20}
+      2: {tactical_parry: 30}
+      3: {tactical_parry: 40}
+      4: {tactical_parry: 50}
+    jobs:
+      drk:
+        1: {level: 88, content: abyssea}
+        2: {level: 98, content: abyssea}
+      nin:
+        1: {level: 77, content: abyssea}
+        2: {level: 87, content: abyssea}
+        3: {level: 97, content: abyssea}
+      dnc:
+        1: {level: 77, content: abyssea}
+        2: {level: 84, content: abyssea}
+        3: {level: 91, content: abyssea}
+        4: {level: 97, content: abyssea}
+      run:
+        1: {level: 40, content: abyssea}
+        2: {level: 60, content: abyssea}
+        3: {level: 85, content: abyssea}
+
+  tactical_guard:
+    id: 101
+    ranks:
+      1: {tactical_guard: 30}
+      2: {tactical_guard: 45}
+      3: {tactical_guard: 60}
+    jobs:
+      mnk:
+        1: {level: 77, content: abyssea}
+        2: {level: 87, content: abyssea}
+        3: {level: 97, content: abyssea}
+      pup:
+        1: {level: 80, content: abyssea}
+        2: {level: 90, content: abyssea}
+
+  shield_defense_bonus:
+    id: 102
+    ranks:
+      1: {shield_def_bonus: 2}
+      2: {shield_def_bonus: 4}
+      3: {shield_def_bonus: 6}
+      4: {shield_def_bonus: 8}
+    jobs:
+      war:
+        1: {level: 80, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 99, content: abyssea}
+      whm:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      pld:
+        1: {level: 77, content: abyssea}
+        2: {level: 82, content: abyssea}
+        3: {level: 88, content: abyssea}
+        4: {level: 93, content: abyssea}
+
+  stout_servant:
+    id: 103
+    ranks:
+      1: {none: 5}
+      2: {none: 7}
+      3: {none: 9}
+    jobs:
+      bst:
+        1: {level: 78, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 98, content: abyssea}
+      smn:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      pup:
+        1: {level: 78, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 98, content: abyssea}
+
+  true_shot:
+    id: 104
+
+  blood_boon:
+    id: 105
+    ranks:
+      1: {blood_boon: 20}
+      2: {blood_boon: 23}
+      3: {blood_boon: 26}
+      4: {blood_boon: 29}
+    jobs:
+      smn:
+        1: {level: 60, content: abyssea}
+        2: {level: 70, content: abyssea}
+        3: {level: 80, content: abyssea}
+        4: {level: 90, content: abyssea}
+
+  skillchain_bonus:
+    id: 106
+    ranks:
+      1: {skillchainbonus:  8}
+      2: {skillchainbonus: 12}
+      3: {skillchainbonus: 16}
+      4: {skillchainbonus: 20}
+      5: {skillchainbonus: 23}
+    jobs:
+      mnk:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      sam:
+        1: {level: 78, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 98, content: abyssea}
+      nin:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      dnc:
+        1: {level: 45, content: abyssea}
+        2: {level: 58, content: abyssea}
+        3: {level: 71, content: abyssea}
+        4: {level: 84, content: abyssea}
+        5: {level: 97, content: abyssea}
+
+  fencer:
+    id: 107
+    ranks:
+      1: {fencer_tp_bonus: 200, fencer_crithitrate:  3}
+      2: {fencer_tp_bonus: 300, fencer_crithitrate:  5}
+      3: {fencer_tp_bonus: 400, fencer_crithitrate:  7}
+      4: {fencer_tp_bonus: 450, fencer_crithitrate:  9}
+      5: {fencer_tp_bonus: 500, fencer_crithitrate: 10}
+    jobs:
+      war:
+        1: {level: 45, content: abyssea}
+        2: {level: 58, content: abyssea}
+        3: {level: 71, content: abyssea}
+        4: {level: 84, content: abyssea}
+        5: {level: 97, content: abyssea}
+      bst:
+        1: {level: 80, content: abyssea}
+        2: {level: 87, content: abyssea}
+        3: {level: 94, content: abyssea}
+      brd:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+
+  conserve_tp:
+    id: 108
+    ranks:
+      1: {conserve_tp: 15}
+      2: {conserve_tp: 18}
+      3: {conserve_tp: 21}
+      4: {conserve_tp: 24}
+      5: {conserve_tp: 26}
+    jobs:
+      rng:
+        1: {level: 80, content: abyssea}
+        2: {level: 91, content: abyssea}
+      drg:
+        1: {level: 45, content: abyssea}
+        2: {level: 58, content: abyssea}
+        3: {level: 71, content: abyssea}
+        4: {level: 84, content: abyssea}
+        5: {level: 97, content: abyssea}
+      dnc:
+        1: {level: 77, content: abyssea}
+        2: {level: 87, content: abyssea}
+        3: {level: 97, content: abyssea}
+
+  occult_acumen:
+    id: 109
+    ranks:
+      1: {occult_acumen:  25}
+      2: {occult_acumen:  50}
+      3: {occult_acumen:  75}
+      4: {occult_acumen: 100}
+      5: {occult_acumen: 125}
+    jobs:
+      blm:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      drk:
+        1: {level: 45, content: abyssea}
+        2: {level: 58, content: abyssea}
+        3: {level: 71, content: abyssea}
+        4: {level: 84, content: abyssea}
+        5: {level: 97, content: abyssea}
+      sch:
+        1: {level: 78, content: abyssea}
+        2: {level: 88, content: abyssea}
+        3: {level: 98, content: abyssea}
+
+  magic_burst_bonus:
+    id: 110
+    ranks:
+      1: {magic_burst_bonus_uncapped:  5}
+      2: {magic_burst_bonus_uncapped:  7}
+      3: {magic_burst_bonus_uncapped:  9}
+      4: {magic_burst_bonus_uncapped: 11}
+      5: {magic_burst_bonus_uncapped: 13}
+    jobs:
+      blm:
+        1: {level: 45, content: abyssea}
+        2: {level: 58, content: abyssea}
+        3: {level: 71, content: abyssea}
+        4: {level: 84, content: abyssea}
+        5: {level: 97, content: abyssea}
+      rdm:
+        1: {level: 85, content: abyssea}
+        2: {level: 95, content: abyssea}
+      nin:
+        1: {level: 80, content: abyssea}
+        2: {level: 90, content: abyssea}
+      sch:
+        1: {level: 79, content: abyssea}
+        2: {level: 89, content: abyssea}
+        3: {level: 99, content: abyssea}
+
+  divine_benison:
+    id: 111
+    ranks:
+      1: {divine_benison: 10}
+      2: {divine_benison: 20}
+      3: {divine_benison: 30}
+      4: {divine_benison: 40}
+      5: {divine_benison: 50}
+    jobs:
+      whm:
+        1: {level: 50, content: abyssea}
+        2: {level: 60, content: abyssea}
+        3: {level: 70, content: abyssea}
+        4: {level: 80, content: abyssea}
+        5: {level: 90, content: abyssea}
+
+  elemental_celerity:
+    id: 112
+    ranks:
+      1: {elemental_celerity: 10}
+      2: {elemental_celerity: 15}
+      3: {elemental_celerity: 20}
+      4: {elemental_celerity: 25}
+      5: {elemental_celerity: 30}
+    jobs:
+      blm:
+        1: {level: 50, content: abyssea}
+        2: {level: 60, content: abyssea}
+        3: {level: 70, content: abyssea}
+        4: {level: 80, content: abyssea}
+        5: {level: 90, content: abyssea}
+      geo:
+        1: {level: 55, content: soa}
+        2: {level: 75, content: soa} # level unverified
+        3: {level: 95, content: soa} # level unverified; there may be a fourth rank
+
+  dead_aim:
+    id: 113
+    ranks:
+      1: {ranged_crit_dmg_increase: 10}
+      2: {ranged_crit_dmg_increase: 20}
+      3: {ranged_crit_dmg_increase: 30}
+      4: {ranged_crit_dmg_increase: 35}
+      5: {ranged_crit_dmg_increase: 40}
+      6: {ranged_crit_dmg_increase: 45}
+    jobs:
+      rng:
+        1: {level: 50, content: soa}
+        2: {level: 60, content: soa}
+        3: {level: 70, content: soa}
+        4: {level: 80, content: soa}
+        5: {level: 90, content: soa}
+        6: {level: 99, content: soa}
+
+  tranquil_heart:
+    id: 114
+    jobs:
+      whm:
+        1: {level: 21, content: abyssea}
+      rdm:
+        1: {level: 26, content: abyssea}
+      sch:
+        1: {level: 30, content: abyssea}
+
+  stalwart_soul:
+    id: 115
+    ranks:
+      1: {stalwart_soul: 15}
+      2: {stalwart_soul: 30}
+      3: {stalwart_soul: 40}
+      4: {stalwart_soul: 50}
+    jobs:
+      drk:
+        1: {level: 45, content: abyssea}
+        2: {level: 60, content: abyssea}
+        3: {level: 75, content: abyssea}
+        4: {level: 90, content: abyssea}
+
+  cardinal_chant:
+    id: 116
+    ranks:
+      1: {cardinal_chant: 1}
+      2: {cardinal_chant: 2}
+      3: {cardinal_chant: 3}
+      4: {cardinal_chant: 4}
+    jobs:
+      geo:
+        1: {level: 25, content: soa}
+        2: {level: 45, content: soa}
+        3: {level: 65, content: soa}
+        4: {level: 85, content: soa}
+
+  tenacity:
+    id: 117
+    ranks:
+      1: {sleepres:  5, poisonres:  5, paralyzeres:  5, blindres:  5, silenceres:  5, virusres:  5, petrifyres:  5, bindres:  5, curseres:  5}
+      2: {sleepres:  7, poisonres:  7, paralyzeres:  7, blindres:  7, silenceres:  7, virusres:  7, petrifyres:  7, bindres:  7, curseres:  7}
+      3: {sleepres:  9, poisonres:  9, paralyzeres:  9, blindres:  9, silenceres:  9, virusres:  9, petrifyres:  9, bindres:  9, curseres:  9}
+      4: {sleepres: 11, poisonres: 11, paralyzeres: 11, blindres: 11, silenceres: 11, virusres: 11, petrifyres: 11, bindres: 11, curseres: 11}
+      5: {sleepres: 13, poisonres: 13, paralyzeres: 13, blindres: 13, silenceres: 13, virusres: 13, petrifyres: 13, bindres: 13, curseres: 13}
+      6: {sleepres: 15, poisonres: 15, paralyzeres: 15, blindres: 15, silenceres: 15, virusres: 15, petrifyres: 15, bindres: 15, curseres: 15}
+    jobs:
+      run:
+        1: {level:  5, content: soa}
+        2: {level: 25, content: soa}
+        3: {level: 45, content: soa}
+        4: {level: 75, content: soa}
+        5: {level: 80, content: soa}
+        6: {level: 95, content: soa}
+
+  inquartata:
+    id: 118
+    ranks:
+      1: {inquartata:  5}
+      2: {inquartata:  7}
+      3: {inquartata:  9}
+      4: {inquartata: 11}
+    jobs:
+      run:
+        1: {level: 15, content: soa}
+        2: {level: 45, content: soa}
+        3: {level: 75, content: soa}
+        4: {level: 90, content: soa}
+
+  curative_recantation:
+    id:    119
+    merit: curative_recantation
+    ranks:
+      1: {curative_recantation: 0}
+    jobs:
+      geo:
+        1: {level: 75, content: soa}
+
+  primeval_zeal:
+    id:    120
+    merit: primeval_zeal
+    ranks:
+      1: {primeval_zeal: 0}
+    jobs:
+      geo:
+        1: {level: 75, content: soa}
+
+  inspiration:
+    id: 121
+
+  sleight_of_sword:
+    id: 122
+
+  daken:
+    id: 123
+    ranks:
+      1: {daken: 20}
+      2: {daken: 25}
+      3: {daken: 30}
+      4: {daken: 35}
+      5: {daken: 40}
+    jobs:
+      nin:
+        1: {level: 25, content: soa}
+        2: {level: 40, content: soa}
+        3: {level: 55, content: soa}
+        4: {level: 70, content: soa}
+        5: {level: 95, content: soa}
+
+  superior:
+    id: 124
+
+  magic_accuracy_bonus:
+    id: 125
+
+  magic_evasion_bonus:
+    id: 126
+
+  smite:
+    id: 127
+    ranks:
+      1: {smite: 25}
+      2: {smite: 38}
+      3: {smite: 51}
+      4: {smite: 64}
+      5: {smite: 76}
+    jobs:
+      war:
+        1: {level: 35, content: soa}
+        2: {level: 65, content: soa}
+        3: {level: 95, content: soa}
+      mnk:
+        1: {level: 40, content: soa}
+        2: {level: 80, content: soa}
+      drk:
+        1: {level: 15, content: soa}
+        2: {level: 35, content: soa}
+        3: {level: 55, content: soa}
+        4: {level: 75, content: soa}
+        5: {level: 95, content: soa}
+      drg:
+        1: {level: 40, content: soa}
+        2: {level: 80, content: soa}
+      pup:
+        1: {level: 60, content: soa}
+
+  damage_limit_plus:
+    id: 129
+    ranks:
+      1: {damage_limit: 10}
+      2: {damage_limit: 20}
+      3: {damage_limit: 30}
+      4: {damage_limit: 40}
+      5: {damage_limit: 50}
+    jobs:
+      war:
+        1: {level: 40, content: rov}
+        2: {level: 80, content: rov}
+      mnk:
+        1: {level: 30, content: rov}
+        2: {level: 60, content: rov}
+        3: {level: 90, content: rov}
+      rdm:
+        1: {level: 60, content: rov}
+      thf:
+        1: {level: 50, content: rov}
+      drk:
+        1: {level: 20, content: rov}
+        2: {level: 40, content: rov}
+        3: {level: 55, content: rov}
+        4: {level: 70, content: rov}
+        5: {level: 80, content: rov}
+      bst:
+        1: {level: 45, content: rov}
+        2: {level: 90, content: rov}
+      rng:
+        1: {level: 30, content: rov}
+        2: {level: 60, content: rov}
+        3: {level: 90, content: rov}
+      sam:
+        1: {level: 40, content: rov}
+        2: {level: 80, content: rov}
+      nin:
+        1: {level: 50, content: rov}
+      drg:
+        1: {level: 30, content: rov}
+        2: {level: 60, content: rov}
+        3: {level: 90, content: rov}
+      pup:
+        1: {level: 45, content: rov}
+        2: {level: 90, content: rov}
+      dnc:
+        1: {level: 45, content: rov}
+        2: {level: 90, content: rov}
+
+  animus_solace:
+    id: 130
+
+  animus_misery:
+    id: 131
+
+  con_anima:
+    id: 132
+
+  con_brio:
+    id: 133
+
+  weaponskill_damage_boost:
+    id: 134
+    ranks:
+      1: {all_wsdmg_all_hits:  7}
+      2: {all_wsdmg_all_hits: 10}
+      3: {all_wsdmg_all_hits: 13}
+      4: {all_wsdmg_all_hits: 16}
+      5: {all_wsdmg_all_hits: 19}
+      6: {all_wsdmg_all_hits: 21}
+    jobs:
+      drg:
+        1: {level: 45, content: rov}
+        2: {level: 55, content: rov}
+        3: {level: 65, content: rov}
+        4: {level: 75, content: rov}
+        5: {level: 85, content: rov}
+        6: {level: 95, content: rov}
+
+  # Stacks with Max HP Boost. https://www.bg-wiki.com/ffxi/Max_HP_Boost
+  max_hp_boost_ii:
+    id: 135
+    ranks:
+      1: {base_hp: 150}
+      2: {base_hp: 300}
+      3: {base_hp: 450}
+    jobs:
+      mnk:
+        1: {level: 75, content: rov}
+        2: {level: 85, content: rov}
+        3: {level: 95, content: rov}
+
+  shield_barrier:
+    id: 136
+    ranks:
+      1: {shield_barrier: 1}
+    jobs:
+      pld:
+        1: {level: 70, content: rov}
+
+  tandem_strike:
+    id: 137
+    ranks:
+      1: {tandem_strike_power: 10}
+      2: {tandem_strike_power: 20}
+      3: {tandem_strike_power: 30}
+      4: {tandem_strike_power: 40}
+      5: {tandem_strike_power: 50}
+    jobs:
+      bst:
+        1: {level: 30, content: rov}
+        2: {level: 45, content: rov}
+        3: {level: 60, content: rov}
+        4: {level: 75, content: rov}
+        5: {level: 90, content: rov}
+
+  tandem_blow:
+    id: 138
+    ranks:
+      1: {tandem_blow_power:  5}
+      2: {tandem_blow_power: 10}
+      3: {tandem_blow_power: 15}
+    jobs:
+      bst:
+        1: {level: 40, content: rov}
+        2: {level: 60, content: rov}
+        3: {level: 80, content: rov}
