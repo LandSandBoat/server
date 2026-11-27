@@ -6,7 +6,7 @@ return {
     ['Biyaada']                  = { event = 250 },
     ['Bjibar']                   = { event = 263 },
     ['blank_striking_a_balance'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
-    ['Chocobo']                  = { text = ID.text.CHOCOBO_HAPPY },
+    ['Chocobo']                  = { messageSpecial = ID.text.CHOCOBO_HAPPY },
     ['Dabigo']                   = { event = 210 },
     ['Dahaeel']                  = { event = 264 },
     ['Danaaba']                  = { event = 248 },
