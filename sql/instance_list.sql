@@ -85,7 +85,7 @@ INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,NULL,30,-9.000
 
 -- LEBROS_CAVERN (zoneID: 63, starting id: 6300)
 INSERT INTO `instance_list` VALUES (6300,'excavation_duty',63,61,NULL,30,124.999,-39.309,19.999,0,NULL,NULL,NULL,NULL);
-INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,NULL,30,-333.000,-9.921,-259.999,255,NULL,NULL,NULL,NULL);
+INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,NULL,30,-333.000,-9.921,-259.999,128,NULL,NULL,NULL,NULL);
 INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,NULL,30,-459.912,-9.860,342.319,0,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
 -- INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,30,0.000,0.000,0.000,0,NULL,NULL,NULL,NULL);
